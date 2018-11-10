@@ -1,0 +1,9 @@
+C:\Users\alexf\Source\Repos\PDFSharp\PDFSharp\bin\Debug\netstandard2.0\PDFSharp.deps.json
+C:\Users\alexf\Source\Repos\PDFSharp\PDFSharp\bin\Debug\netstandard2.0\PDFSharp.dll
+C:\Users\alexf\Source\Repos\PDFSharp\PDFSharp\bin\Debug\netstandard2.0\PDFSharp.pdb
+C:\Users\alexf\Source\Repos\PDFSharp\PDFSharp\obj\Debug\netstandard2.0\PDFSharp.csproj.CoreCompileInputs.cache
+C:\Users\alexf\Source\Repos\PDFSharp\PDFSharp\obj\Debug\netstandard2.0\PDFSharp.AssemblyInfoInputs.cache
+C:\Users\alexf\Source\Repos\PDFSharp\PDFSharp\obj\Debug\netstandard2.0\PDFSharp.AssemblyInfo.cs
+C:\Users\alexf\Source\Repos\PDFSharp\PDFSharp\obj\Debug\netstandard2.0\PDFSharp.dll
+C:\Users\alexf\Source\Repos\PDFSharp\PDFSharp\obj\Debug\netstandard2.0\PDFSharp.pdb
+C:\Users\alexf\Source\Repos\PDFSharp\PDFSharp\obj\Debug\netstandard2.0\PDFSharp.csprojAssemblyReference.cache
