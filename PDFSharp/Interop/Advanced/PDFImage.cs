@@ -1,4 +1,4 @@
-#region PDFsharp - A .NET library for processing PDF
+#region PDFSharp - A .NET library for processing PDF
 //
 // Authors:
 //   Stefan Lange
@@ -620,7 +620,7 @@ namespace PDFSharp.Interop.Advanced
                         pdfMask.Elements.SetName(Keys.Type, "/XObject");
                         pdfMask.Elements.SetName(Keys.Subtype, "/Image");
 
-                        Owner._irefTable.Add(pdfMask);
+                        Owner.IrefTable.Add(pdfMask);
                         pdfMask.Stream = new PDFStream(maskDataCompressed, pdfMask);
                         pdfMask.Elements[PDFStream.Keys.Length] = new PDFInteger(maskDataCompressed.Length);
                         pdfMask.Elements[PDFStream.Keys.Filter] = new PDFName("/FlateDecode");
@@ -718,7 +718,7 @@ namespace PDFSharp.Interop.Advanced
                         colorPalette.CreateStream(idb.PaletteData);
                         colorPalette.Elements[PDFStream.Keys.Length] = new PDFInteger(idb.PaletteDataLength);
                     }
-                    Owner._irefTable.Add(colorPalette);
+                    Owner.IrefTable.Add(colorPalette);
 
                     PDFArray arrayColorSpace = new PDFArray(_document);
                     arrayColorSpace.Elements.Add(new PDFName("/Indexed"));
@@ -754,7 +754,7 @@ namespace PDFSharp.Interop.Advanced
                 pdfMask.Elements.SetName(Keys.Type, "/XObject");
                 pdfMask.Elements.SetName(Keys.Subtype, "/Image");
 
-                Owner._irefTable.Add(pdfMask);
+                Owner.IrefTable.Add(pdfMask);
                 pdfMask.Stream = new PDFStream(maskDataCompressed, pdfMask);
                 pdfMask.Elements[PDFStream.Keys.Length] = new PDFInteger(maskDataCompressed.Length);
                 pdfMask.Elements[PDFStream.Keys.Filter] = new PDFName("/FlateDecode");
@@ -772,7 +772,7 @@ namespace PDFSharp.Interop.Advanced
                 smask.Elements.SetName(Keys.Type, "/XObject");
                 smask.Elements.SetName(Keys.Subtype, "/Image");
 
-                Owner._irefTable.Add(smask);
+                Owner.IrefTable.Add(smask);
                 smask.Stream = new PDFStream(alphaMaskCompressed, smask);
                 smask.Elements[PDFStream.Keys.Length] = new PDFInteger(alphaMaskCompressed.Length);
                 smask.Elements[PDFStream.Keys.Filter] = new PDFName("/FlateDecode");
@@ -946,7 +946,7 @@ namespace PDFSharp.Interop.Advanced
                     pdfMask.Elements.SetName(Keys.Type, "/XObject");
                     pdfMask.Elements.SetName(Keys.Subtype, "/Image");
 
-                    Owner._irefTable.Add(pdfMask);
+                    Owner.IrefTable.Add(pdfMask);
                     pdfMask.Stream = new PDFStream(maskDataCompressed, pdfMask);
                     pdfMask.Elements[PDFStream.Keys.Length] = new PDFInteger(maskDataCompressed.Length);
                     pdfMask.Elements[PDFStream.Keys.Filter] = new PDFName("/FlateDecode");
@@ -964,7 +964,7 @@ namespace PDFSharp.Interop.Advanced
                     smask.Elements.SetName(Keys.Type, "/XObject");
                     smask.Elements.SetName(Keys.Subtype, "/Image");
 
-                    Owner._irefTable.Add(smask);
+                    Owner.IrefTable.Add(smask);
                     smask.Stream = new PDFStream(alphaMaskCompressed, smask);
                     smask.Elements[PDFStream.Keys.Length] = new PDFInteger(alphaMaskCompressed.Length);
                     smask.Elements[PDFStream.Keys.Filter] = new PDFName("/FlateDecode");
@@ -1275,7 +1275,7 @@ namespace PDFSharp.Interop.Advanced
                         pdfMask.Elements.SetName(Keys.Type, "/XObject");
                         pdfMask.Elements.SetName(Keys.Subtype, "/Image");
 
-                        Owner._irefTable.Add(pdfMask);
+                        Owner.IrefTable.Add(pdfMask);
                         pdfMask.Stream = new PDFStream(maskDataCompressed, pdfMask);
                         pdfMask.Elements[PDFStream.Keys.Length] = new PDFInteger(maskDataCompressed.Length);
                         pdfMask.Elements[PDFStream.Keys.Filter] = new PDFName("/FlateDecode");
@@ -1374,7 +1374,7 @@ namespace PDFSharp.Interop.Advanced
                         colorPalette.CreateStream(paletteData);
                         colorPalette.Elements[PDFStream.Keys.Length] = new PDFInteger(paletteData.Length);
                     }
-                    Owner._irefTable.Add(colorPalette);
+                    Owner.IrefTable.Add(colorPalette);
 
                     PDFArray arrayColorSpace = new PDFArray(_document);
                     arrayColorSpace.Elements.Add(new PDFName("/Indexed"));

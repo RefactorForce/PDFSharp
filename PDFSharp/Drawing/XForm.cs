@@ -1,4 +1,4 @@
-#region PDFsharp - A .NET library for processing PDF
+#region PDFSharp - A .NET library for processing PDF
 //
 // Authors:
 //   Stefan Lange
@@ -178,7 +178,7 @@ namespace PDFSharp.Drawing
         /// This function should be called when drawing the content of this form is finished.
         /// The XGraphics object used for drawing the content is disposed by this function and 
         /// cannot be used for any further drawing operations.
-        /// PDFsharp automatically calls this function when this form was used the first time
+        /// PDFSharp automatically calls this function when this form was used the first time
         /// in a DrawImage function. 
         /// </summary>
         public void DrawingFinished()
@@ -198,7 +198,7 @@ namespace PDFSharp.Drawing
         internal void AssociateGraphics(XGraphics gfx)
         {
             if (_formState == FormState.NotATemplate)
-                throw new NotImplementedException("The current version of PDFsharp cannot draw on an imported page.");
+                throw new NotImplementedException("The current version of PDFSharp cannot draw on an imported page.");
 
             if (_formState == FormState.UnderConstruction)
                 throw new InvalidOperationException("An XGraphics object already exists for this form.");
@@ -272,13 +272,13 @@ namespace PDFSharp.Drawing
         /// <summary>
         /// Get the width of the page identified by the property PageNumber.
         /// </summary>
-        [Obsolete("Use either PixelWidth or PointWidth. Temporarily obsolete because of rearrangements for WPF. Currently same as PixelWidth, but will become PointWidth in future releases of PDFsharp.")]
+        [Obsolete("Use either PixelWidth or PointWidth. Temporarily obsolete because of rearrangements for WPF. Currently same as PixelWidth, but will become PointWidth in future releases of PDFSharp.")]
         public override double Width => ViewBox.Width;
 
         /// <summary>
         /// Get the width of the page identified by the property PageNumber.
         /// </summary>
-        [Obsolete("Use either PixelHeight or PointHeight. Temporarily obsolete because of rearrangements for WPF. Currently same as PixelHeight, but will become PointHeight in future releases of PDFsharp.")]
+        [Obsolete("Use either PixelHeight or PointHeight. Temporarily obsolete because of rearrangements for WPF. Currently same as PixelHeight, but will become PointHeight in future releases of PDFSharp.")]
         public override double Height => ViewBox.Height;
 
         /// <summary>
@@ -427,7 +427,7 @@ namespace PDFSharp.Drawing
             {
                 Debug.Assert(IsTemplate, "This function is for form templates only.");
                 if (_pdfForm.Reference == null)
-                    Owner._irefTable.Add(_pdfForm);
+                    Owner.IrefTable.Add(_pdfForm);
                 return _pdfForm;
             }
         }
@@ -438,7 +438,7 @@ namespace PDFSharp.Drawing
         internal string GetFormName(XForm form)
         {
             Debug.Assert(IsTemplate, "This function is for form templates only.");
-            PDFFormXObject pdfForm = Owner.FormTable.GetForm(form);
+            PDFFormXObject pdfForm = Owner.ExternalDocumentTable.GetForm(form);
             Debug.Assert(pdfForm != null);
             string name = Resources.AddForm(pdfForm);
             return name;

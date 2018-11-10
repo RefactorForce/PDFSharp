@@ -1,4 +1,4 @@
-#region PDFsharp - A .NET library for processing PDF
+#region PDFSharp - A .NET library for processing PDF
 //
 // Authors:
 //   Stefan Lange
@@ -50,7 +50,7 @@ namespace PDFSharp.Drawing.PDF
     /// Represents the current PDF graphics state.
     /// </summary>
     /// <remarks>
-    /// Completely revised for PDFsharp 1.4.
+    /// Completely revised for PDFSharp 1.4.
     /// </remarks>
     internal sealed class PDFGraphicsState : ICloneable
     {

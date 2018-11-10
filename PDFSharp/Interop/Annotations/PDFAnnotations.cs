@@ -1,4 +1,4 @@
-#region PDFsharp - A .NET library for processing PDF
+#region PDFSharp - A .NET library for processing PDF
 //
 // Authors:
 //   Stefan Lange
@@ -58,7 +58,7 @@ namespace PDFSharp.Interop.Annotations
         public void Add(PDFAnnotation annotation)
         {
             annotation.Document = Owner;
-            Owner._irefTable.Add(annotation);
+            Owner.IrefTable.Add(annotation);
             Elements.Add(annotation.Reference);
         }
 

@@ -1,4 +1,4 @@
-#region PDFsharp - A .NET library for processing PDF
+#region PDFSharp - A .NET library for processing PDF
 //
 // Authors:
 //   Stefan Lange
@@ -72,7 +72,7 @@ namespace PDFSharp.Interop.Advanced
             if (!IsSymbolFont)
                 Encoding = "/WinAnsiEncoding";
 
-            Owner._irefTable.Add(FontDescriptor);
+            Owner.IrefTable.Add(FontDescriptor);
             Elements[Keys.FontDescriptor] = FontDescriptor.Reference;
 
             FontEncoding = font.PDFOptions.FontEncoding;

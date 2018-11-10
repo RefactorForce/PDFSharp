@@ -1,4 +1,4 @@
-#region PDFsharp - A .NET library for processing PDF
+#region PDFSharp - A .NET library for processing PDF
 //
 // Authors:
 //   Stefan Lange
@@ -401,7 +401,7 @@ namespace PDFSharp.Interop.Internal
                     {
                         // TODO Reduce redundancy.
                         // Encrypt data after padding BOM.
-                        var bytes2 = new byte[bytes.Length + 2];
+                        byte[] bytes2 = new byte[bytes.Length + 2];
                         // Add BOM.
                         bytes2[0] = 0xfe;
                         bytes2[1] = 0xff;
@@ -411,7 +411,7 @@ namespace PDFSharp.Interop.Internal
                         bytes2 = securityHandler.EncryptBytes(bytes2);
                         encrypted = true;
                         pdf.Append("<");
-                        var count2 = bytes2.Length;
+                        int count2 = bytes2.Length;
                         for (int idx = 0; idx < count2; idx += 2)
                         {
                             pdf.AppendFormat("{0:X2}{1:X2}", bytes2[idx], bytes2[idx + 1]);

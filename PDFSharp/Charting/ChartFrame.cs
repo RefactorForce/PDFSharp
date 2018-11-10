@@ -1,4 +1,4 @@
-#region PDFsharp Charting - A .NET charting library based on PDFsharp
+#region PDFSharp Charting - A .NET charting library based on PDFSharp
 //
 // Authors:
 //   Niklas Schneider
@@ -49,29 +49,19 @@ namespace PDFSharp.Charting
         /// </summary>
         public ChartFrame(XRect rect)
         {
-            _location = rect.Location;
-            _size = rect.Size;
+            Location = rect.Location;
+            Size = rect.Size;
         }
 
         /// <summary>
         /// Gets or sets the location of the ChartFrame.
         /// </summary>
-        public XPoint Location
-        {
-            get => _location;
-            set => _location = value;
-        }
-        XPoint _location;
+        public XPoint Location { get; set; }
 
         /// <summary>
         /// Gets or sets the size of the ChartFrame.
         /// </summary>
-        public XSize Size
-        {
-            get => _size;
-            set => _size = value;
-        }
-        XSize _size;
+        public XSize Size { get; set; }
 
         /// <summary>
         /// Adds a chart to the ChartFrame.
@@ -92,19 +82,19 @@ namespace PDFSharp.Charting
             const int dx = 5;
             const int dy = 5;
             gfx.DrawRoundedRectangle(XBrushes.Gainsboro,
-                                     _location.X + dx, _location.Y + dy,
-                                     _size.Width, _size.Height, 20, 20);
+                                     Location.X + dx, Location.Y + dy,
+                                     Size.Width, Size.Height, 20, 20);
 
-            XRect chartRect = new XRect(_location.X, _location.Y, _size.Width, _size.Height);
+            XRect chartRect = new XRect(Location.X, Location.Y, Size.Width, Size.Height);
             XLinearGradientBrush brush = new XLinearGradientBrush(chartRect, XColor.FromArgb(0xFFD0DEEF), XColors.White,
                                                                   XLinearGradientMode.Vertical);
             XPen penBorder = new XPen(XColors.SteelBlue, 2.5);
             gfx.DrawRoundedRectangle(penBorder, brush,
-                                     _location.X, _location.Y, _size.Width, _size.Height,
+                                     Location.X, Location.Y, Size.Width, Size.Height,
                                      15, 15);
 
             XGraphicsState state = gfx.Save();
-            gfx.TranslateTransform(_location.X, _location.Y);
+            gfx.TranslateTransform(Location.X, Location.Y);
 
             // Calculate rectangle for all charts. Y-Position will be moved for each chart.
             int charts = _chartList.Count;
@@ -112,8 +102,8 @@ namespace PDFSharp.Charting
             const uint dyChart = 20;
             const uint dyBetweenCharts = 30;
             XRect rect = new XRect(dxChart, dyChart,
-              _size.Width - 2 * dxChart,
-              (_size.Height - (charts - 1) * dyBetweenCharts - 2 * dyChart) / charts);
+              Size.Width - 2 * dxChart,
+              (Size.Height - (charts - 1) * dyBetweenCharts - 2 * dyChart) / charts);
 
             // draw each chart in list
             foreach (Chart chart in _chartList)
@@ -162,12 +152,12 @@ namespace PDFSharp.Charting
         public void DrawChart(XGraphics gfx)
         {
             XGraphicsState state = gfx.Save();
-            gfx.TranslateTransform(_location.X, _location.Y);
+            gfx.TranslateTransform(Location.X, Location.Y);
 
             if (_chartList.Count > 0)
             {
-                XRect chartRect = new XRect(0, 0, _size.Width, _size.Height);
-                Chart chart = (Chart)_chartList[0];
+                XRect chartRect = new XRect(0, 0, Size.Width, Size.Height);
+                Chart chart = _chartList[0];
                 RendererParameters parms = new RendererParameters(gfx, chartRect)
                 {
                     DrawingItem = chart

@@ -1,4 +1,4 @@
-#region PDFsharp - A .NET library for processing PDF
+#region PDFSharp - A .NET library for processing PDF
 //
 // Authors:
 //   Stefan Lange
@@ -30,50 +30,34 @@
 using System;
 using System.Diagnostics;
 using System.IO;
-#if NETFX_CORE
 using System.Threading.Tasks;
-#endif
 using PDFSharp.Interop.Advanced;
 using PDFSharp.Interop.Internal;
 using PDFSharp.Interop.IO;
 using PDFSharp.Interop.AcroForms;
 using PDFSharp.Interop.Security;
 
-// ReSharper disable ConvertPropertyToExpressionBody
-
 namespace PDFSharp.Interop
 {
+    // TODO: Add asynchronous document saving API.
+
     /// <summary>
     /// Represents a PDF document.
     /// </summary>
-    [DebuggerDisplay("(Name={Name})")] // A name makes debugging easier
+    [DebuggerDisplay("(Name={Name})")]
     public sealed class PDFDocument : PDFObject, IDisposable
     {
-        internal DocumentState _state;
-        internal PDFDocumentOpenMode _openMode;
-
-#if DEBUG_
-        static PDFDocument()
-        {
-            PSSR.TestResourceMessages();
-            //string test = PSSR.ResMngr.GetString("SampleMessage1");
-            //test.GetType();
-        }
-#endif
-
         /// <summary>
         /// Creates a new PDF document in memory.
         /// To open an existing PDF file, use the PDFReader class.
         /// </summary>
         public PDFDocument()
         {
-            //PDFDocument.Gob.AttatchDocument(Handle);
-
-            _creation = DateTime.Now;
-            _state = DocumentState.Created;
-            _version = 14;
+            Creation = DateTime.Now;
+            State = DocumentState.Created;
+            Version = 14;
             Initialize();
-            Info.CreationDate = _creation;
+            Info.CreationDate = Creation;
         }
 
         /// <summary>
@@ -84,20 +68,12 @@ namespace PDFSharp.Interop
         /// </summary>
         public PDFDocument(string filename)
         {
-            //PDFDocument.Gob.AttatchDocument(Handle);
-
-            _creation = DateTime.Now;
-            _state = DocumentState.Created;
-            _version = 14;
+            Creation = DateTime.Now;
+            State = DocumentState.Created;
+            Version = 14;
             Initialize();
-            Info.CreationDate = _creation;
-
-            // TODO 4STLA: encapsulate the whole c'tor with #if !NETFX_CORE?
-#if !NETFX_CORE
-            _outStream = new FileStream(filename, FileMode.Create);
-#else
-            throw new NotImplementedException();
-#endif
+            Info.CreationDate = Creation;            
+            OutStream = new FileStream(filename, FileMode.Create);
         }
 
         /// <summary>
@@ -108,48 +84,31 @@ namespace PDFSharp.Interop
         /// </summary>
         public PDFDocument(Stream outputStream)
         {
-            //PDFDocument.Gob.AttatchDocument(Handle);
-
-            _creation = DateTime.Now;
-            _state = DocumentState.Created;
+            Creation = DateTime.Now;
+            State = DocumentState.Created;
             Initialize();
-            Info.CreationDate = _creation;
+            Info.CreationDate = Creation;
 
-            _outStream = outputStream;
+            OutStream = outputStream;
         }
 
         internal PDFDocument(Lexer lexer)
         {
-            //PDFDocument.Gob.AttatchDocument(Handle);
+            Creation = DateTime.Now;
+            State = DocumentState.Imported;
 
-            _creation = DateTime.Now;
-            _state = DocumentState.Imported;
-
-            //_info = new PDFInfo(this);
-            //_pages = new PDFPages(this);
-            //_fontTable = new PDFFontTable();
-            //_catalog = new PDFCatalog(this);
-            ////_font = new PDFFont();
-            //_objects = new PDFObjectTable(this);
-            //_trailer = new PDFTrailer(this);
-            _irefTable = new PDFCrossReferenceTable(this);
-            _lexer = lexer;
+            IrefTable = new PDFCrossReferenceTable(this);
+            Lexer = lexer;
         }
 
         void Initialize()
         {
-            //_info = new PDFInfo(this);
             _fontTable = new PDFFontTable(this);
             _imageTable = new PDFImageTable(this);
-            _trailer = new PDFTrailer(this);
-            _irefTable = new PDFCrossReferenceTable(this);
-            _trailer.CreateNewDocumentIDs();
+            Trailer = new PDFTrailer(this);
+            IrefTable = new PDFCrossReferenceTable(this);
+            Trailer.CreateNewDocumentIDs();
         }
-
-        //~PDFDocument()
-        //{
-        //  Dispose(false);
-        //}
 
         /// <summary>
         /// Disposes all references to this document stored in other documents. This function should be called
@@ -160,41 +119,34 @@ namespace PDFSharp.Interop
 
         void Dispose(bool disposing)
         {
-            if (_state != DocumentState.Disposed)
+            if (State != DocumentState.Disposed)
             {
                 if (disposing)
                 {
                     // Dispose managed resources.
                 }
-                //PDFDocument.Gob.DetatchDocument(Handle);
             }
-            _state = DocumentState.Disposed;
+            State = DocumentState.Disposed;
         }
 
         /// <summary>
         /// Gets or sets a user defined object that contains arbitrary information associated with this document.
-        /// The tag is not used by PDFsharp.
+        /// The tag is not used by PDFSharp.
         /// </summary>
         public object Tag { get; set; }
 
         /// <summary>
         /// Gets or sets a value used to distinguish PDFDocument objects.
-        /// The name is not used by PDFsharp.
+        /// The name is not used by PDFSharp.
         /// </summary>
-        string Name { get; set; } = NewName();
+        string Name { get; set; } = GenerateName();
 
         /// <summary>
         /// Get a new default name for a new document.
         /// </summary>
-        static string NewName() =>
-#if DEBUG_
-            if (PDFDocument.nameCount == 57)
-                PDFDocument.nameCount.GetType();
-#endif
-            "Document " + _nameCount++;
-        static int _nameCount;
+        static string GenerateName() => "Document " + NameCount++;
 
-        internal bool CanModify => true;
+        internal bool CanModify => State != DocumentState.Disposed;
 
         /// <summary>
         /// Closes this instance.
@@ -204,14 +156,14 @@ namespace PDFSharp.Interop
             if (!CanModify)
                 throw new InvalidOperationException(PSSR.CannotModify);
 
-            if (_outStream != null)
+            if (OutStream != null)
             {
                 // Get security handler if document gets encrypted
                 PDFStandardSecurityHandler securityHandler = null;
                 if (SecuritySettings.DocumentSecurityLevel != PDFDocumentSecurityLevel.None)
                     securityHandler = SecuritySettings.SecurityHandler;
 
-                PDFWriter writer = new PDFWriter(_outStream, securityHandler);
+                PDFWriter writer = new PDFWriter(OutStream, securityHandler);
                 try
                 {
                     DoSave(writer);
@@ -222,8 +174,7 @@ namespace PDFSharp.Interop
                 }
             }
         }
-
-#if true //!NETFX_CORE
+        
         /// <summary>
         /// Saves the document to the specified path. If a file already exists, it will be overwritten.
         /// </summary>
@@ -231,54 +182,10 @@ namespace PDFSharp.Interop
         {
             if (!CanModify)
                 throw new InvalidOperationException(PSSR.CannotModify);
-
-#if !NETFX_CORE
+            
             using (Stream stream = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.None))
-            {
                 Save(stream);
-            }
-#else
-            var task = SaveAsync(path, true);
-
-            ////var file = await Windows.Storage.ApplicationData.Current.LocalFolder.CreateFileAsync("MyWav.wav", Windows.Storage.CreationCollisionOption.ReplaceExisting);
-            ////var stream = file.OpenStreamForWriteAsync();
-            ////var writer = new StreamWriter(stream);
-            ////Save(stream);
-
-            //var ms = new MemoryStream();
-            //Save(ms, false);
-            //byte[] pdf = ms.ToArray();
-            //ms.Close();
-#endif
         }
-#endif
-
-#if NETFX_CORE
-        /// <summary>
-        /// Saves the document to the specified path. If a file already exists, it will be overwritten.
-        /// </summary>
-        public async Task SaveAsync(string path, bool closeStream)
-        {
-            if (!CanModify)
-                throw new InvalidOperationException(PSSR.CannotModify);
-
-            // Just march through...
-
-            var file = await Windows.Storage.ApplicationData.Current.LocalFolder.CreateFileAsync("My1st.pdf", Windows.Storage.CreationCollisionOption.ReplaceExisting);
-            var stream = await file.OpenStreamForWriteAsync();
-            using (var writer = new StreamWriter(stream))
-            {
-                Save(stream, false);
-            }
-
-            //var ms = new MemoryStream();
-            //Save(ms, false);
-            //byte[] pdf = ms.ToArray();
-            //ms.Close();
-            //await stream.WriteAsync(pdf, 0, pdf.Length);
-            //stream.Close();
-        }
-#endif
 
         /// <summary>
         /// Saves the document to the specified stream.
@@ -306,29 +213,22 @@ namespace PDFSharp.Interop
             }
             finally
             {
-                if (stream != null)
+                if (stream is Stream)
                 {
                     if (closeStream)
-#if UWP
-                        stream.Dispose();
-#else
                         stream.Close();
-#endif
-                    else
-                    {
-                        if (stream.CanRead && stream.CanSeek)
+                    else if (stream.CanRead == true && stream.CanSeek == true)
                             stream.Position = 0; // Reset the stream position if the stream is kept open.
-                    }
                 }
-                if (writer != null)
-                    writer.Close(closeStream);
+
+                writer?.Close(closeStream);
             }
         }
 
         /// <summary>
         /// Saves the document to the specified stream.
         /// The stream is not closed by this function.
-        /// (Older versions of PDFsharp closes the stream. That was not very useful.)
+        /// (Older versions of PDFSharp closes the stream. That was not very useful.)
         /// </summary>
         public void Save(Stream stream) => Save(stream, false);
 
@@ -339,7 +239,7 @@ namespace PDFSharp.Interop
         {
             if (_pages == null || _pages.Count == 0)
             {
-                if (_outStream != null)
+                if (OutStream != null)
                 {
                     // Give feedback if the wrong constructor was used.
                     throw new InvalidOperationException("Cannot save a PDF document with no pages. Do not use \"public PDFDocument(string filename)\" or \"public PDFDocument(Stream outputStream)\" if you want to open an existing PDF document from a file or stream; use PDFReader.Open() for that purpose.");
@@ -350,11 +250,11 @@ namespace PDFSharp.Interop
             try
             {
                 // HACK: Remove XRefTrailer
-                if (_trailer is PDFCrossReferenceStream)
+                if (Trailer is PDFCrossReferenceStream)
                 {
                     // HACK^2: Preserve the SecurityHandler.
                     PDFStandardSecurityHandler securityHandler = _securitySettings.SecurityHandler;
-                    _trailer = new PDFTrailer((PDFCrossReferenceStream)_trailer)
+                    Trailer = new PDFTrailer((PDFCrossReferenceStream)Trailer)
                     {
                         _securityHandler = securityHandler
                     };
@@ -365,13 +265,13 @@ namespace PDFSharp.Interop
                 {
                     PDFStandardSecurityHandler securityHandler = _securitySettings.SecurityHandler;
                     if (securityHandler.Reference == null)
-                        _irefTable.Add(securityHandler);
+                        IrefTable.Add(securityHandler);
                     else
-                        Debug.Assert(_irefTable.Contains(securityHandler.ObjectID));
-                    _trailer.Elements[PDFTrailer.Keys.Encrypt] = _securitySettings.SecurityHandler.Reference;
+                        Debug.Assert(IrefTable.Contains(securityHandler.ObjectID));
+                    Trailer.Elements[PDFTrailer.Keys.Encrypt] = _securitySettings.SecurityHandler.Reference;
                 }
                 else
-                    _trailer.Elements.Remove(PDFTrailer.Keys.Encrypt);
+                    Trailer.Elements.Remove(PDFTrailer.Keys.Encrypt);
 
                 PrepareForSave();
 
@@ -379,39 +279,25 @@ namespace PDFSharp.Interop
                     _securitySettings.SecurityHandler.PrepareEncryption();
 
                 writer.WriteFileHeader(this);
-                PDFReference[] irefs = _irefTable.AllReferences;
+                PDFReference[] irefs = IrefTable.AllReferences;
                 int count = irefs.Length;
                 for (int idx = 0; idx < count; idx++)
                 {
                     PDFReference iref = irefs[idx];
-#if DEBUG_
-                    if (iref.ObjectNumber == 378)
-                        GetType();
-#endif
                     iref.Position = writer.Position;
                     iref.Value.WriteObject(writer);
                 }
                 int startxref = writer.Position;
-                _irefTable.WriteObject(writer);
+                IrefTable.WriteObject(writer);
                 writer.WriteRaw("trailer\n");
-                _trailer.Elements.SetInteger("/Size", count + 1);
-                _trailer.WriteObject(writer);
+                Trailer.Elements.SetInteger("/Size", count + 1);
+                Trailer.WriteObject(writer);
                 writer.WriteEof(this, startxref);
-
-                //if (encrypt)
-                //{
-                //  state &= ~DocumentState.SavingEncrypted;
-                //  //_securitySettings.SecurityHandler.EncryptDocument();
-                //}
             }
             finally
             {
                 if (writer != null)
-                {
                     writer.Stream.Flush();
-                    // DO NOT CLOSE WRITER HERE
-                    //writer.Close();
-                }
             }
         }
 
@@ -423,9 +309,9 @@ namespace PDFSharp.Interop
             PDFDocumentInformation info = Info;
 
             // Add patch level to producer if it is not '0'.
-            string pdfSharpProducer = ProductVersionInfo.Producer;
-            if (!ProductVersionInfo.VersionPatch.Equals("0"))
-                pdfSharpProducer = ProductVersionInfo.Producer2;
+            string pdfSharpProducer = VersionMetadata.Header;
+            if (!VersionMetadata.VersionPatch.Equals("0"))
+                pdfSharpProducer = VersionMetadata.Header;
 
             // Set Creator if value is undefined.
             if (info.Elements[PDFDocumentInformation.Keys.Creator] == null)
@@ -437,8 +323,8 @@ namespace PDFSharp.Interop
                 producer = pdfSharpProducer;
             else
             {
-                // Prevent endless concatenation if file is edited with PDFsharp more than once.
-                if (!producer.StartsWith(ProductVersionInfo.Title))
+                // Prevent endless concatenation if file is edited with PDFSharp more than once.
+                if (!producer.StartsWith(VersionMetadata.Title))
                     producer = pdfSharpProducer + " (Original: " + producer + ")";
             }
             info.Elements.SetString(PDFDocumentInformation.Keys.Producer, producer);
@@ -450,13 +336,11 @@ namespace PDFSharp.Interop
             // Let catalog do the rest.
             Catalog.PrepareForSave();
 
-#if true
             // Remove all unreachable objects (e.g. from deleted pages)
-            int removed = _irefTable.Compact();
+            int removed = IrefTable.Compact();
             if (removed != 0)
                 Debug.WriteLine("PrepareForSave: Number of deleted unreachable objects: " + removed);
-            _irefTable.Renumber();
-#endif
+            IrefTable.Renumber();
         }
 
         /// <summary>
@@ -535,8 +419,7 @@ namespace PDFSharp.Interop
         /// <summary>
         /// Gets the file size of the document.
         /// </summary>
-        public long FileSize => _fileSize;
-        internal long _fileSize; // TODO: make private
+        public long FileSize { get; internal set; } // TODO: make private
 
         /// <summary>
         /// Gets the full qualified file name if the document was read form a file, or an empty string otherwise.
@@ -564,12 +447,12 @@ namespace PDFSharp.Interop
         /// Returns a value indicating whether the document was newly created or opened from an existing document.
         /// Returns true if the document was opened with the PDFReader.Open function, false otherwise.
         /// </summary>
-        public bool IsImported => (_state & DocumentState.Imported) != 0;
+        public bool IsImported => (State & DocumentState.Imported) != 0;
 
         /// <summary>
         /// Returns a value indicating whether the document is read only or can be modified.
         /// </summary>
-        public bool IsReadOnly => _openMode != PDFDocumentOpenMode.Modify;
+        public bool IsReadOnly => OpenMode != PDFDocumentOpenMode.Modify;
 
         internal Exception DocumentNotImported() => new InvalidOperationException("Document not imported.");
 
@@ -581,7 +464,7 @@ namespace PDFSharp.Interop
             get
             {
                 if (_info == null)
-                    _info = _trailer.Info;
+                    _info = Trailer.Info;
                 return _info;
             }
         }
@@ -689,23 +572,14 @@ namespace PDFSharp.Interop
         /// <summary>
         /// Gets the document image table that holds all images used in the current document.
         /// </summary>
-        internal PDFImageTable ImageTable
-        {
-            get
-            {
-                if (_imageTable == null)
-                    _imageTable = new PDFImageTable(this);
-                return _imageTable;
-            }
-        }
+        internal PDFImageTable ImageTable => _imageTable ?? (_imageTable = new PDFImageTable(this));
         PDFImageTable _imageTable;
 
         /// <summary>
         /// Gets the document form table that holds all form external objects used in the current document.
         /// </summary>
-        internal PDFFormXObjectTable FormTable  // TODO: Rename to ExternalDocumentTable.
-=> _formTable ?? (_formTable = new PDFFormXObjectTable(this));
-        PDFFormXObjectTable _formTable;
+        internal PDFFormXObjectTable ExternalDocumentTable => _externalDocumentTable ?? (_externalDocumentTable = new PDFFormXObjectTable(this));
+        PDFFormXObjectTable _externalDocumentTable;
 
         /// <summary>
         /// Gets the document ExtGState table that holds all form state objects used in the current document.
@@ -716,7 +590,7 @@ namespace PDFSharp.Interop
         /// <summary>
         /// Gets the PDFCatalog of the current document.
         /// </summary>
-        internal PDFCatalog Catalog => _catalog ?? (_catalog = _trailer.Root);
+        internal PDFCatalog Catalog => _catalog ?? (_catalog = Trailer.Root);
         PDFCatalog _catalog;  // never changes if once created
 
         /// <summary>
@@ -779,63 +653,57 @@ namespace PDFSharp.Interop
         public void Flatten()
         {
             for (int idx = 0; idx < AcroForm.Fields.Count; idx++)
-            {
                 AcroForm.Fields[idx].ReadOnly = true;
-            }
         }
 
         /// <summary>
         /// Gets the security handler.
         /// </summary>
-        public PDFStandardSecurityHandler SecurityHandler => _trailer.SecurityHandler;
-
-        internal PDFTrailer _trailer;
-        internal PDFCrossReferenceTable _irefTable;
-        internal Stream _outStream;
-
-        // Imported Document
-        internal Lexer _lexer;
-
-        internal DateTime _creation;
+        public PDFStandardSecurityHandler SecurityHandler => Trailer.SecurityHandler;
 
         /// <summary>
         /// Occurs when the specified document is not used anymore for importing content.
         /// </summary>
         internal void OnExternalDocumentFinalized(DocumentHandle handle)
         {
-            if (tls != null)
-            {
-                //PDFDocument[] documents = tls.Documents;
-                tls.DetachDocument(handle);
-            }
+            if (storage != null)
+                storage.DetachDocument(handle);
 
-            if (_formTable != null)
-                _formTable.DetachDocument(handle);
+            if (_externalDocumentTable != null)
+                _externalDocumentTable.DetachDocument(handle);
         }
-
-        //internal static GlobalObjectTable Gob = new GlobalObjectTable();
 
         /// <summary>
         /// Gets the ThreadLocalStorage object. It is used for caching objects that should created
         /// only once.
         /// </summary>
-        internal static ThreadLocalStorage Tls => tls ?? (tls = new ThreadLocalStorage());
+        internal static ThreadLocalStorage Storage => storage ?? (storage = new ThreadLocalStorage { });
+
+        internal DocumentState State { get; set; }
+        internal PDFDocumentOpenMode OpenMode { get; set; }
+        internal DateTime Creation { get; }
+        internal Stream OutStream { get; }
+        internal PDFCrossReferenceTable IrefTable { get; set; }
+        internal Lexer Lexer { get; }
+        internal PDFTrailer Trailer { get; set; }
+        public static int NameCount { get; set; }
+
         [ThreadStatic]
-        static ThreadLocalStorage tls;
+        static ThreadLocalStorage storage;
 
         [DebuggerDisplay("(ID={ID}, alive={IsAlive})")]
         internal class DocumentHandle
         {
             public DocumentHandle(PDFDocument document)
             {
-                _weakRef = new WeakReference(document);
+                Reference = new WeakReference(document);
                 ID = document.Guid.ToString("B").ToUpper();
             }
 
-            public bool IsAlive => _weakRef.IsAlive;
+            public bool IsAlive => Reference.IsAlive;
 
-            public PDFDocument Target => _weakRef.Target as PDFDocument;
-            readonly WeakReference _weakRef;
+            public PDFDocument Target => Reference.Target as PDFDocument;
+            WeakReference Reference { get; }
 
             public string ID;
 

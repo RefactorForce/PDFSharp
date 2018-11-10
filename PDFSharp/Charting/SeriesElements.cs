@@ -1,4 +1,4 @@
-#region PDFsharp Charting - A .NET charting library based on PDFsharp
+#region PDFSharp Charting - A .NET charting library based on PDFSharp
 //
 // Authors:
 //   Niklas Schneider
@@ -48,10 +48,7 @@ namespace PDFSharp.Charting
         /// <summary>
         /// Gets a point by its index.
         /// </summary>
-        public new Point this[int index]
-        {
-            get { return (Point)base[index]; }
-        }
+        public new Point this[int index] => (Point)base[index];
 
         #region Methods
         /// <summary>

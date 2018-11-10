@@ -1,4 +1,4 @@
-#region PDFsharp Charting - A .NET charting library based on PDFsharp
+#region PDFSharp Charting - A .NET charting library based on PDFSharp
 //
 // Authors:
 //   Niklas Schneider
@@ -93,7 +93,7 @@ namespace PDFSharp.Charting
         /// </summary>
         public DataLabelPosition Position
         {
-            get => (DataLabelPosition)_position;
+            get => _position;
             set
             {
                 if (!Enum.IsDefined(typeof(DataLabelPosition), value))

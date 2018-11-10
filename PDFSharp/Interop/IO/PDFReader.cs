@@ -1,4 +1,4 @@
-#region PDFsharp - A .NET library for processing PDF
+#region PDFSharp - A .NET library for processing PDF
 //
 // Authors:
 //   Stefan Lange
@@ -255,9 +255,9 @@ namespace PDFSharp.Interop.IO
             {
                 Lexer lexer = new Lexer(stream);
                 document = new PDFDocument(lexer);
-                document._state |= DocumentState.Imported;
-                document._openMode = openmode;
-                document._fileSize = stream.Length;
+                document.State |= DocumentState.Imported;
+                document.OpenMode = openmode;
+                document.FileSize = stream.Length;
 
                 // Get file version.
                 byte[] header = new byte[1024];
@@ -267,18 +267,18 @@ namespace PDFSharp.Interop.IO
                 if (document._version == 0)
                     throw new InvalidOperationException(PSSR.InvalidPDF);
 
-                document._irefTable.IsUnderConstruction = true;
+                document.IrefTable.IsUnderConstruction = true;
                 Parser parser = new Parser(document);
                 // Read all trailers or cross-reference streams, but no objects.
-                document._trailer = parser.ReadTrailer();
-                if (document._trailer == null)
+                document.Trailer = parser.ReadTrailer();
+                if (document.Trailer == null)
                     ParserDiagnostics.ThrowParserException("Invalid PDF file: no trailer found."); // TODO L10N using PSSR.
 
-                Debug.Assert(document._irefTable.IsUnderConstruction);
-                document._irefTable.IsUnderConstruction = false;
+                Debug.Assert(document.IrefTable.IsUnderConstruction);
+                document.IrefTable.IsUnderConstruction = false;
 
                 // Is document encrypted?
-                PDFReference xrefEncrypt = document._trailer.Elements[PDFTrailer.Keys.Encrypt] as PDFReference;
+                PDFReference xrefEncrypt = document.Trailer.Elements[PDFTrailer.Keys.Encrypt] as PDFReference;
                 if (xrefEncrypt != null)
                 {
                     //xrefEncrypt.Value = parser.ReadObject(null, xrefEncrypt.ObjectID, false);
@@ -332,7 +332,7 @@ namespace PDFSharp.Interop.IO
                     }
                 }
 
-                PDFReference[] irefs2 = document._irefTable.AllReferences;
+                PDFReference[] irefs2 = document.IrefTable.AllReferences;
                 int count2 = irefs2.Length;
 
                 // 3rd: Create iRefs for all compressed objects.
@@ -376,7 +376,7 @@ namespace PDFSharp.Interop.IO
                             {
                                 PDFReference irefNew = parser.ReadCompressedObject(new PDFObjectID((int)item.Field2),
                                     (int)item.Field3);
-                                Debug.Assert(document._irefTable.Contains(iref.ObjectID));
+                                Debug.Assert(document.IrefTable.Contains(iref.ObjectID));
                                 //document._irefTable.Add(irefNew);
                             }
                         }
@@ -384,7 +384,7 @@ namespace PDFSharp.Interop.IO
                 }
 
 
-                PDFReference[] irefs = document._irefTable.AllReferences;
+                PDFReference[] irefs = document.IrefTable.AllReferences;
                 int count = irefs.Length;
 
                 // Read all indirect objects.
@@ -399,7 +399,7 @@ namespace PDFSharp.Interop.IO
 #endif
                         try
                         {
-                            Debug.Assert(document._irefTable.Contains(iref.ObjectID));
+                            Debug.Assert(document.IrefTable.Contains(iref.ObjectID));
                             PDFObject pdfObject = parser.ReadObject(null, iref.ObjectID, false, false);
                             Debug.Assert(pdfObject.Reference == iref);
                             pdfObject.Reference = iref;
@@ -414,11 +414,11 @@ namespace PDFSharp.Interop.IO
                     }
                     else
                     {
-                        Debug.Assert(document._irefTable.Contains(iref.ObjectID));
+                        Debug.Assert(document.IrefTable.Contains(iref.ObjectID));
                         //iref.GetType();
                     }
                     // Set maximum object number.
-                    document._irefTable._maxObjectNumber = Math.Max(document._irefTable._maxObjectNumber,
+                    document.IrefTable._maxObjectNumber = Math.Max(document.IrefTable._maxObjectNumber,
                         iref.ObjectNumber);
                 }
 
@@ -429,7 +429,7 @@ namespace PDFSharp.Interop.IO
                 }
 
                 // Fix references of trailer values and then objects and irefs are consistent.
-                document._trailer.Finish();
+                document.Trailer.Finish();
 
 #if DEBUG_
     // Some tests...
@@ -443,7 +443,7 @@ namespace PDFSharp.Interop.IO
                 {
                     // Create new or change existing document IDs.
                     if (document.Internals.SecondDocumentID == "")
-                        document._trailer.CreateNewDocumentIDs();
+                        document.Trailer.CreateNewDocumentIDs();
                     else
                     {
                         byte[] agTemp = Guid.NewGuid().ToByteArray();
@@ -454,7 +454,7 @@ namespace PDFSharp.Interop.IO
                     document.Info.ModificationDate = DateTime.Now;
 
                     // Remove all unreachable objects
-                    int removed = document._irefTable.Compact();
+                    int removed = document.IrefTable.Compact();
                     if (removed != 0)
                         Debug.WriteLine("Number of deleted unreachable objects: " + removed);
 
@@ -465,9 +465,9 @@ namespace PDFSharp.Interop.IO
                     //bool b = document.irefTable.Contains(new PDFObjectID(1108));
                     //b.GetType();
 
-                    document._irefTable.CheckConsistence();
-                    document._irefTable.Renumber();
-                    document._irefTable.CheckConsistence();
+                    document.IrefTable.CheckConsistence();
+                    document.IrefTable.Renumber();
+                    document.IrefTable.CheckConsistence();
                 }
             }
             catch (Exception ex)

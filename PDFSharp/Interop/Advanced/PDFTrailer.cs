@@ -1,4 +1,4 @@
-#region PDFsharp - A .NET library for processing PDF
+#region PDFSharp - A .NET library for processing PDF
 //
 // Authors:
 //   Stefan Lange
@@ -167,41 +167,41 @@ namespace PDFSharp.Interop.Advanced
         internal void Finish()
         {
             // /Root
-            if (_document._trailer.Elements[Keys.Root] is PDFReference iref && iref.Value == null)
+            if (_document.Trailer.Elements[Keys.Root] is PDFReference iref && iref.Value == null)
             {
-                iref = _document._irefTable[iref.ObjectID];
+                iref = _document.IrefTable[iref.ObjectID];
                 Debug.Assert(iref.Value != null);
-                _document._trailer.Elements[Keys.Root] = iref;
+                _document.Trailer.Elements[Keys.Root] = iref;
             }
 
             // /Info
-            iref = _document._trailer.Elements[Keys.Info] as PDFReference;
+            iref = _document.Trailer.Elements[Keys.Info] as PDFReference;
             if (iref != null && iref.Value == null)
             {
-                iref = _document._irefTable[iref.ObjectID];
+                iref = _document.IrefTable[iref.ObjectID];
                 Debug.Assert(iref.Value != null);
-                _document._trailer.Elements[Keys.Info] = iref;
+                _document.Trailer.Elements[Keys.Info] = iref;
             }
 
             // /Encrypt
-            iref = _document._trailer.Elements[Keys.Encrypt] as PDFReference;
+            iref = _document.Trailer.Elements[Keys.Encrypt] as PDFReference;
             if (iref != null)
             {
-                iref = _document._irefTable[iref.ObjectID];
+                iref = _document.IrefTable[iref.ObjectID];
                 Debug.Assert(iref.Value != null);
-                _document._trailer.Elements[Keys.Encrypt] = iref;
+                _document.Trailer.Elements[Keys.Encrypt] = iref;
 
                 // The encryption dictionary (security handler) was read in before the XRefTable construction 
                 // was completed. The next lines fix that state (it took several hours to find these bugs...).
-                iref.Value = _document._trailer._securityHandler;
-                _document._trailer._securityHandler.Reference = iref;
+                iref.Value = _document.Trailer._securityHandler;
+                _document.Trailer._securityHandler.Reference = iref;
                 iref.Value.Reference = iref;
             }
 
             Elements.Remove(Keys.Prev);
 
-            Debug.Assert(_document._irefTable.IsUnderConstruction == false);
-            _document._irefTable.IsUnderConstruction = false;
+            Debug.Assert(_document.IrefTable.IsUnderConstruction == false);
+            _document.IrefTable.IsUnderConstruction = false;
         }
 
         /// <summary>

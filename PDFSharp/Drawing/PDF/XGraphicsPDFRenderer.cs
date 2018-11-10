@@ -1,4 +1,4 @@
-﻿#region PDFsharp - A .NET library for processing PDF
+﻿#region PDFSharp - A .NET library for processing PDF
 //
 // Authors:
 //   Stefan Lange
@@ -657,7 +657,7 @@ namespace PDFSharp.Drawing.PDF
                 XForm form = (XForm)image;
                 form.Finish();
 
-                PDFFormXObject pdfForm = Owner.FormTable.GetForm(form);
+                PDFFormXObject pdfForm = Owner.ExternalDocumentTable.GetForm(form);
 
                 double cx = width / image.PointWidth;
                 double cy = height / image.PointHeight;
@@ -720,7 +720,7 @@ namespace PDFSharp.Drawing.PDF
                 XForm form = (XForm)image;
                 form.Finish();
 
-                PDFFormXObject pdfForm = Owner.FormTable.GetForm(form);
+                PDFFormXObject pdfForm = Owner.ExternalDocumentTable.GetForm(form);
 
                 double cx = width / image.PointWidth;
                 double cy = height / image.PointHeight;
@@ -1531,12 +1531,12 @@ namespace PDFSharp.Drawing.PDF
 
                 // PDF uses a standard right-handed Cartesian coordinate system with the y axis directed up
                 // and the rotation counterclockwise. Windows uses the opposite convertion with y axis
-                // directed down and rotation clockwise. When I started with PDFsharp I flipped pages horizontally
+                // directed down and rotation clockwise. When I started with PDFSharp I flipped pages horizontally
                 // and then mirrored text to compensate the effect that the fipping turns text upside down.
                 // I found this technique during analysis of PDF documents generated with PDFlib. Unfortunately
                 // this technique leads to several problems with programms that compose or view PDF documents
-                // generated with PDFsharp.
-                // In PDFsharp 1.4 I implement a revised technique that does not need text mirroring any more.
+                // generated with PDFSharp.
+                // In PDFSharp 1.4 I implement a revised technique that does not need text mirroring any more.
 
                 DefaultViewMatrix = new XMatrix();
                 if (Gfx.PageDirection == XPageDirection.Downwards)
@@ -1725,7 +1725,7 @@ namespace PDFSharp.Drawing.PDF
         }
 
         /// <summary>
-        /// PDFsharp uses the Td operator to set the text position. Td just sets the offset of the text matrix
+        /// PDFSharp uses the Td operator to set the text position. Td just sets the offset of the text matrix
         /// and produces lesser code as Tm.
         /// </summary>
         /// <param name="pos">The absolute text position.</param>

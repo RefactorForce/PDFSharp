@@ -1,4 +1,4 @@
-#region PDFsharp - A .NET library for processing PDF
+#region PDFSharp - A .NET library for processing PDF
 //
 // Authors:
 //   Stefan Lange
@@ -4974,7 +4974,7 @@ namespace PDFSharp.Drawing  // #??? Clean up
         //#if CORE || GDI
         //        /// <summary>
         //        /// Critical section used to serialize access to GDI+.
-        //        /// This may be necessary to use PDFsharp safely in a Web application.
+        //        /// This may be necessary to use PDFSharp safely in a Web application.
         //        /// </summary>
         //        internal static readonly object GdiPlus = new object();
         //#endif

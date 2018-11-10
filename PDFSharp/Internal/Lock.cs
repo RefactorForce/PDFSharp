@@ -1,4 +1,4 @@
-#region PDFsharp - A .NET library for processing PDF
+#region PDFSharp - A .NET library for processing PDF
 //
 // Authors:
 //   Stefan Lange
@@ -35,7 +35,7 @@ using PDFSharp.Interop.Internal;
 namespace PDFSharp.Internal
 {
     /// <summary>
-    /// Static locking functions to make PDFsharp thread save.
+    /// Static locking functions to make PDFSharp thread save.
     /// </summary>
     internal static class Lock
     {

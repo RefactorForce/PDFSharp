@@ -1,4 +1,4 @@
-#region PDFsharp Charting - A .NET charting library based on PDFsharp
+#region PDFSharp Charting - A .NET charting library based on PDFSharp
 //
 // Authors:
 //   Niklas Schneider
@@ -37,10 +37,7 @@ namespace PDFSharp.Charting.Renderers
         /// <summary>
         /// Initializes a new instance of the Renderer class with the specified renderer parameters.
         /// </summary>
-        internal Renderer(RendererParameters rendererParms)
-        {
-            _rendererParms = rendererParms;
-        }
+        internal Renderer(RendererParameters rendererParms) => _rendererParms = rendererParms;
 
         /// <summary>
         /// Derived renderer should return an initialized and renderer specific rendererInfo,

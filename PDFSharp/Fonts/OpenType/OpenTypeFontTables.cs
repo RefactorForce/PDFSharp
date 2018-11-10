@@ -1,5 +1,5 @@
 ﻿
-#region PDFsharp - A .NET library for processing PDF
+#region PDFSharp - A .NET library for processing PDF
 //
 // Authors:
 //   Stefan Lange
@@ -48,7 +48,7 @@ namespace PDFSharp.Fonts.OpenType
     }
 
     /// <summary>
-    /// Only Symbol and Unicode is used by PDFsharp.
+    /// Only Symbol and Unicode is used by PDFSharp.
     /// </summary>
     internal enum WinEncodingId
     {
@@ -196,7 +196,7 @@ namespace PDFSharp.Fonts.OpenType
                     }
                 }
                 if (!success)
-                    throw new InvalidOperationException("Font has no usable platform or encoding ID. It cannot be used with PDFsharp.");
+                    throw new InvalidOperationException("Font has no usable platform or encoding ID. It cannot be used with PDFSharp.");
             }
             catch (Exception ex)
             {

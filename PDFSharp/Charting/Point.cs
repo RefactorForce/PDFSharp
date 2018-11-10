@@ -1,4 +1,4 @@
-#region PDFsharp Charting - A .NET charting library based on PDFsharp
+#region PDFSharp Charting - A .NET charting library based on PDFSharp
 //
 // Authors:
 //   Niklas Schneider
@@ -44,20 +44,15 @@ namespace PDFSharp.Charting
         /// Initializes a new instance of the Point class with a real value.
         /// </summary>
         public Point(double value)
-            : this()
-        {
-            Value = value;
-        }
+            : this() => Value = value;
 
         /// <summary>
         /// Initializes a new instance of the Point class with a real value.
         /// </summary>
         public Point(string value)
-            : this()
-        {
+            : this() =>
             // = "34.5 23.9"
             Value = 0;
-        }
 
         #region Methods
         /// <summary>

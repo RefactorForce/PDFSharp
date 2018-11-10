@@ -1,4 +1,4 @@
-#region PDFsharp Charting - A .NET charting library based on PDFsharp
+#region PDFSharp Charting - A .NET charting library based on PDFSharp
 //
 // Authors:
 //   Niklas Schneider
@@ -50,8 +50,13 @@ namespace PDFSharp.Charting.Renderers
         /// </summary>
         internal virtual double X
         {
-            get => _rect.X;
-            set => _rect.X = value;
+            get => Rect.X;
+            set
+            {
+                XRect temp = Rect;
+                temp.X = value;
+                Rect = temp;
+            }
         }
 
         /// <summary>
@@ -59,8 +64,13 @@ namespace PDFSharp.Charting.Renderers
         /// </summary>
         internal virtual double Y
         {
-            get => _rect.Y;
-            set => _rect.Y = value;
+            get => Rect.Y;
+            set
+            {
+                XRect temp = Rect;
+                temp.Y = value;
+                Rect = temp;
+            }
         }
 
         /// <summary>
@@ -68,8 +78,13 @@ namespace PDFSharp.Charting.Renderers
         /// </summary>
         internal virtual double Width
         {
-            get => _rect.Width;
-            set => _rect.Width = value;
+            get => Rect.Width;
+            set
+            {
+                XRect temp = Rect;
+                temp.Width = value;
+                Rect = temp;
+            }
         }
 
         /// <summary>
@@ -77,8 +92,13 @@ namespace PDFSharp.Charting.Renderers
         /// </summary>
         internal virtual double Height
         {
-            get => _rect.Height;
-            set => _rect.Height = value;
+            get => Rect.Height;
+            set
+            {
+                XRect temp = Rect;
+                temp.Height = value;
+                Rect = temp;
+            }
         }
 
         /// <summary>
@@ -86,19 +106,19 @@ namespace PDFSharp.Charting.Renderers
         /// </summary>
         internal XSize Size
         {
-            get => _rect.Size;
-            set => _rect.Size = value;
+            get => Rect.Size;
+            set
+            {
+                XRect temp = Rect;
+                temp.Size = value;
+                Rect = temp;
+            }
         }
 
         /// <summary>
         /// Gets the area's rectangle.
         /// </summary>
-        internal XRect Rect
-        {
-            get => _rect;
-            set => _rect = value;
-        }
-        XRect _rect;
+        internal XRect Rect { get; set; }
     }
 
     /// <summary>

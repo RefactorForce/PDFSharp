@@ -473,7 +473,7 @@ namespace PDFSharp.SharpZipLib.Zip
         // Trying to work out an appropriate OEM code page would be good.
         // 850 is a good default for English speakers particularly in Europe.
 #if SILVERLIGHT || NETFX_CORE || UWP
-        // TODO Do we need this for PDFsharp? If so, make it work.
+        // TODO Do we need this for PDFSharp? If so, make it work.
         static int defaultCodePage = 65001;
 #else
         static int defaultCodePage = CultureInfo.CurrentCulture.TextInfo.ANSICodePage;

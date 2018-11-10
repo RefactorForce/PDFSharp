@@ -1,4 +1,4 @@
-#region PDFsharp - A .NET library for processing PDF
+#region PDFSharp - A .NET library for processing PDF
 //
 // Authors:
 //   Stefan Lange
@@ -126,7 +126,7 @@ namespace PDFSharp.Drawing
 #if GDI
         [Obsolete("Use Add(Stream stream)")]
 #else
-        [Obsolete("Use the GDI build of PDFsharp and use Add(Stream stream)")]
+        [Obsolete("Use the GDI build of PDFSharp and use Add(Stream stream)")]
 #endif
         public static void AddFont(string filename) => throw new NotImplementedException();//XGlyphTypeface glyphTypeface = new XGlyphTypeface(filename);//Global.AddGlyphTypeface(glyphTypeface);
 
@@ -233,7 +233,7 @@ namespace PDFSharp.Drawing
 #if GDI
         [Obsolete("Use Add(Stream stream)")]
 #else
-        [Obsolete("Use the GDI build of PDFsharp and use Add(Stream stream)")]
+        [Obsolete("Use the GDI build of PDFSharp and use Add(Stream stream)")]
 #endif
         public static void AddFont(Stream stream, string facename) => throw new NotImplementedException();//XGlyphTypeface glyphTypeface = new XGlyphTypeface(stream, facename);//Global.AddGlyphTypeface(glyphTypeface);
 

@@ -1,4 +1,4 @@
-#region PDFsharp - A .NET library for processing PDF
+#region PDFSharp - A .NET library for processing PDF
 //
 // Authors:
 //   Stefan Lange
@@ -188,7 +188,7 @@ namespace PDFSharp.PDF.Printing
         /// <summary>
         /// For reasons only Adobe knows the Reader seams to open and shows the document instead of printing it
         /// when it was not already running.
-        /// If you use PDFsharp and have any suggestions to circumvent this function, please let us know.
+        /// If you use PDFSharp and have any suggestions to circumvent this function, please let us know.
         /// </summary>
         void DoSomeVeryDirtyHacksToMakeItWork()
         {

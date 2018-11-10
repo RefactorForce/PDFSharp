@@ -1,4 +1,4 @@
-#region PDFsharp Charting - A .NET charting library based on PDFsharp
+#region PDFSharp Charting - A .NET charting library based on PDFSharp
 //
 // Authors:
 //   Niklas Schneider
@@ -46,13 +46,7 @@ namespace PDFSharp.Charting
         /// Initializes a new instance of the XValue class with the specified value.
         /// </summary>
         public XValue(string value)
-            : this()
-        {
-            if (value == null)
-                throw new ArgumentNullException("value");
-
-            _value = value;
-        }
+            : this() => _value = value ?? throw new ArgumentNullException("value");
 
         /// <summary>
         /// The actual value of the XValue.

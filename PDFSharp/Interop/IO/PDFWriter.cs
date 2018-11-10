@@ -1,4 +1,4 @@
-#region PDFsharp - A .NET library for processing PDF
+#region PDFSharp - A .NET library for processing PDF
 //
 // Authors:
 //   Stefan Lange
@@ -467,7 +467,7 @@ namespace PDFSharp.Interop.IO
 
             if (Layout == PDFWriterLayout.Verbose)
             {
-                WriteRaw(String.Format("% PDFsharp Version {0} (verbose mode)\n", ProductVersionInfo.Version));
+                WriteRaw(String.Format("% PDFSharp Version {0} (verbose mode)\n", VersionMetadata.Version));
                 // Keep some space for later fix-up.
                 _commentPosition = (int)Stream.Position + 2;
                 WriteRaw("%                                                \n");
@@ -487,13 +487,13 @@ namespace PDFSharp.Interop.IO
             int fileSize = (int)Stream.Position;
             if (Layout == PDFWriterLayout.Verbose)
             {
-                TimeSpan duration = DateTime.Now - document._creation;
+                TimeSpan duration = DateTime.Now - document.Creation;
 
                 Stream.Position = _commentPosition;
                 // Without InvariantCulture parameter the following line fails if the current culture is e.g.
                 // a Far East culture, because the date string contains non-ASCII characters.
                 // So never never never never use ToString without a culture info.
-                WriteRaw("Creation date: " + document._creation.ToString("G", CultureInfo.InvariantCulture));
+                WriteRaw("Creation date: " + document.Creation.ToString("G", CultureInfo.InvariantCulture));
                 Stream.Position = _commentPosition + 50;
                 WriteRaw("Creation time: " + duration.TotalSeconds.ToString("0.000", CultureInfo.InvariantCulture) + " seconds");
                 Stream.Position = _commentPosition + 100;
@@ -501,7 +501,7 @@ namespace PDFSharp.Interop.IO
                 Stream.Position = _commentPosition + 150;
                 WriteRaw("Pages: " + document.Pages.Count.ToString(CultureInfo.InvariantCulture));
                 Stream.Position = _commentPosition + 200;
-                WriteRaw("Objects: " + document._irefTable.ObjectTable.Count.ToString(CultureInfo.InvariantCulture));
+                WriteRaw("Objects: " + document.IrefTable.ObjectTable.Count.ToString(CultureInfo.InvariantCulture));
             }
         }
 

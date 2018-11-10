@@ -1,4 +1,4 @@
-#region PDFsharp - A .NET library for processing PDF
+#region PDFSharp - A .NET library for processing PDF
 //
 // Authors:
 //   Stefan Lange
@@ -53,7 +53,7 @@ namespace PDFSharp.Interop.IO
 
         /// <summary>
         /// The PDF stream is indented to reflect the nesting levels of the objects and contains additional
-        /// information about the PDFsharp objects. Furthermore content streams are not deflated. This 
+        /// information about the PDFSharp objects. Furthermore content streams are not deflated. This 
         /// is useful for debugging purposes only and increases the size of the file significantly.
         /// </summary>
         Verbose,

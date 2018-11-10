@@ -1,4 +1,4 @@
-#region PDFsharp - A .NET library for processing PDF
+#region PDFSharp - A .NET library for processing PDF
 //
 // Authors:
 //   Stefan Lange
@@ -104,7 +104,7 @@ namespace PDFSharp.Drawing
 
         /// <summary>
         /// Initializes a new instance of the <see cref="XFont"/> class with enforced style simulation.
-        /// Only for testing PDFsharp.
+        /// Only for testing PDFSharp.
         /// </summary>
         internal XFont(string familyName, double emSize, XFontStyle style, XPDFFontOptions pdfOptions, XStyleSimulations styleSimulations)
         {
@@ -313,7 +313,7 @@ namespace PDFSharp.Drawing
 
         /// <summary>
         /// Initializes this instance by computing the glyph typeface, font family, font source and TrueType fontface.
-        /// (PDFsharp currently only deals with TrueType fonts.)
+        /// (PDFSharp currently only deals with TrueType fonts.)
         /// </summary>
         void Initialize()
         {

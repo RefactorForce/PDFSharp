@@ -1,4 +1,4 @@
-#region PDFsharp - A .NET library for processing PDF
+#region PDFSharp - A .NET library for processing PDF
 //
 // Authors:
 //   Stefan Lange
@@ -48,7 +48,7 @@ namespace PDFSharp.Interop
         RawEncoding = PDFStringFlags.RawEncoding,
 
         /// <summary>
-        /// Not yet used by PDFsharp.
+        /// Not yet used by PDFSharp.
         /// </summary>
         StandardEncoding = PDFStringFlags.StandardEncoding,
 
@@ -67,12 +67,12 @@ namespace PDFSharp.Interop
         WinAnsiEncoding = PDFStringFlags.WinAnsiEncoding,
 
         /// <summary>
-        /// Not yet used by PDFsharp.
+        /// Not yet used by PDFSharp.
         /// </summary>
         MacRomanEncoding = PDFStringFlags.MacExpertEncoding,
 
         /// <summary>
-        /// Not yet used by PDFsharp.
+        /// Not yet used by PDFSharp.
         /// </summary>
         MacExpertEncoding = PDFStringFlags.MacExpertEncoding,
 
@@ -90,11 +90,11 @@ namespace PDFSharp.Interop
     {
         // ReSharper disable InconsistentNaming
         RawEncoding = 0x00,
-        StandardEncoding = 0x01,  // not used by PDFsharp
+        StandardEncoding = 0x01,  // not used by PDFSharp
         PDFDocEncoding = 0x02,
         WinAnsiEncoding = 0x03,
-        MacRomanEncoding = 0x04,  // not used by PDFsharp
-        MacExpertEncoding = 0x05,  // not used by PDFsharp
+        MacRomanEncoding = 0x04,  // not used by PDFSharp
+        MacExpertEncoding = 0x05,  // not used by PDFSharp
         Unicode = 0x06,
         EncodingMask = 0x0F,
 

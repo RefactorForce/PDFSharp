@@ -1,4 +1,4 @@
-#region PDFsharp - A .NET library for processing PDF
+#region PDFSharp - A .NET library for processing PDF
 //
 // Authors:
 //   Stefan Lange
@@ -32,7 +32,7 @@ using System;
 namespace PDFSharp
 {
     /// <summary>
-    /// Base class of all exceptions in the PDFsharp frame work.
+    /// Base class of all exceptions in the PDFSharp frame work.
     /// </summary>
     public class PDFSharpException : Exception
     {

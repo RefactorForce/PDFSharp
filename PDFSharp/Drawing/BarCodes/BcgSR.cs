@@ -1,4 +1,4 @@
-#region PDFsharp - A .NET library for processing PDF
+#region PDFSharp - A .NET library for processing PDF
 //
 // Authors:
 //   Klaus Potzesny
@@ -31,7 +31,7 @@ using System;
 
 namespace PDFSharp.Drawing.BarCodes
 {
-    // TODO: Mere with PDFsharp strings table
+    // TODO: Mere with PDFSharp strings table
     /// <summary>
     /// String resources for the empira barcode renderer.
     /// </summary>

@@ -1,4 +1,4 @@
-#region PDFsharp Charting - A .NET charting library based on PDFsharp
+#region PDFSharp Charting - A .NET charting library based on PDFSharp
 //
 // Authors:
 //   Niklas Schneider
@@ -41,19 +41,13 @@ namespace PDFSharp.Charting
         /// <summary>
         /// Initializes a new instance of the DocumentObjectCollection class.
         /// </summary>
-        internal DocumentObjectCollection()
-        {
-            _elements = new List<DocumentObject>();
-        }
+        internal DocumentObjectCollection() => _elements = new List<DocumentObject>();
 
         /// <summary>
         /// Initializes a new instance of the DocumentObjectCollection class with the specified parent.
         /// </summary>
         internal DocumentObjectCollection(DocumentObject parent)
-            : base(parent)
-        {
-            _elements = new List<DocumentObject>();
-        }
+            : base(parent) => _elements = new List<DocumentObject>();
 
         /// <summary>
         /// Gets the element at the specified index.
@@ -129,13 +123,7 @@ namespace PDFSharp.Charting
         /// <summary>
         /// Gets the first value in the collection, if there is any, otherwise null.
         /// </summary>
-        public DocumentObject First
-        {
-            get
-            {
-                return Count > 0 ? this[0] : null;
-            }
-        }
+        public DocumentObject First => Count > 0 ? this[0] : null;
 
         /// <summary>
         /// Gets the last element or null, if no such element exists.
@@ -145,7 +133,7 @@ namespace PDFSharp.Charting
             get
             {
                 int count = _elements.Count;
-                return count > 0 ? (DocumentObject)_elements[count - 1] : null;
+                return count > 0 ? _elements[count - 1] : null;
             }
         }
         #endregion

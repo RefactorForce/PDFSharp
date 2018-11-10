@@ -1,4 +1,4 @@
-#region PDFsharp - A .NET library for processing PDF
+#region PDFSharp - A .NET library for processing PDF
 //
 // Authors:
 //   Stefan Lange
@@ -32,7 +32,7 @@ using PDFSharp.Interop.IO;
 namespace PDFSharp.Interop
 {
     /// <summary>
-    /// Represents an indirect null value. This type is not used by PDFsharp, but at least
+    /// Represents an indirect null value. This type is not used by PDFSharp, but at least
     /// one tool from Adobe creates PDF files with a null object.
     /// </summary>
     public sealed class PDFNullObject : PDFObject

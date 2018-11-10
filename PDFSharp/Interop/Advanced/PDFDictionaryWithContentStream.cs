@@ -1,4 +1,4 @@
-#region PDFsharp - A .NET library for processing PDF
+#region PDFSharp - A .NET library for processing PDF
 //
 // Authors:
 //   Stefan Lange
@@ -127,7 +127,7 @@ namespace PDFSharp.Interop.Advanced
         /// </summary>
         internal string GetFormName(XForm form)
         {
-            PDFFormXObject pdfForm = _document.FormTable.GetForm(form);
+            PDFFormXObject pdfForm = _document.ExternalDocumentTable.GetForm(form);
             Debug.Assert(pdfForm != null);
             string name = Resources.AddForm(pdfForm);
             return name;

@@ -1,4 +1,4 @@
-#region PDFsharp Charting - A .NET charting library based on PDFsharp
+#region PDFSharp Charting - A .NET charting library based on PDFSharp
 //
 // Authors:
 //   Niklas Schneider
@@ -43,10 +43,7 @@ namespace PDFSharp.Charting
         /// <summary>
         /// Initializes a new instance of the DocumentObject class with the specified parent.
         /// </summary>
-        public DocumentObject(DocumentObject parent)
-        {
-            _parent = parent;
-        }
+        public DocumentObject(DocumentObject parent) => _parent = parent;
 
         #region Methods
         /// <summary>

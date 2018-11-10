@@ -1,4 +1,4 @@
-#region PDFsharp - A .NET library for processing PDF
+#region PDFSharp - A .NET library for processing PDF
 //
 // Authors:
 //   Stefan Lange
@@ -93,7 +93,7 @@ namespace PDFSharp.Interop
         }
 
         /// <summary>
-        /// Gets the producer application (for example, PDFsharp).
+        /// Gets the producer application (for example, PDFSharp).
         /// </summary>
         public string Producer => Elements.GetString(Keys.Producer);
 

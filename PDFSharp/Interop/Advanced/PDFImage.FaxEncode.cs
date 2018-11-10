@@ -1,4 +1,4 @@
-﻿#region PDFsharp - A .NET library for processing PDF
+﻿#region PDFSharp - A .NET library for processing PDF
 //
 // Authors:
 //   Stefan Lange
@@ -771,7 +771,7 @@ namespace PDFSharp.Interop.Advanced
 
             if (_bitsInBuffer == 8)
             {
-                // The line below will sometimes throw a System.IndexOutOfRangeException while PDFsharp tries different formats for monochrome bitmaps (exception occurs if CCITT encoding requires more space than an uncompressed bitmap).
+                // The line below will sometimes throw a System.IndexOutOfRangeException while PDFSharp tries different formats for monochrome bitmaps (exception occurs if CCITT encoding requires more space than an uncompressed bitmap).
                 _imageData[_bytesOffsetWrite] = (byte)_buffer;
                 _bitsInBuffer = 0;
                 ++_bytesOffsetWrite;

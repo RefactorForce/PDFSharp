@@ -1,4 +1,4 @@
-﻿#region PDFsharp - A .NET library for processing PDF
+﻿#region PDFSharp - A .NET library for processing PDF
 //
 // Authors:
 //   Stefan Lange
@@ -47,7 +47,7 @@ namespace PDFSharp.Fonts.OpenType
 {
     /// <summary>
     /// The OpenType font descriptor.
-    /// Currently the only font type PDFsharp supports.
+    /// Currently the only font type PDFSharp supports.
     /// </summary>
     internal sealed class OpenTypeDescriptor : FontDescriptor
     {

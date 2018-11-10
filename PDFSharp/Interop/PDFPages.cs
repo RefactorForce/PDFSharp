@@ -1,4 +1,4 @@
-#region PDFsharp - A .NET library for processing PDF
+#region PDFSharp - A .NET library for processing PDF
 //
 // Authors:
 //   Stefan Lange
@@ -146,7 +146,7 @@ namespace PDFSharp.Interop
                 // TODO: check this case
                 // Because the owner of the inserted page is this document we assume that the page was former part of it 
                 // and it is therefore well-defined.
-                Owner._irefTable.Add(page);
+                Owner.IrefTable.Add(page);
                 Debug.Assert(page.Owner == Owner);
 
                 // Insert page in array.
@@ -164,7 +164,7 @@ namespace PDFSharp.Interop
                 // Case: New page was newly created and inserted now.
                 page.Document = Owner;
 
-                Owner._irefTable.Add(page);
+                Owner.IrefTable.Add(page);
                 Debug.Assert(page.Owner == Owner);
                 PagesArray.Elements.Insert(index, page.Reference);
                 Elements.SetInteger(Keys.Count, PagesArray.Elements.Count);
@@ -174,10 +174,10 @@ namespace PDFSharp.Interop
                 // Case: Page is from an external document -> import it.
                 PDFPage importPage = page;
                 page = ImportExternalPage(importPage);
-                Owner._irefTable.Add(page);
+                Owner.IrefTable.Add(page);
 
                 // Add page substitute to importedObjectTable.
-                PDFImportedObjectTable importedObjectTable = Owner.FormTable.GetImportedObjectTable(importPage);
+                PDFImportedObjectTable importedObjectTable = Owner.ExternalDocumentTable.GetImportedObjectTable(importPage);
                 importedObjectTable.Add(importPage.ObjectID, page.Reference);
 
                 PagesArray.Elements.Insert(index, page.Reference);
@@ -226,10 +226,10 @@ namespace PDFSharp.Interop
                 insertPages[idx] = page;
                 importPages[idx] = importPage;
 
-                Owner._irefTable.Add(page);
+                Owner.IrefTable.Add(page);
 
                 // Add page substitute to importedObjectTable.
-                PDFImportedObjectTable importedObjectTable = Owner.FormTable.GetImportedObjectTable(importPage);
+                PDFImportedObjectTable importedObjectTable = Owner.ExternalDocumentTable.GetImportedObjectTable(importPage);
                 importedObjectTable.Add(importPage.ObjectID, page.Reference);
 
                 PagesArray.Elements.Insert(insertIndex, page.Reference);
@@ -417,7 +417,7 @@ namespace PDFSharp.Interop
         /// </summary>
         PDFPage ImportExternalPage(PDFPage importPage)
         {
-            if (importPage.Owner._openMode != PDFDocumentOpenMode.Import)
+            if (importPage.Owner.OpenMode != PDFDocumentOpenMode.Import)
                 throw new InvalidOperationException("A PDF document must be opened with PDFDocumentOpenMode.Import to import pages from it.");
 
             PDFPage page = new PDFPage(_document);
@@ -458,7 +458,7 @@ namespace PDFSharp.Interop
             {
                 PDFImportedObjectTable importedObjectTable = null;
                 if (!deepcopy)
-                    importedObjectTable = Owner.FormTable.GetImportedObjectTable(importPage);
+                    importedObjectTable = Owner.ExternalDocumentTable.GetImportedObjectTable(importPage);
 
                 // The item can be indirect. If so, replace it by its value.
                 if (item is PDFReference)
@@ -572,7 +572,7 @@ namespace PDFSharp.Interop
             if (String.IsNullOrEmpty(type))
             {
                 // Type is required. If type is missing, assume it is "/Page" and hope it will work.
-                // TODO Implement a "Strict" mode in PDFsharp and don't do this in "Strict" mode.
+                // TODO Implement a "Strict" mode in PDFSharp and don't do this in "Strict" mode.
                 PDFPage.InheritValues(kid, values);
                 return new PDFDictionary[] { kid };
             }

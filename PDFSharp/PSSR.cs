@@ -1,4 +1,4 @@
-#region PDFsharp - A .NET library for processing PDF
+#region PDFSharp - A .NET library for processing PDF
 //
 // Authors:
 //   Stefan Lange
@@ -160,7 +160,7 @@ namespace PDFSharp
 
         public static string InvalidVersionNumber => "Invalid version number. Valid values are 12, 13, and 14.";
 
-        public static string CannotHandleXRefStreams => "Cannot handle cross-reference streams. The current implementation of PDFsharp cannot handle this PDF feature introduced with Acrobat 6.";
+        public static string CannotHandleXRefStreams => "Cannot handle cross-reference streams. The current implementation of PDFSharp cannot handle this PDF feature introduced with Acrobat 6.";
 
         public static string PasswordRequired => "A password is required to open the PDF document.";
 

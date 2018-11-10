@@ -1,4 +1,4 @@
-#region PDFsharp - A .NET library for processing PDF
+#region PDFSharp - A .NET library for processing PDF
 //
 // Authors:
 //   Stefan Lange
@@ -175,7 +175,7 @@ namespace PDFSharp.Interop.AcroForms
             //"   <rdf:RDF xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"> " + '\n' +
             //"      <rdf:Description rdf:about=\"\" " + '\n' +
             //"            xmlns:pdf=\"http://ns.adobe.com/pdf/1.3/\"> " + '\n' +
-            //"         <pdf:Producer>PDFsharp 1.40.2150-g (www.pdfsharp.com) (Original: Powered By Crystal)</pdf:Producer> " + '\n' +
+            //"         <pdf:Producer>PDFSharp 1.40.2150-g (www.pdfsharp.com) (Original: Powered By Crystal)</pdf:Producer> " + '\n' +
             //"      </rdf:Description> " + '\n' +
             //"      <rdf:Description rdf:about=\"\" " + '\n' +
             //"            xmlns:xap=\"http://ns.adobe.com/xap/1.0/\"> " + '\n' +

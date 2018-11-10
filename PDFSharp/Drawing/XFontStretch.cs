@@ -1,4 +1,4 @@
-#region PDFsharp - A .NET library for processing PDF
+#region PDFSharp - A .NET library for processing PDF
 //
 // Authors:
 //   Stefan Lange
@@ -44,7 +44,7 @@ namespace PDFSharp.Drawing
     }
 
     /// <summary>
-    /// NYI. Reserved for future extensions of PDFsharp.
+    /// NYI. Reserved for future extensions of PDFSharp.
     /// </summary>
     // [DebuggerDisplay("'{Name}', {Size}")]
     public class XFontStretch

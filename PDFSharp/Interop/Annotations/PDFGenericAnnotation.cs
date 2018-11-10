@@ -1,4 +1,4 @@
-#region PDFsharp - A .NET library for processing PDF
+#region PDFSharp - A .NET library for processing PDF
 //
 // Authors:
 //   Stefan Lange
@@ -30,7 +30,7 @@
 namespace PDFSharp.Interop.Annotations
 {
     /// <summary>
-    /// Represents a generic annotation. Used for annotation dictionaries unknown to PDFsharp.
+    /// Represents a generic annotation. Used for annotation dictionaries unknown to PDFSharp.
     /// </summary>
     internal sealed class PDFGenericAnnotation : PDFAnnotation
     {

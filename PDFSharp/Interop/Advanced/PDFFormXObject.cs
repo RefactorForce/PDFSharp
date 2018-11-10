@@ -1,4 +1,4 @@
-#region PDFsharp - A .NET library for processing PDF
+#region PDFSharp - A .NET library for processing PDF
 //
 // Authors:
 //   Stefan Lange
@@ -99,7 +99,7 @@ namespace PDFSharp.Interop.Advanced
                 root = ImportClosure(importedObjectTable, thisDocument, root);
                 // If the root was a direct object, make it indirect.
                 if (root.Reference == null)
-                    thisDocument._irefTable.Add(root);
+                    thisDocument.IrefTable.Add(root);
 
                 Debug.Assert(root.Reference != null);
                 Elements["/Resources"] = root.Reference;

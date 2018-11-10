@@ -1,4 +1,4 @@
-#region PDFsharp - A .NET library for processing PDF
+#region PDFSharp - A .NET library for processing PDF
 //
 // Authors:
 //   Stefan Lange
@@ -122,7 +122,7 @@ namespace PDFSharp.Drawing
                 // Update StringFormat only if it exists.
                 if (_stringFormat != null)
                 {
-                    // BaseLine is specific to PDFsharp.
+                    // BaseLine is specific to PDFSharp.
                     if (value == XLineAlignment.BaseLine)
                         _stringFormat.LineAlignment = StringAlignment.Near;
                     else
@@ -175,7 +175,7 @@ namespace PDFSharp.Drawing
                 _stringFormat = (StringFormat)StringFormat.GenericTypographic.Clone();
                 _stringFormat.Alignment = (StringAlignment)_alignment;
 
-                // BaseLine is specific to PDFsharp.
+                // BaseLine is specific to PDFSharp.
                 if (_lineAlignment == XLineAlignment.BaseLine)
                     _stringFormat.LineAlignment = StringAlignment.Near;
                 else

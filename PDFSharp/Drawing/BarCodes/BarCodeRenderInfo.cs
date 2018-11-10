@@ -1,5 +1,5 @@
 //
-// PDFsharp - A library for processing PDF
+// PDFSharp - A library for processing PDF
 //
 // Authors:
 //   Klaus Potzesny

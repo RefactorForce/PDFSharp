@@ -1,4 +1,4 @@
-#region PDFsharp - A .NET library for processing PDF
+#region PDFSharp - A .NET library for processing PDF
 //
 // Authors:
 //   Stefan Lange
@@ -50,7 +50,7 @@ namespace PDFSharp.Interop
         /// </summary>
         protected PDFObject(PDFDocument document) =>
             // Calling a virtual member in a constructor is dangerous.
-            // In PDFsharp Document is overridden in PDFPage and the code is checked to be save
+            // In PDFSharp Document is overridden in PDFPage and the code is checked to be save
             // when called for a not completely initialized object.
             Document = document;
 
@@ -131,7 +131,7 @@ namespace PDFSharp.Interop
 
             // TODO: check imported
             if (Reference == null)
-                Reference = _document._irefTable[objectID];
+                Reference = _document.IrefTable[objectID];
             if (Reference == null)
             {
                 // ReSharper disable once ObjectCreationAsStatement because the new object is set to this object
@@ -241,7 +241,7 @@ namespace PDFSharp.Interop
                 {
                     // Case: The cloned object was an indirect object.
                     // Add clone to new owner document.
-                    owner._irefTable.Add(clone);
+                    owner.IrefTable.Add(clone);
                     // The clone gets an iref by adding it to its new owner.
                     Debug.Assert(clone.Reference != null);
                     // Save an association from old object identifier to new iref.
@@ -335,7 +335,7 @@ namespace PDFSharp.Interop
                     {
                         // Case: The cloned object was an indirect object.
                         // Add clone to new owner document.
-                        owner._irefTable.Add(clone);
+                        owner.IrefTable.Add(clone);
                         Debug.Assert(clone.Reference != null);
                         // Save an association from old object identifier to new iref.
                         importedObjectTable.Add(obj.ObjectID, clone.Reference);
@@ -505,7 +505,7 @@ namespace PDFSharp.Interop
             else
             {
                 // Case: The item is some other indirect object.
-                // Indirect integers, booleans, etc. are allowed, but PDFsharp do not create them.
+                // Indirect integers, booleans, etc. are allowed, but PDFSharp do not create them.
                 // If such objects occur in imported PDF files from other producers, nothing more is to do.
                 // The owner was already set, which is double checked by the assertions below.
                 if (value is PDFNameObject || value is PDFStringObject || value is PDFBooleanObject || value is PDFIntegerObject || value is PDFNumberObject)
@@ -519,7 +519,7 @@ namespace PDFSharp.Interop
         }
 
         /// <summary>
-        /// Ensure for future versions of PDFsharp not to forget code for a new kind of PDFItem.
+        /// Ensure for future versions of PDFSharp not to forget code for a new kind of PDFItem.
         /// </summary>
         /// <param name="item">The item.</param>
         [Conditional("DEBUG")]
@@ -549,7 +549,7 @@ namespace PDFSharp.Interop
         /// </summary>
         public PDFReference Reference { get;
 
-            // Setting the reference outside PDFsharp is not considered as a valid operation.
+            // Setting the reference outside PDFSharp is not considered as a valid operation.
             internal set; }
     }
 }

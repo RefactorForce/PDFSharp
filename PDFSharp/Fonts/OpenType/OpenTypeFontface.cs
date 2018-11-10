@@ -1,5 +1,5 @@
 ﻿
-#region PDFsharp - A .NET library for processing PDF
+#region PDFSharp - A .NET library for processing PDF
 //
 // Authors:
 //   Stefan Lange
@@ -294,7 +294,7 @@ namespace PDFSharp.Fonts.OpenType
                 if (startTag == TTCF)
                 {
                     _fontTechnology = FontTechnology.TrueTypeCollection;
-                    throw new InvalidOperationException("TrueType collection fonts are not yet supported by PDFsharp.");
+                    throw new InvalidOperationException("TrueType collection fonts are not yet supported by PDFSharp.");
                 }
 
                 // Read offset table
@@ -321,7 +321,7 @@ namespace PDFSharp.Fonts.OpenType
 
                 // PDFlib checks this, but it is not part of the OpenType spec anymore
                 if (TableDictionary.ContainsKey("bhed"))
-                    throw new NotSupportedException("Bitmap fonts are not supported by PDFsharp.");
+                    throw new NotSupportedException("Bitmap fonts are not supported by PDFSharp.");
 
                 // Read required tables
                 if (Seek(CMapTable.Tag) != -1)

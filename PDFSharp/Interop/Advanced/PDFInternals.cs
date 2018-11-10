@@ -1,4 +1,4 @@
-#region PDFsharp - A .NET library for processing PDF
+#region PDFSharp - A .NET library for processing PDF
 //
 // Authors:
 //   Stefan Lange
@@ -50,28 +50,28 @@ namespace PDFSharp.Interop.Advanced
         /// </summary>
         public string FirstDocumentID
         {
-            get => _document._trailer.GetDocumentID(0);
-            set => _document._trailer.SetDocumentID(0, value);
+            get => _document.Trailer.GetDocumentID(0);
+            set => _document.Trailer.SetDocumentID(0, value);
         }
 
         /// <summary>
         /// Gets the first document identifier as GUID.
         /// </summary>
-        public Guid FirstDocumentGuid => GuidFromString(_document._trailer.GetDocumentID(0));
+        public Guid FirstDocumentGuid => GuidFromString(_document.Trailer.GetDocumentID(0));
 
         /// <summary>
         /// Gets or sets the second document identifier.
         /// </summary>
         public string SecondDocumentID
         {
-            get => _document._trailer.GetDocumentID(1);
-            set => _document._trailer.SetDocumentID(1, value);
+            get => _document.Trailer.GetDocumentID(1);
+            set => _document.Trailer.SetDocumentID(1, value);
         }
 
         /// <summary>
         /// Gets the first document identifier as GUID.
         /// </summary>
-        public Guid SecondDocumentGuid => GuidFromString(_document._trailer.GetDocumentID(0));
+        public Guid SecondDocumentGuid => GuidFromString(_document.Trailer.GetDocumentID(0));
 
         Guid GuidFromString(string id)
         {
@@ -98,7 +98,7 @@ namespace PDFSharp.Interop.Advanced
         /// <summary>
         /// Returns the object with the specified Identifier, or null, if no such object exists.
         /// </summary>
-        public PDFObject GetObject(PDFObjectID objectID) => _document._irefTable[objectID].Value;
+        public PDFObject GetObject(PDFObjectID objectID) => _document.IrefTable[objectID].Value;
 
         /// <summary>
         /// Maps the specified external object to the substitute object in this document.
@@ -106,7 +106,7 @@ namespace PDFSharp.Interop.Advanced
         /// </summary>
         public PDFObject MapExternalObject(PDFObject externalObject)
         {
-            PDFFormXObjectTable table = _document.FormTable;
+            PDFFormXObjectTable table = _document.ExternalDocumentTable;
             PDFImportedObjectTable iot = table.GetImportedObjectTable(externalObject.Owner);
             PDFReference reference = iot[externalObject.ObjectID];
             return reference?.Value;
@@ -158,7 +158,7 @@ namespace PDFSharp.Interop.Advanced
         /// </summary>
         public PDFObject[] GetAllObjects()
         {
-            PDFReference[] irefs = _document._irefTable.AllReferences;
+            PDFReference[] irefs = _document.IrefTable.AllReferences;
             int count = irefs.Length;
             PDFObject[] objects = new PDFObject[count];
             for (int idx = 0; idx < count; idx++)
@@ -180,7 +180,7 @@ namespace PDFSharp.Interop.Advanced
         {
 #if true
             T obj = Activator.CreateInstance<T>();
-            _document._irefTable.Add(obj);
+            _document.IrefTable.Add(obj);
 #else
             T result = null;
 #if !NETFX_CORE && !UWP
@@ -212,7 +212,7 @@ namespace PDFSharp.Interop.Advanced
                 obj.Document = _document;
             else if (obj.Owner != _document)
                 throw new InvalidOperationException("Object does not belong to this document.");
-            _document._irefTable.Add(obj);
+            _document.IrefTable.Add(obj);
         }
 
         /// <summary>
@@ -227,7 +227,7 @@ namespace PDFSharp.Interop.Advanced
             if (obj.Owner != _document)
                 throw new InvalidOperationException("Object does not belong to this document.");
 
-            _document._irefTable.Remove(obj.Reference);
+            _document.IrefTable.Remove(obj.Reference);
         }
 
         /// <summary>
@@ -245,7 +245,7 @@ namespace PDFSharp.Interop.Advanced
         /// </summary>
         public PDFObject[] GetClosure(PDFObject obj, int depth)
         {
-            PDFReference[] references = _document._irefTable.TransitiveClosure(obj, depth);
+            PDFReference[] references = _document.IrefTable.TransitiveClosure(obj, depth);
             int count = references.Length + 1;
             PDFObject[] objects = new PDFObject[count];
             objects[0] = obj;

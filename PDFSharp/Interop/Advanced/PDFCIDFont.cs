@@ -1,5 +1,5 @@
 ﻿
-#region PDFsharp - A .NET library for processing PDF
+#region PDFSharp - A .NET library for processing PDF
 //
 // Authors:
 //   Stefan Lange
@@ -56,7 +56,7 @@ namespace PDFSharp.Interop.Advanced
 
             FontDescriptor = fontDescriptor;
             // ReSharper disable once DoNotCallOverridableMethodsInConstructor
-            Owner._irefTable.Add(fontDescriptor);
+            Owner.IrefTable.Add(fontDescriptor);
             Elements[Keys.FontDescriptor] = fontDescriptor.Reference;
 
             FontEncoding = font.PDFOptions.FontEncoding;
@@ -75,7 +75,7 @@ namespace PDFSharp.Interop.Advanced
 
             FontDescriptor = fontDescriptor;
             // ReSharper disable once DoNotCallOverridableMethodsInConstructor
-            Owner._irefTable.Add(fontDescriptor);
+            Owner.IrefTable.Add(fontDescriptor);
             Elements[Keys.FontDescriptor] = fontDescriptor.Reference;
 
             FontEncoding = PDFFontEncoding.Unicode;
@@ -100,7 +100,7 @@ namespace PDFSharp.Interop.Advanced
                 GetType();
             }
 #endif
-            // CID fonts must be always embedded. PDFsharp embeds automatically a subset.
+            // CID fonts must be always embedded. PDFSharp embeds automatically a subset.
             OpenTypeFontface subSet = FontDescriptor._descriptor.FontFace.loca == null
                 ? FontDescriptor._descriptor.FontFace
                 : FontDescriptor._descriptor.FontFace.CreateFontSubSet(_cmapInfo.GlyphIndices, true);

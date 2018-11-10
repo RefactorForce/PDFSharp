@@ -1,4 +1,4 @@
-#region PDFsharp - A .NET library for processing PDF
+#region PDFSharp - A .NET library for processing PDF
 //
 // Authors:
 //   Stefan Lange
@@ -34,7 +34,7 @@ using PDFSharp.Interop.Internal;
 namespace PDFSharp.Interop
 {
     /// <summary>
-    /// Represents an indirect text string value. This type is not used by PDFsharp. If it is imported from
+    /// Represents an indirect text string value. This type is not used by PDFSharp. If it is imported from
     /// an external PDF file, the value is converted into a direct object.
     /// </summary>
     [DebuggerDisplay("({Value})")]

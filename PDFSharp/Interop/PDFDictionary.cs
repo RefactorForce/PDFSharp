@@ -1,4 +1,4 @@
-﻿#region PDFsharp - A .NET library for processing PDF
+﻿#region PDFSharp - A .NET library for processing PDF
 //
 // Authors:
 //   Stefan Lange
@@ -213,7 +213,7 @@ namespace PDFSharp.Interop
                 throw new ArgumentNullException("key");
             PDFItem item = Elements[key];
 #if DEBUG
-            // TODO: simplify PDFsharp
+            // TODO: simplify PDFSharp
             if (item is PDFObject && ((PDFObject)item).IsIndirect)
             {
                 // Replace an indirect object by its Reference.
@@ -764,7 +764,7 @@ namespace PDFSharp.Interop
 #endif
                             if (options == VCF.CreateIndirect)
                             {
-                                Owner.Owner._irefTable.Add(obj);
+                                Owner.Owner.IrefTable.Add(obj);
                                 this[key] = obj.Reference;
                             }
                             else
@@ -791,19 +791,19 @@ namespace PDFSharp.Interop
                         if (true) // || _owner.Document.IsImported)
                         {
                             Type type = GetValueType(key);
-                            Debug.Assert(type != null, "No value type specified in meta information. Please send this file to PDFsharp support.");
+                            Debug.Assert(type != null, "No value type specified in meta information. Please send this file to PDFSharp support.");
 
 #if !NETFX_CORE
                             if (type != null && type != value.GetType())
                             {
                                 if (typeof(PDFDictionary).IsAssignableFrom(type))
                                 {
-                                    Debug.Assert(value is PDFDictionary, "Bug in PDFsharp. Please send this file to PDFsharp support.");
+                                    Debug.Assert(value is PDFDictionary, "Bug in PDFSharp. Please send this file to PDFSharp support.");
                                     value = CreateDictionary(type, (PDFDictionary)value);
                                 }
                                 else if (typeof(PDFArray).IsAssignableFrom(type))
                                 {
-                                    Debug.Assert(value is PDFArray, "Bug in PDFsharp. Please send this file to PDFsharp support.");
+                                    Debug.Assert(value is PDFArray, "Bug in PDFSharp. Please send this file to PDFSharp support.");
                                     value = CreateArray(type, (PDFArray)value);
                                 }
                                 else
@@ -816,12 +816,12 @@ namespace PDFSharp.Interop
                             {
                                 if (typeof(PDFDictionary).GetTypeInfo().IsAssignableFrom(typeInfo))
                                 {
-                                    Debug.Assert(value is PDFDictionary, "Bug in PDFsharp. Please send this file to PDFsharp support.");
+                                    Debug.Assert(value is PDFDictionary, "Bug in PDFSharp. Please send this file to PDFSharp support.");
                                     value = CreateDictionary(type, (PDFDictionary)value);
                                 }
                                 else if (typeof(PDFArray).GetTypeInfo().IsAssignableFrom(typeInfo))
                                 {
-                                    Debug.Assert(value is PDFArray, "Bug in PDFsharp. Please send this file to PDFsharp support.");
+                                    Debug.Assert(value is PDFArray, "Bug in PDFSharp. Please send this file to PDFSharp support.");
                                     value = CreateArray(type, (PDFArray)value);
                                 }
                                 else
@@ -841,7 +841,7 @@ namespace PDFSharp.Interop
                             Debug.Assert(!dict.IsIndirect);
 
                             Type type = GetValueType(key);
-                            Debug.Assert(type != null, "No value type specified in meta information. Please send this file to PDFsharp support.");
+                            Debug.Assert(type != null, "No value type specified in meta information. Please send this file to PDFSharp support.");
                             if (dict.GetType() != type)
                                 dict = CreateDictionary(type, dict);
                             return dict;
@@ -853,7 +853,7 @@ namespace PDFSharp.Interop
 
                             Type type = GetValueType(key);
                             // This is more complicated. If type is null do nothing
-                            //Debug.Assert(type != null, "No value type specified in meta information. Please send this file to PDFsharp support.");
+                            //Debug.Assert(type != null, "No value type specified in meta information. Please send this file to PDFSharp support.");
                             if (type != null && type != array.GetType())
                                 array = CreateArray(type, array);
                             return array;
@@ -1535,7 +1535,7 @@ namespace PDFSharp.Interop
             }
 
             /// <summary>
-            /// Tries to unfilter the bytes of the stream. If the stream is filtered and PDFsharp knows the filter
+            /// Tries to unfilter the bytes of the stream. If the stream is filtered and PDFSharp knows the filter
             /// algorithm, the stream content is replaced by its unfiltered value and the function returns true.
             /// Otherwise the content remains untouched and the function returns false.
             /// The function is useful for analyzing existing PDF files.
@@ -1547,7 +1547,7 @@ namespace PDFSharp.Interop
                     PDFItem filter = _ownerDictionary.Elements["/Filter"];
                     if (filter != null)
                     {
-                        // PDFsharp can only uncompress streams that are compressed with the ZIP or LZH algorithm.
+                        // PDFSharp can only uncompress streams that are compressed with the ZIP or LZH algorithm.
                         byte[] bytes = Filtering.Decode(_value, filter);
                         if (bytes != null)
                         {

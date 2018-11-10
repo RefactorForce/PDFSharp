@@ -1,4 +1,4 @@
-#region PDFsharp - A .NET library for processing PDF
+#region PDFSharp - A .NET library for processing PDF
 //
 // Authors:
 //   Stefan Lange
@@ -36,7 +36,7 @@ using PDFSharp.Interop.IO;
 namespace PDFSharp.Interop.Advanced
 {
     /// <summary>
-    /// Represents the content of a page. PDFsharp supports only one content stream per page.
+    /// Represents the content of a page. PDFSharp supports only one content stream per page.
     /// If an imported page has an array of content streams, the streams are concatenated to
     /// one single stream.
     /// </summary>
@@ -114,7 +114,7 @@ namespace PDFSharp.Interop.Advanced
         /// </summary>
         internal void PreserveGraphicsState()
         {
-            // If a content stream is touched by PDFsharp it is typically because graphical operations are
+            // If a content stream is touched by PDFSharp it is typically because graphical operations are
             // prepended or appended. Some nasty PDF tools does not preserve the graphical state correctly.
             // Therefore we try to relieve the problem by surrounding the content stream with push/restore 
             // graphic state operation.

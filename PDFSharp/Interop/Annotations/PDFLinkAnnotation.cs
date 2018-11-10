@@ -1,4 +1,4 @@
-#region PDFsharp - A .NET library for processing PDF
+#region PDFSharp - A .NET library for processing PDF
 //
 // Authors:
 //   Stefan Lange
@@ -125,7 +125,7 @@ namespace PDFSharp.Interop.Annotations
             // Older Adobe Reader versions uses a border width of 0 as default value if neither Border nor BS are present.
             // But the PDF Reference specifies:
             // "If neither the Border nor the BS entry is present, the border is drawn as a solid line with a width of 1 point."
-            // After this issue was fixed in newer Reader versions older PDFsharp created documents show an ugly solid border.
+            // After this issue was fixed in newer Reader versions older PDFSharp created documents show an ugly solid border.
             // The following hack fixes this by specifying a 0 width border.
             if (Elements[PDFAnnotation.Keys.BS] == null)
                 Elements[PDFAnnotation.Keys.BS] = new PDFLiteral("<</Type/Border/W 0>>");
@@ -140,7 +140,7 @@ namespace PDFSharp.Interop.Annotations
                     break;
 
                 case LinkType.Document:
-                    // destIndex > Owner.PageCount can happen when rendering pages using PDFsharp directly.
+                    // destIndex > Owner.PageCount can happen when rendering pages using PDFSharp directly.
                     int destIndex = _destPage;
                     if (destIndex > Owner.PageCount)
                         destIndex = Owner.PageCount;

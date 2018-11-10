@@ -1,4 +1,4 @@
-#region PDFsharp - A .NET library for processing PDF
+#region PDFSharp - A .NET library for processing PDF
 //
 // Authors:
 //   Stefan Lange
@@ -27,7 +27,7 @@
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
-// Not used in PDFsharp 1.x.
+// Not used in PDFSharp 1.x.
 
 namespace PDFSharp.Drawing
 {

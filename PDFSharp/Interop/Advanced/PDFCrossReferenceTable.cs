@@ -1,4 +1,4 @@
-﻿#region PDFsharp - A .NET library for processing PDF
+﻿#region PDFSharp - A .NET library for processing PDF
 //
 // Authors:
 //   Stefan Lange
@@ -197,7 +197,7 @@ namespace PDFSharp.Interop.Advanced
             int removed = ObjectTable.Count;
             //CheckConsistence();
             // TODO: Is this really so easy?
-            PDFReference[] irefs = TransitiveClosure(_document._trailer);
+            PDFReference[] irefs = TransitiveClosure(_document.Trailer);
 
 #if DEBUG
             // Have any two objects the same ID?

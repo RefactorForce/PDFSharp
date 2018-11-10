@@ -1,4 +1,4 @@
-#region PDFsharp - A .NET library for processing PDF
+#region PDFSharp - A .NET library for processing PDF
 //
 // Authors:
 //   Stefan Lange
@@ -93,7 +93,7 @@ namespace PDFSharp.Interop.Advanced
         /// </summary>
         internal void WriteXRefEnty(PDFWriter writer)
         {
-            // PDFsharp does not yet support PDF 1.5 object streams.
+            // PDFSharp does not yet support PDF 1.5 object streams.
 
             // Each line must be exactly 20 bytes long, otherwise Acrobat repairs the file.
             string text = String.Format("{0:0000000000} {1:00000} n\n",

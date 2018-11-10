@@ -1,4 +1,4 @@
-#region PDFsharp - A .NET library for processing PDF
+#region PDFSharp - A .NET library for processing PDF
 //
 // Authors:
 //   Stefan Lange
@@ -67,7 +67,7 @@ namespace PDFSharp.Interop.Advanced
                 Debug.Assert(form.IsTemplate, "An XPDFForm must not have a PDFFormXObject.");
                 if (ReferenceEquals(form._pdfForm.Owner, Owner))
                     return form._pdfForm;
-                //throw new InvalidOperationException("Because of a current limitation of PDFsharp an XPDFForm object can be used only within one single PDFDocument.");
+                //throw new InvalidOperationException("Because of a current limitation of PDFSharp an XPDFForm object can be used only within one single PDFDocument.");
 
                 // Dispose PDFFromXObject when document has changed
                 form._pdfForm = null;

@@ -1,4 +1,4 @@
-#region PDFsharp - A .NET library for processing PDF
+#region PDFSharp - A .NET library for processing PDF
 //
 // Authors:
 //   Stefan Lange
@@ -30,7 +30,7 @@
 namespace PDFSharp
 {
     /// <summary>
-    /// Base namespace of PDFsharp. Most classes are implemented in nested namespaces like e. g. PDFSharp.PDF.
+    /// Base namespace of PDFSharp. Most classes are implemented in nested namespaces like e. g. PDFSharp.PDF.
     /// </summary>
     /// <seealso cref="Interop"></seealso>
     [System.Runtime.CompilerServices.CompilerGenerated]

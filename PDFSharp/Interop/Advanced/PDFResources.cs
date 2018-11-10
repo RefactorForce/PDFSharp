@@ -1,4 +1,4 @@
-#region PDFsharp - A .NET library for processing PDF
+#region PDFSharp - A .NET library for processing PDF
 //
 // Authors:
 //   Stefan Lange
@@ -64,7 +64,7 @@ namespace PDFSharp.Interop.Advanced
                 name = NextFontName;
                 _resources[font] = name;
                 if (font.Reference == null)
-                    Owner._irefTable.Add(font);
+                    Owner.IrefTable.Add(font);
                 Fonts.Elements[name] = font.Reference;
             }
             return name;
@@ -81,7 +81,7 @@ namespace PDFSharp.Interop.Advanced
                 name = NextImageName;
                 _resources[image] = name;
                 if (image.Reference == null)
-                    Owner._irefTable.Add(image);
+                    Owner.IrefTable.Add(image);
                 XObjects.Elements[name] = image.Reference;
             }
             return name;
@@ -98,7 +98,7 @@ namespace PDFSharp.Interop.Advanced
                 name = NextFormName;
                 _resources[form] = name;
                 if (form.Reference == null)
-                    Owner._irefTable.Add(form);
+                    Owner.IrefTable.Add(form);
                 XObjects.Elements[name] = form.Reference;
             }
             return name;
@@ -115,7 +115,7 @@ namespace PDFSharp.Interop.Advanced
                 name = NextExtGStateName;
                 _resources[extGState] = name;
                 if (extGState.Reference == null)
-                    Owner._irefTable.Add(extGState);
+                    Owner.IrefTable.Add(extGState);
                 ExtGStates.Elements[name] = extGState.Reference;
             }
             return name;
@@ -132,7 +132,7 @@ namespace PDFSharp.Interop.Advanced
                 name = NextPatternName;
                 _resources[pattern] = name;
                 if (pattern.Reference == null)
-                    Owner._irefTable.Add(pattern);
+                    Owner.IrefTable.Add(pattern);
                 Patterns.Elements[name] = pattern.Reference;
             }
             return name;
@@ -149,7 +149,7 @@ namespace PDFSharp.Interop.Advanced
                 name = NextPatternName;
                 _resources[pattern] = name;
                 if (pattern.Reference == null)
-                    Owner._irefTable.Add(pattern);
+                    Owner.IrefTable.Add(pattern);
                 Patterns.Elements[name] = pattern.Reference;
             }
             return name;
@@ -166,7 +166,7 @@ namespace PDFSharp.Interop.Advanced
                 name = NextShadingName;
                 _resources[shading] = name;
                 if (shading.Reference == null)
-                    Owner._irefTable.Add(shading);
+                    Owner.IrefTable.Add(shading);
                 Shadings.Elements[name] = shading.Reference;
             }
             return name;
@@ -326,7 +326,7 @@ namespace PDFSharp.Interop.Advanced
                     Properties.CollectResourceNames(_importedResourceNames);
             }
             return _importedResourceNames.ContainsKey(name);
-            // This is superfluous because PDFsharp resource names cannot be double.
+            // This is superfluous because PDFSharp resource names cannot be double.
             // importedResourceNames.Add(name, null);
         }
 
@@ -336,7 +336,7 @@ namespace PDFSharp.Interop.Advanced
         Dictionary<string, object> _importedResourceNames;
 
         /// <summary>
-        /// Maps all PDFsharp resources to their local resource names.
+        /// Maps all PDFSharp resources to their local resource names.
         /// </summary>
         readonly Dictionary<PDFObject, string> _resources = new Dictionary<PDFObject, string>();
 

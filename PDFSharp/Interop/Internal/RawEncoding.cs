@@ -1,4 +1,4 @@
-#region PDFsharp - A .NET library for processing PDF
+#region PDFSharp - A .NET library for processing PDF
 //
 // Authors:
 //   Stefan Lange
@@ -33,7 +33,7 @@ namespace PDFSharp.Interop.Internal
 {
     /// <summary>
     /// An encoder for raw strings. The raw encoding is simply the identity relation between
-    /// characters and bytes. PDFsharp internally works with raw encoded strings instead of
+    /// characters and bytes. PDFSharp internally works with raw encoded strings instead of
     /// byte arrays because strings are much more handy than byte arrays.
     /// </summary>
     /// <remarks>

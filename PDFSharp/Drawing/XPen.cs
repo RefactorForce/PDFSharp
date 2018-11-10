@@ -1,4 +1,4 @@
-#region PDFsharp - A .NET library for processing PDF
+#region PDFSharp - A .NET library for processing PDF
 //
 // Authors:
 //   Stefan Lange
@@ -279,7 +279,7 @@ namespace PDFSharp.Drawing
                         break;
 
                     default:
-                        throw new NotImplementedException("Pen type not supported by PDFsharp.");
+                        throw new NotImplementedException("Pen type not supported by PDFSharp.");
                 }
                 // Bug fixed by drice2@ageone.de
                 if (pen.DashStyle == System.DrawingCore.Drawing2D.DashStyle.Custom)

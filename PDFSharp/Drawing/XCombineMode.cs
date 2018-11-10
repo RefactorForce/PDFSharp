@@ -1,4 +1,4 @@
-#region PDFsharp - A .NET library for processing PDF
+#region PDFSharp - A .NET library for processing PDF
 //
 // Authors:
 //   Stefan Lange
@@ -45,22 +45,22 @@ namespace PDFSharp.Drawing
         Intersect = 1,
 
         /// <summary>
-        /// Not yet implemented in PDFsharp.
+        /// Not yet implemented in PDFSharp.
         /// </summary>
         Union = 2,
 
         /// <summary>
-        /// Not yet implemented in PDFsharp.
+        /// Not yet implemented in PDFSharp.
         /// </summary>
         Xor = 3,
 
         /// <summary>
-        /// Not yet implemented in PDFsharp.
+        /// Not yet implemented in PDFSharp.
         /// </summary>
         Exclude = 4,
 
         /// <summary>
-        /// Not yet implemented in PDFsharp.
+        /// Not yet implemented in PDFSharp.
         /// </summary>
         Complement = 5,
     }

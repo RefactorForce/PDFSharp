@@ -1,4 +1,4 @@
-#region PDFsharp - A .NET library for processing PDF
+#region PDFSharp - A .NET library for processing PDF
 //
 // Authors:
 //   Stefan Lange
@@ -104,7 +104,7 @@ namespace PDFSharp.Fonts
             //GlyphTypeface wpfGlyphTypeface;
             XFontSource fontSource = null;//CreateFontSource(familyName, isBold, isItalic, out wpfGlyphTypeface, typefaceKey);
 #endif
-            // If no such font exists return null. PDFsharp will fail.
+            // If no such font exists return null. PDFSharp will fail.
             if (fontSource == null)
                 return null;
 
@@ -317,7 +317,7 @@ namespace PDFSharp.Fonts
         /// </summary>
         internal static XFontSource CreateFontSource(string familyName, bool isBold, bool isItalic)
         {
-            // PDFsharp does not provide a default font because this would blow up the assembly
+            // PDFSharp does not provide a default font because this would blow up the assembly
             // unnecessarily if the font is not needed. Provide your own font resolver to generate
             // PDF files containing text.
             return null;

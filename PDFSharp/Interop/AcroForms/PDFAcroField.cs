@@ -1,4 +1,4 @@
-#region PDFsharp - A .NET library for processing PDF
+#region PDFSharp - A .NET library for processing PDF
 //
 // Authors:
 //   Stefan Lange
@@ -335,8 +335,8 @@ namespace PDFSharp.Interop.AcroForms
 
             /// <summary>
             /// Gets a field from the collection. For your convenience an instance of a derived class like
-            /// PDFTextField or PDFCheckBox is returned if PDFsharp can guess the actual type of the dictionary.
-            /// If the actual type cannot be guessed by PDFsharp the function returns an instance
+            /// PDFTextField or PDFCheckBox is returned if PDFSharp can guess the actual type of the dictionary.
+            /// If the actual type cannot be guessed by PDFSharp the function returns an instance
             /// of PDFGenericField.
             /// </summary>
             public PDFAcroField this[int index]
@@ -384,7 +384,7 @@ namespace PDFSharp.Interop.AcroForms
 
             /// <summary>
             /// Create a derived type like PDFTextField or PDFCheckBox if possible.
-            /// If the actual cannot be guessed by PDFsharp the function returns an instance
+            /// If the actual cannot be guessed by PDFSharp the function returns an instance
             /// of PDFGenericField.
             /// </summary>
             PDFAcroField CreateAcroField(PDFDictionary dict)

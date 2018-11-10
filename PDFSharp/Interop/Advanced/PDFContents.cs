@@ -1,4 +1,4 @@
-#region PDFsharp - A .NET library for processing PDF
+#region PDFSharp - A .NET library for processing PDF
 //
 // Authors:
 //   Stefan Lange
@@ -76,7 +76,7 @@ namespace PDFSharp.Interop.Advanced
 
             SetModified();
             PDFContent content = new PDFContent(Owner);
-            Owner._irefTable.Add(content);
+            Owner.IrefTable.Add(content);
             Debug.Assert(content.Reference != null);
             Elements.Add(content.Reference);
             return content;
@@ -91,7 +91,7 @@ namespace PDFSharp.Interop.Advanced
 
             SetModified();
             PDFContent content = new PDFContent(Owner);
-            Owner._irefTable.Add(content);
+            Owner.IrefTable.Add(content);
             Debug.Assert(content.Reference != null);
             Elements.Insert(0, content.Reference);
             return content;
@@ -143,7 +143,7 @@ namespace PDFSharp.Interop.Advanced
 
             content.CreateStream(contentBytes);
 
-            Owner._irefTable.Add(content);
+            Owner.IrefTable.Add(content);
             Elements.Clear();
             Elements.Add(content.Reference);
 

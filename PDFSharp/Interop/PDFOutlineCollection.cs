@@ -1,4 +1,4 @@
-#region PDFsharp - A .NET library for processing PDF
+#region PDFSharp - A .NET library for processing PDF
 //
 // Authors:
 //   Stefan Lange
@@ -91,7 +91,7 @@ namespace PDFSharp.Interop
             if (outline == null)
                 throw new ArgumentNullException("outline");
 
-            // DestinationPage is optional. PDFsharp does not yet support outlines with action ("/A") instead of destination page ("/DEST")
+            // DestinationPage is optional. PDFSharp does not yet support outlines with action ("/A") instead of destination page ("/DEST")
             if (outline.DestinationPage != null && !ReferenceEquals(Owner, outline.DestinationPage.Owner))
                 throw new ArgumentException("Destination page must belong to this document.");
 
@@ -265,7 +265,7 @@ namespace PDFSharp.Interop
             if (outline == null)
                 throw new ArgumentNullException("outline");
 
-            // DestinationPage is optional. PDFsharp does not yet support outlines with action ("/A") instead of destination page ("/DEST")
+            // DestinationPage is optional. PDFSharp does not yet support outlines with action ("/A") instead of destination page ("/DEST")
             if (outline.DestinationPage != null && !ReferenceEquals(Owner, outline.DestinationPage.Owner))
                 throw new ArgumentException("Destination page must belong to this document.");
 
@@ -274,8 +274,8 @@ namespace PDFSharp.Interop
             outline.Parent = _parent;
 
             //_outlines.Add(outline);
-            if (!Owner._irefTable.Contains(outline.ObjectID))
-                Owner._irefTable.Add(outline);
+            if (!Owner.IrefTable.Contains(outline.ObjectID))
+                Owner.IrefTable.Add(outline);
             else
             {
                 outline.GetType();
@@ -301,7 +301,7 @@ namespace PDFSharp.Interop
             //outline.Document = Owner;
             outline.Parent = null;
 
-            Owner._irefTable.Remove(outline.Reference);
+            Owner.IrefTable.Remove(outline.Reference);
         }
 
         /// <summary>

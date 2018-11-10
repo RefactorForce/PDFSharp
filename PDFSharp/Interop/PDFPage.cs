@@ -1,4 +1,4 @@
-#region PDFsharp - A .NET library for processing PDF
+#region PDFSharp - A .NET library for processing PDF
 //
 // Authors:
 //   Stefan Lange
@@ -103,7 +103,7 @@ namespace PDFSharp.Interop
 
         /// <summary>
         /// Gets or sets a user defined object that contains arbitrary information associated with this PDF page.
-        /// The tag is not used by PDFsharp.
+        /// The tag is not used by PDFSharp.
         /// </summary>
         public object Tag { get; set; }
 
@@ -300,7 +300,7 @@ namespace PDFSharp.Interop
         /// <summary>
         /// Gets or sets the /Rotate entry of the PDF page. The value is the number of degrees by which the page 
         /// should be rotated clockwise when displayed or printed. The value must be a multiple of 90.
-        /// PDFsharp does not set this value, but for imported pages this value can be set and must be taken
+        /// PDFSharp does not set this value, but for imported pages this value can be set and must be taken
         /// into account when adding graphic to such a page.
         /// </summary>
         public int Rotate
@@ -557,7 +557,7 @@ namespace PDFSharp.Interop
         /// </summary>
         internal string GetFormName(XForm form)
         {
-            PDFFormXObject pdfForm = _document.FormTable.GetForm(form);
+            PDFFormXObject pdfForm = _document.ExternalDocumentTable.GetForm(form);
             Debug.Assert(pdfForm != null);
             string name = Resources.AddForm(pdfForm);
             return name;
@@ -582,7 +582,7 @@ namespace PDFSharp.Interop
 
 #if true
             // Add transparency group to prevent rendering problems of Adobe viewer.
-            // Update (PDFsharp 1.50 beta 3): Add transparency group only if ColorMode is defined.
+            // Update (PDFSharp 1.50 beta 3): Add transparency group only if ColorMode is defined.
             // Rgb is the default for the ColorMode, but if user sets it to Undefined then
             // we respect this and skip the transparency group.
             TransparencyUsed = true; // TODO: check XObjects

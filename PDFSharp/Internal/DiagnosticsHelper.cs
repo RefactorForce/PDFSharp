@@ -1,4 +1,4 @@
-#region PDFsharp - A .NET library for processing PDF
+#region PDFSharp - A .NET library for processing PDF
 //
 // Authors:
 //   Stefan Lange
@@ -68,7 +68,7 @@ namespace PDFSharp.Internal
 
         /// <summary>
         /// Indirectly throws NotImplementedException.
-        /// Required because PDFsharp Release builds tread warnings as errors and
+        /// Required because PDFSharp Release builds tread warnings as errors and
         /// throwing NotImplementedException may lead to unreachable code which
         /// crashes the build.
         /// </summary>
@@ -115,7 +115,7 @@ namespace PDFSharp.Internal
     }
 
     /// <summary>
-    /// Internal stuff for development of PDFsharp.
+    /// Internal stuff for development of PDFSharp.
     /// </summary>
     public static class FontsDevHelper
     {

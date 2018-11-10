@@ -1,4 +1,4 @@
-#region PDFsharp - A .NET library for processing PDF
+#region PDFSharp - A .NET library for processing PDF
 //
 // Authors:
 //   Stefan Lange
@@ -153,7 +153,7 @@ namespace PDFSharp.Fonts
                 }
 
                 // Return value is null if the typeface could not be resolved.
-                // In this case PDFsharp stops.
+                // In this case PDFSharp stops.
                 return fontResolverInfo;
             }
             finally { Lock.ExitFontFactory(); }

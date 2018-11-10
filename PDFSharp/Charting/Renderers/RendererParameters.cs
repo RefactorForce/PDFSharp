@@ -1,4 +1,4 @@
-#region PDFsharp Charting - A .NET charting library based on PDFsharp
+#region PDFSharp Charting - A .NET charting library based on PDFSharp
 //
 // Authors:
 //   Niklas Schneider
@@ -48,8 +48,8 @@ namespace PDFSharp.Charting.Renderers
         /// </summary>
         public RendererParameters(XGraphics gfx, double x, double y, double width, double height)
         {
-            _gfx = gfx;
-            _box = new XRect(x, y, width, height);
+            Graphics = gfx;
+            Box = new XRect(x, y, width, height);
         }
 
         /// <summary>
@@ -58,48 +58,28 @@ namespace PDFSharp.Charting.Renderers
         /// </summary>
         public RendererParameters(XGraphics gfx, XRect boundingBox)
         {
-            _gfx = gfx;
-            _box = boundingBox;
+            Graphics = gfx;
+            Box = boundingBox;
         }
 
         /// <summary>
         /// Gets or sets the graphics object.
         /// </summary>
-        public XGraphics Graphics
-        {
-            get => _gfx;
-            set => _gfx = value;
-        }
-        XGraphics _gfx;
+        public XGraphics Graphics { get; set; }
 
         /// <summary>
         /// Gets or sets the item to draw.
         /// </summary>
-        public object DrawingItem
-        {
-            get => _item;
-            set => _item = value;
-        }
-        object _item;
+        public object DrawingItem { get; set; }
 
         /// <summary>
         /// Gets or sets the rectangle for the drawing item.
         /// </summary>
-        public XRect Box
-        {
-            get => _box;
-            set => _box = value;
-        }
-        XRect _box;
+        public XRect Box { get; set; }
 
         /// <summary>
         /// Gets or sets the RendererInfo.
         /// </summary>
-        public RendererInfo RendererInfo
-        {
-            get => _rendererInfo;
-            set => _rendererInfo = value;
-        }
-        RendererInfo _rendererInfo;
+        public RendererInfo RendererInfo { get; set; }
     }
 }

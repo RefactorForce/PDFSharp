@@ -1,4 +1,4 @@
-#region PDFsharp - A .NET library for processing PDF
+#region PDFSharp - A .NET library for processing PDF
 //
 // Authors:
 //   Stefan Lange
@@ -63,7 +63,7 @@ namespace PDFSharp.Interop.Advanced
         /// </summary>
         internal void CollectResourceNames(Dictionary<string, object> usedResourceNames)
         {
-            // ?TODO: Imported resources (e.g. fonts) can be reused, but I think this is rather difficult. Will be an issue in PDFsharp 2.0.
+            // ?TODO: Imported resources (e.g. fonts) can be reused, but I think this is rather difficult. Will be an issue in PDFSharp 2.0.
             PDFName[] names = Elements.KeyNames;
             foreach (PDFName name in names)
                 usedResourceNames.Add(name.ToString(), null);

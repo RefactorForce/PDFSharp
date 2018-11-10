@@ -1,4 +1,4 @@
-#region PDFsharp - A .NET library for processing PDF
+#region PDFSharp - A .NET library for processing PDF
 //
 // Authors:
 //   Stefan Lange
@@ -65,14 +65,14 @@ namespace PDFSharp.Internal
             // Hex formatting does not work with type char. It must be casted to integer.
             string message = String.Format(CultureInfo.InvariantCulture,
                 "Unexpected character '0x{0:x4}' in PDF stream. The file may be corrupted. " +
-                "If you think this is a bug in PDFsharp, please send us your PDF file.", (int)ch);
+                "If you think this is a bug in PDFSharp, please send us your PDF file.", (int)ch);
             ThrowParserException(message);
         }
         public static void HandleUnexpectedToken(string token)
         {
             string message = String.Format(CultureInfo.InvariantCulture,
                 "Unexpected token '{0}' in PDF stream. The file may be corrupted. " +
-                "If you think this is a bug in PDFsharp, please send us your PDF file.", token);
+                "If you think this is a bug in PDFSharp, please send us your PDF file.", token);
             ThrowParserException(message);
         }
     }
@@ -93,7 +93,7 @@ namespace PDFSharp.Internal
         {
             string message = String.Format(CultureInfo.InvariantCulture,
                 "Unexpected character '0x{0:x4}' in content stream. The stream may be corrupted or the feature is not implemented. " +
-                "If you think this is a bug in PDFsharp, please send us your PDF file.", (int)ch);
+                "If you think this is a bug in PDFSharp, please send us your PDF file.", (int)ch);
             ThrowContentReaderException(message);
         }
     }

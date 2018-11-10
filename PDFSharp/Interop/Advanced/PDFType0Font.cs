@@ -1,4 +1,4 @@
-#region PDFsharp - A .NET library for processing PDF
+#region PDFSharp - A .NET library for processing PDF
 //
 // Authors:
 //   Stefan Lange
@@ -75,7 +75,7 @@ namespace PDFSharp.Interop.Advanced
             DescendantFont.BaseFont = BaseFont;
 
             PDFArray descendantFonts = new PDFArray(document);
-            Owner._irefTable.Add(DescendantFont);
+            Owner.IrefTable.Add(DescendantFont);
             descendantFonts.Elements.Add(DescendantFont.Reference);
             Elements[Keys.DescendantFonts] = descendantFonts;
         }
@@ -114,7 +114,7 @@ namespace PDFSharp.Interop.Advanced
             DescendantFont.BaseFont = BaseFont;
 
             PDFArray descendantFonts = new PDFArray(document);
-            Owner._irefTable.Add(DescendantFont);
+            Owner.IrefTable.Add(DescendantFont);
             descendantFonts.Elements.Add(DescendantFont.Reference);
             Elements[Keys.DescendantFonts] = descendantFonts;
         }

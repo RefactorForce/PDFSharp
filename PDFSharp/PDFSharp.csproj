@@ -3,6 +3,10 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <DefineConstants>CORE;CORE_WITH_GDI</DefineConstants>
+    <LangVersion>latest</LangVersion>
+    
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageLicenseUrl>https://github.com/RefactorForce/PDFSharp/tree/master/LICENSE</PackageLicenseUrl>
   </PropertyGroup>
 
   <ItemGroup>

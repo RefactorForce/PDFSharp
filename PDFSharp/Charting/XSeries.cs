@@ -1,4 +1,4 @@
-#region PDFsharp Charting - A .NET charting library based on PDFsharp
+#region PDFSharp Charting - A .NET charting library based on PDFSharp
 //
 // Authors:
 //   Niklas Schneider
@@ -39,18 +39,12 @@ namespace PDFSharp.Charting
         /// <summary>
         /// Initializes a new instance of the XSeries class.
         /// </summary>
-        public XSeries()
-        {
-            _xSeriesElements = new XSeriesElements();
-        }
+        public XSeries() => _xSeriesElements = new XSeriesElements();
 
         /// <summary>
         /// Gets the xvalue at the specified index.
         /// </summary>
-        public XValue this[int index]
-        {
-            get { return (XValue)_xSeriesElements[index]; }
-        }
+        public XValue this[int index] => (XValue)_xSeriesElements[index];
 
         /// <summary>
         /// The actual value container of the XSeries.

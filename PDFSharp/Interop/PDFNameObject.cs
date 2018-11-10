@@ -1,4 +1,4 @@
-#region PDFsharp - A .NET library for processing PDF
+#region PDFSharp - A .NET library for processing PDF
 //
 // Authors:
 //   Stefan Lange
@@ -34,7 +34,7 @@ using PDFSharp.Interop.IO;
 namespace PDFSharp.Interop
 {
     /// <summary>
-    /// Represents an indirect name value. This type is not used by PDFsharp. If it is imported from
+    /// Represents an indirect name value. This type is not used by PDFSharp. If it is imported from
     /// an external PDF file, the value is converted into a direct object. Acrobat sometime uses indirect
     /// names to save space, because an indirect reference to a name may be shorter than a long name.
     /// </summary>

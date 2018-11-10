@@ -1,4 +1,4 @@
-﻿#region PDFsharp - A .NET library for processing PDF
+﻿#region PDFSharp - A .NET library for processing PDF
 //
 // Authors:
 //   Stefan Lange
@@ -45,7 +45,7 @@ namespace PDFSharp.Fonts
 
         /// <summary>
         /// Gets or sets the global font resolver for the current application domain.
-        /// This static function must be called only once and before any font operation was executed by PDFsharp.
+        /// This static function must be called only once and before any font operation was executed by PDFSharp.
         /// If this is not easily to obtain, e.g. because your code is running on a web server, you must provide the
         /// same instance of your font resolver in every subsequent setting of this property.
         /// In a web application set the font resolver in Global.asax.

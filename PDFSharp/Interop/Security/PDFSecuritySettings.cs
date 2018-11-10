@@ -1,4 +1,4 @@
-#region PDFsharp - A .NET library for processing PDF
+#region PDFSharp - A .NET library for processing PDF
 //
 // Authors:
 //   Stefan Lange
@@ -234,6 +234,6 @@ namespace PDFSharp.Interop.Security
         /// <summary>
         /// PDFStandardSecurityHandler is the only implemented handler.
         /// </summary>
-        internal PDFStandardSecurityHandler SecurityHandler => _document._trailer.SecurityHandler;
+        internal PDFStandardSecurityHandler SecurityHandler => _document.Trailer.SecurityHandler;
     }
 }

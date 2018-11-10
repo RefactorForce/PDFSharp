@@ -1,4 +1,4 @@
-#region PDFsharp - A .NET library for processing PDF
+#region PDFSharp - A .NET library for processing PDF
 //
 // Authors:
 //   Stefan Lange
@@ -108,7 +108,7 @@ namespace PDFSharp.Interop.Security
         /// </summary>
         public void EncryptDocument()
         {
-            foreach (PDFReference iref in _document._irefTable.AllReferences)
+            foreach (PDFReference iref in _document.IrefTable.AllReferences)
             {
                 if (!ReferenceEquals(iref.Value, this))
                     EncryptObject(iref.Value);

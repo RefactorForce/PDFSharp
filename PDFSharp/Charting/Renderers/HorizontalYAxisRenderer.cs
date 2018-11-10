@@ -1,4 +1,4 @@
-#region PDFsharp Charting - A .NET charting library based on PDFsharp
+#region PDFSharp Charting - A .NET charting library based on PDFSharp
 //
 // Authors:
 //   Niklas Schneider
@@ -230,8 +230,7 @@ namespace PDFSharp.Charting.Renderers
         /// </summary>
         private void InitScale(AxisRendererInfo rendererInfo)
         {
-            double yMin, yMax;
-            CalcYAxis(out yMin, out yMax);
+            CalcYAxis(out double yMin, out double yMax);
             FineTuneYAxis(rendererInfo, yMin, yMax);
 
             rendererInfo.MajorTickMarkWidth = DefaultMajorTickMarkWidth;

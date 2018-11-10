@@ -1,4 +1,4 @@
-#region PDFsharp - A .NET library for processing PDF
+#region PDFSharp - A .NET library for processing PDF
 //
 // Authors:
 //   Stefan Lange
@@ -54,7 +54,7 @@ namespace PDFSharp.Drawing
     {
         /// <summary>
         /// Initializes a new instance of the XPDFForm class from the specified path to an external PDF document.
-        /// Although PDFsharp internally caches XPDFForm objects it is recommended to reuse XPDFForm objects
+        /// Although PDFSharp internally caches XPDFForm objects it is recommended to reuse XPDFForm objects
         /// in your code and change the PageNumber property if more than one page is needed form the external
         /// document. Furthermore, because XPDFForm can occupy very much memory, it is recommended to
         /// dispose XPDFForm objects if not needed anymore.
@@ -161,7 +161,7 @@ namespace PDFSharp.Drawing
                         //...
                     }
                     if (_externalDocument != null)
-                        PDFDocument.Tls.DetachDocument(_externalDocument.Handle);
+                        PDFDocument.Storage.DetachDocument(_externalDocument.Handle);
                     //...
                 }
                 finally
@@ -175,7 +175,7 @@ namespace PDFSharp.Drawing
         /// <summary>
         /// Gets or sets an image that is used for drawing if the current XGraphics object cannot handle
         /// PDF forms. A place holder is useful for showing a preview of a page on the display, because
-        /// PDFsharp cannot render native PDF objects.
+        /// PDFSharp cannot render native PDF objects.
         /// </summary>
         public XImage PlaceHolder { get; set; }
 
@@ -363,7 +363,7 @@ namespace PDFSharp.Drawing
                     throw new InvalidOperationException("This XPDFForm is a template and not an imported PDF page; therefore it has no external document.");
 
                 if (_externalDocument == null)
-                    _externalDocument = PDFDocument.Tls.GetDocument(_path);
+                    _externalDocument = PDFDocument.Storage.GetDocument(_path);
                 return _externalDocument;
             }
         }
