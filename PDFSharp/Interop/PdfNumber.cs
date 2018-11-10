@@ -32,7 +32,7 @@ namespace PDFSharp.Interop
     /// <summary>
     /// Base class for direct number values (not yet used, maybe superfluous).
     /// </summary>
-    public abstract class PdfNumber : PdfItem
+    public abstract class PDFNumber : PDFItem
     {
         // No code in base class.
     }

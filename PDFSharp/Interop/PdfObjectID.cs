@@ -37,13 +37,13 @@ namespace PDFSharp.Interop
     /// Represents a PDF object identifier, a pair of object and generation number.
     /// </summary>
     [DebuggerDisplay("{DebuggerDisplay}")]
-    public struct PdfObjectID : IComparable
+    public struct PDFObjectID : IComparable
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfObjectID"/> class.
+        /// Initializes a new instance of the <see cref="PDFObjectID"/> class.
         /// </summary>
         /// <param name="objectNumber">The object number.</param>
-        public PdfObjectID(int objectNumber)
+        public PDFObjectID(int objectNumber)
         {
             Debug.Assert(objectNumber >= 1, "Object number out of range.");
             ObjectNumber = objectNumber;
@@ -56,11 +56,11 @@ namespace PDFSharp.Interop
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfObjectID"/> class.
+        /// Initializes a new instance of the <see cref="PDFObjectID"/> class.
         /// </summary>
         /// <param name="objectNumber">The object number.</param>
         /// <param name="generationNumber">The generation number.</param>
-        public PdfObjectID(int objectNumber, int generationNumber)
+        public PDFObjectID(int objectNumber, int generationNumber)
         {
             Debug.Assert(objectNumber >= 1, "Object number out of range.");
             //Debug.Assert(generationNumber >= 0 && generationNumber <= 65535, "Generation number out of range.");
@@ -94,7 +94,7 @@ namespace PDFSharp.Interop
         /// </summary>
         public override bool Equals(object obj)
         {
-            if (obj is PdfObjectID id)
+            if (obj is PDFObjectID id)
             {
                 if (ObjectNumber == id.ObjectNumber)
                     return _generationNumber == id._generationNumber;
@@ -110,12 +110,12 @@ namespace PDFSharp.Interop
         /// <summary>
         /// Determines whether the two objects are equal.
         /// </summary>
-        public static bool operator ==(PdfObjectID left, PdfObjectID right) => left.Equals(right);
+        public static bool operator ==(PDFObjectID left, PDFObjectID right) => left.Equals(right);
 
         /// <summary>
         /// Determines whether the tow objects not are equal.
         /// </summary>
-        public static bool operator !=(PdfObjectID left, PdfObjectID right) => !left.Equals(right);
+        public static bool operator !=(PDFObjectID left, PDFObjectID right) => !left.Equals(right);
 
         /// <summary>
         /// Returns the object and generation numbers as a string.
@@ -125,12 +125,12 @@ namespace PDFSharp.Interop
         /// <summary>
         /// Creates an empty object identifier.
         /// </summary>
-        public static PdfObjectID Empty => new PdfObjectID();
+        public static PDFObjectID Empty => new PDFObjectID();
 
         /// <summary>
         /// Compares the current object id with another object.
         /// </summary>
-        public int CompareTo(object obj) => obj is PdfObjectID id
+        public int CompareTo(object obj) => obj is PDFObjectID id
                 ? ObjectNumber == id.ObjectNumber ? _generationNumber - id._generationNumber : ObjectNumber - id.ObjectNumber
                 : 1;
 

@@ -37,23 +37,23 @@ namespace PDFSharp.Interop
     /// Represents a direct date value.
     /// </summary>
     [DebuggerDisplay("({Value})")]
-    public sealed class PdfDate : PdfItem
+    public sealed class PDFDate : PDFItem
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfDate"/> class.
+        /// Initializes a new instance of the <see cref="PDFDate"/> class.
         /// </summary>
-        public PdfDate()
+        public PDFDate()
         { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfDate"/> class.
+        /// Initializes a new instance of the <see cref="PDFDate"/> class.
         /// </summary>
-        public PdfDate(string value) => Value = Parser.ParseDateTime(value, DateTime.MinValue);
+        public PDFDate(string value) => Value = Parser.ParseDateTime(value, DateTime.MinValue);
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfDate"/> class.
+        /// Initializes a new instance of the <see cref="PDFDate"/> class.
         /// </summary>
-        public PdfDate(DateTime value) => Value = value;
+        public PDFDate(DateTime value) => Value = value;
 
         /// <summary>
         /// Gets the value as DateTime.
@@ -74,6 +74,6 @@ namespace PDFSharp.Interop
         /// <summary>
         /// Writes the value in the PDF date format.
         /// </summary>
-        internal override void WriteObject(PdfWriter writer) => writer.WriteDocString(ToString());
+        internal override void WriteObject(PDFWriter writer) => writer.WriteDocString(ToString());
     }
 }

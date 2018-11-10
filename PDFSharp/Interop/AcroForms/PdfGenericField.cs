@@ -32,16 +32,16 @@ namespace PDFSharp.Interop.AcroForms
     /// <summary>
     /// Represents a generic field. Used for AcroForm dictionaries unknown to PDFsharp.
     /// </summary>
-    public sealed class PdfGenericField : PdfAcroField
+    public sealed class PDFGenericField : PDFAcroField
     {
         /// <summary>
-        /// Initializes a new instance of PdfGenericField.
+        /// Initializes a new instance of PDFGenericField.
         /// </summary>
-        internal PdfGenericField(PdfDocument document)
+        internal PDFGenericField(PDFDocument document)
             : base(document)
         { }
 
-        internal PdfGenericField(PdfDictionary dict)
+        internal PDFGenericField(PDFDictionary dict)
             : base(dict)
         { }
 
@@ -49,7 +49,7 @@ namespace PDFSharp.Interop.AcroForms
         /// Predefined keys of this dictionary. 
         /// The description comes from PDF 1.4 Reference.
         /// </summary>
-        public new class Keys : PdfAcroField.Keys
+        public new class Keys : PDFAcroField.Keys
         {
             internal static DictionaryMeta Meta => _meta ?? (_meta = CreateMeta(typeof(Keys)));
             static DictionaryMeta _meta;

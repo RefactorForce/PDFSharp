@@ -78,17 +78,17 @@ namespace PDFSharp.Fonts
 
         /// <summary>
         /// Gets or sets the default font encoding used for XFont objects where encoding is not explicitly specified.
-        /// If it is not set, the default value is PdfFontEncoding.Unicode.
+        /// If it is not set, the default value is PDFFontEncoding.Unicode.
         /// If you are sure your document contains only Windows-1252 characters (see https://en.wikipedia.org/wiki/Windows-1252) 
-        /// set default encoding to PdfFontEncodingj.Windows1252.
+        /// set default encoding to PDFFontEncodingj.Windows1252.
         /// Must be set only once per app domain.
         /// </summary>
-        public static PdfFontEncoding DefaultFontEncoding
+        public static PDFFontEncoding DefaultFontEncoding
         {
             get
             {
                 if (!_fontEncodingInitialized)
-                    DefaultFontEncoding = PdfFontEncoding.Unicode;
+                    DefaultFontEncoding = PDFFontEncoding.Unicode;
                 return _fontEncoding;
             }
             set
@@ -110,7 +110,7 @@ namespace PDFSharp.Fonts
                 finally { Lock.ExitFontFactory(); }
             }
         }
-        static PdfFontEncoding _fontEncoding;
+        static PDFFontEncoding _fontEncoding;
         static bool _fontEncodingInitialized;
     }
 }

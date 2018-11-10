@@ -42,7 +42,7 @@ namespace PDFSharp.Drawing
         /// <summary>
         /// Imports the image. Returns null if the image importer does not support the format.
         /// </summary>
-        ImportedImage ImportImage(StreamReaderHelper stream, PdfDocument document);
+        ImportedImage ImportImage(StreamReaderHelper stream, PDFDocument document);
 
         /// <summary>
         /// Prepares the image data needed for the PDF file.
@@ -153,7 +153,7 @@ namespace PDFSharp.Drawing
         /// <summary>
         /// Initializes a new instance of the <see cref="ImportedImage"/> class.
         /// </summary>
-        protected ImportedImage(IImageImporter importer, ImagePrivateData data, PdfDocument document)
+        protected ImportedImage(IImageImporter importer, ImagePrivateData data, PDFDocument document)
         {
             Data = data;
             _document = document;
@@ -186,7 +186,7 @@ namespace PDFSharp.Drawing
 
         private readonly IImageImporter _importer;
         internal ImagePrivateData Data;
-        internal readonly PdfDocument _document;
+        internal readonly PDFDocument _document;
     }
 
     /// <summary>

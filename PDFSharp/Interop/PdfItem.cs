@@ -35,16 +35,16 @@ namespace PDFSharp.Interop
     /// <summary>
     /// The base class of all PDF objects and simple PDF types.
     /// </summary>
-    public abstract class PdfItem : ICloneable
+    public abstract class PDFItem : ICloneable
     {
-        // All simple types (i.e. derived from PdfItem but not from PdfObject) must be immutable.
+        // All simple types (i.e. derived from PDFItem but not from PDFObject) must be immutable.
 
         object ICloneable.Clone() => Copy();
 
         /// <summary>
         /// Creates a copy of this object.
         /// </summary>
-        public PdfItem Clone() => (PdfItem)Copy();
+        public PDFItem Clone() => (PDFItem)Copy();
 
         /// <summary>
         /// Implements the copy mechanism. Must be overridden in derived classes.
@@ -53,8 +53,8 @@ namespace PDFSharp.Interop
 
         /// <summary>
         /// When overridden in a derived class, appends a raw string representation of this object
-        /// to the specified PdfWriter.
+        /// to the specified PDFWriter.
         /// </summary>
-        internal abstract void WriteObject(PdfWriter writer);
+        internal abstract void WriteObject(PDFWriter writer);
     }
 }

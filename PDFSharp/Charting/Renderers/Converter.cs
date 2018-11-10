@@ -32,7 +32,7 @@ using PDFSharp.Drawing;
 namespace PDFSharp.Charting.Renderers
 {
     /// <summary>
-    /// Provides functions which converts Charting.DOM objects into PdfSharp.Drawing objects.
+    /// Provides functions which converts Charting.DOM objects into PDFSharp.Drawing objects.
     /// </summary>
     internal class Converter
     {

@@ -38,19 +38,19 @@ namespace PDFSharp.Interop
     /// Represents a direct integer value.
     /// </summary>
     [DebuggerDisplay("({Value})")]
-    public sealed class PdfInteger : PdfNumber, IConvertible
+    public sealed class PDFInteger : PDFNumber, IConvertible
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfInteger"/> class.
+        /// Initializes a new instance of the <see cref="PDFInteger"/> class.
         /// </summary>
-        public PdfInteger()
+        public PDFInteger()
         { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfInteger"/> class.
+        /// Initializes a new instance of the <see cref="PDFInteger"/> class.
         /// </summary>
         /// <param name="value">The value.</param>
-        public PdfInteger(int value) => Value = value;
+        public PDFInteger(int value) => Value = value;
 
         /// <summary>
         /// Gets the value as integer.
@@ -67,7 +67,7 @@ namespace PDFSharp.Interop
         /// <summary>
         /// Writes the integer as string.
         /// </summary>
-        internal override void WriteObject(PdfWriter writer) => writer.Write(this);
+        internal override void WriteObject(PDFWriter writer) => writer.Write(this);
 
         #region IConvertible Members
 
@@ -78,7 +78,7 @@ namespace PDFSharp.Interop
         double IConvertible.ToDouble(IFormatProvider provider) => Value;
 
         DateTime IConvertible.ToDateTime(IFormatProvider provider) =>
-            // TODO:  Add PdfInteger.ToDateTime implementation
+            // TODO:  Add PDFInteger.ToDateTime implementation
             new DateTime();
 
         float IConvertible.ToSingle(IFormatProvider provider) => Value;
@@ -107,7 +107,7 @@ namespace PDFSharp.Interop
         decimal IConvertible.ToDecimal(IFormatProvider provider) => Value;
 
         object IConvertible.ToType(Type conversionType, IFormatProvider provider) =>
-            // TODO:  Add PdfInteger.ToType implementation
+            // TODO:  Add PDFInteger.ToType implementation
             null;
 
         uint IConvertible.ToUInt32(IFormatProvider provider) => Convert.ToUInt32(Value);

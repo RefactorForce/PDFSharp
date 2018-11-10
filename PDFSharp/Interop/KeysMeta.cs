@@ -82,43 +82,43 @@ namespace PDFSharp.Interop
                 switch (KeyType & KeyType.TypeMask)
                 {
                     case KeyType.Name:
-                        type = typeof(PdfName);
+                        type = typeof(PDFName);
                         break;
 
                     case KeyType.String:
-                        type = typeof(PdfString);
+                        type = typeof(PDFString);
                         break;
 
                     case KeyType.Boolean:
-                        type = typeof(PdfBoolean);
+                        type = typeof(PDFBoolean);
                         break;
 
                     case KeyType.Integer:
-                        type = typeof(PdfInteger);
+                        type = typeof(PDFInteger);
                         break;
 
                     case KeyType.Real:
-                        type = typeof(PdfReal);
+                        type = typeof(PDFReal);
                         break;
 
                     case KeyType.Date:
-                        type = typeof(PdfDate);
+                        type = typeof(PDFDate);
                         break;
 
                     case KeyType.Rectangle:
-                        type = typeof(PdfRectangle);
+                        type = typeof(PDFRectangle);
                         break;
 
                     case KeyType.Array:
-                        type = typeof(PdfArray);
+                        type = typeof(PDFArray);
                         break;
 
                     case KeyType.Dictionary:
-                        type = typeof(PdfDictionary);
+                        type = typeof(PDFDictionary);
                         break;
 
                     case KeyType.Stream:
-                        type = typeof(PdfDictionary);
+                        type = typeof(PDFDictionary);
                         break;
 
                     // The following types are not yet used
@@ -136,7 +136,7 @@ namespace PDFSharp.Interop
                         throw new NotImplementedException("KeyType.StreamOrArray");
 
                     case KeyType.ArrayOrNameOrString:
-                        return null; // HACK: Make PdfOutline work
+                        return null; // HACK: Make PDFOutline work
                                      //throw new NotImplementedException("KeyType.ArrayOrNameOrString");
 
                     default:
@@ -156,10 +156,10 @@ namespace PDFSharp.Interop
         public DictionaryMeta(Type type)
         {
             //#if (NETFX_CORE && DEBUG) || CORE
-            //            if (type == typeof(PdfPages.Keys))
+            //            if (type == typeof(PDFPages.Keys))
             //            {
-            //                var x = typeof(PdfPages).GetRuntimeFields();
-            //                var y = typeof(PdfPages).GetTypeInfo().DeclaredFields;
+            //                var x = typeof(PDFPages).GetRuntimeFields();
+            //                var y = typeof(PDFPages).GetTypeInfo().DeclaredFields;
             //                x.GetType();
             //                y.GetType();
             //                Debug-Break.Break();
@@ -219,7 +219,7 @@ namespace PDFSharp.Interop
                 }
             }
             type = type.GetTypeInfo().BaseType;
-            if (type != typeof(object) && type != typeof(PdfObject))
+            if (type != typeof(object) && type != typeof(PDFObject))
                 CollectKeyDescriptors(type);
         }
 #endif
@@ -252,8 +252,8 @@ namespace PDFSharp.Interop
                 foreach (var fieldInfo in typeof(B).GetTypeInfo().DeclaredFields) { s += " " + fieldInfo.Name; }
                 Debug.WriteLine(s);
 
-                s = "Runtime fields of PdfPages.Keys:";
-                foreach (var fieldInfo in typeof(PdfPages.Keys).GetRuntimeFields()) { s += " " + fieldInfo.Name; }
+                s = "Runtime fields of PDFPages.Keys:";
+                foreach (var fieldInfo in typeof(PDFPages.Keys).GetRuntimeFields()) { s += " " + fieldInfo.Name; }
                 Debug.WriteLine(s);
             }
         }

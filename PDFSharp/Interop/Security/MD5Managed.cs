@@ -47,7 +47,7 @@ using System.Security.Cryptography;
 // ReSharper disable InconsistentNaming
 
 #if SILVERLIGHT || WINDOWS_PHONE || UWP || GDI && DEBUG
-namespace PdfSharp.Pdf.Security
+namespace PDFSharp.PDF.Security
 {
 #if UWP
     class HashAlgorithm

@@ -35,7 +35,7 @@ namespace PDFSharp.Interop
     /// Specifies the embedding options of an XFont when converted into PDF.
     /// Font embedding is not optional anymore. So Always is the only option.
     /// </summary>
-    public enum PdfFontEmbedding
+    public enum PDFFontEmbedding
     {
         /// <summary>
         /// All fonts are embedded.

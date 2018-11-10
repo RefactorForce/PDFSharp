@@ -34,15 +34,15 @@ namespace PDFSharp.Interop.AcroForms
     /// <summary>
     /// Represents the radio button field.
     /// </summary>
-    public sealed class PdfRadioButtonField : PdfButtonField
+    public sealed class PDFRadioButtonField : PDFButtonField
     {
         /// <summary>
-        /// Initializes a new instance of PdfRadioButtonField.
+        /// Initializes a new instance of PDFRadioButtonField.
         /// </summary>
-        internal PdfRadioButtonField(PdfDocument document)
+        internal PDFRadioButtonField(PDFDocument document)
             : base(document) => _document = document;
 
-        internal PdfRadioButtonField(PdfDictionary dict)
+        internal PDFRadioButtonField(PDFDictionary dict)
             : base(dict)
         { }
 
@@ -53,34 +53,34 @@ namespace PDFSharp.Interop.AcroForms
         {
             get
             {
-                string value = Elements.GetString(PdfAcroField.Keys.V);
+                string value = Elements.GetString(PDFAcroField.Keys.V);
                 return IndexInOptStrings(value);
             }
             set
             {
 
-                if (!(Elements[Keys.Opt] is PdfArray opt))
-                    opt = Elements[PdfAcroField.Keys.Kids] as PdfArray;
+                if (!(Elements[Keys.Opt] is PDFArray opt))
+                    opt = Elements[PDFAcroField.Keys.Kids] as PDFArray;
 
                 if (opt != null)
                 {
                     int count = opt.Elements.Count;
                     if (value < 0 || value >= count)
                         throw new ArgumentOutOfRangeException("value");
-                    Elements.SetName(PdfAcroField.Keys.V, opt.Elements[value].ToString());
+                    Elements.SetName(PDFAcroField.Keys.V, opt.Elements[value].ToString());
                 }
             }
         }
 
         int IndexInOptStrings(string value)
         {
-            if (Elements[Keys.Opt] is PdfArray opt)
+            if (Elements[Keys.Opt] is PDFArray opt)
             {
                 int count = opt.Elements.Count;
                 for (int idx = 0; idx < count; idx++)
                 {
-                    PdfItem item = opt.Elements[idx];
-                    if (item is PdfString)
+                    PDFItem item = opt.Elements[idx];
+                    if (item is PDFString)
                     {
                         if (item.ToString() == value)
                             return idx;
@@ -94,7 +94,7 @@ namespace PDFSharp.Interop.AcroForms
         /// Predefined keys of this dictionary. 
         /// The description comes from PDF 1.4 Reference.
         /// </summary>
-        public new class Keys : PdfButtonField.Keys
+        public new class Keys : PDFButtonField.Keys
         {
             /// <summary>
             /// (Optional; inheritable; PDF 1.4) An array of text strings to be used in

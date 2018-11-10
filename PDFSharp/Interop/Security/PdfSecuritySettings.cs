@@ -34,10 +34,10 @@ namespace PDFSharp.Interop.Security
     /// <summary>
     /// Encapsulates access to the security settings of a PDF document.
     /// </summary>
-    public sealed class PdfSecuritySettings
+    public sealed class PDFSecuritySettings
     {
-        internal PdfSecuritySettings(PdfDocument document) => _document = document;
-        readonly PdfDocument _document;
+        internal PDFSecuritySettings(PDFDocument document) => _document = document;
+        readonly PDFDocument _document;
 
         /// <summary>
         /// Indicates whether the granted access to the document is 'owner permission'. Returns true if the document 
@@ -48,15 +48,15 @@ namespace PDFSharp.Interop.Security
         internal bool _hasOwnerPermissions = true;
 
         /// <summary>
-        /// Gets or sets the document security level. If you set the security level to anything but PdfDocumentSecurityLevel.None
+        /// Gets or sets the document security level. If you set the security level to anything but PDFDocumentSecurityLevel.None
         /// you must also set a user and/or an owner password. Otherwise saving the document will fail.
         /// </summary>
-        public PdfDocumentSecurityLevel DocumentSecurityLevel { get; set; }
+        public PDFDocumentSecurityLevel DocumentSecurityLevel { get; set; }
 
         /// <summary>
         /// Sets the user password of the document. Setting a password automatically sets the
-        /// PdfDocumentSecurityLevel to PdfDocumentSecurityLevel.Encrypted128Bit if its current
-        /// value is PdfDocumentSecurityLevel.None.
+        /// PDFDocumentSecurityLevel to PDFDocumentSecurityLevel.Encrypted128Bit if its current
+        /// value is PDFDocumentSecurityLevel.None.
         /// </summary>
         public string UserPassword
         {
@@ -65,8 +65,8 @@ namespace PDFSharp.Interop.Security
 
         /// <summary>
         /// Sets the owner password of the document. Setting a password automatically sets the
-        /// PdfDocumentSecurityLevel to PdfDocumentSecurityLevel.Encrypted128Bit if its current
-        /// value is PdfDocumentSecurityLevel.None.
+        /// PDFDocumentSecurityLevel to PDFDocumentSecurityLevel.Encrypted128Bit if its current
+        /// value is PDFDocumentSecurityLevel.None.
         /// </summary>
         public string OwnerPassword
         {
@@ -78,7 +78,7 @@ namespace PDFSharp.Interop.Security
         /// </summary>
         internal bool CanSave(ref string message)
         {
-            if (DocumentSecurityLevel != PdfDocumentSecurityLevel.None)
+            if (DocumentSecurityLevel != PDFDocumentSecurityLevel.None)
             {
                 if (String.IsNullOrEmpty(SecurityHandler._userPassword) && String.IsNullOrEmpty(SecurityHandler._ownerPassword))
                 {
@@ -97,14 +97,14 @@ namespace PDFSharp.Interop.Security
         /// </summary>
         public bool PermitPrint
         {
-            get => (SecurityHandler.Permission & PdfUserAccessPermission.PermitPrint) != 0;
+            get => (SecurityHandler.Permission & PDFUserAccessPermission.PermitPrint) != 0;
             set
             {
-                PdfUserAccessPermission permission = SecurityHandler.Permission;
+                PDFUserAccessPermission permission = SecurityHandler.Permission;
                 if (value)
-                    permission |= PdfUserAccessPermission.PermitPrint;
+                    permission |= PDFUserAccessPermission.PermitPrint;
                 else
-                    permission &= ~PdfUserAccessPermission.PermitPrint;
+                    permission &= ~PDFUserAccessPermission.PermitPrint;
                 SecurityHandler.Permission = permission;
             }
         }
@@ -114,14 +114,14 @@ namespace PDFSharp.Interop.Security
         /// </summary>
         public bool PermitModifyDocument
         {
-            get => (SecurityHandler.Permission & PdfUserAccessPermission.PermitModifyDocument) != 0;
+            get => (SecurityHandler.Permission & PDFUserAccessPermission.PermitModifyDocument) != 0;
             set
             {
-                PdfUserAccessPermission permission = SecurityHandler.Permission;
+                PDFUserAccessPermission permission = SecurityHandler.Permission;
                 if (value)
-                    permission |= PdfUserAccessPermission.PermitModifyDocument;
+                    permission |= PDFUserAccessPermission.PermitModifyDocument;
                 else
-                    permission &= ~PdfUserAccessPermission.PermitModifyDocument;
+                    permission &= ~PDFUserAccessPermission.PermitModifyDocument;
                 SecurityHandler.Permission = permission;
             }
         }
@@ -131,14 +131,14 @@ namespace PDFSharp.Interop.Security
         /// </summary>
         public bool PermitExtractContent
         {
-            get => (SecurityHandler.Permission & PdfUserAccessPermission.PermitExtractContent) != 0;
+            get => (SecurityHandler.Permission & PDFUserAccessPermission.PermitExtractContent) != 0;
             set
             {
-                PdfUserAccessPermission permission = SecurityHandler.Permission;
+                PDFUserAccessPermission permission = SecurityHandler.Permission;
                 if (value)
-                    permission |= PdfUserAccessPermission.PermitExtractContent;
+                    permission |= PDFUserAccessPermission.PermitExtractContent;
                 else
-                    permission &= ~PdfUserAccessPermission.PermitExtractContent;
+                    permission &= ~PDFUserAccessPermission.PermitExtractContent;
                 SecurityHandler.Permission = permission;
             }
         }
@@ -148,14 +148,14 @@ namespace PDFSharp.Interop.Security
         /// </summary>
         public bool PermitAnnotations
         {
-            get => (SecurityHandler.Permission & PdfUserAccessPermission.PermitAnnotations) != 0;
+            get => (SecurityHandler.Permission & PDFUserAccessPermission.PermitAnnotations) != 0;
             set
             {
-                PdfUserAccessPermission permission = SecurityHandler.Permission;
+                PDFUserAccessPermission permission = SecurityHandler.Permission;
                 if (value)
-                    permission |= PdfUserAccessPermission.PermitAnnotations;
+                    permission |= PDFUserAccessPermission.PermitAnnotations;
                 else
-                    permission &= ~PdfUserAccessPermission.PermitAnnotations;
+                    permission &= ~PDFUserAccessPermission.PermitAnnotations;
                 SecurityHandler.Permission = permission;
             }
         }
@@ -165,14 +165,14 @@ namespace PDFSharp.Interop.Security
         /// </summary>
         public bool PermitFormsFill
         {
-            get => (SecurityHandler.Permission & PdfUserAccessPermission.PermitFormsFill) != 0;
+            get => (SecurityHandler.Permission & PDFUserAccessPermission.PermitFormsFill) != 0;
             set
             {
-                PdfUserAccessPermission permission = SecurityHandler.Permission;
+                PDFUserAccessPermission permission = SecurityHandler.Permission;
                 if (value)
-                    permission |= PdfUserAccessPermission.PermitFormsFill;
+                    permission |= PDFUserAccessPermission.PermitFormsFill;
                 else
-                    permission &= ~PdfUserAccessPermission.PermitFormsFill;
+                    permission &= ~PDFUserAccessPermission.PermitFormsFill;
                 SecurityHandler.Permission = permission;
             }
         }
@@ -182,14 +182,14 @@ namespace PDFSharp.Interop.Security
         /// </summary>
         public bool PermitAccessibilityExtractContent
         {
-            get => (SecurityHandler.Permission & PdfUserAccessPermission.PermitAccessibilityExtractContent) != 0;
+            get => (SecurityHandler.Permission & PDFUserAccessPermission.PermitAccessibilityExtractContent) != 0;
             set
             {
-                PdfUserAccessPermission permission = SecurityHandler.Permission;
+                PDFUserAccessPermission permission = SecurityHandler.Permission;
                 if (value)
-                    permission |= PdfUserAccessPermission.PermitAccessibilityExtractContent;
+                    permission |= PDFUserAccessPermission.PermitAccessibilityExtractContent;
                 else
-                    permission &= ~PdfUserAccessPermission.PermitAccessibilityExtractContent;
+                    permission &= ~PDFUserAccessPermission.PermitAccessibilityExtractContent;
                 SecurityHandler.Permission = permission;
             }
         }
@@ -200,14 +200,14 @@ namespace PDFSharp.Interop.Security
         /// </summary>
         public bool PermitAssembleDocument
         {
-            get => (SecurityHandler.Permission & PdfUserAccessPermission.PermitAssembleDocument) != 0;
+            get => (SecurityHandler.Permission & PDFUserAccessPermission.PermitAssembleDocument) != 0;
             set
             {
-                PdfUserAccessPermission permission = SecurityHandler.Permission;
+                PDFUserAccessPermission permission = SecurityHandler.Permission;
                 if (value)
-                    permission |= PdfUserAccessPermission.PermitAssembleDocument;
+                    permission |= PDFUserAccessPermission.PermitAssembleDocument;
                 else
-                    permission &= ~PdfUserAccessPermission.PermitAssembleDocument;
+                    permission &= ~PDFUserAccessPermission.PermitAssembleDocument;
                 SecurityHandler.Permission = permission;
             }
         }
@@ -218,22 +218,22 @@ namespace PDFSharp.Interop.Security
         /// </summary>
         public bool PermitFullQualityPrint
         {
-            get => (SecurityHandler.Permission & PdfUserAccessPermission.PermitFullQualityPrint) != 0;
+            get => (SecurityHandler.Permission & PDFUserAccessPermission.PermitFullQualityPrint) != 0;
             set
             {
-                PdfUserAccessPermission permission = SecurityHandler.Permission;
+                PDFUserAccessPermission permission = SecurityHandler.Permission;
                 if (value)
-                    permission |= PdfUserAccessPermission.PermitFullQualityPrint;
+                    permission |= PDFUserAccessPermission.PermitFullQualityPrint;
                 else
-                    permission &= ~PdfUserAccessPermission.PermitFullQualityPrint;
+                    permission &= ~PDFUserAccessPermission.PermitFullQualityPrint;
                 SecurityHandler.Permission = permission;
             }
         }
         #endregion
 
         /// <summary>
-        /// PdfStandardSecurityHandler is the only implemented handler.
+        /// PDFStandardSecurityHandler is the only implemented handler.
         /// </summary>
-        internal PdfStandardSecurityHandler SecurityHandler => _document._trailer.SecurityHandler;
+        internal PDFStandardSecurityHandler SecurityHandler => _document._trailer.SecurityHandler;
     }
 }

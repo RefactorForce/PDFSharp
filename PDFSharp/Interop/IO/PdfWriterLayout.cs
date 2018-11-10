@@ -33,7 +33,7 @@ namespace PDFSharp.Interop.IO
     /// Determines how the PDF output stream is formatted. Even all formats create valid PDF files,
     /// only Compact or Standard should be used for production purposes.
     /// </summary>
-    public enum PdfWriterLayout
+    public enum PDFWriterLayout
     {
         /// <summary>
         /// The PDF stream contains no unnecessary characters. This is default in release build.

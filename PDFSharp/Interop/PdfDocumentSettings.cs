@@ -32,9 +32,9 @@ namespace PDFSharp.Interop
     /// <summary>
     /// Holds PDF specific information of the document.
     /// </summary>
-    public sealed class PdfDocumentSettings
+    public sealed class PDFDocumentSettings
     {
-        internal PdfDocumentSettings(PdfDocument document)
+        internal PDFDocumentSettings(PDFDocument document)
         { }
 
         /// <summary>

@@ -39,28 +39,28 @@ namespace PDFSharp.Interop.Advanced
     /// <summary>
     /// Represents an array of PDF content streams of a page.
     /// </summary>
-    public sealed class PdfContents : PdfArray
+    public sealed class PDFContents : PDFArray
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfContents"/> class.
+        /// Initializes a new instance of the <see cref="PDFContents"/> class.
         /// </summary>
         /// <param name="document">The document.</param>
-        public PdfContents(PdfDocument document)
+        public PDFContents(PDFDocument document)
             : base(document)
         { }
 
-        internal PdfContents(PdfArray array)
+        internal PDFContents(PDFArray array)
             : base(array)
         {
             int count = Elements.Count;
             for (int idx = 0; idx < count; idx++)
             {
-                // Convert the references from PdfDictionary to PdfContent
-                PdfItem item = Elements[idx];
-                if (item is PdfReference iref && iref.Value is PdfDictionary)
+                // Convert the references from PDFDictionary to PDFContent
+                PDFItem item = Elements[idx];
+                if (item is PDFReference iref && iref.Value is PDFDictionary)
                 {
                     // The following line is correct!
-                    new PdfContent((PdfDictionary)iref.Value);
+                    new PDFContent((PDFDictionary)iref.Value);
                 }
                 else
                     throw new InvalidOperationException("Unexpected item in a content stream array.");
@@ -70,12 +70,12 @@ namespace PDFSharp.Interop.Advanced
         /// <summary>
         /// Appends a new content stream and returns it.
         /// </summary>
-        public PdfContent AppendContent()
+        public PDFContent AppendContent()
         {
             Debug.Assert(Owner != null);
 
             SetModified();
-            PdfContent content = new PdfContent(Owner);
+            PDFContent content = new PDFContent(Owner);
             Owner._irefTable.Add(content);
             Debug.Assert(content.Reference != null);
             Elements.Add(content.Reference);
@@ -85,12 +85,12 @@ namespace PDFSharp.Interop.Advanced
         /// <summary>
         /// Prepends a new content stream and returns it.
         /// </summary>
-        public PdfContent PrependContent()
+        public PDFContent PrependContent()
         {
             Debug.Assert(Owner != null);
 
             SetModified();
-            PdfContent content = new PdfContent(Owner);
+            PDFContent content = new PDFContent(Owner);
             Owner._irefTable.Add(content);
             Debug.Assert(content.Reference != null);
             Elements.Insert(0, content.Reference);
@@ -101,14 +101,14 @@ namespace PDFSharp.Interop.Advanced
         /// Creates a single content stream with the bytes from the array of the content streams.
         /// This operation does not modify any of the content streams in this array.
         /// </summary>
-        public PdfContent CreateSingleContent()
+        public PDFContent CreateSingleContent()
         {
             byte[] bytes = new byte[0];
             byte[] bytes1;
             byte[] bytes2;
-            foreach (PdfItem iref in Elements)
+            foreach (PDFItem iref in Elements)
             {
-                PdfDictionary cont = (PdfDictionary)((PdfReference)iref).Value;
+                PDFDictionary cont = (PDFDictionary)((PDFReference)iref).Value;
                 bytes1 = bytes;
                 bytes2 = cont.Stream.UnfilteredValue;
                 bytes = new byte[bytes1.Length + bytes2.Length + 1];
@@ -116,15 +116,15 @@ namespace PDFSharp.Interop.Advanced
                 bytes[bytes1.Length] = (byte)'\n';
                 bytes2.CopyTo(bytes, bytes1.Length + 1);
             }
-            PdfContent content = new PdfContent(Owner);
-            content.Stream = new PdfDictionary.PdfStream(bytes, content);
+            PDFContent content = new PDFContent(Owner);
+            content.Stream = new PDFDictionary.PDFStream(bytes, content);
             return content;
         }
 
         /// <summary>
         /// Replaces the current content of the page with the specified content sequence.
         /// </summary>
-        public PdfContent ReplaceContent(CSequence cseq)
+        public PDFContent ReplaceContent(CSequence cseq)
         {
             if (cseq == null)
                 throw new ArgumentNullException(nameof(cseq));
@@ -135,11 +135,11 @@ namespace PDFSharp.Interop.Advanced
         /// <summary>
         /// Replaces the current content of the page with the specified bytes.
         /// </summary>
-        PdfContent ReplaceContent(byte[] contentBytes)
+        PDFContent ReplaceContent(byte[] contentBytes)
         {
             Debug.Assert(Owner != null);
 
-            PdfContent content = new PdfContent(Owner);
+            PDFContent content = new PDFContent(Owner);
 
             content.CreateStream(contentBytes);
 
@@ -159,7 +159,7 @@ namespace PDFSharp.Interop.Advanced
 
                 if (count == 1)
                 {
-                    PdfContent content = (PdfContent)((PdfReference)Elements[0]).Value;
+                    PDFContent content = (PDFContent)((PDFReference)Elements[0]).Value;
                     content.PreserveGraphicsState();
                 }
                 else if (count > 1)
@@ -167,7 +167,7 @@ namespace PDFSharp.Interop.Advanced
                     // Surround content streams with q/Q operations
                     byte[] value;
                     int length;
-                    PdfContent content = (PdfContent)((PdfReference)Elements[0]).Value;
+                    PDFContent content = (PDFContent)((PDFReference)Elements[0]).Value;
                     if (content != null && content.Stream != null)
                     {
                         length = content.Stream.Length;
@@ -178,7 +178,7 @@ namespace PDFSharp.Interop.Advanced
                         content.Stream.Value = value;
                         content.Elements.SetInteger("/Length", length + 2);
                     }
-                    content = (PdfContent)((PdfReference)Elements[count - 1]).Value;
+                    content = (PDFContent)((PDFReference)Elements[count - 1]).Value;
                     if (content != null && content.Stream != null)
                     {
                         length = content.Stream.Length;
@@ -195,7 +195,7 @@ namespace PDFSharp.Interop.Advanced
         }
         bool _modified;
 
-        internal override void WriteObject(PdfWriter writer)
+        internal override void WriteObject(PDFWriter writer)
         {
             // Save two bytes in PDF stream...
             if (Elements.Count == 1)
@@ -207,11 +207,11 @@ namespace PDFSharp.Interop.Advanced
         /// <summary>
         /// Gets the enumerator.
         /// </summary>
-        public new IEnumerator<PdfContent> GetEnumerator() => new PdfPageContentEnumerator(this);
+        public new IEnumerator<PDFContent> GetEnumerator() => new PDFPageContentEnumerator(this);
 
-        class PdfPageContentEnumerator : IEnumerator<PdfContent>
+        class PDFPageContentEnumerator : IEnumerator<PDFContent>
         {
-            internal PdfPageContentEnumerator(PdfContents list)
+            internal PDFPageContentEnumerator(PDFContents list)
             {
                 _contents = list;
                 _index = -1;
@@ -222,7 +222,7 @@ namespace PDFSharp.Interop.Advanced
                 if (_index < _contents.Elements.Count - 1)
                 {
                     _index++;
-                    _currentElement = (PdfContent)((PdfReference)_contents.Elements[_index]).Value;
+                    _currentElement = (PDFContent)((PDFReference)_contents.Elements[_index]).Value;
                     return true;
                 }
                 _index = _contents.Elements.Count;
@@ -237,7 +237,7 @@ namespace PDFSharp.Interop.Advanced
 
             object IEnumerator.Current => Current;
 
-            public PdfContent Current
+            public PDFContent Current
             {
                 get
                 {
@@ -252,9 +252,9 @@ namespace PDFSharp.Interop.Advanced
                 // Nothing to do.
             }
 
-            PdfContent _currentElement;
+            PDFContent _currentElement;
             int _index;
-            readonly PdfContents _contents;
+            readonly PDFContents _contents;
         }
     }
 }

@@ -40,9 +40,9 @@ namespace PDFSharp.Interop.Advanced
     /// <summary>
     /// Represents a PDF group XObject.
     /// </summary>
-    public abstract class PdfGroupAttributes : PdfDictionary
+    public abstract class PDFGroupAttributes : PDFDictionary
     {
-        internal PdfGroupAttributes(PdfDocument thisDocument)
+        internal PDFGroupAttributes(PDFDocument thisDocument)
             : base(thisDocument) => Elements.SetName(Keys.Type, "/Group");
 
         /// <summary>

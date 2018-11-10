@@ -37,16 +37,16 @@ namespace PDFSharp.Interop.AcroForms
     /// <summary>
     /// Represents the text field.
     /// </summary>
-    public sealed class PdfTextField : PdfAcroField
+    public sealed class PDFTextField : PDFAcroField
     {
         /// <summary>
-        /// Initializes a new instance of PdfTextField.
+        /// Initializes a new instance of PDFTextField.
         /// </summary>
-        internal PdfTextField(PdfDocument document)
+        internal PDFTextField(PDFDocument document)
             : base(document)
         { }
 
-        internal PdfTextField(PdfDictionary dict)
+        internal PDFTextField(PDFDictionary dict)
             : base(dict)
         { }
 
@@ -55,8 +55,8 @@ namespace PDFSharp.Interop.AcroForms
         /// </summary>
         public string Text
         {
-            get => Elements.GetString(PdfAcroField.Keys.V);
-            set { Elements.SetString(PdfAcroField.Keys.V, value); RenderAppearance(); } //HACK in PdfTextField
+            get => Elements.GetString(PDFAcroField.Keys.V);
+            set { Elements.SetString(PDFAcroField.Keys.V, value); RenderAppearance(); } //HACK in PDFTextField
         }
 
         /// <summary>
@@ -89,13 +89,13 @@ namespace PDFSharp.Interop.AcroForms
         /// </summary>
         public bool MultiLine
         {
-            get => (Flags & PdfAcroFieldFlags.Multiline) != 0;
+            get => (Flags & PDFAcroFieldFlags.Multiline) != 0;
             set
             {
                 if (value)
-                    SetFlags |= PdfAcroFieldFlags.Multiline;
+                    SetFlags |= PDFAcroFieldFlags.Multiline;
                 else
-                    SetFlags &= ~PdfAcroFieldFlags.Multiline;
+                    SetFlags &= ~PDFAcroFieldFlags.Multiline;
             }
         }
 
@@ -104,13 +104,13 @@ namespace PDFSharp.Interop.AcroForms
         /// </summary>
         public bool Password
         {
-            get => (Flags & PdfAcroFieldFlags.Password) != 0;
+            get => (Flags & PDFAcroFieldFlags.Password) != 0;
             set
             {
                 if (value)
-                    SetFlags |= PdfAcroFieldFlags.Password;
+                    SetFlags |= PDFAcroFieldFlags.Password;
                 else
-                    SetFlags &= ~PdfAcroFieldFlags.Password;
+                    SetFlags &= ~PDFAcroFieldFlags.Password;
             }
         }
 
@@ -121,16 +121,16 @@ namespace PDFSharp.Interop.AcroForms
         void RenderAppearance()
         {
 #if true_
-            PdfFormXObject xobj = new PdfFormXObject(Owner);
+            PDFFormXObject xobj = new PDFFormXObject(Owner);
             Owner.Internals.AddObject(xobj);
-            xobj.Elements["/BBox"] = new PdfLiteral("[0 0 122.653 12.707]");
-            xobj.Elements["/FormType"] = new PdfLiteral("1");
-            xobj.Elements["/Matrix"] = new PdfLiteral("[1 0 0 1 0 0]");
-            PdfDictionary res = new PdfDictionary(Owner);
+            xobj.Elements["/BBox"] = new PDFLiteral("[0 0 122.653 12.707]");
+            xobj.Elements["/FormType"] = new PDFLiteral("1");
+            xobj.Elements["/Matrix"] = new PDFLiteral("[1 0 0 1 0 0]");
+            PDFDictionary res = new PDFDictionary(Owner);
             xobj.Elements["/Resources"] = res;
-            res.Elements["/Font"] = new PdfLiteral("<< /Helv 28 0 R >> /ProcSet [/PDF /Text]");
-            xobj.Elements["/Subtype"] = new PdfLiteral("/Form");
-            xobj.Elements["/Type"] = new PdfLiteral("/XObject");
+            res.Elements["/Font"] = new PDFLiteral("<< /Helv 28 0 R >> /ProcSet [/PDF /Text]");
+            xobj.Elements["/Subtype"] = new PDFLiteral("/Form");
+            xobj.Elements["/Type"] = new PDFLiteral("/XObject");
 
             string s =
               "/Tx BMC " + '\n' +
@@ -155,11 +155,11 @@ namespace PDFSharp.Interop.AcroForms
             xobj.CreateStream(stream);
 
             // Get existing or create new appearance dictionary
-            PdfDictionary ap = Elements[PdfAnnotation.Keys.AP] as PdfDictionary;
+            PDFDictionary ap = Elements[PDFAnnotation.Keys.AP] as PDFDictionary;
             if (ap == null)
             {
-                ap = new PdfDictionary(_document);
-                Elements[PdfAnnotation.Keys.AP] = ap;
+                ap = new PDFDictionary(_document);
+                Elements[PDFAnnotation.Keys.AP] = ap;
             }
 
             // Set XRef to normal state
@@ -207,7 +207,7 @@ namespace PDFSharp.Interop.AcroForms
             //"                                                                          " + '\n' +
             //"<?xpacket end=\"w\"?>";
 
-            //PdfDictionary mdict = (PdfDictionary)_document.Internals.GetObject(new PdfObjectID(32));
+            //PDFDictionary mdict = (PDFDictionary)_document.Internals.GetObject(new PDFObjectID(32));
 
             //length = m.Length;
             //stream = new byte[length];
@@ -220,7 +220,7 @@ namespace PDFSharp.Interop.AcroForms
 
 
 #else
-            PdfRectangle rect = Elements.GetRectangle(PdfAnnotation.Keys.Rect);
+            PDFRectangle rect = Elements.GetRectangle(PDFAnnotation.Keys.Rect);
             XForm form = new XForm(_document, rect.Size);
             XGraphics gfx = XGraphics.FromForm(form);
 
@@ -233,19 +233,19 @@ namespace PDFSharp.Interop.AcroForms
                   rect.ToXRect() - rect.Location + new XPoint(2, 0), XStringFormats.TopLeft);
 
             form.DrawingFinished();
-            form.PdfForm.Elements.Add("/FormType", new PdfLiteral("1"));
+            form.PDFForm.Elements.Add("/FormType", new PDFLiteral("1"));
 
             // Get existing or create new appearance dictionary.
-            if (!(Elements[PdfAnnotation.Keys.AP] is PdfDictionary ap))
+            if (!(Elements[PDFAnnotation.Keys.AP] is PDFDictionary ap))
             {
-                ap = new PdfDictionary(_document);
-                Elements[PdfAnnotation.Keys.AP] = ap;
+                ap = new PDFDictionary(_document);
+                Elements[PDFAnnotation.Keys.AP] = ap;
             }
 
             // Set XRef to normal state
-            ap.Elements["/N"] = form.PdfForm.Reference;
+            ap.Elements["/N"] = form.PDFForm.Reference;
 
-            PdfFormXObject xobj = form.PdfForm;
+            PDFFormXObject xobj = form.PDFForm;
             string s = xobj.Stream.ToString();
             // Thank you Adobe: Without putting the content in 'EMC brackets'
             // the text is not rendered by PDF Reader 9 or higher.
@@ -264,7 +264,7 @@ namespace PDFSharp.Interop.AcroForms
         /// Predefined keys of this dictionary. 
         /// The description comes from PDF 1.4 Reference.
         /// </summary>
-        public new class Keys : PdfAcroField.Keys
+        public new class Keys : PDFAcroField.Keys
         {
             /// <summary>
             /// (Optional; inheritable) The maximum length of the field’s text, in characters.

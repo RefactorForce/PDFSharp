@@ -32,22 +32,22 @@ namespace PDFSharp.Interop
     /// <summary>
     /// This class is intended for empira internal use only and may change or drop in future releases.
     /// </summary>
-    public class PdfCustomValue : PdfDictionary
+    public class PDFCustomValue : PDFDictionary
     {
         /// <summary>
         /// This function is intended for empira internal use only.
         /// </summary>
-        public PdfCustomValue() => CreateStream(new byte[] { });
+        public PDFCustomValue() => CreateStream(new byte[] { });
 
         /// <summary>
         /// This function is intended for empira internal use only.
         /// </summary>
-        public PdfCustomValue(byte[] bytes) => CreateStream(bytes);
+        public PDFCustomValue(byte[] bytes) => CreateStream(bytes);
 
-        internal PdfCustomValue(PdfDocument document)
+        internal PDFCustomValue(PDFDocument document)
             : base(document) => CreateStream(new byte[] { });
 
-        internal PdfCustomValue(PdfDictionary dict)
+        internal PDFCustomValue(PDFDictionary dict)
             : base(dict)
         {
             // TODO: uncompress stream
@@ -56,7 +56,7 @@ namespace PDFSharp.Interop
         /// <summary>
         /// This property is intended for empira internal use only.
         /// </summary>
-        public PdfCustomValueCompressionMode CompressionMode;
+        public PDFCustomValueCompressionMode CompressionMode;
 
         /// <summary>
         /// This property is intended for empira internal use only.

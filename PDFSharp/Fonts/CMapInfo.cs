@@ -102,9 +102,9 @@ namespace PDFSharp.Fonts
             for (int idx = 0; idx < 256 - 32; idx++)
                 ansi[idx] = (byte)(idx + 32);
 #if EDF_CORE
-            string text = null; // PdfEncoders.WinAnsiEncoding.GetString(ansi, 0, ansi.Length);
+            string text = null; // PDFEncoders.WinAnsiEncoding.GetString(ansi, 0, ansi.Length);
 #else
-            string text = PdfEncoders.WinAnsiEncoding.GetString(ansi, 0, ansi.Length);
+            string text = PDFEncoders.WinAnsiEncoding.GetString(ansi, 0, ansi.Length);
 #endif
             AddChars(text);
         }

@@ -36,7 +36,7 @@ namespace PDFSharp.Interop.Annotations
     /// <summary>
     /// Represents a link annotation.
     /// </summary>
-    public sealed class PdfLinkAnnotation : PdfAnnotation
+    public sealed class PDFLinkAnnotation : PDFAnnotation
     {
         // Just a hack to make MigraDoc work with this code.
         enum LinkType
@@ -45,22 +45,22 @@ namespace PDFSharp.Interop.Annotations
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfLinkAnnotation"/> class.
+        /// Initializes a new instance of the <see cref="PDFLinkAnnotation"/> class.
         /// </summary>
-        public PdfLinkAnnotation()
+        public PDFLinkAnnotation()
         {
             _linkType = LinkType.None;
-            Elements.SetName(PdfAnnotation.Keys.Subtype, "/Link");
+            Elements.SetName(PDFAnnotation.Keys.Subtype, "/Link");
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfLinkAnnotation"/> class.
+        /// Initializes a new instance of the <see cref="PDFLinkAnnotation"/> class.
         /// </summary>
-        public PdfLinkAnnotation(PdfDocument document)
+        public PDFLinkAnnotation(PDFDocument document)
             : base(document)
         {
             _linkType = LinkType.None;
-            Elements.SetName(PdfAnnotation.Keys.Subtype, "/Link");
+            Elements.SetName(PDFAnnotation.Keys.Subtype, "/Link");
         }
 
         /// <summary>
@@ -68,12 +68,12 @@ namespace PDFSharp.Interop.Annotations
         /// </summary>
         /// <param name="rect">The link area in default page coordinates.</param>
         /// <param name="destinationPage">The one-based destination page number.</param>
-        public static PdfLinkAnnotation CreateDocumentLink(PdfRectangle rect, int destinationPage)
+        public static PDFLinkAnnotation CreateDocumentLink(PDFRectangle rect, int destinationPage)
         {
             if (destinationPage < 1)
                 throw new ArgumentException("Invalid destination page in call to CreateDocumentLink: page number is one-based and must be 1 or higher.", "destinationPage");
 
-            PdfLinkAnnotation link = new PdfLinkAnnotation
+            PDFLinkAnnotation link = new PDFLinkAnnotation
             {
                 _linkType = LinkType.Document,
                 Rectangle = rect,
@@ -88,9 +88,9 @@ namespace PDFSharp.Interop.Annotations
         /// <summary>
         /// Creates a link to the web.
         /// </summary>
-        public static PdfLinkAnnotation CreateWebLink(PdfRectangle rect, string url)
+        public static PDFLinkAnnotation CreateWebLink(PDFRectangle rect, string url)
         {
-            PdfLinkAnnotation link = new PdfLinkAnnotation
+            PDFLinkAnnotation link = new PDFLinkAnnotation
             {
                 _linkType = LinkType.Web,
                 Rectangle = rect,
@@ -102,9 +102,9 @@ namespace PDFSharp.Interop.Annotations
         /// <summary>
         /// Creates a link to a file.
         /// </summary>
-        public static PdfLinkAnnotation CreateFileLink(PdfRectangle rect, string fileName)
+        public static PDFLinkAnnotation CreateFileLink(PDFRectangle rect, string fileName)
         {
-            PdfLinkAnnotation link = new PdfLinkAnnotation
+            PDFLinkAnnotation link = new PDFLinkAnnotation
             {
                 _linkType = LinkType.File,
                 // TODO: Adjust bleed box here (if possible)
@@ -114,9 +114,9 @@ namespace PDFSharp.Interop.Annotations
             return link;
         }
 
-        internal override void WriteObject(PdfWriter writer)
+        internal override void WriteObject(PDFWriter writer)
         {
-            PdfPage dest = null;
+            PDFPage dest = null;
             //pdf.AppendFormat(CultureInfo.InvariantCulture,
             //  "{0} 0 obj\n<<\n/Type/Annot\n/Subtype/Link\n" +
             //  "/Rect[{1} {2} {3} {4}]\n/BS<</Type/Border>>\n/Border[0 0 0]\n/C[0 0 0]\n",
@@ -127,12 +127,12 @@ namespace PDFSharp.Interop.Annotations
             // "If neither the Border nor the BS entry is present, the border is drawn as a solid line with a width of 1 point."
             // After this issue was fixed in newer Reader versions older PDFsharp created documents show an ugly solid border.
             // The following hack fixes this by specifying a 0 width border.
-            if (Elements[PdfAnnotation.Keys.BS] == null)
-                Elements[PdfAnnotation.Keys.BS] = new PdfLiteral("<</Type/Border/W 0>>");
+            if (Elements[PDFAnnotation.Keys.BS] == null)
+                Elements[PDFAnnotation.Keys.BS] = new PDFLiteral("<</Type/Border/W 0>>");
 
             // May be superfluous. See comment above.
-            if (Elements[PdfAnnotation.Keys.Border] == null)
-                Elements[PdfAnnotation.Keys.Border] = new PdfLiteral("[0 0 0]");
+            if (Elements[PDFAnnotation.Keys.Border] == null)
+                Elements[PDFAnnotation.Keys.Border] = new PDFLiteral("[0 0 0]");
 
             switch (_linkType)
             {
@@ -147,21 +147,21 @@ namespace PDFSharp.Interop.Annotations
                     destIndex--;
                     dest = Owner.Pages[destIndex];
                     //pdf.AppendFormat("/Dest[{0} 0 R/XYZ null null 0]\n", dest.ObjectID);
-                    Elements[Keys.Dest] = new PdfLiteral("[{0} 0 R/XYZ null null 0]", dest.ObjectNumber);
+                    Elements[Keys.Dest] = new PDFLiteral("[{0} 0 R/XYZ null null 0]", dest.ObjectNumber);
                     break;
 
                 case LinkType.Web:
-                    //pdf.AppendFormat("/A<</S/URI/URI{0}>>\n", PdfEncoders.EncodeAsLiteral(url));
-                    Elements[PdfAnnotation.Keys.A] = new PdfLiteral("<</S/URI/URI{0}>>", //PdfEncoders.EncodeAsLiteral(url));
-                        PdfEncoders.ToStringLiteral(_url, PdfStringEncoding.WinAnsiEncoding, writer.SecurityHandler));
+                    //pdf.AppendFormat("/A<</S/URI/URI{0}>>\n", PDFEncoders.EncodeAsLiteral(url));
+                    Elements[PDFAnnotation.Keys.A] = new PDFLiteral("<</S/URI/URI{0}>>", //PDFEncoders.EncodeAsLiteral(url));
+                        PDFEncoders.ToStringLiteral(_url, PDFStringEncoding.WinAnsiEncoding, writer.SecurityHandler));
                     break;
 
                 case LinkType.File:
                     //pdf.AppendFormat("/A<</Type/Action/S/Launch/F<</Type/Filespec/F{0}>> >>\n", 
-                    //  PdfEncoders.EncodeAsLiteral(url));
-                    Elements[PdfAnnotation.Keys.A] = new PdfLiteral("<</Type/Action/S/Launch/F<</Type/Filespec/F{0}>> >>",
-                        //PdfEncoders.EncodeAsLiteral(url));
-                        PdfEncoders.ToStringLiteral(_url, PdfStringEncoding.WinAnsiEncoding, writer.SecurityHandler));
+                    //  PDFEncoders.EncodeAsLiteral(url));
+                    Elements[PDFAnnotation.Keys.A] = new PDFLiteral("<</Type/Action/S/Launch/F<</Type/Filespec/F{0}>> >>",
+                        //PDFEncoders.EncodeAsLiteral(url));
+                        PDFEncoders.ToStringLiteral(_url, PDFStringEncoding.WinAnsiEncoding, writer.SecurityHandler));
                     break;
             }
             base.WriteObject(writer);
@@ -170,7 +170,7 @@ namespace PDFSharp.Interop.Annotations
         /// <summary>
         /// Predefined keys of this dictionary.
         /// </summary>
-        internal new class Keys : PdfAnnotation.Keys
+        internal new class Keys : PDFAnnotation.Keys
         {
             //  /// <summary>
             //  /// (Required) The type of annotation that this dictionary describes;

@@ -38,18 +38,18 @@ namespace PDFSharp.Interop
     /// Represents a direct unsigned integer value.
     /// </summary>
     [DebuggerDisplay("({Value})")]
-    public sealed class PdfUInteger : PdfNumber, IConvertible
+    public sealed class PDFUInteger : PDFNumber, IConvertible
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfUInteger"/> class.
+        /// Initializes a new instance of the <see cref="PDFUInteger"/> class.
         /// </summary>
-        public PdfUInteger()
+        public PDFUInteger()
         { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfUInteger"/> class.
+        /// Initializes a new instance of the <see cref="PDFUInteger"/> class.
         /// </summary>
-        public PdfUInteger(uint value) => Value = value;
+        public PDFUInteger(uint value) => Value = value;
 
         /// <summary>
         /// Gets the value as integer.
@@ -69,7 +69,7 @@ namespace PDFSharp.Interop
         /// <summary>
         /// Writes the integer as string.
         /// </summary>
-        internal override void WriteObject(PdfWriter writer) => writer.Write(this);
+        internal override void WriteObject(PDFWriter writer) => writer.Write(this);
 
         #region IConvertible Members
 
@@ -92,7 +92,7 @@ namespace PDFSharp.Interop
         /// Returns an undefined DateTime structure.
         /// </summary>
         public DateTime ToDateTime(IFormatProvider provider) =>
-            // TODO:  Add PdfUInteger.ToDateTime implementation
+            // TODO:  Add PDFUInteger.ToDateTime implementation
             new DateTime();
 
         /// <summary>
@@ -154,7 +154,7 @@ namespace PDFSharp.Interop
         /// Returns null.
         /// </summary>
         public object ToType(Type conversionType, IFormatProvider provider) =>
-            // TODO:  Add PdfUInteger.ToType implementation
+            // TODO:  Add PDFUInteger.ToType implementation
             null;
 
         /// <summary>

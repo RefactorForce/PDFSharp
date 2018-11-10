@@ -35,7 +35,7 @@ namespace PDFSharp.Interop.Security
     /// Specifies which operations are permitted when the document is opened with user access.
     /// </summary>
     [Flags]
-    internal enum PdfUserAccessPermission
+    internal enum PDFUserAccessPermission
     {
         /// <summary>
         /// Permits everything. This is the default value.

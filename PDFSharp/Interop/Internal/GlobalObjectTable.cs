@@ -40,7 +40,7 @@ namespace PDFSharp.Interop.Internal
         public GlobalObjectTable_not_in_use()
         { }
 
-        public void AttatchDocument(PdfDocument.DocumentHandle handle)
+        public void AttatchDocument(PDFDocument.DocumentHandle handle)
         {
             lo ck (_documentHandles)
             {
@@ -48,7 +48,7 @@ namespace PDFSharp.Interop.Internal
             }
         }
 
-        public void DetatchDocument(PdfDocument.DocumentHandle handle)
+        public void DetatchDocument(PDFDocument.DocumentHandle handle)
         {
             lo ck (_documentHandles)
             {
@@ -56,9 +56,9 @@ namespace PDFSharp.Interop.Internal
                 int count = _documentHandles.Count;
                 for (int idx = 0; idx < count; idx++)
                 {
-                    if (((PdfDocument.DocumentHandle)_documentHandles[idx]).IsAlive)
+                    if (((PDFDocument.DocumentHandle)_documentHandles[idx]).IsAlive)
                     {
-                        PdfDocument target = ((PdfDocument.DocumentHandle)_documentHandles[idx]).Target;
+                        PDFDocument target = ((PDFDocument.DocumentHandle)_documentHandles[idx]).Target;
                         if (target != null)
                             target.OnExternalDocumentFinalized(handle);
                     }
@@ -67,7 +67,7 @@ namespace PDFSharp.Interop.Internal
                 // Clean up table
                 for (int idx = 0; idx < _documentHandles.Count; idx++)
                 {
-                    PdfDocument target = ((PdfDocument.DocumentHandle)_documentHandles[idx]).Target;
+                    PDFDocument target = ((PDFDocument.DocumentHandle)_documentHandles[idx]).Target;
                     if (target == null)
                     {
                         _documentHandles.RemoveAt(idx);
@@ -85,14 +85,14 @@ namespace PDFSharp.Interop.Internal
             //    int count = documents.Count;
             //    for (int idx = 0; idx < count; idx++)
             //    {
-            //      PdfDocument target = ((WeakReference)documents[idx]).Target as PdfDocument;
+            //      PDFDocument target = ((WeakReference)documents[idx]).Target as PDFDocument;
             //      if (target != null)
             //        target.OnExternalDocumentFinalized(document);
             //    }
 
             //    for (int idx = 0; idx < documents.Count; idx++)
             //    {
-            //      PdfDocument target = ((WeakReference)documents[idx]).Target as PdfDocument;
+            //      PDFDocument target = ((WeakReference)documents[idx]).Target as PDFDocument;
             //      if (target == null)
             //      {
             //        documents.RemoveAt(idx);
@@ -103,12 +103,12 @@ namespace PDFSharp.Interop.Internal
             //}
         }
 
-        //int IndexOf(PdfDocument.Handle handle)
+        //int IndexOf(PDFDocument.Handle handle)
         //{
         //  int count = documents.Count;
         //  for (int idx = 0; idx < count; idx++)
         //  {
-        //    if ((PdfDocument.Handle)documents[idx] == handle)
+        //    if ((PDFDocument.Handle)documents[idx] == handle)
         //      return idx;
         //    //if (Object.ReferenceEquals(((WeakReference)documents[idx]).Target, document))
         //    //  return idx;

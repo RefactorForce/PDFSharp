@@ -54,7 +54,7 @@ namespace PDFSharp.Fonts.OpenType
         /// <summary>
         /// New...
         /// </summary>
-        public OpenTypeDescriptor(string fontDescriptorKey, string name, XFontStyle stlye, OpenTypeFontface fontface, XPdfFontOptions options)
+        public OpenTypeDescriptor(string fontDescriptorKey, string name, XFontStyle stlye, OpenTypeFontface fontface, XPDFFontOptions options)
             : base(fontDescriptorKey)
         {
             FontFace = fontface;
@@ -217,9 +217,9 @@ namespace PDFSharp.Fonts.OpenType
             //flags = image.
 
 #if !EDF_CORE
-            Encoding ansi = PdfEncoders.WinAnsiEncoding; // System.Text.Encoding.Default;
+            Encoding ansi = PDFEncoders.WinAnsiEncoding; // System.Text.Encoding.Default;
 #else
-            Encoding ansi = null; //$$$ PdfEncoders.WinAnsiEncoding; // System.Text.Encoding.Default;
+            Encoding ansi = null; //$$$ PDFEncoders.WinAnsiEncoding; // System.Text.Encoding.Default;
 #endif
 
             Encoding unicode = Encoding.Unicode;
@@ -262,7 +262,7 @@ namespace PDFSharp.Fonts.OpenType
                     ch = (char)(ch | (FontFace.os2.usFirstCharIndex & 0xFF00));  // @@@ refactor
                 }
                 int glyphIndex = CharCodeToGlyphIndex(ch);
-                Widths[idx] = GlyphIndexToPdfWidth(glyphIndex);
+                Widths[idx] = GlyphIndexToPDFWidth(glyphIndex);
             }
         }
         public int[] Widths;
@@ -285,7 +285,7 @@ namespace PDFSharp.Fonts.OpenType
         /// </summary>
         public override bool IsItalicFace => FontFace.os2.IsItalic;
 
-        internal int DesignUnitsToPdf(double value) => (int)Math.Round(value * 1000.0 / FontFace.head.unitsPerEm);
+        internal int DesignUnitsToPDF(double value) => (int)Math.Round(value * 1000.0 / FontFace.head.unitsPerEm);
 
         /// <summary>
         /// Maps a unicode to the index of the corresponding glyph.
@@ -327,7 +327,7 @@ namespace PDFSharp.Fonts.OpenType
         /// <summary>
         /// Converts the width of a glyph identified by its index to PDF design units.
         /// </summary>
-        public int GlyphIndexToPdfWidth(int glyphIndex)
+        public int GlyphIndexToPDFWidth(int glyphIndex)
         {
             try
             {
@@ -352,10 +352,10 @@ namespace PDFSharp.Fonts.OpenType
             }
         }
 
-        public int PdfWidthFromCharCode(char ch)
+        public int PDFWidthFromCharCode(char ch)
         {
             int idx = CharCodeToGlyphIndex(ch);
-            int width = GlyphIndexToPdfWidth(idx);
+            int width = GlyphIndexToPDFWidth(idx);
             return width;
         }
 

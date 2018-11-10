@@ -34,11 +34,11 @@ namespace PDFSharp.Interop
     /// <summary>
     /// Represents a indirect reference that is not in the cross reference table.
     /// </summary>
-    public sealed class PdfNull : PdfItem
+    public sealed class PDFNull : PDFItem
     {
         // Reference: 3.2.8  Null Object / Page 63
 
-        PdfNull()
+        PDFNull()
         { }
 
         /// <summary>
@@ -49,13 +49,13 @@ namespace PDFSharp.Interop
         /// </returns>
         public override string ToString() => "null";
 
-        internal override void WriteObject(PdfWriter writer) =>
+        internal override void WriteObject(PDFWriter writer) =>
             // Implementet because it must be overridden.
             writer.WriteRaw(" null ");
 
         /// <summary>
         /// The only instance of this class.
         /// </summary>
-        public static readonly PdfNull Value = new PdfNull();
+        public static readonly PDFNull Value = new PDFNull();
     }
 }

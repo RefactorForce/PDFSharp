@@ -54,7 +54,7 @@ namespace PDFSharp.Interop.IO
         public Lexer(Stream pdfInputStream)
         {
             _pdfSteam = pdfInputStream;
-            PdfLength = (int)_pdfSteam.Length;
+            PDFLength = (int)_pdfSteam.Length;
             _idxChar = 0;
             Position = 0;
         }
@@ -202,7 +202,7 @@ namespace PDFSharp.Interop.IO
             _pdfSteam.Position = position;
             byte[] bytes = new byte[length];
             _pdfSteam.Read(bytes, 0, length);
-            return PdfEncoders.RawEncoding.GetString(bytes, 0, bytes.Length);
+            return PDFEncoders.RawEncoding.GetString(bytes, 0, bytes.Length);
         }
 
         /// <summary>
@@ -301,7 +301,7 @@ namespace PDFSharp.Interop.IO
             // Got an AutoCAD PDF file that contains this: /C 264584027963392
             // Best we can do is to convert it to real value.
             return Symbol.Real;
-            //thr ow new PdfReaderException("Number exceeds integer range.");
+            //thr ow new PDFReaderException("Number exceeds integer range.");
         }
 
         public Symbol ScanNumberOrReference()
@@ -597,7 +597,7 @@ namespace PDFSharp.Interop.IO
         /// </summary>
         internal char ScanNextChar(bool handleCRLF)
         {
-            if (PdfLength <= _idxChar)
+            if (PDFLength <= _idxChar)
             {
                 _currChar = Chars.EOF;
                 _nextChar = Chars.EOF;
@@ -732,7 +732,7 @@ namespace PDFSharp.Interop.IO
         {
             const int range = 20;
             int start = Math.Max(Position - range, 0);
-            int length = Math.Min(2 * range, PdfLength - start);
+            int length = Math.Min(2 * range, PDFLength - start);
             long posOld = _pdfSteam.Position;
             _pdfSteam.Position = start;
             byte[] bytes = new byte[length];
@@ -808,14 +808,14 @@ namespace PDFSharp.Interop.IO
         /// <summary>
         /// Interprets current token as object ID.
         /// </summary>
-        public PdfObjectID TokenToObjectID
+        public PDFObjectID TokenToObjectID
         {
             get
             {
                 string[] numbers = Token.Split('|');
                 int objectNumber = Int32.Parse(numbers[0]);
                 int generationNumber = Int32.Parse(numbers[1]);
-                return new PdfObjectID(objectNumber, generationNumber);
+                return new PDFObjectID(objectNumber, generationNumber);
             }
         }
 
@@ -862,7 +862,7 @@ namespace PDFSharp.Interop.IO
         /// <summary>
         /// Gets the length of the PDF output.
         /// </summary>
-        public int PdfLength { get; }
+        public int PDFLength { get; }
 
         int _idxChar;
         char _currChar;

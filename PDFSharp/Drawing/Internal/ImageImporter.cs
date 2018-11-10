@@ -54,7 +54,7 @@ namespace PDFSharp.Drawing.Internal
         /// <summary>
         /// Imports the image.
         /// </summary>
-        public ImportedImage ImportImage(Stream stream, PdfDocument document)
+        public ImportedImage ImportImage(Stream stream, PDFDocument document)
         {
             StreamReaderHelper helper = new StreamReaderHelper(stream);
 
@@ -73,7 +73,7 @@ namespace PDFSharp.Drawing.Internal
         /// <summary>
         /// Imports the image.
         /// </summary>
-        public ImportedImage ImportImage(string filename, PdfDocument document)
+        public ImportedImage ImportImage(string filename, PDFDocument document)
         {
             ImportedImage ii;
             using (Stream fs = File.OpenRead(filename))

@@ -39,13 +39,13 @@ namespace PDFSharp.Interop.Advanced
     /// <summary>
     /// Represents a ToUnicode map for composite font.
     /// </summary>
-    internal sealed class PdfToUnicodeMap : PdfDictionary
+    internal sealed class PDFToUnicodeMap : PDFDictionary
     {
-        public PdfToUnicodeMap(PdfDocument document)
+        public PDFToUnicodeMap(PDFDocument document)
             : base(document)
         { }
 
-        public PdfToUnicodeMap(PdfDocument document, CMapInfo cmapInfo)
+        public PDFToUnicodeMap(PDFDocument document, CMapInfo cmapInfo)
             : base(document) => CMapInfo = cmapInfo;
 
         /// <summary>
@@ -117,7 +117,7 @@ namespace PDFSharp.Interop.Advanced
                 Elements.SetName("/Filter", "/FlateDecode");
                 bytes = Filtering.FlateDecode.Encode(bytes, _document.Options.FlateEncodeMode);
             }
-            //PdfStream stream = CreateStream(bytes);
+            //PDFStream stream = CreateStream(bytes);
             else
             {
                 Elements.Remove("/Filter");
@@ -128,11 +128,11 @@ namespace PDFSharp.Interop.Advanced
             else
             {
                 Stream.Value = bytes;
-                Elements.SetInteger(PdfStream.Keys.Length, Stream.Length);
+                Elements.SetInteger(PDFStream.Keys.Length, Stream.Length);
             }
         }
 
-        public sealed class Keys : PdfStream.Keys
+        public sealed class Keys : PDFStream.Keys
         {
             // No new keys.
         }

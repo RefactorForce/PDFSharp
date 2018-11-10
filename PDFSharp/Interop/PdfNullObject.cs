@@ -35,21 +35,21 @@ namespace PDFSharp.Interop
     /// Represents an indirect null value. This type is not used by PDFsharp, but at least
     /// one tool from Adobe creates PDF files with a null object.
     /// </summary>
-    public sealed class PdfNullObject : PdfObject
+    public sealed class PDFNullObject : PDFObject
     {
         // Reference: 3.2.8  Null Object / Page 63
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfNullObject"/> class.
+        /// Initializes a new instance of the <see cref="PDFNullObject"/> class.
         /// </summary>
-        public PdfNullObject()
+        public PDFNullObject()
         { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfNullObject"/> class.
+        /// Initializes a new instance of the <see cref="PDFNullObject"/> class.
         /// </summary>
         /// <param name="document">The document.</param>
-        public PdfNullObject(PdfDocument document)
+        public PDFNullObject(PDFDocument document)
             : base(document)
         { }
 
@@ -61,7 +61,7 @@ namespace PDFSharp.Interop
         /// <summary>
         /// Writes the keyword «null».
         /// </summary>
-        internal override void WriteObject(PdfWriter writer)
+        internal override void WriteObject(PDFWriter writer)
         {
             writer.WriteBeginObject(this);
             writer.WriteRaw(" null ");

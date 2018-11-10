@@ -61,7 +61,7 @@ namespace PDFSharp
         /// </summary>
         UserOrOwnerPasswordRequired,
 
-        // ----- PdfParser Messages -------------------------------------------------------------------
+        // ----- PDFParser Messages -------------------------------------------------------------------
 
         /// <summary>
         /// PSMsgID.

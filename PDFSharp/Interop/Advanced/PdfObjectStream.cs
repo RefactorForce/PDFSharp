@@ -38,20 +38,20 @@ namespace PDFSharp.Interop.Advanced
     /// Represents an object stream that contains compressed objects.
     /// PDF 1.5.
     /// </summary>
-    public class PdfObjectStream : PdfDictionary
+    public class PDFObjectStream : PDFDictionary
     {
         // Reference: 3.4.6  Object Streams / Page 100
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfObjectStream"/> class.
+        /// Initializes a new instance of the <see cref="PDFObjectStream"/> class.
         /// </summary>
-        public PdfObjectStream(PdfDocument document)
+        public PDFObjectStream(PDFDocument document)
             : base(document)
         {
 #if DEBUG && CORE
-            if (Internal.PdfDiagnostics.TraceObjectStreams)
+            if (Internal.PDFDiagnostics.TraceObjectStreams)
             {
-                Debug.WriteLine("PdfObjectStream(document) created.");
+                Debug.WriteLine("PDFObjectStream(document) created.");
             }
 #endif
         }
@@ -59,7 +59,7 @@ namespace PDFSharp.Interop.Advanced
         /// <summary>
         /// Initializes a new instance from an existing dictionary. Used for object type transformation.
         /// </summary>
-        internal PdfObjectStream(PdfDictionary dict)
+        internal PDFObjectStream(PDFDictionary dict)
             : base(dict)
         {
             int n = Elements.GetInteger(Keys.N);
@@ -70,9 +70,9 @@ namespace PDFSharp.Interop.Advanced
             _header = parser.ReadObjectStreamHeader(n, first);
 
 #if DEBUG && CORE
-            if (Internal.PdfDiagnostics.TraceObjectStreams)
+            if (Internal.PDFDiagnostics.TraceObjectStreams)
             {
-                Debug.WriteLine(String.Format("PdfObjectStream(document) created. Header item count: {0}", _header.GetLength(0)));
+                Debug.WriteLine(String.Format("PDFObjectStream(document) created. Header item count: {0}", _header.GetLength(0)));
             }
 #endif
         }
@@ -80,7 +80,7 @@ namespace PDFSharp.Interop.Advanced
         /// <summary>
         /// Reads the compressed object with the specified index.
         /// </summary>
-        internal void ReadReferences(PdfCrossReferenceTable xrefTable)
+        internal void ReadReferences(PDFCrossReferenceTable xrefTable)
         {
             ////// Create parser for stream.
             ////Parser parser = new Parser(_document, new MemoryStream(Stream.Value));
@@ -89,10 +89,10 @@ namespace PDFSharp.Interop.Advanced
                 int objectNumber = _header[idx][0];
                 int offset = _header[idx][1];
 
-                PdfObjectID objectID = new PdfObjectID(objectNumber);
+                PDFObjectID objectID = new PDFObjectID(objectNumber);
 
                 // HACK: -1 indicates compressed object.
-                PdfReference iref = new PdfReference(objectID, -1);
+                PDFReference iref = new PDFReference(objectID, -1);
                 ////iref.ObjectID = objectID;
                 ////iref.Value = xrefStream;
                 if (!xrefTable.Contains(iref.ObjectID))
@@ -109,7 +109,7 @@ namespace PDFSharp.Interop.Advanced
         /// <summary>
         /// Reads the compressed object with the specified index.
         /// </summary>
-        internal PdfReference ReadCompressedObject(int index)
+        internal PDFReference ReadCompressedObject(int index)
         {
             Parser parser = new Parser(_document, new MemoryStream(Stream.Value));
             int objectNumber = _header[index][0];
@@ -128,7 +128,7 @@ namespace PDFSharp.Interop.Advanced
         /// <summary>
         /// Predefined keys common to all font dictionaries.
         /// </summary>
-        public class Keys : PdfStream.Keys
+        public class Keys : PDFStream.Keys
         {
             // Reference: TABLE 3.14  Additional entries specific to an object stream dictionary / Page 101
 

@@ -42,31 +42,31 @@ namespace PDFSharp.Interop
     /// Represents a PDF array object.
     /// </summary>
     [DebuggerDisplay("{DebuggerDisplay}")]
-    public class PdfArray : PdfObject, IEnumerable<PdfItem>
+    public class PDFArray : PDFObject, IEnumerable<PDFItem>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfArray"/> class.
+        /// Initializes a new instance of the <see cref="PDFArray"/> class.
         /// </summary>
-        public PdfArray()
+        public PDFArray()
         { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfArray"/> class.
+        /// Initializes a new instance of the <see cref="PDFArray"/> class.
         /// </summary>
         /// <param name="document">The document.</param>
-        public PdfArray(PdfDocument document)
+        public PDFArray(PDFDocument document)
             : base(document)
         { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfArray"/> class.
+        /// Initializes a new instance of the <see cref="PDFArray"/> class.
         /// </summary>
         /// <param name="document">The document.</param>
         /// <param name="items">The items.</param>
-        public PdfArray(PdfDocument document, params PdfItem[] items)
+        public PDFArray(PDFDocument document, params PDFItem[] items)
             : base(document)
         {
-            foreach (PdfItem item in items)
+            foreach (PDFItem item in items)
                 Elements.Add(item);
         }
 
@@ -74,7 +74,7 @@ namespace PDFSharp.Interop
         /// Initializes a new instance from an existing dictionary. Used for object type transformation.
         /// </summary>
         /// <param name="array">The array.</param>
-        protected PdfArray(PdfArray array)
+        protected PDFArray(PDFArray array)
             : base(array)
         {
             if (array._elements != null)
@@ -85,22 +85,22 @@ namespace PDFSharp.Interop
         /// Creates a copy of this array. Direct elements are deep copied.
         /// Indirect references are not modified.
         /// </summary>
-        public new PdfArray Clone() => (PdfArray)Copy();
+        public new PDFArray Clone() => (PDFArray)Copy();
 
         /// <summary>
         /// Implements the copy mechanism.
         /// </summary>
         protected override object Copy()
         {
-            PdfArray array = (PdfArray)base.Copy();
+            PDFArray array = (PDFArray)base.Copy();
             if (array._elements != null)
             {
                 array._elements = array._elements.Clone();
                 int count = array._elements.Count;
                 for (int idx = 0; idx < count; idx++)
                 {
-                    PdfItem item = array._elements[idx];
-                    if (item is PdfObject)
+                    PDFItem item = array._elements[idx];
+                    if (item is PDFObject)
                         array._elements[idx] = item.Clone();
                 }
             }
@@ -115,7 +115,7 @@ namespace PDFSharp.Interop
         /// <summary>
         /// Returns an enumerator that iterates through a collection.
         /// </summary>
-        public virtual IEnumerator<PdfItem> GetEnumerator() => Elements.GetEnumerator();
+        public virtual IEnumerator<PDFItem> GetEnumerator() => Elements.GetEnumerator();
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
@@ -133,33 +133,33 @@ namespace PDFSharp.Interop
             return pdf.ToString();
         }
 
-        internal override void WriteObject(PdfWriter writer)
+        internal override void WriteObject(PDFWriter writer)
         {
             writer.WriteBeginObject(this);
             int count = Elements.Count;
             for (int idx = 0; idx < count; idx++)
             {
-                PdfItem value = Elements[idx];
+                PDFItem value = Elements[idx];
                 value.WriteObject(writer);
             }
             writer.WriteEndObject();
         }
 
         /// <summary>
-        /// Represents the elements of an PdfArray.
+        /// Represents the elements of an PDFArray.
         /// </summary>
-        public sealed class ArrayElements : IList<PdfItem>, ICloneable
+        public sealed class ArrayElements : IList<PDFItem>, ICloneable
         {
-            internal ArrayElements(PdfArray array)
+            internal ArrayElements(PDFArray array)
             {
-                _elements = new List<PdfItem>();
+                _elements = new List<PDFItem>();
                 _ownerArray = array;
             }
 
             object ICloneable.Clone()
             {
                 ArrayElements elements = (ArrayElements)MemberwiseClone();
-                elements._elements = new List<PdfItem>(elements._elements);
+                elements._elements = new List<PDFItem>(elements._elements);
                 elements._ownerArray = null;
                 return elements;
             }
@@ -172,7 +172,7 @@ namespace PDFSharp.Interop
             /// <summary>
             /// Moves this instance to another array during object type transformation.
             /// </summary>
-            internal void ChangeOwner(PdfArray array)
+            internal void ChangeOwner(PDFArray array)
             {
                 if (_ownerArray != null)
                 {
@@ -201,10 +201,10 @@ namespace PDFSharp.Interop
                 if (obj == null)
                     return false;
 
-                if (obj is PdfBoolean boolean)
+                if (obj is PDFBoolean boolean)
                     return boolean.Value;
 
-                if (obj is PdfBooleanObject booleanObject)
+                if (obj is PDFBooleanObject booleanObject)
                     return booleanObject.Value;
 
                 throw new InvalidCastException("GetBoolean: Object is not a boolean.");
@@ -225,10 +225,10 @@ namespace PDFSharp.Interop
                 if (obj == null)
                     return 0;
 
-                if (obj is PdfInteger integer)
+                if (obj is PDFInteger integer)
                     return integer.Value;
 
-                if (obj is PdfIntegerObject integerObject)
+                if (obj is PDFIntegerObject integerObject)
                     return integerObject.Value;
 
                 throw new InvalidCastException("GetInteger: Object is not an integer.");
@@ -249,16 +249,16 @@ namespace PDFSharp.Interop
                 if (obj == null)
                     return 0;
 
-                if (obj is PdfReal real)
+                if (obj is PDFReal real)
                     return real.Value;
 
-                if (obj is PdfRealObject realObject)
+                if (obj is PDFRealObject realObject)
                     return realObject.Value;
 
-                if (obj is PdfInteger integer)
+                if (obj is PDFInteger integer)
                     return integer.Value;
 
-                if (obj is PdfIntegerObject integerObject)
+                if (obj is PDFIntegerObject integerObject)
                     return integerObject.Value;
 
                 throw new InvalidCastException("GetReal: Object is not a number.");
@@ -279,22 +279,22 @@ namespace PDFSharp.Interop
                 if (obj == null)
                     return null;
 
-                if (obj is PdfNull @null)
+                if (obj is PDFNull @null)
                     return null;
 
-                if (obj is PdfNullObject nullObject)
+                if (obj is PDFNullObject nullObject)
                     return null;
 
-                if (obj is PdfReal real)
+                if (obj is PDFReal real)
                     return real.Value;
 
-                if (obj is PdfRealObject realObject)
+                if (obj is PDFRealObject realObject)
                     return realObject.Value;
 
-                if (obj is PdfInteger integer)
+                if (obj is PDFInteger integer)
                     return integer.Value;
 
-                if (obj is PdfIntegerObject integerObject)
+                if (obj is PDFIntegerObject integerObject)
                     return integerObject.Value;
 
                 throw new InvalidCastException("GetReal: Object is not a number.");
@@ -315,10 +315,10 @@ namespace PDFSharp.Interop
                 if (obj == null)
                     return String.Empty;
 
-                if (obj is PdfString str)
+                if (obj is PDFString str)
                     return str.Value;
 
-                if (obj is PdfStringObject strObject)
+                if (obj is PDFStringObject strObject)
                     return strObject.Value;
 
                 throw new InvalidCastException("GetString: Object is not a string.");
@@ -339,11 +339,11 @@ namespace PDFSharp.Interop
                 if (obj == null)
                     return String.Empty;
 
-                PdfName name = obj as PdfName;
+                PDFName name = obj as PDFName;
                 if (name != null)
                     return name.Value;
 
-                PdfNameObject nameObject = obj as PdfNameObject;
+                PDFNameObject nameObject = obj as PDFNameObject;
                 if (nameObject != null)
                     return nameObject.Value;
 
@@ -351,56 +351,56 @@ namespace PDFSharp.Interop
             }
 
             /// <summary>
-            /// Returns the indirect object if the value at the specified index is a PdfReference.
+            /// Returns the indirect object if the value at the specified index is a PDFReference.
             /// </summary>
             [Obsolete("Use GetObject, GetDictionary, GetArray, or GetReference")]
-            public PdfObject GetIndirectObject(int index)
+            public PDFObject GetIndirectObject(int index)
             {
                 if (index < 0 || index >= Count)
                     throw new ArgumentOutOfRangeException("index", index, PSSR.IndexOutOfRange);
 
-                PdfReference reference = this[index] as PdfReference;
+                PDFReference reference = this[index] as PDFReference;
                 return reference?.Value;
             }
 
             /// <summary>
-            /// Gets the PdfObject with the specified index, or null, if no such object exists. If the index refers to
-            /// a reference, the referenced PdfObject is returned.
+            /// Gets the PDFObject with the specified index, or null, if no such object exists. If the index refers to
+            /// a reference, the referenced PDFObject is returned.
             /// </summary>
-            public PdfObject GetObject(int index)
+            public PDFObject GetObject(int index)
             {
                 if (index < 0 || index >= Count)
                     throw new ArgumentOutOfRangeException("index", index, PSSR.IndexOutOfRange);
 
-                PdfItem item = this[index];
-                return item is PdfReference reference ? reference.Value : item as PdfObject;
+                PDFItem item = this[index];
+                return item is PDFReference reference ? reference.Value : item as PDFObject;
             }
 
             /// <summary>
-            /// Gets the PdfArray with the specified index, or null, if no such object exists. If the index refers to
-            /// a reference, the referenced PdfArray is returned.
+            /// Gets the PDFArray with the specified index, or null, if no such object exists. If the index refers to
+            /// a reference, the referenced PDFArray is returned.
             /// </summary>
-            public PdfDictionary GetDictionary(int index) => GetObject(index) as PdfDictionary;
+            public PDFDictionary GetDictionary(int index) => GetObject(index) as PDFDictionary;
 
             /// <summary>
-            /// Gets the PdfArray with the specified index, or null, if no such object exists. If the index refers to
-            /// a reference, the referenced PdfArray is returned.
+            /// Gets the PDFArray with the specified index, or null, if no such object exists. If the index refers to
+            /// a reference, the referenced PDFArray is returned.
             /// </summary>
-            public PdfArray GetArray(int index) => GetObject(index) as PdfArray;
+            public PDFArray GetArray(int index) => GetObject(index) as PDFArray;
 
             /// <summary>
-            /// Gets the PdfReference with the specified index, or null, if no such object exists.
+            /// Gets the PDFReference with the specified index, or null, if no such object exists.
             /// </summary>
-            public PdfReference GetReference(int index)
+            public PDFReference GetReference(int index)
             {
-                PdfItem item = this[index];
-                return item as PdfReference;
+                PDFItem item = this[index];
+                return item as PDFReference;
             }
 
             /// <summary>
             /// Gets all items of this array.
             /// </summary>
-            public PdfItem[] Items => _elements.ToArray();
+            public PDFItem[] Items => _elements.ToArray();
 
             #region IList Members
 
@@ -413,7 +413,7 @@ namespace PDFSharp.Interop
             /// Gets or sets an item at the specified index.
             /// </summary>
             /// <value></value>
-            public PdfItem this[int index]
+            public PDFItem this[int index]
             {
                 get => _elements[index];
                 set => _elements[index] = value ?? throw new ArgumentNullException("value");
@@ -427,17 +427,17 @@ namespace PDFSharp.Interop
             /// <summary>
             /// Removes the first occurrence of a specific object from the array/>.
             /// </summary>
-            public bool Remove(PdfItem item) => _elements.Remove(item);
+            public bool Remove(PDFItem item) => _elements.Remove(item);
 
             /// <summary>
             /// Inserts the item the specified index.
             /// </summary>
-            public void Insert(int index, PdfItem value) => _elements.Insert(index, value);
+            public void Insert(int index, PDFItem value) => _elements.Insert(index, value);
 
             /// <summary>
             /// Determines whether the specified value is in the array.
             /// </summary>
-            public bool Contains(PdfItem value) => _elements.Contains(value);
+            public bool Contains(PDFItem value) => _elements.Contains(value);
 
             /// <summary>
             /// Removes all items from the array.
@@ -447,18 +447,18 @@ namespace PDFSharp.Interop
             /// <summary>
             /// Gets the index of the specified item.
             /// </summary>
-            public int IndexOf(PdfItem value) => _elements.IndexOf(value);
+            public int IndexOf(PDFItem value) => _elements.IndexOf(value);
 
             /// <summary>
             /// Appends the specified object to the array.
             /// </summary>
-            public void Add(PdfItem value)
+            public void Add(PDFItem value)
             {
                 // TODO: ??? 
-                //Debug.Assert((value is PdfObject && ((PdfObject)value).Reference == null) | !(value is PdfObject),
+                //Debug.Assert((value is PDFObject && ((PDFObject)value).Reference == null) | !(value is PDFObject),
                 //  "You try to set an indirect object directly into an array.");
 
-                if (value is PdfObject obj && obj.IsIndirect)
+                if (value is PDFObject obj && obj.IsIndirect)
                     _elements.Add(obj.Reference);
                 else
                     _elements.Add(value);
@@ -486,7 +486,7 @@ namespace PDFSharp.Interop
             /// <summary>
             /// Copies the elements of the array to the specified array.
             /// </summary>
-            public void CopyTo(PdfItem[] array, int index) => _elements.CopyTo(array, index);
+            public void CopyTo(PDFItem[] array, int index) => _elements.CopyTo(array, index);
 
             /// <summary>
             /// The current implementation return null.
@@ -498,19 +498,19 @@ namespace PDFSharp.Interop
             /// <summary>
             /// Returns an enumerator that iterates through the array.
             /// </summary>
-            public IEnumerator<PdfItem> GetEnumerator() => _elements.GetEnumerator();
+            public IEnumerator<PDFItem> GetEnumerator() => _elements.GetEnumerator();
 
             IEnumerator IEnumerable.GetEnumerator() => _elements.GetEnumerator();
 
             /// <summary>
             /// The elements of the array.
             /// </summary>
-            List<PdfItem> _elements;
+            List<PDFItem> _elements;
 
             /// <summary>
             /// The array this objects belongs to.
             /// </summary>
-            PdfArray _ownerArray;
+            PDFArray _ownerArray;
         }
 
         ArrayElements _elements;

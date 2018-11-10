@@ -36,20 +36,20 @@ namespace PDFSharp.Interop.Advanced
     /// <summary>
     /// Represents the catalog dictionary.
     /// </summary>
-    public sealed class PdfCatalog : PdfDictionary
+    public sealed class PDFCatalog : PDFDictionary
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfCatalog"/> class.
+        /// Initializes a new instance of the <see cref="PDFCatalog"/> class.
         /// </summary>
-        public PdfCatalog(PdfDocument document)
+        public PDFCatalog(PDFDocument document)
             : base(document)
         {
             Elements.SetName(Keys.Type, "/Catalog");
 
-            _version = "1.4";  // HACK in PdfCatalog
+            _version = "1.4";  // HACK in PDFCatalog
         }
 
-        internal PdfCatalog(PdfDictionary dictionary)
+        internal PDFCatalog(PDFDictionary dictionary)
             : base(dictionary)
         { }
 
@@ -87,57 +87,57 @@ namespace PDFSharp.Interop.Advanced
         /// <summary>
         /// Gets the pages collection of this document.
         /// </summary>
-        public PdfPages Pages
+        public PDFPages Pages
         {
             get
             {
                 if (_pages == null)
                 {
-                    _pages = (PdfPages)Elements.GetValue(Keys.Pages, VCF.CreateIndirect);
+                    _pages = (PDFPages)Elements.GetValue(Keys.Pages, VCF.CreateIndirect);
                     if (Owner.IsImported)
                         _pages.FlattenPageTree();
                 }
                 return _pages;
             }
         }
-        PdfPages _pages;
+        PDFPages _pages;
 
         /// <summary>
-        /// Implementation of PdfDocument.PageLayout.
+        /// Implementation of PDFDocument.PageLayout.
         /// </summary>
-        internal PdfPageLayout PageLayout
+        internal PDFPageLayout PageLayout
         {
-            get => (PdfPageLayout)Elements.GetEnumFromName(Keys.PageLayout, PdfPageLayout.SinglePage);
+            get => (PDFPageLayout)Elements.GetEnumFromName(Keys.PageLayout, PDFPageLayout.SinglePage);
             set => Elements.SetEnumAsName(Keys.PageLayout, value);
         }
 
         /// <summary>
-        /// Implementation of PdfDocument.PageMode.
+        /// Implementation of PDFDocument.PageMode.
         /// </summary>
-        internal PdfPageMode PageMode
+        internal PDFPageMode PageMode
         {
-            get => (PdfPageMode)Elements.GetEnumFromName(Keys.PageMode, PdfPageMode.UseNone);
+            get => (PDFPageMode)Elements.GetEnumFromName(Keys.PageMode, PDFPageMode.UseNone);
             set => Elements.SetEnumAsName(Keys.PageMode, value);
         }
 
         /// <summary>
-        /// Implementation of PdfDocument.ViewerPreferences.
+        /// Implementation of PDFDocument.ViewerPreferences.
         /// </summary>
-        internal PdfViewerPreferences ViewerPreferences
+        internal PDFViewerPreferences ViewerPreferences
         {
             get
             {
                 if (_viewerPreferences == null)
-                    _viewerPreferences = (PdfViewerPreferences)Elements.GetValue(Keys.ViewerPreferences, VCF.CreateIndirect);
+                    _viewerPreferences = (PDFViewerPreferences)Elements.GetValue(Keys.ViewerPreferences, VCF.CreateIndirect);
                 return _viewerPreferences;
             }
         }
-        PdfViewerPreferences _viewerPreferences;
+        PDFViewerPreferences _viewerPreferences;
 
         /// <summary>
-        /// Implementation of PdfDocument.Outlines.
+        /// Implementation of PDFDocument.Outlines.
         /// </summary>
-        internal PdfOutlineCollection Outlines
+        internal PDFOutlineCollection Outlines
         {
             get
             {
@@ -145,29 +145,29 @@ namespace PDFSharp.Interop.Advanced
                 {
                     ////// Ensure that the page tree exists.
                     ////// ReSharper disable once UnusedVariable because we need dummy to call the getter.
-                    ////PdfPages dummy = Pages;
+                    ////PDFPages dummy = Pages;
 
                     // Now create the outline item tree.
-                    _outline = (PdfOutline)Elements.GetValue(Keys.Outlines, VCF.CreateIndirect);
+                    _outline = (PDFOutline)Elements.GetValue(Keys.Outlines, VCF.CreateIndirect);
                 }
                return _outline.Outlines;
             }
         }
-        PdfOutline _outline;
+        PDFOutline _outline;
 
         /// <summary>
         /// Gets the AcroForm dictionary of this document.
         /// </summary>
-        public PdfAcroForm AcroForm
+        public PDFAcroForm AcroForm
         {
             get
             {
                 if (_acroForm == null)
-                    _acroForm = (PdfAcroForm)Elements.GetValue(Keys.AcroForm);
+                    _acroForm = (PDFAcroForm)Elements.GetValue(Keys.AcroForm);
                 return _acroForm;
             }
         }
-        PdfAcroForm _acroForm;
+        PDFAcroForm _acroForm;
 
         /// <summary>
         /// Gets or sets the language identifier specifying the natural language for all text in the document.
@@ -198,17 +198,17 @@ namespace PDFSharp.Interop.Advanced
             if (_outline != null && _outline.Outlines.Count > 0)
             {
                 if (Elements[Keys.PageMode] == null)
-                    PageMode = PdfPageMode.UseOutlines;
+                    PageMode = PDFPageMode.UseOutlines;
                 _outline.PrepareForSave();
             }
         }
 
-        internal override void WriteObject(PdfWriter writer)
+        internal override void WriteObject(PDFWriter writer)
         {
             if (_outline != null && _outline.Outlines.Count > 0)
             {
                 if (Elements[Keys.PageMode] == null)
-                    PageMode = PdfPageMode.UseOutlines;
+                    PageMode = PDFPageMode.UseOutlines;
             }
             base.WriteObject(writer);
         }
@@ -241,7 +241,7 @@ namespace PDFSharp.Interop.Advanced
             /// (Required; must be an indirect reference) The page tree node that is the root of 
             /// the document’s page tree.
             /// </summary>
-            [KeyInfo(KeyType.Dictionary | KeyType.Required | KeyType.MustBeIndirect, typeof(PdfPages))]
+            [KeyInfo(KeyType.Dictionary | KeyType.Required | KeyType.MustBeIndirect, typeof(PDFPages))]
             public const string Pages = "/Pages";
 
             /// <summary>
@@ -271,7 +271,7 @@ namespace PDFSharp.Interop.Advanced
             /// is to be displayed on the screen. If this entry is absent, applications should use
             /// their own current user preference settings.
             /// </summary>
-            [KeyInfo("1.2", KeyType.Dictionary | KeyType.Optional, typeof(PdfViewerPreferences))]
+            [KeyInfo("1.2", KeyType.Dictionary | KeyType.Optional, typeof(PDFViewerPreferences))]
             public const string ViewerPreferences = "/ViewerPreferences";
 
             /// <summary>
@@ -304,7 +304,7 @@ namespace PDFSharp.Interop.Advanced
             /// (Optional; must be an indirect reference) The outline dictionary that is the root 
             /// of the document’s outline hierarchy.
             /// </summary>
-            [KeyInfo(KeyType.Dictionary | KeyType.Optional, typeof(PdfOutline))]
+            [KeyInfo(KeyType.Dictionary | KeyType.Optional, typeof(PDFOutline))]
             public const string Outlines = "/Outlines";
 
             /// <summary>
@@ -340,7 +340,7 @@ namespace PDFSharp.Interop.Advanced
             /// <summary>
             /// (Optional; PDF 1.2) The document’s interactive form (AcroForm) dictionary.
             /// </summary>
-            [KeyInfo("1.2", KeyType.Dictionary | KeyType.Optional, typeof(PdfAcroForm))]
+            [KeyInfo("1.2", KeyType.Dictionary | KeyType.Optional, typeof(PDFAcroForm))]
             public const string AcroForm = "/AcroForm";
 
             /// <summary>

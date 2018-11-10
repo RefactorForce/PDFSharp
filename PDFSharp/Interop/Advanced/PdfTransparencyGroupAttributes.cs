@@ -32,15 +32,15 @@ namespace PDFSharp.Interop.Advanced
     /// <summary>
     /// Represents a PDF transparency group XObject.
     /// </summary>
-    public sealed class PdfTransparencyGroupAttributes : PdfGroupAttributes
+    public sealed class PDFTransparencyGroupAttributes : PDFGroupAttributes
     {
-        internal PdfTransparencyGroupAttributes(PdfDocument thisDocument)
-            : base(thisDocument) => Elements.SetName(PdfGroupAttributes.Keys.S, "/Transparency");
+        internal PDFTransparencyGroupAttributes(PDFDocument thisDocument)
+            : base(thisDocument) => Elements.SetName(PDFGroupAttributes.Keys.S, "/Transparency");
 
         /// <summary>
         /// Predefined keys of this dictionary.
         /// </summary>
-        public sealed new class Keys : PdfGroupAttributes.Keys
+        public sealed new class Keys : PDFGroupAttributes.Keys
         {
             /// <summary>
             /// (Sometimes required, as discussed below)

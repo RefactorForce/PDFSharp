@@ -55,7 +55,7 @@ namespace PDFSharp.Interop.Filters
         /// </summary>
         public virtual byte[] Encode(string rawString)
         {
-            byte[] bytes = PdfEncoders.RawEncoding.GetBytes(rawString);
+            byte[] bytes = PDFEncoders.RawEncoding.GetBytes(rawString);
             bytes = Encode(bytes);
             return bytes;
         }
@@ -76,7 +76,7 @@ namespace PDFSharp.Interop.Filters
         public virtual string DecodeToString(byte[] data, FilterParms parms)
         {
             byte[] bytes = Decode(data, parms);
-            string text = PdfEncoders.RawEncoding.GetString(bytes, 0, bytes.Length);
+            string text = PDFEncoders.RawEncoding.GetString(bytes, 0, bytes.Length);
             return text;
         }
 

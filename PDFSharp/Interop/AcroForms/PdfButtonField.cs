@@ -37,19 +37,19 @@ namespace PDFSharp.Interop.AcroForms
     /// <summary>
     /// Represents the base class for all button fields.
     /// </summary>
-    public abstract class PdfButtonField : PdfAcroField
+    public abstract class PDFButtonField : PDFAcroField
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfButtonField"/> class.
+        /// Initializes a new instance of the <see cref="PDFButtonField"/> class.
         /// </summary>
-        protected PdfButtonField(PdfDocument document)
+        protected PDFButtonField(PDFDocument document)
             : base(document)
         { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfButtonField"/> class.
+        /// Initializes a new instance of the <see cref="PDFButtonField"/> class.
         /// </summary>
-        protected PdfButtonField(PdfDictionary dict)
+        protected PDFButtonField(PDFDictionary dict)
             : base(dict)
         { }
 
@@ -61,9 +61,9 @@ namespace PDFSharp.Interop.AcroForms
             // Try to get the information from the appearance dictionaray.
             // Just return the first key that is not /Off.
             // I'm not sure what is the right solution to get this value.
-            if (Elements[PdfAnnotation.Keys.AP] is PdfDictionary ap)
+            if (Elements[PDFAnnotation.Keys.AP] is PDFDictionary ap)
             {
-                if (ap.Elements["/N"] is PdfDictionary n)
+                if (ap.Elements["/N"] is PDFDictionary n)
                 {
                     foreach (string name in n.Elements.Keys)
                         if (name != "/Off")
@@ -75,7 +75,7 @@ namespace PDFSharp.Interop.AcroForms
 
         internal override void GetDescendantNames(ref List<string> names, string partialName)
         {
-            string t = Elements.GetString(PdfAcroField.Keys.T);
+            string t = Elements.GetString(PDFAcroField.Keys.T);
             // HACK: ??? 
             if (t == "")
                 t = "???";
@@ -93,7 +93,7 @@ namespace PDFSharp.Interop.AcroForms
         /// Predefined keys of this dictionary. 
         /// The description comes from PDF 1.4 Reference.
         /// </summary>
-        public new class Keys : PdfAcroField.Keys
+        public new class Keys : PDFAcroField.Keys
         {
             // Pushbuttons have no additional entries.
         }

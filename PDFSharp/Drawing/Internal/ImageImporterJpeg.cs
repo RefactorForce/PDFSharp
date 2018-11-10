@@ -39,7 +39,7 @@ namespace PDFSharp.Drawing.Internal
 
         // Notes: JFIF is big-endian.
 
-        public ImportedImage ImportImage(StreamReaderHelper stream, PdfDocument document)
+        public ImportedImage ImportImage(StreamReaderHelper stream, PDFDocument document)
         {
             try
             {
@@ -279,7 +279,7 @@ namespace PDFSharp.Drawing.Internal
         /// <summary>
         /// Initializes a new instance of the <see cref="ImportedImageJpeg"/> class.
         /// </summary>
-        public ImportedImageJpeg(IImageImporter importer, ImagePrivateDataDct data, PdfDocument document)
+        public ImportedImageJpeg(IImageImporter importer, ImagePrivateDataDct data, PDFDocument document)
             : base(importer, data, document)
         { }
 

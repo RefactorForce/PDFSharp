@@ -39,9 +39,9 @@ using PDFSharp.Interop.Internal;
 namespace PDFSharp.Interop.IO
 {
     /// <summary>
-    /// Encapsulates the arguments of the PdfPasswordProvider delegate.
+    /// Encapsulates the arguments of the PDFPasswordProvider delegate.
     /// </summary>
-    public class PdfPasswordProviderArgs
+    public class PDFPasswordProviderArgs
     {
         /// <summary>
         /// Sets the password to open the document with.
@@ -49,20 +49,20 @@ namespace PDFSharp.Interop.IO
         public string Password;
 
         /// <summary>
-        /// When set to true the PdfReader.Open function returns null indicating that no PdfDocument was created.
+        /// When set to true the PDFReader.Open function returns null indicating that no PDFDocument was created.
         /// </summary>
         public bool Abort;
     }
 
     /// <summary>
-    /// A delegated used by the PdfReader.Open function to retrieve a password if the document is protected.
+    /// A delegated used by the PDFReader.Open function to retrieve a password if the document is protected.
     /// </summary>
-    public delegate void PdfPasswordProvider(PdfPasswordProviderArgs args);
+    public delegate void PDFPasswordProvider(PDFPasswordProviderArgs args);
 
     /// <summary>
     /// Represents the functionality for reading PDF documents.
     /// </summary>
-    public static class PdfReader
+    public static class PDFReader
     {
         /// <summary>
         /// Determines whether the file specified by its path is a PDF file by inspecting the first eight
@@ -70,19 +70,19 @@ namespace PDFSharp.Interop.IO
         /// number as integer (e.g. 14 for PDF 1.4). If the file header is invalid or inaccessible
         /// for any reason, 0 is returned. The function never throws an exception. 
         /// </summary>
-        public static int TestPdfFile(string path)
+        public static int TestPDFFile(string path)
         {
 #if !NETFX_CORE
             FileStream stream = null;
             try
             {
-                string realPath = Drawing.XPdfForm.ExtractPageNumber(path, out int pageNumber);
+                string realPath = Drawing.XPDFForm.ExtractPageNumber(path, out int pageNumber);
                 if (File.Exists(realPath)) // prevent unwanted exceptions during debugging
                 {
                     stream = new FileStream(realPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
                     byte[] bytes = new byte[1024];
                     stream.Read(bytes, 0, 1024);
-                    return GetPdfFileVersion(bytes);
+                    return GetPDFFileVersion(bytes);
                 }
             }
             // ReSharper disable once EmptyGeneralCatchClause
@@ -115,7 +115,7 @@ namespace PDFSharp.Interop.IO
         /// number as integer (e.g. 14 for PDF 1.4). If the data is invalid or inaccessible
         /// for any reason, 0 is returned. The function never throws an exception. 
         /// </summary>
-        public static int TestPdfFile(Stream stream)
+        public static int TestPDFFile(Stream stream)
         {
             long pos = -1;
             try
@@ -123,7 +123,7 @@ namespace PDFSharp.Interop.IO
                 pos = stream.Position;
                 byte[] bytes = new byte[1024];
                 stream.Read(bytes, 0, 1024);
-                return GetPdfFileVersion(bytes);
+                return GetPDFFileVersion(bytes);
             }
             // ReSharper disable once EmptyGeneralCatchClause
             catch { }
@@ -146,17 +146,17 @@ namespace PDFSharp.Interop.IO
         /// number as integer (e.g. 14 for PDF 1.4). If the data is invalid or inaccessible
         /// for any reason, 0 is returned. The function never throws an exception. 
         /// </summary>
-        public static int TestPdfFile(byte[] data) => GetPdfFileVersion(data);
+        public static int TestPDFFile(byte[] data) => GetPDFFileVersion(data);
 
         /// <summary>
         /// Implements scanning the PDF file version.
         /// </summary>
-        internal static int GetPdfFileVersion(byte[] bytes)
+        internal static int GetPDFFileVersion(byte[] bytes)
         {
             try
             {
                 // Acrobat accepts headers like «%!PS-Adobe-N.n PDF-M.m»...
-                string header = PdfEncoders.RawEncoding.GetString(bytes, 0, bytes.Length);  // Encoding.ASCII.GetString(bytes);
+                string header = PDFEncoders.RawEncoding.GetString(bytes, 0, bytes.Length);  // Encoding.ASCII.GetString(bytes);
                 if (header[0] == '%' || header.IndexOf("%PDF", StringComparison.Ordinal) >= 0)
                 {
                     int ich = header.IndexOf("PDF-", StringComparison.Ordinal);
@@ -177,25 +177,25 @@ namespace PDFSharp.Interop.IO
         /// <summary>
         /// Opens an existing PDF document.
         /// </summary>
-        public static PdfDocument Open(string path, PdfDocumentOpenMode openmode) => Open(path, null, openmode, null);
+        public static PDFDocument Open(string path, PDFDocumentOpenMode openmode) => Open(path, null, openmode, null);
 
         /// <summary>
         /// Opens an existing PDF document.
         /// </summary>
-        public static PdfDocument Open(string path, PdfDocumentOpenMode openmode, PdfPasswordProvider provider) => Open(path, null, openmode, provider);
+        public static PDFDocument Open(string path, PDFDocumentOpenMode openmode, PDFPasswordProvider provider) => Open(path, null, openmode, provider);
 
         /// <summary>
         /// Opens an existing PDF document.
         /// </summary>
-        public static PdfDocument Open(string path, string password, PdfDocumentOpenMode openmode) => Open(path, password, openmode, null);
+        public static PDFDocument Open(string path, string password, PDFDocumentOpenMode openmode) => Open(path, password, openmode, null);
 
         /// <summary>
         /// Opens an existing PDF document.
         /// </summary>
-        public static PdfDocument Open(string path, string password, PdfDocumentOpenMode openmode, PdfPasswordProvider provider)
+        public static PDFDocument Open(string path, string password, PDFDocumentOpenMode openmode, PDFPasswordProvider provider)
         {
 #if !NETFX_CORE
-            PdfDocument document;
+            PDFDocument document;
             Stream stream = null;
             try
             {
@@ -224,37 +224,37 @@ namespace PDFSharp.Interop.IO
         /// <summary>
         /// Opens an existing PDF document.
         /// </summary>
-        public static PdfDocument Open(string path) => Open(path, null, PdfDocumentOpenMode.Modify, null);
+        public static PDFDocument Open(string path) => Open(path, null, PDFDocumentOpenMode.Modify, null);
 
         /// <summary>
         /// Opens an existing PDF document.
         /// </summary>
-        public static PdfDocument Open(string path, string password) => Open(path, password, PdfDocumentOpenMode.Modify, null);
+        public static PDFDocument Open(string path, string password) => Open(path, password, PDFDocumentOpenMode.Modify, null);
 
         /// <summary>
         /// Opens an existing PDF document.
         /// </summary>
-        public static PdfDocument Open(Stream stream, PdfDocumentOpenMode openmode) => Open(stream, null, openmode);
+        public static PDFDocument Open(Stream stream, PDFDocumentOpenMode openmode) => Open(stream, null, openmode);
 
         /// <summary>
         /// Opens an existing PDF document.
         /// </summary>
-        public static PdfDocument Open(Stream stream, PdfDocumentOpenMode openmode, PdfPasswordProvider passwordProvider) => Open(stream, null, openmode, passwordProvider);
+        public static PDFDocument Open(Stream stream, PDFDocumentOpenMode openmode, PDFPasswordProvider passwordProvider) => Open(stream, null, openmode, passwordProvider);
         /// <summary>
         /// Opens an existing PDF document.
         /// </summary>
-        public static PdfDocument Open(Stream stream, string password, PdfDocumentOpenMode openmode) => Open(stream, password, openmode, null);
+        public static PDFDocument Open(Stream stream, string password, PDFDocumentOpenMode openmode) => Open(stream, password, openmode, null);
 
         /// <summary>
         /// Opens an existing PDF document.
         /// </summary>
-        public static PdfDocument Open(Stream stream, string password, PdfDocumentOpenMode openmode, PdfPasswordProvider passwordProvider)
+        public static PDFDocument Open(Stream stream, string password, PDFDocumentOpenMode openmode, PDFPasswordProvider passwordProvider)
         {
-            PdfDocument document;
+            PDFDocument document;
             try
             {
                 Lexer lexer = new Lexer(stream);
-                document = new PdfDocument(lexer);
+                document = new PDFDocument(lexer);
                 document._state |= DocumentState.Imported;
                 document._openMode = openmode;
                 document._fileSize = stream.Length;
@@ -263,9 +263,9 @@ namespace PDFSharp.Interop.IO
                 byte[] header = new byte[1024];
                 stream.Position = 0;
                 stream.Read(header, 0, 1024);
-                document._version = GetPdfFileVersion(header);
+                document._version = GetPDFFileVersion(header);
                 if (document._version == 0)
-                    throw new InvalidOperationException(PSSR.InvalidPdf);
+                    throw new InvalidOperationException(PSSR.InvalidPDF);
 
                 document._irefTable.IsUnderConstruction = true;
                 Parser parser = new Parser(document);
@@ -278,22 +278,22 @@ namespace PDFSharp.Interop.IO
                 document._irefTable.IsUnderConstruction = false;
 
                 // Is document encrypted?
-                PdfReference xrefEncrypt = document._trailer.Elements[PdfTrailer.Keys.Encrypt] as PdfReference;
+                PDFReference xrefEncrypt = document._trailer.Elements[PDFTrailer.Keys.Encrypt] as PDFReference;
                 if (xrefEncrypt != null)
                 {
                     //xrefEncrypt.Value = parser.ReadObject(null, xrefEncrypt.ObjectID, false);
-                    PdfObject encrypt = parser.ReadObject(null, xrefEncrypt.ObjectID, false, false);
+                    PDFObject encrypt = parser.ReadObject(null, xrefEncrypt.ObjectID, false, false);
 
                     encrypt.Reference = xrefEncrypt;
                     xrefEncrypt.Value = encrypt;
-                    PdfStandardSecurityHandler securityHandler = document.SecurityHandler;
+                    PDFStandardSecurityHandler securityHandler = document.SecurityHandler;
                     TryAgain:
                     PasswordValidity validity = securityHandler.ValidatePassword(password);
                     if (validity == PasswordValidity.Invalid)
                     {
                         if (passwordProvider != null)
                         {
-                            PdfPasswordProviderArgs args = new PdfPasswordProviderArgs();
+                            PDFPasswordProviderArgs args = new PDFPasswordProviderArgs();
                             passwordProvider(args);
                             if (args.Abort)
                                 return null;
@@ -303,16 +303,16 @@ namespace PDFSharp.Interop.IO
                         else
                         {
                             if (password == null)
-                                throw new PdfReaderException(PSSR.PasswordRequired);
+                                throw new PDFReaderException(PSSR.PasswordRequired);
                             else
-                                throw new PdfReaderException(PSSR.InvalidPassword);
+                                throw new PDFReaderException(PSSR.InvalidPassword);
                         }
                     }
-                    else if (validity == PasswordValidity.UserPassword && openmode == PdfDocumentOpenMode.Modify)
+                    else if (validity == PasswordValidity.UserPassword && openmode == PDFDocumentOpenMode.Modify)
                     {
                         if (passwordProvider != null)
                         {
-                            PdfPasswordProviderArgs args = new PdfPasswordProviderArgs();
+                            PDFPasswordProviderArgs args = new PDFPasswordProviderArgs();
                             passwordProvider(args);
                             if (args.Abort)
                                 return null;
@@ -320,7 +320,7 @@ namespace PDFSharp.Interop.IO
                             goto TryAgain;
                         }
                         else
-                            throw new PdfReaderException(PSSR.OwnerPasswordRequired);
+                            throw new PDFReaderException(PSSR.OwnerPasswordRequired);
                     }
                 }
                 else
@@ -332,29 +332,29 @@ namespace PDFSharp.Interop.IO
                     }
                 }
 
-                PdfReference[] irefs2 = document._irefTable.AllReferences;
+                PDFReference[] irefs2 = document._irefTable.AllReferences;
                 int count2 = irefs2.Length;
 
                 // 3rd: Create iRefs for all compressed objects.
                 Dictionary<int, object> objectStreams = new Dictionary<int, object>();
                 for (int idx = 0; idx < count2; idx++)
                 {
-                    PdfReference iref = irefs2[idx];
-                    if (iref.Value is PdfCrossReferenceStream xrefStream)
+                    PDFReference iref = irefs2[idx];
+                    if (iref.Value is PDFCrossReferenceStream xrefStream)
                     {
                         for (int idx2 = 0; idx2 < xrefStream.Entries.Count; idx2++)
                         {
-                            PdfCrossReferenceStream.CrossReferenceStreamEntry item = xrefStream.Entries[idx2];
+                            PDFCrossReferenceStream.CrossReferenceStreamEntry item = xrefStream.Entries[idx2];
                             // Is type xref to compressed object?
                             if (item.Type == 2)
                             {
-                                //PdfReference irefNew = parser.ReadCompressedObject(new PdfObjectID((int)item.Field2), (int)item.Field3);
+                                //PDFReference irefNew = parser.ReadCompressedObject(new PDFObjectID((int)item.Field2), (int)item.Field3);
                                 //document._irefTable.Add(irefNew);
                                 int objectNumber = (int)item.Field2;
                                 if (!objectStreams.ContainsKey(objectNumber))
                                 {
                                     objectStreams.Add(objectNumber, null);
-                                    PdfObjectID objectID = new PdfObjectID((int)item.Field2);
+                                    PDFObjectID objectID = new PDFObjectID((int)item.Field2);
                                     parser.ReadIRefsFromCompressedObject(objectID);
                                 }
                             }
@@ -365,16 +365,16 @@ namespace PDFSharp.Interop.IO
                 // 4th: Read compressed objects.
                 for (int idx = 0; idx < count2; idx++)
                 {
-                    PdfReference iref = irefs2[idx];
-                    if (iref.Value is PdfCrossReferenceStream xrefStream)
+                    PDFReference iref = irefs2[idx];
+                    if (iref.Value is PDFCrossReferenceStream xrefStream)
                     {
                         for (int idx2 = 0; idx2 < xrefStream.Entries.Count; idx2++)
                         {
-                            PdfCrossReferenceStream.CrossReferenceStreamEntry item = xrefStream.Entries[idx2];
+                            PDFCrossReferenceStream.CrossReferenceStreamEntry item = xrefStream.Entries[idx2];
                             // Is type xref to compressed object?
                             if (item.Type == 2)
                             {
-                                PdfReference irefNew = parser.ReadCompressedObject(new PdfObjectID((int)item.Field2),
+                                PDFReference irefNew = parser.ReadCompressedObject(new PDFObjectID((int)item.Field2),
                                     (int)item.Field3);
                                 Debug.Assert(document._irefTable.Contains(iref.ObjectID));
                                 //document._irefTable.Add(irefNew);
@@ -384,13 +384,13 @@ namespace PDFSharp.Interop.IO
                 }
 
 
-                PdfReference[] irefs = document._irefTable.AllReferences;
+                PDFReference[] irefs = document._irefTable.AllReferences;
                 int count = irefs.Length;
 
                 // Read all indirect objects.
                 for (int idx = 0; idx < count; idx++)
                 {
-                    PdfReference iref = irefs[idx];
+                    PDFReference iref = irefs[idx];
                     if (iref.Value == null)
                     {
 #if DEBUG_
@@ -400,7 +400,7 @@ namespace PDFSharp.Interop.IO
                         try
                         {
                             Debug.Assert(document._irefTable.Contains(iref.ObjectID));
-                            PdfObject pdfObject = parser.ReadObject(null, iref.ObjectID, false, false);
+                            PDFObject pdfObject = parser.ReadObject(null, iref.ObjectID, false, false);
                             Debug.Assert(pdfObject.Reference == iref);
                             pdfObject.Reference = iref;
                             Debug.Assert(pdfObject.Reference.Value != null, "Something went wrong.");
@@ -433,13 +433,13 @@ namespace PDFSharp.Interop.IO
 
 #if DEBUG_
     // Some tests...
-                PdfReference[] reachables = document.xrefTable.TransitiveClosure(document.trailer);
+                PDFReference[] reachables = document.xrefTable.TransitiveClosure(document.trailer);
                 reachables.GetType();
                 reachables = document.xrefTable.AllXRefs;
                 document.xrefTable.CheckConsistence();
 #endif
 
-                if (openmode == PdfDocumentOpenMode.Modify)
+                if (openmode == PDFDocumentOpenMode.Modify)
                 {
                     // Create new or change existing document IDs.
                     if (document.Internals.SecondDocumentID == "")
@@ -447,7 +447,7 @@ namespace PDFSharp.Interop.IO
                     else
                     {
                         byte[] agTemp = Guid.NewGuid().ToByteArray();
-                        document.Internals.SecondDocumentID = PdfEncoders.RawEncoding.GetString(agTemp, 0, agTemp.Length);
+                        document.Internals.SecondDocumentID = PDFEncoders.RawEncoding.GetString(agTemp, 0, agTemp.Length);
                     }
 
                     // Change modification date
@@ -459,10 +459,10 @@ namespace PDFSharp.Interop.IO
                         Debug.WriteLine("Number of deleted unreachable objects: " + removed);
 
                     // Force flattening of page tree
-                    PdfPages pages = document.Pages;
+                    PDFPages pages = document.Pages;
                     Debug.Assert(pages != null);
 
-                    //bool b = document.irefTable.Contains(new PdfObjectID(1108));
+                    //bool b = document.irefTable.Contains(new PDFObjectID(1108));
                     //b.GetType();
 
                     document._irefTable.CheckConsistence();
@@ -481,6 +481,6 @@ namespace PDFSharp.Interop.IO
         /// <summary>
         /// Opens an existing PDF document.
         /// </summary>
-        public static PdfDocument Open(Stream stream) => Open(stream, PdfDocumentOpenMode.Modify);
+        public static PDFDocument Open(Stream stream) => Open(stream, PDFDocumentOpenMode.Modify);
     }
 }

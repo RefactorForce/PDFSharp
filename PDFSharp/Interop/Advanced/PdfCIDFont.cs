@@ -37,18 +37,18 @@ namespace PDFSharp.Interop.Advanced
     /// <summary>
     /// Represents a CIDFont dictionary.
     /// </summary>
-    internal class PdfCIDFont : PdfFont
+    internal class PDFCIDFont : PDFFont
     {
-        public PdfCIDFont(PdfDocument document)
+        public PDFCIDFont(PDFDocument document)
             : base(document)
         { }
 
-        public PdfCIDFont(PdfDocument document, PdfFontDescriptor fontDescriptor, XFont font)
+        public PDFCIDFont(PDFDocument document, PDFFontDescriptor fontDescriptor, XFont font)
             : base(document)
         {
             Elements.SetName(Keys.Type, "/Font");
             Elements.SetName(Keys.Subtype, "/CIDFontType2");
-            PdfDictionary cid = new PdfDictionary();
+            PDFDictionary cid = new PDFDictionary();
             cid.Elements.SetString("/Ordering", "Identity");
             cid.Elements.SetString("/Registry", "Adobe");
             cid.Elements.SetInteger("/Supplement", 0);
@@ -59,15 +59,15 @@ namespace PDFSharp.Interop.Advanced
             Owner._irefTable.Add(fontDescriptor);
             Elements[Keys.FontDescriptor] = fontDescriptor.Reference;
 
-            FontEncoding = font.PdfOptions.FontEncoding;
+            FontEncoding = font.PDFOptions.FontEncoding;
         }
 
-        public PdfCIDFont(PdfDocument document, PdfFontDescriptor fontDescriptor, byte[] fontData)
+        public PDFCIDFont(PDFDocument document, PDFFontDescriptor fontDescriptor, byte[] fontData)
             : base(document)
         {
             Elements.SetName(Keys.Type, "/Font");
             Elements.SetName(Keys.Subtype, "/CIDFontType2");
-            PdfDictionary cid = new PdfDictionary();
+            PDFDictionary cid = new PDFDictionary();
             cid.Elements.SetString("/Ordering", "Identity");
             cid.Elements.SetString("/Registry", "Adobe");
             cid.Elements.SetInteger("/Supplement", 0);
@@ -78,7 +78,7 @@ namespace PDFSharp.Interop.Advanced
             Owner._irefTable.Add(fontDescriptor);
             Elements[Keys.FontDescriptor] = fontDescriptor.Reference;
 
-            FontEncoding = PdfFontEncoding.Unicode;
+            FontEncoding = PDFFontEncoding.Unicode;
         }
 
         public string BaseFont
@@ -105,24 +105,24 @@ namespace PDFSharp.Interop.Advanced
                 ? FontDescriptor._descriptor.FontFace
                 : FontDescriptor._descriptor.FontFace.CreateFontSubSet(_cmapInfo.GlyphIndices, true);
             byte[] fontData = subSet.FontSource.Bytes;
-            PdfDictionary fontStream = new PdfDictionary(Owner);
+            PDFDictionary fontStream = new PDFDictionary(Owner);
             Owner.Internals.AddObject(fontStream);
-            FontDescriptor.Elements[PdfFontDescriptor.Keys.FontFile2] = fontStream.Reference;
+            FontDescriptor.Elements[PDFFontDescriptor.Keys.FontFile2] = fontStream.Reference;
 
-            fontStream.Elements["/Length1"] = new PdfInteger(fontData.Length);
+            fontStream.Elements["/Length1"] = new PDFInteger(fontData.Length);
             if (!Owner.Options.NoCompression)
             {
                 fontData = Filtering.FlateDecode.Encode(fontData, _document.Options.FlateEncodeMode);
-                fontStream.Elements["/Filter"] = new PdfName("/FlateDecode");
+                fontStream.Elements["/Filter"] = new PDFName("/FlateDecode");
             }
-            fontStream.Elements["/Length"] = new PdfInteger(fontData.Length);
+            fontStream.Elements["/Length"] = new PDFInteger(fontData.Length);
             fontStream.CreateStream(fontData);
         }
 
         /// <summary>
         /// Predefined keys of this dictionary.
         /// </summary>
-        public new sealed class Keys : PdfFont.Keys
+        public new sealed class Keys : PDFFont.Keys
         {
             /// <summary>
             /// (Required) The type of PDF object that this dictionary describes;
@@ -157,7 +157,7 @@ namespace PDFSharp.Interop.Advanced
             /// (Required; must be an indirect reference) A font descriptor describing the
             /// CIDFont’s default metrics other than its glyph widths.
             /// </summary>
-            [KeyInfo(KeyType.Dictionary | KeyType.MustBeIndirect, typeof(PdfFontDescriptor))]
+            [KeyInfo(KeyType.Dictionary | KeyType.MustBeIndirect, typeof(PDFFontDescriptor))]
             public new const string FontDescriptor = "/FontDescriptor";
 
             /// <summary>
@@ -173,7 +173,7 @@ namespace PDFSharp.Interop.Advanced
             /// for consecutive CIDs or one width for a range of CIDs.
             /// Default value: none (the DW value is used for all glyphs).
             /// </summary>
-            [KeyInfo(KeyType.Array, typeof(PdfArray))]
+            [KeyInfo(KeyType.Array, typeof(PDFArray))]
             public const string W = "/W";
 
             /// <summary>
@@ -189,7 +189,7 @@ namespace PDFSharp.Interop.Advanced
             /// of the metrics for vertical writing for the glyphs in the CIDFont.
             /// Default value: none (the DW2 value is used for all glyphs).
             /// </summary>
-            [KeyInfo(KeyType.Array, typeof(PdfArray))]
+            [KeyInfo(KeyType.Array, typeof(PDFArray))]
             public const string W2 = "/W2";
 
             /// <summary>

@@ -41,11 +41,11 @@ namespace PDFSharp.Interop.Internal
         public DocEncoding()
         { }
 
-        public override int GetByteCount(char[] chars, int index, int count) => PdfEncoders.WinAnsiEncoding.GetByteCount(chars, index, count);
+        public override int GetByteCount(char[] chars, int index, int count) => PDFEncoders.WinAnsiEncoding.GetByteCount(chars, index, count);
 
         public override int GetBytes(char[] chars, int charIndex, int charCount, byte[] bytes, int byteIndex)
         {
-            byte[] ansi = PdfEncoders.WinAnsiEncoding.GetBytes(chars, charIndex, charCount);
+            byte[] ansi = PDFEncoders.WinAnsiEncoding.GetBytes(chars, charIndex, charCount);
             for (int idx = 0, count = ansi.Length; count > 0; idx++, byteIndex++, count--)
                 bytes[byteIndex] = AnsiToDoc[ansi[idx]];
             return ansi.Length;
@@ -53,14 +53,14 @@ namespace PDFSharp.Interop.Internal
 
         public override int GetCharCount(byte[] bytes, int index, int count)
         {
-            //return PdfEncoders.WinAnsiEncoding.GetCharCount(bytes, index, count);
-            Debug.Assert(PdfEncoders.WinAnsiEncoding.GetCharCount(bytes, index, count) == count);
+            //return PDFEncoders.WinAnsiEncoding.GetCharCount(bytes, index, count);
+            Debug.Assert(PDFEncoders.WinAnsiEncoding.GetCharCount(bytes, index, count) == count);
             return count;
         }
 
         public override int GetChars(byte[] bytes, int byteIndex, int byteCount, char[] chars, int charIndex)
         {
-            PdfDocToUnicode.GetType();
+            PDFDocToUnicode.GetType();
             throw new NotImplementedException("GetChars");
             //for (; byteCount > 0; byteIndex++, charIndex++, byteCount--)
             //  chars[charIndex] = (char)bytes[byteIndex];
@@ -115,7 +115,7 @@ namespace PDFSharp.Interop.Internal
         };
 
         // TODO: use this table
-        static readonly char[] PdfDocToUnicode = new char[]
+        static readonly char[] PDFDocToUnicode = new char[]
         {
             '\x00', '\x01', '\x02', '\x03', '\x04', '\x05', '\x06', '\x07', '\x08', '\x09', '\x0A', '\x0B', '\x0C', '\x0D', '\x0E', '\x0F',
             '\x10', '\x11', '\x12', '\x13', '\x14', '\x15', '\x16', '\x17', '\x18', '\x19', '\x1A', '\x1B', '\x1C', '\x1D', '\x1E', '\x1F',

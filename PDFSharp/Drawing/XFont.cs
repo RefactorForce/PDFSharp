@@ -73,7 +73,7 @@ namespace PDFSharp.Drawing
         /// <param name="familyName">Name of the font family.</param>
         /// <param name="emSize">The em size.</param>
         public XFont(string familyName, double emSize)
-            : this(familyName, emSize, XFontStyle.Regular, new XPdfFontOptions(GlobalFontSettings.DefaultFontEncoding))
+            : this(familyName, emSize, XFontStyle.Regular, new XPDFFontOptions(GlobalFontSettings.DefaultFontEncoding))
         { }
 
         /// <summary>
@@ -83,7 +83,7 @@ namespace PDFSharp.Drawing
         /// <param name="emSize">The em size.</param>
         /// <param name="style">The font style.</param>
         public XFont(string familyName, double emSize, XFontStyle style)
-            : this(familyName, emSize, style, new XPdfFontOptions(GlobalFontSettings.DefaultFontEncoding))
+            : this(familyName, emSize, style, new XPDFFontOptions(GlobalFontSettings.DefaultFontEncoding))
         { }
 
         /// <summary>
@@ -93,7 +93,7 @@ namespace PDFSharp.Drawing
         /// <param name="emSize">The em size.</param>
         /// <param name="style">The font style.</param>
         /// <param name="pdfOptions">Additional PDF options.</param>
-        public XFont(string familyName, double emSize, XFontStyle style, XPdfFontOptions pdfOptions)
+        public XFont(string familyName, double emSize, XFontStyle style, XPDFFontOptions pdfOptions)
         {
             FamilyName = familyName;
             Size = emSize;
@@ -106,7 +106,7 @@ namespace PDFSharp.Drawing
         /// Initializes a new instance of the <see cref="XFont"/> class with enforced style simulation.
         /// Only for testing PDFsharp.
         /// </summary>
-        internal XFont(string familyName, double emSize, XFontStyle style, XPdfFontOptions pdfOptions, XStyleSimulations styleSimulations)
+        internal XFont(string familyName, double emSize, XFontStyle style, XPDFFontOptions pdfOptions, XStyleSimulations styleSimulations)
         {
             FamilyName = familyName;
             Size = emSize;
@@ -125,7 +125,7 @@ namespace PDFSharp.Drawing
         /// <param name="emSize">The em size.</param>
         /// <param name="style">The font style.</param>
         public XFont(GdiFontFamily fontFamily, double emSize, XFontStyle style)
-            : this(fontFamily, emSize, style, new XPdfFontOptions(GlobalFontSettings.DefaultFontEncoding))
+            : this(fontFamily, emSize, style, new XPDFFontOptions(GlobalFontSettings.DefaultFontEncoding))
         { }
 
         /// <summary>
@@ -135,7 +135,7 @@ namespace PDFSharp.Drawing
         /// <param name="emSize">The em size.</param>
         /// <param name="style">The font style.</param>
         /// <param name="pdfOptions">Additional PDF options.</param>
-        public XFont(GdiFontFamily fontFamily, double emSize, XFontStyle style, XPdfFontOptions pdfOptions)
+        public XFont(GdiFontFamily fontFamily, double emSize, XFontStyle style, XPDFFontOptions pdfOptions)
         {
             FamilyName = fontFamily.Name;
             GdiFontFamily = fontFamily;
@@ -150,7 +150,7 @@ namespace PDFSharp.Drawing
         /// </summary>
         /// <param name="font">The System.DrawingCore.Font.</param>
         public XFont(GdiFont font)
-            : this(font, new XPdfFontOptions(GlobalFontSettings.DefaultFontEncoding))
+            : this(font, new XPDFFontOptions(GlobalFontSettings.DefaultFontEncoding))
         { }
 
         /// <summary>
@@ -158,7 +158,7 @@ namespace PDFSharp.Drawing
         /// </summary>
         /// <param name="font">The System.DrawingCore.Font.</param>
         /// <param name="pdfOptions">Additional PDF options.</param>
-        public XFont(GdiFont font, XPdfFontOptions pdfOptions)
+        public XFont(GdiFont font, XPDFFontOptions pdfOptions)
         {
             if (font.Unit != GraphicsUnit.World)
                 throw new ArgumentException("Font must use GraphicsUnit.World.");
@@ -180,7 +180,7 @@ namespace PDFSharp.Drawing
         /// <param name="emSize">The em size.</param>
         /// <param name="style">The font style.</param>
         public XFont(WpfFontFamily fontFamily, double emSize, XFontStyle style)
-            : this(fontFamily, emSize, style, new XPdfFontOptions(GlobalFontSettings.DefaultFontEncoding))
+            : this(fontFamily, emSize, style, new XPDFFontOptions(GlobalFontSettings.DefaultFontEncoding))
         { }
 
         /// <summary>
@@ -190,7 +190,7 @@ namespace PDFSharp.Drawing
         /// <param name="emSize">The em size.</param>
         /// <param name="style">The font style.</param>
         /// <param name="pdfOptions">Additional PDF options.</param>
-        public XFont(WpfFontFamily fontFamily, double emSize, XFontStyle style, XPdfFontOptions pdfOptions)
+        public XFont(WpfFontFamily fontFamily, double emSize, XFontStyle style, XPDFFontOptions pdfOptions)
         {
 #if !SILVERLIGHT
             _familyName = fontFamily.FamilyNames[XmlLanguage.GetLanguage("en-US")];
@@ -211,7 +211,7 @@ namespace PDFSharp.Drawing
         /// <param name="typeface">The System.Windows.Media.Typeface.</param>
         /// <param name="emSize">The em size.</param>
         public XFont(WpfTypeface typeface, double emSize)
-            : this(typeface, emSize, new XPdfFontOptions(GlobalFontSettings.DefaultFontEncoding))
+            : this(typeface, emSize, new XPDFFontOptions(GlobalFontSettings.DefaultFontEncoding))
         { }
 
         /// <summary>
@@ -220,7 +220,7 @@ namespace PDFSharp.Drawing
         /// <param name="typeface">The System.Windows.Media.Typeface.</param>
         /// <param name="emSize">The em size.</param>
         /// <param name="pdfOptions">Additional PDF options.</param>
-        public XFont(WpfTypeface typeface, double emSize, XPdfFontOptions pdfOptions)
+        public XFont(WpfTypeface typeface, double emSize, XPDFFontOptions pdfOptions)
         {
             _wpfTypeface = typeface;
             //Debug.Assert(font.Name == font.FontFamily.Name);
@@ -239,7 +239,7 @@ namespace PDFSharp.Drawing
         /// <param name="emSize">The em size.</param>
         /// <param name="style">The font style.</param>
         public XFont(UwpFontFamily fontFamily, double emSize, XFontStyle style)
-            : this(fontFamily, emSize, style, new XPdfFontOptions(GlobalFontSettings.DefaultFontEncoding))
+            : this(fontFamily, emSize, style, new XPDFFontOptions(GlobalFontSettings.DefaultFontEncoding))
         { }
 
         /// <summary>
@@ -249,7 +249,7 @@ namespace PDFSharp.Drawing
         /// <param name="emSize">The em size.</param>
         /// <param name="style">The font style.</param>
         /// <param name="pdfOptions">Additional PDF options.</param>
-        public XFont(UwpFontFamily fontFamily, double emSize, XFontStyle style, XPdfFontOptions pdfOptions)
+        public XFont(UwpFontFamily fontFamily, double emSize, XFontStyle style, XPDFFontOptions pdfOptions)
         {
             _familyName = fontFamily.Source;
             _gdiFontFamily = fontFamily;
@@ -264,7 +264,7 @@ namespace PDFSharp.Drawing
         /// </summary>
         /// <param name="font">The System.DrawingCore.Font.</param>
         public XFont(GdiFont font)
-            : this(font, new XPdfFontOptions(GlobalFontSettings.DefaultFontEncoding))
+            : this(font, new XPDFFontOptions(GlobalFontSettings.DefaultFontEncoding))
         { }
 
         /// <summary>
@@ -272,7 +272,7 @@ namespace PDFSharp.Drawing
         /// </summary>
         /// <param name="font">The System.DrawingCore.Font.</param>
         /// <param name="pdfOptions">Additional PDF options.</param>
-        public XFont(GdiFont font, XPdfFontOptions pdfOptions)
+        public XFont(GdiFont font, XPDFFontOptions pdfOptions)
         {
             if (font.Unit != GraphicsUnit.World)
                 throw new ArgumentException("Font must use GraphicsUnit.World.");
@@ -543,13 +543,13 @@ namespace PDFSharp.Drawing
         /// <summary>
         /// Gets the PDF options of the font.
         /// </summary>
-        public XPdfFontOptions PdfOptions => _pdfOptions ?? (_pdfOptions = new XPdfFontOptions());
-        XPdfFontOptions _pdfOptions;
+        public XPDFFontOptions PDFOptions => _pdfOptions ?? (_pdfOptions = new XPDFFontOptions());
+        XPDFFontOptions _pdfOptions;
 
         /// <summary>
         /// Indicates whether this XFont is encoded as Unicode.
         /// </summary>
-        internal bool Unicode => _pdfOptions != null && _pdfOptions.FontEncoding == PdfFontEncoding.Unicode;
+        internal bool Unicode => _pdfOptions != null && _pdfOptions.FontEncoding == PDFFontEncoding.Unicode;
 
         /// <summary>
         /// Gets the cell space for the font. The CellSpace is the line spacing, the sum of CellAscent and CellDescent and optionally some extra space.
@@ -750,7 +750,7 @@ namespace PDFSharp.Drawing
 
 
         /// <summary>
-        /// Cache PdfFontTable.FontSelector to speed up finding the right PdfFont
+        /// Cache PDFFontTable.FontSelector to speed up finding the right PDFFont
         /// if this font is used more than once.
         /// </summary>
         internal string Selector { get; set; }

@@ -37,16 +37,16 @@ namespace PDFSharp.Interop.Advanced
     /// <summary>
     /// Represents a PDF font.
     /// </summary>
-    public class PdfFont : PdfDictionary
+    public class PDFFont : PDFDictionary
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfFont"/> class.
+        /// Initializes a new instance of the <see cref="PDFFont"/> class.
         /// </summary>
-        public PdfFont(PdfDocument document)
+        public PDFFont(PDFDocument document)
             : base(document)
         { }
 
-        internal PdfFontDescriptor FontDescriptor
+        internal PDFFontDescriptor FontDescriptor
         {
             get
             {
@@ -55,9 +55,9 @@ namespace PDFSharp.Interop.Advanced
             }
             set => _fontDescriptor = value;
         }
-        PdfFontDescriptor _fontDescriptor;
+        PDFFontDescriptor _fontDescriptor;
 
-        internal PdfFontEncoding FontEncoding;
+        internal PDFFontEncoding FontEncoding;
 
         /// <summary>
         /// Gets a value indicating whether this instance is symbol font.
@@ -89,12 +89,12 @@ namespace PDFSharp.Interop.Advanced
         /// <summary>
         /// Gets or sets ToUnicodeMap.
         /// </summary>
-        internal PdfToUnicodeMap ToUnicodeMap
+        internal PDFToUnicodeMap ToUnicodeMap
         {
             get => _toUnicode;
             set => _toUnicode = value;
         }
-        internal PdfToUnicodeMap _toUnicode;
+        internal PDFToUnicodeMap _toUnicode;
 
 
         /// <summary>
@@ -146,7 +146,7 @@ namespace PDFSharp.Interop.Advanced
             /// FontDescriptor must either all be present or all be absent. Ordinarily, they are
             /// absent; specifying them enables a standard font to be overridden.
             /// </summary>
-            [KeyInfo(KeyType.Dictionary | KeyType.MustBeIndirect, typeof(PdfFontDescriptor))]
+            [KeyInfo(KeyType.Dictionary | KeyType.MustBeIndirect, typeof(PDFFontDescriptor))]
             public const string FontDescriptor = "/FontDescriptor";
         }
     }

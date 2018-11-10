@@ -33,7 +33,7 @@ namespace PDFSharp.Interop.Annotations
     /// Specifies the annotation flags.
     /// </summary>
     [System.Flags]
-    public enum PdfAnnotationFlags
+    public enum PDFAnnotationFlags
     {
         /// <summary>
         /// If set, do not display the annotation if it does not belong to one of the standard

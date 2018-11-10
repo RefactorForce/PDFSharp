@@ -34,7 +34,7 @@ namespace PDFSharp.Interop.Content
     /// <summary>
     /// Exception thrown by ContentReader.
     /// </summary>
-    public class ContentReaderException : PdfSharpException
+    public class ContentReaderException : PDFSharpException
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ContentReaderException"/> class.

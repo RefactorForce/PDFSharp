@@ -32,19 +32,19 @@ namespace PDFSharp.Interop.Annotations
     /// <summary>
     /// Represents a generic annotation. Used for annotation dictionaries unknown to PDFsharp.
     /// </summary>
-    internal sealed class PdfGenericAnnotation : PdfAnnotation
+    internal sealed class PDFGenericAnnotation : PDFAnnotation
     {
         //DMH 6/7/06
-        //Make this public so we can use it in PdfAnnotations to
+        //Make this public so we can use it in PDFAnnotations to
         //get the Meta data from existings annotations.
-        public PdfGenericAnnotation(PdfDictionary dict)
+        public PDFGenericAnnotation(PDFDictionary dict)
             : base(dict)
         { }
 
         /// <summary>
         /// Predefined keys of this dictionary.
         /// </summary>
-        internal new class Keys : PdfAnnotation.Keys
+        internal new class Keys : PDFAnnotation.Keys
         {
             public static DictionaryMeta Meta => _meta ?? (_meta = CreateMeta(typeof(Keys)));
             static DictionaryMeta _meta;

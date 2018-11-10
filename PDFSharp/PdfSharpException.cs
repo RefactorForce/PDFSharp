@@ -34,30 +34,30 @@ namespace PDFSharp
     /// <summary>
     /// Base class of all exceptions in the PDFsharp frame work.
     /// </summary>
-    public class PdfSharpException : Exception
+    public class PDFSharpException : Exception
     {
         // The class is not yet used
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfSharpException"/> class.
+        /// Initializes a new instance of the <see cref="PDFSharpException"/> class.
         /// </summary>
-        public PdfSharpException()
+        public PDFSharpException()
         { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfSharpException"/> class.
+        /// Initializes a new instance of the <see cref="PDFSharpException"/> class.
         /// </summary>
         /// <param name="message">The exception message.</param>
-        public PdfSharpException(string message)
+        public PDFSharpException(string message)
             : base(message)
         { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfSharpException"/> class.
+        /// Initializes a new instance of the <see cref="PDFSharpException"/> class.
         /// </summary>
         /// <param name="message">The exception message.</param>
         /// <param name="innerException">The inner exception.</param>
-        public PdfSharpException(string message, Exception innerException) :
+        public PDFSharpException(string message, Exception innerException) :
             base(message, innerException)
         { }
     }

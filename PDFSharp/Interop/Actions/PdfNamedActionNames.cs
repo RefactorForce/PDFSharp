@@ -32,7 +32,7 @@ namespace PDFSharp.Interop.Actions
     /// <summary>
     /// Specifies the predefined PDF actions.
     /// </summary>
-    public enum PdfNamedActionNames
+    public enum PDFNamedActionNames
     {
         /// <summary>
         /// Go to next page.

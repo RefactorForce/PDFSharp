@@ -32,7 +32,7 @@ namespace PDFSharp.Interop
     /// <summary>
     /// Specifies the page layout to be used by a viewer when the document is opened.
     /// </summary>
-    public enum PdfPageLayout
+    public enum PDFPageLayout
     {
         /// <summary>
         /// Display one page at a time.

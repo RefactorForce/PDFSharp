@@ -177,18 +177,18 @@ namespace PDFSharp.Interop.Filters
         /// <summary>
         /// Decodes the data with the specified filter.
         /// </summary>
-        public static byte[] Decode(byte[] data, PdfItem filterItem)
+        public static byte[] Decode(byte[] data, PDFItem filterItem)
         {
             byte[] result = null;
-            if (filterItem is PdfName)
+            if (filterItem is PDFName)
             {
                 Filter filter = GetFilter(filterItem.ToString());
                 if (filter != null)
                     result = filter.Decode(data);
             }
-            else if (filterItem is PdfArray array)
+            else if (filterItem is PDFArray array)
             {
-                foreach (PdfItem item in array)
+                foreach (PDFItem item in array)
                     data = Decode(data, item);
                 result = data;
             }

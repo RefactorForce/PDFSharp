@@ -36,26 +36,26 @@ namespace PDFSharp.Interop
     /// Represents an indirect real value. This type is not used by PDFsharp. If it is imported from
     /// an external PDF file, the value is converted into a direct object.
     /// </summary>
-    public sealed class PdfRealObject : PdfNumberObject
+    public sealed class PDFRealObject : PDFNumberObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfRealObject"/> class.
+        /// Initializes a new instance of the <see cref="PDFRealObject"/> class.
         /// </summary>
-        public PdfRealObject()
+        public PDFRealObject()
         { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfRealObject"/> class.
+        /// Initializes a new instance of the <see cref="PDFRealObject"/> class.
         /// </summary>
         /// <param name="value">The value.</param>
-        public PdfRealObject(double value) => Value = value;
+        public PDFRealObject(double value) => Value = value;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfRealObject"/> class.
+        /// Initializes a new instance of the <see cref="PDFRealObject"/> class.
         /// </summary>
         /// <param name="document">The document.</param>
         /// <param name="value">The value.</param>
-        public PdfRealObject(PdfDocument document, double value)
+        public PDFRealObject(PDFDocument document, double value)
             : base(document) => Value = value;
 
         /// <summary>
@@ -71,7 +71,7 @@ namespace PDFSharp.Interop
         /// <summary>
         /// Writes the real literal.
         /// </summary>
-        internal override void WriteObject(PdfWriter writer)
+        internal override void WriteObject(PDFWriter writer)
         {
             writer.WriteBeginObject(this);
             writer.Write(Value);

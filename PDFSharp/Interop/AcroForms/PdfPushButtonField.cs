@@ -32,15 +32,15 @@ namespace PDFSharp.Interop.AcroForms
     /// <summary>
     /// Represents the push button field.
     /// </summary>
-    public sealed class PdfPushButtonField : PdfButtonField
+    public sealed class PDFPushButtonField : PDFButtonField
     {
         /// <summary>
-        /// Initializes a new instance of PdfPushButtonField.
+        /// Initializes a new instance of PDFPushButtonField.
         /// </summary>
-        internal PdfPushButtonField(PdfDocument document)
+        internal PDFPushButtonField(PDFDocument document)
             : base(document) => _document = document;
 
-        internal PdfPushButtonField(PdfDictionary dict)
+        internal PDFPushButtonField(PDFDictionary dict)
             : base(dict)
         { }
 
@@ -48,7 +48,7 @@ namespace PDFSharp.Interop.AcroForms
         /// Predefined keys of this dictionary. 
         /// The description comes from PDF 1.4 Reference.
         /// </summary>
-        public new class Keys : PdfAcroField.Keys
+        public new class Keys : PDFAcroField.Keys
         {
             internal static DictionaryMeta Meta => _meta ?? (_meta = CreateMeta(typeof(Keys)));
             static DictionaryMeta _meta;

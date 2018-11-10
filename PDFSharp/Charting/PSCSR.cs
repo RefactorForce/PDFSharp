@@ -30,7 +30,7 @@
 namespace PDFSharp.Charting
 {
     /// <summary>
-    /// The Pdf-Sharp-Charting-String-Resources.
+    /// The PDF-Sharp-Charting-String-Resources.
     /// </summary>
     // ReSharper disable once InconsistentNaming
     internal class PSCSR

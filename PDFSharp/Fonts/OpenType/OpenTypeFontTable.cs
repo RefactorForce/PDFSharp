@@ -34,7 +34,7 @@ using System.Diagnostics;
 //using FWord = System.Int16;
 //using UFWord = System.UInt16;
 #if SILVERLIGHT
-using PdfSharp;
+using PDFSharp;
 #endif
 
 namespace PDFSharp.Fonts.OpenType

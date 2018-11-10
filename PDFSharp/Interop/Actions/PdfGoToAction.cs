@@ -32,30 +32,30 @@ namespace PDFSharp.Interop.Actions
     /// <summary>
     /// Represents a PDF Goto actions.
     /// </summary>
-    public sealed class PdfGoToAction : PdfAction
+    public sealed class PDFGoToAction : PDFAction
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfGoToAction"/> class.
+        /// Initializes a new instance of the <see cref="PDFGoToAction"/> class.
         /// </summary>
-        public PdfGoToAction() => Inititalize();
+        public PDFGoToAction() => Inititalize();
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfGoToAction"/> class.
+        /// Initializes a new instance of the <see cref="PDFGoToAction"/> class.
         /// </summary>
         /// <param name="document">The document that owns this object.</param>
-        public PdfGoToAction(PdfDocument document)
+        public PDFGoToAction(PDFDocument document)
             : base(document) => Inititalize();
 
         void Inititalize()
         {
-            Elements.SetName(PdfAction.Keys.Type, "/Action");
-            Elements.SetName(PdfAction.Keys.S, "/Goto");
+            Elements.SetName(PDFAction.Keys.Type, "/Action");
+            Elements.SetName(PDFAction.Keys.S, "/Goto");
         }
 
         /// <summary>
         /// Predefined keys of this dictionary.
         /// </summary>
-        internal new class Keys : PdfAction.Keys
+        internal new class Keys : PDFAction.Keys
         {
             ///// <summary>
             ///// (Required) The type of action that this dictionary describes;

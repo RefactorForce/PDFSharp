@@ -42,7 +42,7 @@ using System.Windows.Media;
 #if !EDF_CORE
 using PDFSharp.Internal;
 #else
-using PdfSharp.Internal;
+using PDFSharp.Internal;
 #endif
 
 // ReSharper disable RedundantNameQualifier

@@ -32,7 +32,7 @@ namespace PDFSharp.Interop
     /// <summary>
     /// Specifies what color model is used in a PDF document.
     /// </summary>
-    public enum PdfColorMode
+    public enum PDFColorMode
     {
         /// <summary>
         /// All color values are written as specified in the XColor objects they come from.

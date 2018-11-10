@@ -73,7 +73,7 @@ namespace PDFSharp.Drawing
         /// <summary>
         /// Gets the Portable Document Format (PDF) image format
         /// </summary>
-        public static XImageFormat Pdf { get; } = new XImageFormat(new Guid("{84570158-DBF0-4C6B-8368-62D6A3CA76E0}"));
+        public static XImageFormat PDF { get; } = new XImageFormat(new Guid("{84570158-DBF0-4C6B-8368-62D6A3CA76E0}"));
 
         /// <summary>
         /// Gets the Windows icon image format.

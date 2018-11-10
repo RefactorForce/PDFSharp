@@ -41,13 +41,13 @@ namespace PDFSharp.Interop.Advanced
     /// <summary>
     /// Represents an extended graphics state object.
     /// </summary>
-    public sealed class PdfExtGState : PdfDictionary
+    public sealed class PDFExtGState : PDFDictionary
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfExtGState"/> class.
+        /// Initializes a new instance of the <see cref="PDFExtGState"/> class.
         /// </summary>
         /// <param name="document">The document.</param>
-        public PdfExtGState(PdfDocument document)
+        public PDFExtGState(PDFDocument document)
             : base(document) => Elements.SetName(Keys.Type, "/ExtGState");
 #if true_
             //AIS false
@@ -61,15 +61,15 @@ namespace PDFSharp.Interop.Advanced
             //SMask /None
             //Type /ExtGState
 
-            Elements.SetValue(Keys.AIS, new PdfBoolean(false)); // The alpha source
+            Elements.SetValue(Keys.AIS, new PDFBoolean(false)); // The alpha source
             Elements.SetName("/BM", "Normal");
-            Elements.SetValue(Keys.op, new PdfBoolean(false));
-            Elements.SetValue(Keys.OP, new PdfBoolean(false));
-            Elements.SetValue(Keys.OPM, new PdfInteger(1));
-            Elements.SetValue("/SA", new PdfBoolean(true));
+            Elements.SetValue(Keys.op, new PDFBoolean(false));
+            Elements.SetValue(Keys.OP, new PDFBoolean(false));
+            Elements.SetValue(Keys.OPM, new PDFInteger(1));
+            Elements.SetValue("/SA", new PDFBoolean(true));
             Elements.SetName("/SMask", "None");
 #endif
-        //#if OP_HACK//            Elements.SetValue(Keys.op, new PdfBoolean(false));//            Elements.SetValue(Keys.OP, new PdfBoolean(false));//            Elements.SetValue(Keys.OPM, new PdfInteger(1));//#endif
+        //#if OP_HACK//            Elements.SetValue(Keys.op, new PDFBoolean(false));//            Elements.SetValue(Keys.OP, new PDFBoolean(false));//            Elements.SetValue(Keys.OPM, new PDFInteger(1));//#endif
 
         /// <summary>
         /// Used in Edf.Xps.
@@ -186,7 +186,7 @@ namespace PDFSharp.Interop.Advanced
         /// <summary>
         /// Sets a soft mask object.
         /// </summary>
-        public PdfSoftMask SoftMask
+        public PDFSoftMask SoftMask
         {
             set => Elements.SetReference(Keys.SMask, value);
         }

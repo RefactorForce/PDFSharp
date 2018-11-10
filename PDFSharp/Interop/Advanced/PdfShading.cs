@@ -36,7 +36,7 @@ using System.DrawingCore.Imaging;
 using System.Windows.Media;
 #endif
 using PDFSharp.Drawing;
-using PDFSharp.Drawing.Pdf;
+using PDFSharp.Drawing.PDF;
 using PDFSharp.Interop.Internal;
 
 namespace PDFSharp.Interop.Advanced
@@ -44,31 +44,31 @@ namespace PDFSharp.Interop.Advanced
     /// <summary>
     /// Represents a shading dictionary.
     /// </summary>
-    public sealed class PdfShading : PdfDictionary
+    public sealed class PDFShading : PDFDictionary
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfShading"/> class.
+        /// Initializes a new instance of the <see cref="PDFShading"/> class.
         /// </summary>
-        public PdfShading(PdfDocument document)
+        public PDFShading(PDFDocument document)
             : base(document)
         { }
 
         /// <summary>
         /// Setups the shading from the specified brush.
         /// </summary>
-        internal void SetupFromBrush(XLinearGradientBrush brush, XGraphicsPdfRenderer renderer)
+        internal void SetupFromBrush(XLinearGradientBrush brush, XGraphicsPDFRenderer renderer)
         {
             if (brush == null)
                 throw new ArgumentNullException("brush");
 
-            PdfColorMode colorMode = _document.Options.ColorMode;
+            PDFColorMode colorMode = _document.Options.ColorMode;
             XColor color1 = ColorSpaceHelper.EnsureColorMode(colorMode, brush._color1);
             XColor color2 = ColorSpaceHelper.EnsureColorMode(colorMode, brush._color2);
 
-            PdfDictionary function = new PdfDictionary();
+            PDFDictionary function = new PDFDictionary();
 
-            Elements[Keys.ShadingType] = new PdfInteger(2);
-            Elements[Keys.ColorSpace] = colorMode != PdfColorMode.Cmyk ? new PdfName("/DeviceRGB") : new PdfName("/DeviceCMYK");
+            Elements[Keys.ShadingType] = new PDFInteger(2);
+            Elements[Keys.ColorSpace] = colorMode != PDFColorMode.Cmyk ? new PDFName("/DeviceRGB") : new PDFName("/DeviceCMYK");
 
             double x1 = 0, y1 = 0, x2 = 0, y2 = 0;
             if (brush._useRect)
@@ -119,21 +119,21 @@ namespace PDFSharp.Interop.Advanced
             }
 
             const string format = Config.SignificantFigures3;
-            Elements[Keys.Coords] = new PdfLiteral("[{0:" + format + "} {1:" + format + "} {2:" + format + "} {3:" + format + "}]", x1, y1, x2, y2);
+            Elements[Keys.Coords] = new PDFLiteral("[{0:" + format + "} {1:" + format + "} {2:" + format + "} {3:" + format + "}]", x1, y1, x2, y2);
 
-            //Elements[Keys.Background] = new PdfRawItem("[0 1 1]");
+            //Elements[Keys.Background] = new PDFRawItem("[0 1 1]");
             //Elements[Keys.Domain] = 
             Elements[Keys.Function] = function;
-            //Elements[Keys.Extend] = new PdfRawItem("[true true]");
+            //Elements[Keys.Extend] = new PDFRawItem("[true true]");
 
-            string clr1 = "[" + PdfEncoders.ToString(color1, colorMode) + "]";
-            string clr2 = "[" + PdfEncoders.ToString(color2, colorMode) + "]";
+            string clr1 = "[" + PDFEncoders.ToString(color1, colorMode) + "]";
+            string clr2 = "[" + PDFEncoders.ToString(color2, colorMode) + "]";
 
-            function.Elements["/FunctionType"] = new PdfInteger(2);
-            function.Elements["/C0"] = new PdfLiteral(clr1);
-            function.Elements["/C1"] = new PdfLiteral(clr2);
-            function.Elements["/Domain"] = new PdfLiteral("[0 1]");
-            function.Elements["/N"] = new PdfInteger(1);
+            function.Elements["/FunctionType"] = new PDFInteger(2);
+            function.Elements["/C0"] = new PDFLiteral(clr1);
+            function.Elements["/C1"] = new PDFLiteral(clr2);
+            function.Elements["/Domain"] = new PDFLiteral("[0 1]");
+            function.Elements["/N"] = new PDFInteger(1);
         }
 
         /// <summary>

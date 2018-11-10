@@ -47,23 +47,23 @@ namespace PDFSharp.Interop
     /// Represents a PDF rectangle value, that is internally an array with 4 real values.
     /// </summary>
     [DebuggerDisplay("{DebuggerDisplay}")]
-    public sealed class PdfRectangle : PdfItem
+    public sealed class PDFRectangle : PDFItem
     {
         // This class must behave like a value type. Therefore it cannot be changed (like System.String).
 
         /// <summary>
-        /// Initializes a new instance of the PdfRectangle class.
+        /// Initializes a new instance of the PDFRectangle class.
         /// </summary>
-        public PdfRectangle()
+        public PDFRectangle()
         { }
 
         /// <summary>
-        /// Initializes a new instance of the PdfRectangle class with two points specifying
+        /// Initializes a new instance of the PDFRectangle class with two points specifying
         /// two diagonally opposite corners. Notice that in contrast to GDI+ convention the 
         /// 3rd and the 4th parameter specify a point and not a width. This is so much confusing
         /// that this function is for internal use only.
         /// </summary>
-        internal PdfRectangle(double x1, double y1, double x2, double y2)
+        internal PDFRectangle(double x1, double y1, double x2, double y2)
         {
             X1 = x1;
             Y1 = y1;
@@ -73,10 +73,10 @@ namespace PDFSharp.Interop
 
 #if GDI
         /// <summary>
-        /// Initializes a new instance of the PdfRectangle class with two points specifying
+        /// Initializes a new instance of the PDFRectangle class with two points specifying
         /// two diagonally opposite corners.
         /// </summary>
-        public PdfRectangle(PointF pt1, PointF pt2)
+        public PDFRectangle(PointF pt1, PointF pt2)
         {
             _x1 = pt1.X;
             _y1 = pt1.Y;
@@ -86,10 +86,10 @@ namespace PDFSharp.Interop
 #endif
 
         /// <summary>
-        /// Initializes a new instance of the PdfRectangle class with two points specifying
+        /// Initializes a new instance of the PDFRectangle class with two points specifying
         /// two diagonally opposite corners.
         /// </summary>
-        public PdfRectangle(XPoint pt1, XPoint pt2)
+        public PDFRectangle(XPoint pt1, XPoint pt2)
         {
             X1 = pt1.X;
             Y1 = pt1.Y;
@@ -99,9 +99,9 @@ namespace PDFSharp.Interop
 
 #if GDI
         /// <summary>
-        /// Initializes a new instance of the PdfRectangle class with the specified location and size.
+        /// Initializes a new instance of the PDFRectangle class with the specified location and size.
         /// </summary>
-        public PdfRectangle(PointF pt, SizeF size)
+        public PDFRectangle(PointF pt, SizeF size)
         {
             _x1 = pt.X;
             _y1 = pt.Y;
@@ -111,9 +111,9 @@ namespace PDFSharp.Interop
 #endif
 
         /// <summary>
-        /// Initializes a new instance of the PdfRectangle class with the specified location and size.
+        /// Initializes a new instance of the PDFRectangle class with the specified location and size.
         /// </summary>
-        public PdfRectangle(XPoint pt, XSize size)
+        public PDFRectangle(XPoint pt, XSize size)
         {
             X1 = pt.X;
             Y1 = pt.Y;
@@ -122,9 +122,9 @@ namespace PDFSharp.Interop
         }
 
         /// <summary>
-        /// Initializes a new instance of the PdfRectangle class with the specified XRect.
+        /// Initializes a new instance of the PDFRectangle class with the specified XRect.
         /// </summary>
-        public PdfRectangle(XRect rect)
+        public PDFRectangle(XRect rect)
         {
             X1 = rect.X;
             Y1 = rect.Y;
@@ -133,18 +133,18 @@ namespace PDFSharp.Interop
         }
 
         /// <summary>
-        /// Initializes a new instance of the PdfRectangle class with the specified PdfArray.
+        /// Initializes a new instance of the PDFRectangle class with the specified PDFArray.
         /// </summary>
-        internal PdfRectangle(PdfItem item)
+        internal PDFRectangle(PDFItem item)
         {
-            if (item == null || item is PdfNull)
+            if (item == null || item is PDFNull)
                 return;
 
-            if (item is PdfReference)
-                item = ((PdfReference)item).Value;
+            if (item is PDFReference)
+                item = ((PDFReference)item).Value;
 
-            if (!(item is PdfArray array))
-                throw new InvalidOperationException(PSSR.UnexpectedTokenInPdfFile);
+            if (!(item is PDFArray array))
+                throw new InvalidOperationException(PSSR.UnexpectedTokenInPDFFile);
 
             X1 = array.Elements.GetReal(0);
             Y1 = array.Elements.GetReal(1);
@@ -155,14 +155,14 @@ namespace PDFSharp.Interop
         /// <summary>
         /// Clones this instance.
         /// </summary>
-        public new PdfRectangle Clone() => (PdfRectangle)Copy();
+        public new PDFRectangle Clone() => (PDFRectangle)Copy();
 
         /// <summary>
         /// Implements cloning this instance.
         /// </summary>
         protected override object Copy()
         {
-            PdfRectangle rect = (PdfRectangle)base.Copy();
+            PDFRectangle rect = (PDFRectangle)base.Copy();
             return rect;
         }
 
@@ -172,15 +172,15 @@ namespace PDFSharp.Interop
         public bool IsEmpty => X1 == 0 && Y1 == 0 && X2 == 0 && Y2 == 0;
 
         /// <summary>
-        /// Tests whether the specified object is a PdfRectangle and has equal coordinates.
+        /// Tests whether the specified object is a PDFRectangle and has equal coordinates.
         /// </summary>
         public override bool Equals(object obj)
         {
             // ReSharper disable CompareOfFloatsByEqualityOperator
-            PdfRectangle rectangle = obj as PdfRectangle;
+            PDFRectangle rectangle = obj as PDFRectangle;
             if (rectangle != null)
             {
-                PdfRectangle rect = rectangle;
+                PDFRectangle rect = rectangle;
                 return rect.X1 == X1 && rect.Y1 == Y1 && rect.X2 == X2 && rect.Y2 == Y2;
             }
             return false;
@@ -200,7 +200,7 @@ namespace PDFSharp.Interop
         /// <summary>
         /// Tests whether two structures have equal coordinates.
         /// </summary>
-        public static bool operator ==(PdfRectangle left, PdfRectangle right) =>
+        public static bool operator ==(PDFRectangle left, PDFRectangle right) =>
             // ReSharper disable CompareOfFloatsByEqualityOperator
             // use: if (Object.ReferenceEquals(left, null))
             !(left is null)
@@ -210,25 +210,25 @@ namespace PDFSharp.Interop
         /// <summary>
         /// Tests whether two structures differ in one or more coordinates.
         /// </summary>
-        public static bool operator !=(PdfRectangle left, PdfRectangle right) => !(left == right);
+        public static bool operator !=(PDFRectangle left, PDFRectangle right) => !(left == right);
 
         /// <summary>
-        /// Gets or sets the x-coordinate of the first corner of this PdfRectangle.
+        /// Gets or sets the x-coordinate of the first corner of this PDFRectangle.
         /// </summary>
         public double X1 { get; }
 
         /// <summary>
-        /// Gets or sets the y-coordinate of the first corner of this PdfRectangle.
+        /// Gets or sets the y-coordinate of the first corner of this PDFRectangle.
         /// </summary>
         public double Y1 { get; }
 
         /// <summary>
-        /// Gets or sets the x-coordinate of the second corner of this PdfRectangle.
+        /// Gets or sets the x-coordinate of the second corner of this PDFRectangle.
         /// </summary>
         public double X2 { get; }
 
         /// <summary>
-        /// Gets or sets the y-coordinate of the second corner of this PdfRectangle.
+        /// Gets or sets the y-coordinate of the second corner of this PDFRectangle.
         /// </summary>
         public double Y2 { get; }
 
@@ -243,18 +243,18 @@ namespace PDFSharp.Interop
         public double Height => Y2 - Y1;
 
         /// <summary>
-        /// Gets or sets the coordinates of the first point of this PdfRectangle.
+        /// Gets or sets the coordinates of the first point of this PDFRectangle.
         /// </summary>
         public XPoint Location => new XPoint(X1, Y1);
 
         /// <summary>
-        /// Gets or sets the size of this PdfRectangle.
+        /// Gets or sets the size of this PDFRectangle.
         /// </summary>
         public XSize Size => new XSize(X2 - X1, Y2 - Y1);
 
 #if GDI
         /// <summary>
-        /// Determines if the specified point is contained within this PdfRectangle.
+        /// Determines if the specified point is contained within this PDFRectangle.
         /// </summary>
         public bool Contains(PointF pt)
         {
@@ -263,12 +263,12 @@ namespace PDFSharp.Interop
 #endif
 
         /// <summary>
-        /// Determines if the specified point is contained within this PdfRectangle.
+        /// Determines if the specified point is contained within this PDFRectangle.
         /// </summary>
         public bool Contains(XPoint pt) => Contains(pt.X, pt.Y);
 
         /// <summary>
-        /// Determines if the specified point is contained within this PdfRectangle.
+        /// Determines if the specified point is contained within this PDFRectangle.
         /// </summary>
         public bool Contains(double x, double y) =>
             // Treat rectangle inclusive/inclusive.
@@ -276,7 +276,7 @@ namespace PDFSharp.Interop
 
 #if GDI
         /// <summary>
-        /// Determines if the rectangular region represented by rect is entirely contained within this PdfRectangle.
+        /// Determines if the rectangular region represented by rect is entirely contained within this PDFRectangle.
         /// </summary>
         public bool Contains(RectangleF rect)
         {
@@ -286,15 +286,15 @@ namespace PDFSharp.Interop
 #endif
 
         /// <summary>
-        /// Determines if the rectangular region represented by rect is entirely contained within this PdfRectangle.
+        /// Determines if the rectangular region represented by rect is entirely contained within this PDFRectangle.
         /// </summary>
         public bool Contains(XRect rect) => X1 <= rect.X && rect.X + rect.Width <= X2 &&
               Y1 <= rect.Y && rect.Y + rect.Height <= Y2;
 
         /// <summary>
-        /// Determines if the rectangular region represented by rect is entirely contained within this PdfRectangle.
+        /// Determines if the rectangular region represented by rect is entirely contained within this PDFRectangle.
         /// </summary>
-        public bool Contains(PdfRectangle rect) => X1 <= rect.X1 && rect.X2 <= X2 &&
+        public bool Contains(PDFRectangle rect) => X1 <= rect.X1 && rect.X2 <= X2 &&
               Y1 <= rect.Y1 && rect.Y2 <= Y2;
 
         /// <summary>
@@ -308,13 +308,13 @@ namespace PDFSharp.Interop
         public override string ToString()
         {
             const string format = Config.SignificantFigures3;
-            return PdfEncoders.Format("[{0:" + format + "} {1:" + format + "} {2:" + format + "} {3:" + format + "}]", X1, Y1, X2, Y2);
+            return PDFEncoders.Format("[{0:" + format + "} {1:" + format + "} {2:" + format + "} {3:" + format + "}]", X1, Y1, X2, Y2);
         }
 
         /// <summary>
         /// Writes the rectangle.
         /// </summary>
-        internal override void WriteObject(PdfWriter writer) => writer.Write(this);
+        internal override void WriteObject(PDFWriter writer) => writer.Write(this);
 
         /// <summary>
         /// Gets the DebuggerDisplayAttribute text.
@@ -333,7 +333,7 @@ namespace PDFSharp.Interop
 
 #if false // This object is considered as immutable.
     //    /// <summary>
-    //    /// Adjusts the location of this PdfRectangle by the specified amount.
+    //    /// Adjusts the location of this PDFRectangle by the specified amount.
     //    /// </summary>
     //    public void Offset(PointF pos)
     //    {
@@ -341,7 +341,7 @@ namespace PDFSharp.Interop
     //    }
     //
     //    /// <summary>
-    //    /// Adjusts the location of this PdfRectangle by the specified amount.
+    //    /// Adjusts the location of this PDFRectangle by the specified amount.
     //    /// </summary>
     //    public void Offset(double x, double y)
     //    {
@@ -352,7 +352,7 @@ namespace PDFSharp.Interop
     //    }
     //
     //    /// <summary>
-    //    /// Inflates this PdfRectangle by the specified amount.
+    //    /// Inflates this PDFRectangle by the specified amount.
     //    /// </summary>
     //    public void Inflate(double x, double y)
     //    {
@@ -363,7 +363,7 @@ namespace PDFSharp.Interop
     //    }
     //
     //    /// <summary>
-    //    /// Inflates this PdfRectangle by the specified amount.
+    //    /// Inflates this PDFRectangle by the specified amount.
     //    /// </summary>
     //    public void Inflate(SizeF size)
     //    {
@@ -371,20 +371,20 @@ namespace PDFSharp.Interop
     //    }
     //
     //    /// <summary>
-    //    /// Creates and returns an inflated copy of the specified PdfRectangle.
+    //    /// Creates and returns an inflated copy of the specified PDFRectangle.
     //    /// </summary>
-    //    public static PdfRectangle Inflate(PdfRectangle rect, double x, double y)
+    //    public static PDFRectangle Inflate(PDFRectangle rect, double x, double y)
     //    {
     //      rect.Inflate(x, y);
     //      return rect;
     //    }
     //
     //    /// <summary>
-    //    /// Replaces this PdfRectangle with the intersection of itself and the specified PdfRectangle.
+    //    /// Replaces this PDFRectangle with the intersection of itself and the specified PDFRectangle.
     //    /// </summary>
-    //    public void Intersect(PdfRectangle rect)
+    //    public void Intersect(PDFRectangle rect)
     //    {
-    //      PdfRectangle rect2 = PdfRectangle.Intersect(rect, this);
+    //      PDFRectangle rect2 = PDFRectangle.Intersect(rect, this);
     //      _x1 = rect2.x1;
     //      _y1 = rect2.y1;
     //      _x2 = rect2.x2;
@@ -392,24 +392,24 @@ namespace PDFSharp.Interop
     //    }
     //
     //    /// <summary>
-    //    /// Returns a PdfRectangle that represents the intersection of two rectangles. If there is no intersection,
-    //    /// an empty PdfRectangle is returned.
+    //    /// Returns a PDFRectangle that represents the intersection of two rectangles. If there is no intersection,
+    //    /// an empty PDFRectangle is returned.
     //    /// </summary>
-    //    public static PdfRectangle Intersect(PdfRectangle rect1, PdfRectangle rect2)
+    //    public static PDFRectangle Intersect(PDFRectangle rect1, PDFRectangle rect2)
     //    {
     //      double xx1 = Math.Max(rect1.x1, rect2.x1);
     //      double xx2 = Math.Min(rect1.x2, rect2.x2);
     //      double yy1 = Math.Max(rect1.y1, rect2.y1);
     //      double yy2 = Math.Min(rect1.y2, rect2.y2);
     //      if (xx2 >= xx1 && yy2 >= yy1)
-    //        return new PdfRectangle(xx1, yy1, xx2, yy2);
-    //      return PdfRectangle.Empty;
+    //        return new PDFRectangle(xx1, yy1, xx2, yy2);
+    //      return PDFRectangle.Empty;
     //    }
     //
     //    /// <summary>
-    //    /// Determines if this rectangle intersects with the specified PdfRectangle.
+    //    /// Determines if this rectangle intersects with the specified PDFRectangle.
     //    /// </summary>
-    //    public bool IntersectsWith(PdfRectangle rect)
+    //    public bool IntersectsWith(PDFRectangle rect)
     //    {
     //      return rect.x1 < _x2 && _x1 < rect.x2 && rect.y1 < _y2 && _y1 < rect.y2;
     //    }
@@ -417,17 +417,17 @@ namespace PDFSharp.Interop
     //    /// <summary>
     //    /// Creates the smallest rectangle that can contain both of two specified rectangles.
     //    /// </summary>
-    //    public static PdfRectangle Union(PdfRectangle rect1, PdfRectangle rect2)
+    //    public static PDFRectangle Union(PDFRectangle rect1, PDFRectangle rect2)
     //    {
-    //      return new PdfRectangle(
+    //      return new PDFRectangle(
     //        Math.Min(rect1.x1, rect2.x1), Math.Max(rect1.x2, rect2.x2),
     //        Math.Min(rect1.y1, rect2.y1), Math.Max(rect1.y2, rect2.y2));
     //    }
 #endif
 
         /// <summary>
-        /// Represents an empty PdfRectangle.
+        /// Represents an empty PDFRectangle.
         /// </summary>
-        public static readonly PdfRectangle Empty = new PdfRectangle();
+        public static readonly PDFRectangle Empty = new PDFRectangle();
     }
 }

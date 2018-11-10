@@ -34,16 +34,16 @@ namespace PDFSharp.Interop
     /// <summary>
     /// Represents the PDF document information dictionary.
     /// </summary>
-    public sealed class PdfDocumentInformation : PdfDictionary
+    public sealed class PDFDocumentInformation : PDFDictionary
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfDocumentInformation"/> class.
+        /// Initializes a new instance of the <see cref="PDFDocumentInformation"/> class.
         /// </summary>
-        public PdfDocumentInformation(PdfDocument document)
+        public PDFDocumentInformation(PDFDocument document)
             : base(document)
         { }
 
-        internal PdfDocumentInformation(PdfDictionary dict)
+        internal PDFDocumentInformation(PDFDictionary dict)
             : base(dict)
         { }
 

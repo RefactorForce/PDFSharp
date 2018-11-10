@@ -40,10 +40,10 @@ namespace PDFSharp.Interop.Advanced
     /// Provides access to the internal document data structures. This class prevents the public
     /// interfaces from pollution with to much internal functions.
     /// </summary>
-    public class PdfInternals  // TODO: PdfDocumentInternals... PdfPageInterals etc.
+    public class PDFInternals  // TODO: PDFDocumentInternals... PDFPageInterals etc.
     {
-        internal PdfInternals(PdfDocument document) => _document = document;
-        readonly PdfDocument _document;
+        internal PDFInternals(PDFDocument document) => _document = document;
+        readonly PDFDocument _document;
 
         /// <summary>
         /// Gets or sets the first document identifier.
@@ -88,35 +88,35 @@ namespace PDFSharp.Interop.Advanced
         /// <summary>
         /// Gets the catalog dictionary.
         /// </summary>
-        public PdfCatalog Catalog => _document.Catalog;
+        public PDFCatalog Catalog => _document.Catalog;
 
         /// <summary>
         /// Gets the ExtGStateTable object.
         /// </summary>
-        public PdfExtGStateTable ExtGStateTable => _document.ExtGStateTable;
+        public PDFExtGStateTable ExtGStateTable => _document.ExtGStateTable;
 
         /// <summary>
         /// Returns the object with the specified Identifier, or null, if no such object exists.
         /// </summary>
-        public PdfObject GetObject(PdfObjectID objectID) => _document._irefTable[objectID].Value;
+        public PDFObject GetObject(PDFObjectID objectID) => _document._irefTable[objectID].Value;
 
         /// <summary>
         /// Maps the specified external object to the substitute object in this document.
         /// Returns null if no such object exists.
         /// </summary>
-        public PdfObject MapExternalObject(PdfObject externalObject)
+        public PDFObject MapExternalObject(PDFObject externalObject)
         {
-            PdfFormXObjectTable table = _document.FormTable;
-            PdfImportedObjectTable iot = table.GetImportedObjectTable(externalObject.Owner);
-            PdfReference reference = iot[externalObject.ObjectID];
+            PDFFormXObjectTable table = _document.FormTable;
+            PDFImportedObjectTable iot = table.GetImportedObjectTable(externalObject.Owner);
+            PDFReference reference = iot[externalObject.ObjectID];
             return reference?.Value;
         }
 
         /// <summary>
-        /// Returns the PdfReference of the specified object, or null, if the object is not in the
+        /// Returns the PDFReference of the specified object, or null, if the object is not in the
         /// document's object table.
         /// </summary>
-        public static PdfReference GetReference(PdfObject obj)
+        public static PDFReference GetReference(PDFObject obj)
         {
             if (obj == null)
                 throw new ArgumentNullException("obj");
@@ -126,7 +126,7 @@ namespace PDFSharp.Interop.Advanced
         /// <summary>
         /// Gets the object identifier of the specified object.
         /// </summary>
-        public static PdfObjectID GetObjectID(PdfObject obj)
+        public static PDFObjectID GetObjectID(PDFObject obj)
         {
             if (obj == null)
                 throw new ArgumentNullException("obj");
@@ -136,7 +136,7 @@ namespace PDFSharp.Interop.Advanced
         /// <summary>
         /// Gets the object number of the specified object.
         /// </summary>
-        public static int GetObjectNumber(PdfObject obj)
+        public static int GetObjectNumber(PDFObject obj)
         {
             if (obj == null)
                 throw new ArgumentNullException("obj");
@@ -146,7 +146,7 @@ namespace PDFSharp.Interop.Advanced
         /// <summary>
         /// Gets the generation number of the specified object.
         /// </summary>
-        public static int GenerationNumber(PdfObject obj)
+        public static int GenerationNumber(PDFObject obj)
         {
             if (obj == null)
                 throw new ArgumentNullException("obj");
@@ -156,11 +156,11 @@ namespace PDFSharp.Interop.Advanced
         /// <summary>
         /// Gets all indirect objects ordered by their object identifier.
         /// </summary>
-        public PdfObject[] GetAllObjects()
+        public PDFObject[] GetAllObjects()
         {
-            PdfReference[] irefs = _document._irefTable.AllReferences;
+            PDFReference[] irefs = _document._irefTable.AllReferences;
             int count = irefs.Length;
-            PdfObject[] objects = new PdfObject[count];
+            PDFObject[] objects = new PDFObject[count];
             for (int idx = 0; idx < count; idx++)
                 objects[idx] = irefs[idx].Value;
             return objects;
@@ -170,13 +170,13 @@ namespace PDFSharp.Interop.Advanced
         /// Gets all indirect objects ordered by their object identifier.
         /// </summary>
         [Obsolete("Use GetAllObjects.")]  // Properties should not return arrays
-        public PdfObject[] AllObjects => GetAllObjects();
+        public PDFObject[] AllObjects => GetAllObjects();
 
         /// <summary>
         /// Creates the indirect object of the specified type, adds it to the document,
         /// and returns the object.
         /// </summary>
-        public T CreateIndirectObject<T>() where T : PdfObject
+        public T CreateIndirectObject<T>() where T : PDFObject
         {
 #if true
             T obj = Activator.CreateInstance<T>();
@@ -185,7 +185,7 @@ namespace PDFSharp.Interop.Advanced
             T result = null;
 #if !NETFX_CORE && !UWP
             ConstructorInfo ctorInfo = typeof(T).GetConstructor(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.ExactBinding,
-                null, new Type[] { typeof(PdfDocument) }, null);
+                null, new Type[] { typeof(PDFDocument) }, null);
 #else
             ConstructorInfo ctorInfo = null; // TODO
 #endif
@@ -204,7 +204,7 @@ namespace PDFSharp.Interop.Advanced
         /// Adds an object to the PDF document. This operation and only this operation makes the object 
         /// an indirect object owned by this document.
         /// </summary>
-        public void AddObject(PdfObject obj)
+        public void AddObject(PDFObject obj)
         {
             if (obj == null)
                 throw new ArgumentNullException("obj");
@@ -218,7 +218,7 @@ namespace PDFSharp.Interop.Advanced
         /// <summary>
         /// Removes an object from the PDF document.
         /// </summary>
-        public void RemoveObject(PdfObject obj)
+        public void RemoveObject(PDFObject obj)
         {
             if (obj == null)
                 throw new ArgumentNullException("obj");
@@ -237,17 +237,17 @@ namespace PDFSharp.Interop.Advanced
         /// as long as no new objects came along. This is e.g. useful for getting all objects belonging 
         /// to the resources of a page.
         /// </summary>
-        public PdfObject[] GetClosure(PdfObject obj) => GetClosure(obj, Int32.MaxValue);
+        public PDFObject[] GetClosure(PDFObject obj) => GetClosure(obj, Int32.MaxValue);
 
         /// <summary>
         /// Returns an array containing the specified object as first element follows by its transitive
         /// closure limited by the specified number of iterations.
         /// </summary>
-        public PdfObject[] GetClosure(PdfObject obj, int depth)
+        public PDFObject[] GetClosure(PDFObject obj, int depth)
         {
-            PdfReference[] references = _document._irefTable.TransitiveClosure(obj, depth);
+            PDFReference[] references = _document._irefTable.TransitiveClosure(obj, depth);
             int count = references.Length + 1;
-            PdfObject[] objects = new PdfObject[count];
+            PDFObject[] objects = new PDFObject[count];
             objects[0] = obj;
             for (int idx = 1; idx < count; idx++)
                 objects[idx] = references[idx - 1].Value;
@@ -255,15 +255,15 @@ namespace PDFSharp.Interop.Advanced
         }
 
         /// <summary>
-        /// Writes a PdfItem into the specified stream.
+        /// Writes a PDFItem into the specified stream.
         /// </summary>
-        // This function exists to keep PdfWriter and PdfItem.WriteObject internal.
-        public void WriteObject(Stream stream, PdfItem item)
+        // This function exists to keep PDFWriter and PDFItem.WriteObject internal.
+        public void WriteObject(Stream stream, PDFItem item)
         {
             // Never write an encrypted object
-            PdfWriter writer = new PdfWriter(stream, null)
+            PDFWriter writer = new PDFWriter(stream, null)
             {
-                Options = PdfWriterOptions.OmitStream
+                Options = PDFWriterOptions.OmitStream
             };
             item.WriteObject(writer);
         }
@@ -271,6 +271,6 @@ namespace PDFSharp.Interop.Advanced
         /// <summary>
         /// The name of the custom value key.
         /// </summary>
-        public string CustomValueKey = "/PdfSharp.CustomValue";
+        public string CustomValueKey = "/PDFSharp.CustomValue";
     }
 }

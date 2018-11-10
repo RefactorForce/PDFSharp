@@ -34,30 +34,30 @@ namespace PDFSharp.Interop.Advanced
     /// <summary>
     /// Represents a PDF resource object.
     /// </summary>
-    public sealed class PdfResources : PdfDictionary
+    public sealed class PDFResources : PDFDictionary
     {
         // Resource management works roughly like this:
-        // When the user creates an XFont and uses it in the XGraphics of a PdfPage, then at the first time
-        // a PdfFont is created and cached in the document global font table. If the user creates a new
-        // XFont object for an exisisting PdfFont, the PdfFont object is reused. When the PdfFont is added
-        // to the resources of a PdfPage for the first time, it is added to the page local PdfResourceMap for 
+        // When the user creates an XFont and uses it in the XGraphics of a PDFPage, then at the first time
+        // a PDFFont is created and cached in the document global font table. If the user creates a new
+        // XFont object for an exisisting PDFFont, the PDFFont object is reused. When the PDFFont is added
+        // to the resources of a PDFPage for the first time, it is added to the page local PDFResourceMap for 
         // fonts and automatically associated with a local resource name.
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfResources"/> class.
+        /// Initializes a new instance of the <see cref="PDFResources"/> class.
         /// </summary>
         /// <param name="document">The document.</param>
-        public PdfResources(PdfDocument document)
-            : base(document) => Elements[Keys.ProcSet] = new PdfLiteral("[/PDF/Text/ImageB/ImageC/ImageI]");
+        public PDFResources(PDFDocument document)
+            : base(document) => Elements[Keys.ProcSet] = new PDFLiteral("[/PDF/Text/ImageB/ImageC/ImageI]");
 
-        internal PdfResources(PdfDictionary dict)
+        internal PDFResources(PDFDictionary dict)
             : base(dict)
         { }
 
         /// <summary>
         /// Adds the specified font to this resource dictionary and returns its local resource name.
         /// </summary>
-        public string AddFont(PdfFont font)
+        public string AddFont(PDFFont font)
         {
             if (!_resources.TryGetValue(font, out string name))
             {
@@ -74,7 +74,7 @@ namespace PDFSharp.Interop.Advanced
         /// Adds the specified image to this resource dictionary
         /// and returns its local resource name.
         /// </summary>
-        public string AddImage(PdfImage image)
+        public string AddImage(PDFImage image)
         {
             if (!_resources.TryGetValue(image, out string name))
             {
@@ -91,7 +91,7 @@ namespace PDFSharp.Interop.Advanced
         /// Adds the specified form object to this resource dictionary
         /// and returns its local resource name.
         /// </summary>
-        public string AddForm(PdfFormXObject form)
+        public string AddForm(PDFFormXObject form)
         {
             if (!_resources.TryGetValue(form, out string name))
             {
@@ -108,7 +108,7 @@ namespace PDFSharp.Interop.Advanced
         /// Adds the specified graphics state to this resource dictionary
         /// and returns its local resource name.
         /// </summary>
-        public string AddExtGState(PdfExtGState extGState)
+        public string AddExtGState(PDFExtGState extGState)
         {
             if (!_resources.TryGetValue(extGState, out string name))
             {
@@ -125,7 +125,7 @@ namespace PDFSharp.Interop.Advanced
         /// Adds the specified pattern to this resource dictionary
         /// and returns its local resource name.
         /// </summary>
-        public string AddPattern(PdfShadingPattern pattern)
+        public string AddPattern(PDFShadingPattern pattern)
         {
             if (!_resources.TryGetValue(pattern, out string name))
             {
@@ -142,7 +142,7 @@ namespace PDFSharp.Interop.Advanced
         /// Adds the specified pattern to this resource dictionary
         /// and returns its local resource name.
         /// </summary>
-        public string AddPattern(PdfTilingPattern pattern)
+        public string AddPattern(PDFTilingPattern pattern)
         {
             if (!_resources.TryGetValue(pattern, out string name))
             {
@@ -159,7 +159,7 @@ namespace PDFSharp.Interop.Advanced
         /// Adds the specified shading to this resource dictionary
         /// and returns its local resource name.
         /// </summary>
-        public string AddShading(PdfShading shading)
+        public string AddShading(PDFShading shading)
         {
             if (!_resources.TryGetValue(shading, out string name))
             {
@@ -175,34 +175,34 @@ namespace PDFSharp.Interop.Advanced
         /// <summary>
         /// Gets the fonts map.
         /// </summary>
-        internal PdfResourceMap Fonts => _fonts ?? (_fonts = (PdfResourceMap)Elements.GetValue(Keys.Font, VCF.Create));
-        PdfResourceMap _fonts;
+        internal PDFResourceMap Fonts => _fonts ?? (_fonts = (PDFResourceMap)Elements.GetValue(Keys.Font, VCF.Create));
+        PDFResourceMap _fonts;
 
         /// <summary>
         /// Gets the external objects map.
         /// </summary>
-        internal PdfResourceMap XObjects => _xObjects ?? (_xObjects = (PdfResourceMap)Elements.GetValue(Keys.XObject, VCF.Create));
-        PdfResourceMap _xObjects;
+        internal PDFResourceMap XObjects => _xObjects ?? (_xObjects = (PDFResourceMap)Elements.GetValue(Keys.XObject, VCF.Create));
+        PDFResourceMap _xObjects;
 
         // TODO: make own class
-        internal PdfResourceMap ExtGStates => _extGStates ?? (_extGStates = (PdfResourceMap)Elements.GetValue(Keys.ExtGState, VCF.Create));
-        PdfResourceMap _extGStates;
+        internal PDFResourceMap ExtGStates => _extGStates ?? (_extGStates = (PDFResourceMap)Elements.GetValue(Keys.ExtGState, VCF.Create));
+        PDFResourceMap _extGStates;
 
         // TODO: make own class
-        internal PdfResourceMap ColorSpaces => _colorSpaces ?? (_colorSpaces = (PdfResourceMap)Elements.GetValue(Keys.ColorSpace, VCF.Create));
-        PdfResourceMap _colorSpaces;
+        internal PDFResourceMap ColorSpaces => _colorSpaces ?? (_colorSpaces = (PDFResourceMap)Elements.GetValue(Keys.ColorSpace, VCF.Create));
+        PDFResourceMap _colorSpaces;
 
         // TODO: make own class
-        internal PdfResourceMap Patterns => _patterns ?? (_patterns = (PdfResourceMap)Elements.GetValue(Keys.Pattern, VCF.Create));
-        PdfResourceMap _patterns;
+        internal PDFResourceMap Patterns => _patterns ?? (_patterns = (PDFResourceMap)Elements.GetValue(Keys.Pattern, VCF.Create));
+        PDFResourceMap _patterns;
 
         // TODO: make own class
-        internal PdfResourceMap Shadings => _shadings ?? (_shadings = (PdfResourceMap)Elements.GetValue(Keys.Shading, VCF.Create));
-        PdfResourceMap _shadings;
+        internal PDFResourceMap Shadings => _shadings ?? (_shadings = (PDFResourceMap)Elements.GetValue(Keys.Shading, VCF.Create));
+        PDFResourceMap _shadings;
 
         // TODO: make own class
-        internal PdfResourceMap Properties => _properties ?? (_properties = (PdfResourceMap)Elements.GetValue(Keys.Properties, VCF.Create));
-        PdfResourceMap _properties;
+        internal PDFResourceMap Properties => _properties ?? (_properties = (PDFResourceMap)Elements.GetValue(Keys.Properties, VCF.Create));
+        PDFResourceMap _properties;
 
         /// <summary>
         /// Gets a new local name for this resource.
@@ -338,7 +338,7 @@ namespace PDFSharp.Interop.Advanced
         /// <summary>
         /// Maps all PDFsharp resources to their local resource names.
         /// </summary>
-        readonly Dictionary<PdfObject, string> _resources = new Dictionary<PdfObject, string>();
+        readonly Dictionary<PDFObject, string> _resources = new Dictionary<PDFObject, string>();
 
         /// <summary>
         /// Predefined keys of this dictionary.
@@ -349,39 +349,39 @@ namespace PDFSharp.Interop.Advanced
             /// (Optional) A dictionary that maps resource names to graphics state 
             /// parameter dictionaries.
             /// </summary>
-            [KeyInfo(KeyType.Dictionary | KeyType.Optional, typeof(PdfResourceMap))]
+            [KeyInfo(KeyType.Dictionary | KeyType.Optional, typeof(PDFResourceMap))]
             public const string ExtGState = "/ExtGState";
 
             /// <summary>
             /// (Optional) A dictionary that maps each resource name to either the name of a
             /// device-dependent color space or an array describing a color space.
             /// </summary>
-            [KeyInfo(KeyType.Dictionary | KeyType.Optional, typeof(PdfResourceMap))]
+            [KeyInfo(KeyType.Dictionary | KeyType.Optional, typeof(PDFResourceMap))]
             public const string ColorSpace = "/ColorSpace";
 
             /// <summary>
             /// (Optional) A dictionary that maps each resource name to either the name of a
             /// device-dependent color space or an array describing a color space.
             /// </summary>
-            [KeyInfo(KeyType.Dictionary | KeyType.Optional, typeof(PdfResourceMap))]
+            [KeyInfo(KeyType.Dictionary | KeyType.Optional, typeof(PDFResourceMap))]
             public const string Pattern = "/Pattern";
 
             /// <summary>
             /// (Optional; PDF 1.3) A dictionary that maps resource names to shading dictionaries.
             /// </summary>
-            [KeyInfo("1.3", KeyType.Dictionary | KeyType.Optional, typeof(PdfResourceMap))]
+            [KeyInfo("1.3", KeyType.Dictionary | KeyType.Optional, typeof(PDFResourceMap))]
             public const string Shading = "/Shading";
 
             /// <summary>
             /// (Optional) A dictionary that maps resource names to external objects.
             /// </summary>
-            [KeyInfo(KeyType.Dictionary | KeyType.Optional, typeof(PdfResourceMap))]
+            [KeyInfo(KeyType.Dictionary | KeyType.Optional, typeof(PDFResourceMap))]
             public const string XObject = "/XObject";
 
             /// <summary>
             /// (Optional) A dictionary that maps resource names to font dictionaries.
             /// </summary>
-            [KeyInfo(KeyType.Dictionary | KeyType.Optional, typeof(PdfResourceMap))]
+            [KeyInfo(KeyType.Dictionary | KeyType.Optional, typeof(PDFResourceMap))]
             public const string Font = "/Font";
 
             /// <summary>
@@ -394,7 +394,7 @@ namespace PDFSharp.Interop.Advanced
             /// (Optional; PDF 1.2) A dictionary that maps resource names to property list
             /// dictionaries for marked content.
             /// </summary>
-            [KeyInfo(KeyType.Dictionary | KeyType.Optional, typeof(PdfResourceMap))]
+            [KeyInfo(KeyType.Dictionary | KeyType.Optional, typeof(PDFResourceMap))]
             public const string Properties = "/Properties";
 
             /// <summary>

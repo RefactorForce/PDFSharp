@@ -41,13 +41,13 @@ namespace PDFSharp.Interop.Annotations
     /// <summary>
     /// Represents the annotations array of a page.
     /// </summary>
-    public sealed class PdfAnnotations : PdfArray
+    public sealed class PDFAnnotations : PDFArray
     {
-        internal PdfAnnotations(PdfDocument document)
+        internal PDFAnnotations(PDFDocument document)
             : base(document)
         { }
 
-        internal PdfAnnotations(PdfArray array)
+        internal PDFAnnotations(PDFArray array)
             : base(array)
         { }
 
@@ -55,7 +55,7 @@ namespace PDFSharp.Interop.Annotations
         /// Adds the specified annotation.
         /// </summary>
         /// <param name="annotation">The annotation.</param>
-        public void Add(PdfAnnotation annotation)
+        public void Add(PDFAnnotation annotation)
         {
             annotation.Document = Owner;
             Owner._irefTable.Add(annotation);
@@ -65,7 +65,7 @@ namespace PDFSharp.Interop.Annotations
         /// <summary>
         /// Removes an annotation from the document.
         /// </summary>
-        public void Remove(PdfAnnotation annotation)
+        public void Remove(PDFAnnotation annotation)
         {
             if (annotation.Owner != Owner)
                 throw new InvalidOperationException("The annotation does not belong to this document.");
@@ -83,7 +83,7 @@ namespace PDFSharp.Interop.Annotations
                 Page.Annotations.Remove(Page.Annotations[idx]);
         }
 
-        //public void Insert(int index, PdfAnnotation annotation)
+        //public void Insert(int index, PDFAnnotation annotation)
         //{
         //  annotation.Document = Document;
         //  annotations.Insert(index, annotation);
@@ -95,28 +95,28 @@ namespace PDFSharp.Interop.Annotations
         public int Count => Elements.Count;
 
         /// <summary>
-        /// Gets the <see cref="PdfAnnotation"/> at the specified index.
+        /// Gets the <see cref="PDFAnnotation"/> at the specified index.
         /// </summary>
-        public PdfAnnotation this[int index]
+        public PDFAnnotation this[int index]
         {
             get
             {
-                PdfReference iref;
-                PdfDictionary dict;
-                PdfItem item = Elements[index];
-                if ((iref = item as PdfReference) != null)
+                PDFReference iref;
+                PDFDictionary dict;
+                PDFItem item = Elements[index];
+                if ((iref = item as PDFReference) != null)
                 {
-                    Debug.Assert(iref.Value is PdfDictionary, "Reference to dictionary expected.");
-                    dict = (PdfDictionary)iref.Value;
+                    Debug.Assert(iref.Value is PDFDictionary, "Reference to dictionary expected.");
+                    dict = (PDFDictionary)iref.Value;
                 }
                 else
                 {
-                    Debug.Assert(item is PdfDictionary, "Dictionary expected.");
-                    dict = (PdfDictionary)item;
+                    Debug.Assert(item is PDFDictionary, "Dictionary expected.");
+                    dict = (PDFDictionary)item;
                 }
-                if (!(dict is PdfAnnotation annotation))
+                if (!(dict is PDFAnnotation annotation))
                 {
-                    annotation = new PdfGenericAnnotation(dict);
+                    annotation = new PDFGenericAnnotation(dict);
                     if (iref == null)
                         Elements[index] = annotation;
                 }
@@ -124,7 +124,7 @@ namespace PDFSharp.Interop.Annotations
             }
         }
 
-        //public PdfAnnotation this[int index]
+        //public PDFAnnotation this[int index]
         //{
         //  get 
         //  {
@@ -132,9 +132,9 @@ namespace PDFSharp.Interop.Annotations
         //      //Broke this out to simplfy debugging
         //      //Use a generic annotation to access the Meta data
         //      //Assign this as the parent of the annotation
-        //      PdfReference r = Elements[index] as PdfReference;
-        //      PdfDictionary d = r.Value as PdfDictionary;
-        //      PdfGenericAnnotation a = new PdfGenericAnnotation(d);
+        //      PDFReference r = Elements[index] as PDFReference;
+        //      PDFDictionary d = r.Value as PDFDictionary;
+        //      PDFGenericAnnotation a = new PDFGenericAnnotation(d);
         //      a.Collection = this;
         //      return a;
         //  }
@@ -143,20 +143,20 @@ namespace PDFSharp.Interop.Annotations
         /// <summary>
         /// Gets the page the annotations belongs to.
         /// </summary>
-        internal PdfPage Page { get; set; }
+        internal PDFPage Page { get; set; }
 
         /// <summary>
         /// Fixes the /P element in imported annotation.
         /// </summary>
-        internal static void FixImportedAnnotation(PdfPage page)
+        internal static void FixImportedAnnotation(PDFPage page)
         {
-            PdfArray annots = page.Elements.GetArray(PdfPage.Keys.Annots);
+            PDFArray annots = page.Elements.GetArray(PDFPage.Keys.Annots);
             if (annots != null)
             {
                 int count = annots.Elements.Count;
                 for (int idx = 0; idx < count; idx++)
                 {
-                    PdfDictionary annot = annots.Elements.GetDictionary(idx);
+                    PDFDictionary annot = annots.Elements.GetDictionary(idx);
                     if (annot != null && annot.Elements.ContainsKey("/P"))
                         annot.Elements["/P"] = page.Reference;
                 }
@@ -166,7 +166,7 @@ namespace PDFSharp.Interop.Annotations
         /// <summary>
         /// Returns an enumerator that iterates through a collection.
         /// </summary>
-        public override IEnumerator<PdfItem> GetEnumerator() => new AnnotationsIterator(this);
+        public override IEnumerator<PDFItem> GetEnumerator() => new AnnotationsIterator(this);
         // THHO4STLA: AnnotationsIterator: Implementation does not work http://forum.pdfsharp.net/viewtopic.php?p=3285#p3285
         // Code using the enumerator like this will crash:
         //foreach (var annotation in page.Annotations)
@@ -174,18 +174,18 @@ namespace PDFSharp.Interop.Annotations
         //    annotation.GetType();
         //}
 
-        //!!!new 2015-10-15: use PdfItem instead of PdfAnnotation. 
-        // TODO Should we change this to "public new IEnumerator<PdfAnnotation> GetEnumerator()"?
+        //!!!new 2015-10-15: use PDFItem instead of PDFAnnotation. 
+        // TODO Should we change this to "public new IEnumerator<PDFAnnotation> GetEnumerator()"?
 
-        class AnnotationsIterator : IEnumerator<PdfItem/*PdfAnnotation*/>
+        class AnnotationsIterator : IEnumerator<PDFItem/*PDFAnnotation*/>
         {
-            public AnnotationsIterator(PdfAnnotations annotations)
+            public AnnotationsIterator(PDFAnnotations annotations)
             {
                 _annotations = annotations;
                 _index = -1;
             }
 
-            public PdfItem/*PdfAnnotation*/ Current => _annotations[_index];
+            public PDFItem/*PDFAnnotation*/ Current => _annotations[_index];
 
             object IEnumerator.Current => Current;
 
@@ -198,7 +198,7 @@ namespace PDFSharp.Interop.Annotations
                 //throw new NotImplementedException();
             }
 
-            readonly PdfAnnotations _annotations;
+            readonly PDFAnnotations _annotations;
             int _index;
         }
     }

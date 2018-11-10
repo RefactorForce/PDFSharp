@@ -32,16 +32,16 @@ namespace PDFSharp.Interop.AcroForms
     /// <summary>
     /// Represents the signature field.
     /// </summary>
-    public sealed class PdfSignatureField : PdfAcroField
+    public sealed class PDFSignatureField : PDFAcroField
     {
         /// <summary>
-        /// Initializes a new instance of PdfSignatureField.
+        /// Initializes a new instance of PDFSignatureField.
         /// </summary>
-        internal PdfSignatureField(PdfDocument document)
+        internal PDFSignatureField(PDFDocument document)
             : base(document)
         { }
 
-        internal PdfSignatureField(PdfDictionary dict)
+        internal PDFSignatureField(PDFDictionary dict)
             : base(dict)
         { }
 
@@ -49,7 +49,7 @@ namespace PDFSharp.Interop.AcroForms
         /// Predefined keys of this dictionary.
         /// The description comes from PDF 1.4 Reference.
         /// </summary>
-        public new class Keys : PdfAcroField.Keys
+        public new class Keys : PDFAcroField.Keys
         {
             /// <summary>
             /// (Optional) The type of PDF object that this dictionary describes; if present,

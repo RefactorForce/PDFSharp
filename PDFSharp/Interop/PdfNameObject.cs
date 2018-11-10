@@ -39,19 +39,19 @@ namespace PDFSharp.Interop
     /// names to save space, because an indirect reference to a name may be shorter than a long name.
     /// </summary>
     [DebuggerDisplay("({Value})")]
-    public sealed class PdfNameObject : PdfObject
+    public sealed class PDFNameObject : PDFObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfNameObject"/> class.
+        /// Initializes a new instance of the <see cref="PDFNameObject"/> class.
         /// </summary>
-        public PdfNameObject() => Value = "/";  // Empty name.
+        public PDFNameObject() => Value = "/";  // Empty name.
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfNameObject"/> class.
+        /// Initializes a new instance of the <see cref="PDFNameObject"/> class.
         /// </summary>
         /// <param name="document">The document.</param>
         /// <param name="value">The value.</param>
-        public PdfNameObject(PdfDocument document, string value)
+        public PDFNameObject(PDFDocument document, string value)
             : base(document)
         {
             if (value == null)
@@ -87,30 +87,30 @@ namespace PDFSharp.Interop
         /// <summary>
         /// Determines whether a name is equal to a string.
         /// </summary>
-        public static bool operator ==(PdfNameObject name, string str) => name.Value == str;
+        public static bool operator ==(PDFNameObject name, string str) => name.Value == str;
 
         /// <summary>
         /// Determines whether a name is not equal to a string.
         /// </summary>
-        public static bool operator !=(PdfNameObject name, string str) => name.Value != str;
+        public static bool operator !=(PDFNameObject name, string str) => name.Value != str;
 
 #if leads_to_ambiguity
-        public static bool operator ==(string str, PdfName name)
+        public static bool operator ==(string str, PDFName name)
         {
             return str == name.value;
         }
 
-        public static bool operator !=(string str, PdfName name)
+        public static bool operator !=(string str, PDFName name)
         {
             return str == name.value;
         }
 
-        public static bool operator ==(PdfName name1, PdfName name2)
+        public static bool operator ==(PDFName name1, PDFName name2)
         {
             return name1.value == name2.value;
         }
 
-        public static bool operator !=(PdfName name1, PdfName name2)
+        public static bool operator !=(PDFName name1, PDFName name2)
         {
             return name1.value != name2.value;
         }
@@ -119,10 +119,10 @@ namespace PDFSharp.Interop
         /// <summary>
         /// Writes the name including the leading slash.
         /// </summary>
-        internal override void WriteObject(PdfWriter writer)
+        internal override void WriteObject(PDFWriter writer)
         {
             writer.WriteBeginObject(this);
-            writer.Write(new PdfName(Value));
+            writer.Write(new PDFName(Value));
             writer.WriteEndObject();
         }
     }

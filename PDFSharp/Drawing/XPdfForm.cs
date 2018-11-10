@@ -45,21 +45,21 @@ namespace PDFSharp.Drawing
 {
     /// <summary>
     /// Represents a so called 'PDF form external object', which is typically an imported page of an external
-    /// PDF document. XPdfForm objects are used like images to draw an existing PDF page of an external
-    /// document in the current document. XPdfForm objects can only be placed in PDF documents. If you try
+    /// PDF document. XPDFForm objects are used like images to draw an existing PDF page of an external
+    /// document in the current document. XPDFForm objects can only be placed in PDF documents. If you try
     /// to draw them using a XGraphics based on an GDI+ context no action is taken if no placeholder image
     /// is specified. Otherwise the place holder is drawn.
     /// </summary>
-    public class XPdfForm : XForm
+    public class XPDFForm : XForm
     {
         /// <summary>
-        /// Initializes a new instance of the XPdfForm class from the specified path to an external PDF document.
-        /// Although PDFsharp internally caches XPdfForm objects it is recommended to reuse XPdfForm objects
+        /// Initializes a new instance of the XPDFForm class from the specified path to an external PDF document.
+        /// Although PDFsharp internally caches XPDFForm objects it is recommended to reuse XPDFForm objects
         /// in your code and change the PageNumber property if more than one page is needed form the external
-        /// document. Furthermore, because XPdfForm can occupy very much memory, it is recommended to
-        /// dispose XPdfForm objects if not needed anymore.
+        /// document. Furthermore, because XPDFForm can occupy very much memory, it is recommended to
+        /// dispose XPDFForm objects if not needed anymore.
         /// </summary>
-        internal XPdfForm(string path)
+        internal XPDFForm(string path)
         {
             path = ExtractPageNumber(path, out int pageNumber);
 
@@ -69,7 +69,7 @@ namespace PDFSharp.Drawing
                 throw new FileNotFoundException(PSSR.FileNotFound(path));
 #endif
 
-            if (PdfReader.TestPdfFile(path) == 0)
+            if (PDFReader.TestPDFFile(path) == 0)
                 throw new ArgumentException("The specified file has no valid PDF file header.", "path");
 
             _path = path;
@@ -78,31 +78,31 @@ namespace PDFSharp.Drawing
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="XPdfForm"/> class from a stream.
+        /// Initializes a new instance of the <see cref="XPDFForm"/> class from a stream.
         /// </summary>
         /// <param name="stream">The stream.</param>
-        internal XPdfForm(Stream stream)
+        internal XPDFForm(Stream stream)
         {
             // Create a dummy unique path
             _path = "*" + Guid.NewGuid().ToString("B");
 
-            if (PdfReader.TestPdfFile(stream) == 0)
+            if (PDFReader.TestPDFFile(stream) == 0)
                 throw new ArgumentException("The specified stream has no valid PDF file header.", "stream");
 
-            _externalDocument = PdfReader.Open(stream);
+            _externalDocument = PDFReader.Open(stream);
         }
 
         /// <summary>
-        /// Creates an XPdfForm from a file.
+        /// Creates an XPDFForm from a file.
         /// </summary>
-        public static new XPdfForm FromFile(string path) =>
+        public static new XPDFForm FromFile(string path) =>
             // TODO: Same file should return same object (that's why the function is static).
-            new XPdfForm(path);
+            new XPDFForm(path);
 
         /// <summary>
-        /// Creates an XPdfForm from a stream.
+        /// Creates an XPDFForm from a stream.
         /// </summary>
-        public static new XPdfForm FromStream(Stream stream) => new XPdfForm(stream);
+        public static new XPDFForm FromStream(Stream stream) => new XPDFForm(stream);
 
         /*
             void Initialize()
@@ -131,12 +131,12 @@ namespace PDFSharp.Drawing
 
             //if (_pdfRenderer != null)
             //{
-            //  _pdfForm.Stream = new PdfDictionary.PdfStream(PdfEncoders.RawEncoding.GetBytes(pdfRenderer.GetContent()), this.pdfForm);
+            //  _pdfForm.Stream = new PDFDictionary.PDFStream(PDFEncoders.RawEncoding.GetBytes(pdfRenderer.GetContent()), this.pdfForm);
 
             //  if (_document.Options.CompressContentStreams)
             //  {
             //    _pdfForm.Stream.Value = Filtering.FlateDecode.Encode(pdfForm.Stream.Value);
-            //    _pdfForm.Elements["/Filter"] = new PdfName("/FlateDecode");
+            //    _pdfForm.Elements["/Filter"] = new PDFName("/FlateDecode");
             //  }
             //  int length = _pdfForm.Stream.Length;
             //  _pdfForm.Elements.SetInteger("/Length", length);
@@ -144,7 +144,7 @@ namespace PDFSharp.Drawing
         }
 
         /// <summary>
-        /// Frees the memory occupied by the underlying imported PDF document, even if other XPdfForm objects
+        /// Frees the memory occupied by the underlying imported PDF document, even if other XPDFForm objects
         /// refer to this document. A reuse of this object doesn't fail, because the underlying PDF document
         /// is re-imported if necessary.
         /// </summary>
@@ -161,7 +161,7 @@ namespace PDFSharp.Drawing
                         //...
                     }
                     if (_externalDocument != null)
-                        PdfDocument.Tls.DetachDocument(_externalDocument.Handle);
+                        PDFDocument.Tls.DetachDocument(_externalDocument.Handle);
                     //...
                 }
                 finally
@@ -180,15 +180,15 @@ namespace PDFSharp.Drawing
         public XImage PlaceHolder { get; set; }
 
         /// <summary>
-        /// Gets the underlying PdfPage (if one exists).
+        /// Gets the underlying PDFPage (if one exists).
         /// </summary>
-        public PdfPage Page
+        public PDFPage Page
         {
             get
             {
                 if (IsTemplate)
                     return null;
-                PdfPage page = ExternalDocument.Pages[_pageNumber - 1];
+                PDFPage page = ExternalDocument.Pages[_pageNumber - 1];
                 return page;
             }
         }
@@ -217,7 +217,7 @@ namespace PDFSharp.Drawing
         {
             get
             {
-                PdfPage page = ExternalDocument.Pages[_pageNumber - 1];
+                PDFPage page = ExternalDocument.Pages[_pageNumber - 1];
                 return page.Width;
             }
         }
@@ -230,7 +230,7 @@ namespace PDFSharp.Drawing
         {
             get
             {
-                PdfPage page = ExternalDocument.Pages[_pageNumber - 1];
+                PDFPage page = ExternalDocument.Pages[_pageNumber - 1];
                 return page.Height;
             }
         }
@@ -242,7 +242,7 @@ namespace PDFSharp.Drawing
         {
             get
             {
-                PdfPage page = ExternalDocument.Pages[_pageNumber - 1];
+                PDFPage page = ExternalDocument.Pages[_pageNumber - 1];
                 return page.Width;
             }
         }
@@ -254,7 +254,7 @@ namespace PDFSharp.Drawing
         {
             get
             {
-                PdfPage page = ExternalDocument.Pages[_pageNumber - 1];
+                PDFPage page = ExternalDocument.Pages[_pageNumber - 1];
                 return page.Height;
             }
         }
@@ -266,7 +266,7 @@ namespace PDFSharp.Drawing
         {
             get
             {
-                //PdfPage page = ExternalDocument.Pages[_pageNumber - 1];
+                //PDFPage page = ExternalDocument.Pages[_pageNumber - 1];
                 //return (int)page.Width;
                 return DoubleUtil.DoubleToInt(PointWidth);
             }
@@ -279,7 +279,7 @@ namespace PDFSharp.Drawing
         {
             get
             {
-                //PdfPage page = ExternalDocument.Pages[_pageNumber - 1];
+                //PDFPage page = ExternalDocument.Pages[_pageNumber - 1];
                 //return (int)page.Height;
                 return DoubleUtil.DoubleToInt(PointHeight);
             }
@@ -292,7 +292,7 @@ namespace PDFSharp.Drawing
         {
             get
             {
-                PdfPage page = ExternalDocument.Pages[_pageNumber - 1];
+                PDFPage page = ExternalDocument.Pages[_pageNumber - 1];
                 return new XSize(page.Width, page.Height);
             }
         }
@@ -307,7 +307,7 @@ namespace PDFSharp.Drawing
             {
                 if (_transform != value)
                 {
-                    // discard PdfFromXObject when Transform changed
+                    // discard PDFFromXObject when Transform changed
                     _pdfForm = null;
                     _transform = value;
                 }
@@ -324,12 +324,12 @@ namespace PDFSharp.Drawing
             set
             {
                 if (IsTemplate)
-                    throw new InvalidOperationException("The page number of an XPdfForm template cannot be modified.");
+                    throw new InvalidOperationException("The page number of an XPDFForm template cannot be modified.");
 
                 if (_pageNumber != value)
                 {
                     _pageNumber = value;
-                    // dispose PdfFromXObject when number has changed
+                    // dispose PDFFromXObject when number has changed
                     _pdfForm = null;
                 }
             }
@@ -349,10 +349,10 @@ namespace PDFSharp.Drawing
         /// <summary>
         /// Gets the underlying document from which pages are imported.
         /// </summary>
-        internal PdfDocument ExternalDocument
+        internal PDFDocument ExternalDocument
         {
-            // The problem is that you can ask an XPdfForm about the number of its pages before it was
-            // drawn the first time. At this moment the XPdfForm doesn't know the document where it will
+            // The problem is that you can ask an XPDFForm about the number of its pages before it was
+            // drawn the first time. At this moment the XPDFForm doesn't know the document where it will
             // be later draw on one of its pages. To prevent the import of the same document more than
             // once, all imported documents of a thread are cached. The cache is local to the current 
             // thread and not to the appdomain, because I won't get problems in a multi-thread environment
@@ -360,14 +360,14 @@ namespace PDFSharp.Drawing
             get
             {
                 if (IsTemplate)
-                    throw new InvalidOperationException("This XPdfForm is a template and not an imported PDF page; therefore it has no external document.");
+                    throw new InvalidOperationException("This XPDFForm is a template and not an imported PDF page; therefore it has no external document.");
 
                 if (_externalDocument == null)
-                    _externalDocument = PdfDocument.Tls.GetDocument(_path);
+                    _externalDocument = PDFDocument.Tls.GetDocument(_path);
                 return _externalDocument;
             }
         }
-        internal PdfDocument _externalDocument;
+        internal PDFDocument _externalDocument;
 
         /// <summary>
         /// Extracts the page number if the path has the form 'MyFile.pdf#123' and returns

@@ -40,18 +40,18 @@ namespace PDFSharp.Interop.Internal
         /// <summary>
         /// Checks whether a color mode and a color match.
         /// </summary>
-        public static XColor EnsureColorMode(PdfColorMode colorMode, XColor color) =>
+        public static XColor EnsureColorMode(PDFColorMode colorMode, XColor color) =>
 #if true
-            colorMode == PdfColorMode.Rgb && color.ColorSpace != XColorSpace.Rgb
+            colorMode == PDFColorMode.Rgb && color.ColorSpace != XColorSpace.Rgb
                 ? XColor.FromArgb((int)(color.A * 255), color.R, color.G, color.B)
-                : colorMode == PdfColorMode.Cmyk && color.ColorSpace != XColorSpace.Cmyk
+                : colorMode == PDFColorMode.Cmyk && color.ColorSpace != XColorSpace.Cmyk
                 ? XColor.FromCmyk(color.A, color.C, color.M, color.Y, color.K)
                 : color;
 #else
-      if (colorMode == PdfColorMode.Rgb && color.ColorSpace != XColorSpace.Rgb)
+      if (colorMode == PDFColorMode.Rgb && color.ColorSpace != XColorSpace.Rgb)
         throw new InvalidOperationException(PSSR.InappropriateColorSpace(colorMode, color.ColorSpace));
 
-      if (colorMode == PdfColorMode.Cmyk && color.ColorSpace != XColorSpace.Cmyk)
+      if (colorMode == PDFColorMode.Cmyk && color.ColorSpace != XColorSpace.Cmyk)
         throw new InvalidOperationException(PSSR.InappropriateColorSpace(colorMode, color.ColorSpace));
 #endif
 
@@ -59,7 +59,7 @@ namespace PDFSharp.Interop.Internal
         /// <summary>
         /// Checks whether the color mode of a document and a color match.
         /// </summary>
-        public static XColor EnsureColorMode(PdfDocument document, XColor color)
+        public static XColor EnsureColorMode(PDFDocument document, XColor color)
         {
             if (document == null)
                 throw new ArgumentNullException("document");

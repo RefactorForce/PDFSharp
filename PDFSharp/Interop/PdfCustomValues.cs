@@ -34,23 +34,23 @@ namespace PDFSharp.Interop
     /// <summary>
     /// This class is intended for empira internal use only and may change or drop in future releases.
     /// </summary>
-    public class PdfCustomValues : PdfDictionary
+    public class PDFCustomValues : PDFDictionary
     {
-        internal PdfCustomValues()
+        internal PDFCustomValues()
         { }
 
-        internal PdfCustomValues(PdfDocument document)
+        internal PDFCustomValues(PDFDocument document)
             : base(document)
         { }
 
-        internal PdfCustomValues(PdfDictionary dict)
+        internal PDFCustomValues(PDFDictionary dict)
             : base(dict)
         { }
 
         /// <summary>
         /// This function is intended for empira internal use only.
         /// </summary>
-        public PdfCustomValueCompressionMode CompressionMode
+        public PDFCustomValueCompressionMode CompressionMode
         {
             set => throw new NotImplementedException();
         }
@@ -63,15 +63,15 @@ namespace PDFSharp.Interop
         /// <summary>
         /// This function is intended for empira internal use only.
         /// </summary>
-        public PdfCustomValue this[string key]
+        public PDFCustomValue this[string key]
         {
             get
             {
-                PdfDictionary dict = Elements.GetDictionary(key);
+                PDFDictionary dict = Elements.GetDictionary(key);
                 if (dict == null)
                     return null;
-                if (!(dict is PdfCustomValue cust))
-                    cust = new PdfCustomValue(dict);
+                if (!(dict is PDFCustomValue cust))
+                    cust = new PDFCustomValue(dict);
                 return cust;
             }
             set
@@ -89,28 +89,28 @@ namespace PDFSharp.Interop
 #if old
             get
             {
-                PdfDictionary dict = Elements.GetDictionary(key);
+                PDFDictionary dict = Elements.GetDictionary(key);
                 if (dict == null)
                     return null;
-                if (!(dict is PdfCustomValue))
-                    dict = new PdfCustomValue(dict);
+                if (!(dict is PDFCustomValue))
+                    dict = new PDFCustomValue(dict);
                 return dict.Stream.Value;
             }
             set
             {
-                PdfCustomValue cust;
-                PdfDictionary dict = Elements.GetDictionary(key);
+                PDFCustomValue cust;
+                PDFDictionary dict = Elements.GetDictionary(key);
                 if (dict == null)
                 {
-                    cust = new PdfCustomValue();
+                    cust = new PDFCustomValue();
                     Owner.Internals.AddObject(cust);
                     Elements.Add(key, cust);
                 }
                 else
                 {
-                    cust = dict as PdfCustomValue;
+                    cust = dict as PDFCustomValue;
                     if (cust == null)
-                        cust = new PdfCustomValue(dict);
+                        cust = new PDFCustomValue(dict);
                 }
                 cust.Value = value;
             }
@@ -120,31 +120,31 @@ namespace PDFSharp.Interop
         /// <summary>
         /// This function is intended for empira internal use only.
         /// </summary>
-        public static void ClearAllCustomValues(PdfDocument document)
+        public static void ClearAllCustomValues(PDFDocument document)
         {
             document.CustomValues = null;
-            foreach (PdfPage page in document.Pages)
+            foreach (PDFPage page in document.Pages)
                 page.CustomValues = null;
         }
 
-        //public static string Key = "/PdfSharp.CustomValue";
+        //public static string Key = "/PDFSharp.CustomValue";
 
-        internal static PdfCustomValues Get(DictionaryElements elem)
+        internal static PDFCustomValues Get(DictionaryElements elem)
         {
             string key = elem.Owner.Owner.Internals.CustomValueKey;
-            PdfCustomValues customValues;
-            PdfDictionary dict = elem.GetDictionary(key);
+            PDFCustomValues customValues;
+            PDFDictionary dict = elem.GetDictionary(key);
             if (dict == null)
             {
-                customValues = new PdfCustomValues();
+                customValues = new PDFCustomValues();
                 elem.Owner.Owner.Internals.AddObject(customValues);
                 elem.Add(key, customValues);
             }
             else
             {
-                customValues = dict as PdfCustomValues;
+                customValues = dict as PDFCustomValues;
                 if (customValues == null)
-                    customValues = new PdfCustomValues(dict);
+                    customValues = new PDFCustomValues(dict);
             }
             return customValues;
         }

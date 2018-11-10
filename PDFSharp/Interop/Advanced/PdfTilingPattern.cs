@@ -40,16 +40,16 @@ namespace PDFSharp.Interop.Advanced
     /// <summary>
     /// Represents a tiling pattern dictionary.
     /// </summary>
-    public sealed class PdfTilingPattern : PdfDictionaryWithContentStream
+    public sealed class PDFTilingPattern : PDFDictionaryWithContentStream
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfShadingPattern"/> class.
+        /// Initializes a new instance of the <see cref="PDFShadingPattern"/> class.
         /// </summary>
-        public PdfTilingPattern(PdfDocument document)
+        public PDFTilingPattern(PDFDocument document)
             : base(document)
         {
             Elements.SetName(Keys.Type, "/Pattern");
-            Elements[Keys.PatternType] = new PdfInteger(1);
+            Elements[Keys.PatternType] = new PDFInteger(1);
         }
 
         ///// <summary>
@@ -60,16 +60,16 @@ namespace PDFSharp.Interop.Advanced
         //  if (brush == null)
         //    throw new ArgumentNullException("brush");
 
-        //  PdfShading shading = new PdfShading(document);
+        //  PDFShading shading = new PDFShading(document);
         //  shading.SetupFromBrush(brush);
         //  Elements[Keys.Shading] = shading;
-        //  Elements[Keys.Matrix] = new PdfLiteral("[" + PdfEncoders.ToString(matrix) + "]");
+        //  Elements[Keys.Matrix] = new PDFLiteral("[" + PDFEncoders.ToString(matrix) + "]");
         //}
 
         /// <summary>
         /// Common keys for all streams.
         /// </summary>
-        internal sealed new class Keys : PdfDictionaryWithContentStream.Keys
+        internal sealed new class Keys : PDFDictionaryWithContentStream.Keys
         {
             /// <summary>
             /// (Optional) The type of PDF object that this dictionary describes; if present,

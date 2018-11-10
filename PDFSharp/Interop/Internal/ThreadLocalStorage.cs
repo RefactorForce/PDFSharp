@@ -40,18 +40,18 @@ namespace PDFSharp.Interop.Internal
     /// </summary>
     internal class ThreadLocalStorage // #???
     {
-        public ThreadLocalStorage() => _importedDocuments = new Dictionary<string, PdfDocument.DocumentHandle>(StringComparer.OrdinalIgnoreCase);
+        public ThreadLocalStorage() => _importedDocuments = new Dictionary<string, PDFDocument.DocumentHandle>(StringComparer.OrdinalIgnoreCase);
 
-        public void AddDocument(string path, PdfDocument document) => _importedDocuments.Add(path, document.Handle);
+        public void AddDocument(string path, PDFDocument document) => _importedDocuments.Add(path, document.Handle);
 
         public void RemoveDocument(string path) => _importedDocuments.Remove(path);
 
-        public PdfDocument GetDocument(string path)
+        public PDFDocument GetDocument(string path)
         {
             Debug.Assert(path.StartsWith("*") || Path.IsPathRooted(path), "Path must be full qualified.");
 
-            PdfDocument document = null;
-            if (_importedDocuments.TryGetValue(path, out PdfDocument.DocumentHandle handle))
+            PDFDocument document = null;
+            if (_importedDocuments.TryGetValue(path, out PDFDocument.DocumentHandle handle))
             {
                 document = handle.Target;
                 if (document == null)
@@ -59,18 +59,18 @@ namespace PDFSharp.Interop.Internal
             }
             if (document == null)
             {
-                document = PdfReader.Open(path, PdfDocumentOpenMode.Import);
+                document = PDFReader.Open(path, PDFDocumentOpenMode.Import);
                 _importedDocuments.Add(path, document.Handle);
             }
             return document;
         }
 
-        public PdfDocument[] Documents
+        public PDFDocument[] Documents
         {
             get
             {
-                List<PdfDocument> list = new List<PdfDocument>();
-                foreach (PdfDocument.DocumentHandle handle in _importedDocuments.Values)
+                List<PDFDocument> list = new List<PDFDocument>();
+                foreach (PDFDocument.DocumentHandle handle in _importedDocuments.Values)
                 {
                     if (handle.IsAlive)
                         list.Add(handle.Target);
@@ -79,7 +79,7 @@ namespace PDFSharp.Interop.Internal
             }
         }
 
-        public void DetachDocument(PdfDocument.DocumentHandle handle)
+        public void DetachDocument(PDFDocument.DocumentHandle handle)
         {
             if (handle.IsAlive)
             {
@@ -113,6 +113,6 @@ namespace PDFSharp.Interop.Internal
         /// <summary>
         /// Maps path to document handle.
         /// </summary>
-        readonly Dictionary<string, PdfDocument.DocumentHandle> _importedDocuments;
+        readonly Dictionary<string, PDFDocument.DocumentHandle> _importedDocuments;
     }
 }

@@ -38,7 +38,7 @@ using System.DrawingCore.Imaging;
 #if WPF
 using System.Windows.Media;
 #endif
-using PDFSharp.Drawing.Pdf;
+using PDFSharp.Drawing.PDF;
 using PDFSharp.Interop;
 using PDFSharp.Interop.Advanced;
 using PDFSharp.Interop.Filters;
@@ -92,20 +92,20 @@ namespace PDFSharp.Drawing
             if (gfx == null)
                 throw new ArgumentNullException("gfx");
             if (size.Width < 1 || size.Height < 1)
-                throw new ArgumentNullException("size", "The size of the XPdfForm is to small.");
+                throw new ArgumentNullException("size", "The size of the XPDFForm is to small.");
 
             _formState = FormState.Created;
             //templateSize = size;
             _viewBox.Width = size.Width;
             _viewBox.Height = size.Height;
 
-            // If gfx belongs to a PdfPage also create the PdfFormXObject
-            if (gfx.PdfPage != null)
+            // If gfx belongs to a PDFPage also create the PDFFormXObject
+            if (gfx.PDFPage != null)
             {
-                _document = gfx.PdfPage.Owner;
-                _pdfForm = new PdfFormXObject(_document, this);
-                PdfRectangle rect = new PdfRectangle(new XPoint(), size);
-                _pdfForm.Elements.SetRectangle(PdfFormXObject.Keys.BBox, rect);
+                _document = gfx.PDFPage.Owner;
+                _pdfForm = new PDFFormXObject(_document, this);
+                PDFRectangle rect = new PDFRectangle(new XPoint(), size);
+                _pdfForm.Elements.SetRectangle(PDFFormXObject.Keys.BBox, rect);
             }
         }
 #endif
@@ -128,17 +128,17 @@ namespace PDFSharp.Drawing
         /// </summary>
         /// <param name="document">The PDF document.</param>
         /// <param name="viewBox">The view box of the page.</param>
-        public XForm(PdfDocument document, XRect viewBox)
+        public XForm(PDFDocument document, XRect viewBox)
         {
             if (viewBox.Width < 1 || viewBox.Height < 1)
-                throw new ArgumentNullException("viewBox", "The size of the XPdfForm is to small.");
+                throw new ArgumentNullException("viewBox", "The size of the XPDFForm is to small.");
             _formState = FormState.Created;
-            Owner = document ?? throw new ArgumentNullException("document", "An XPdfForm template must be associated with a document at creation time.");
-            _pdfForm = new PdfFormXObject(document, this);
+            Owner = document ?? throw new ArgumentNullException("document", "An XPDFForm template must be associated with a document at creation time.");
+            _pdfForm = new PDFFormXObject(document, this);
             //_templateSize = size;
             ViewBox = viewBox;
-            PdfRectangle rect = new PdfRectangle(viewBox);
-            _pdfForm.Elements.SetRectangle(PdfFormXObject.Keys.BBox, rect);
+            PDFRectangle rect = new PDFRectangle(viewBox);
+            _pdfForm.Elements.SetRectangle(PDFFormXObject.Keys.BBox, rect);
         }
 
         /// <summary>
@@ -146,22 +146,22 @@ namespace PDFSharp.Drawing
         /// </summary>
         /// <param name="document">The PDF document.</param>
         /// <param name="size">The size of the page.</param>
-        public XForm(PdfDocument document, XSize size)
+        public XForm(PDFDocument document, XSize size)
             : this(document, new XRect(0, 0, size.Width, size.Height))
         {
             ////if (size.width < 1 || size.height < 1)
-            ////  throw new ArgumentNullException("size", "The size of the XPdfForm is to small.");
-            ////// I must tie the XPdfForm to a document immediately, because otherwise I would have no place where
+            ////  throw new ArgumentNullException("size", "The size of the XPDFForm is to small.");
+            ////// I must tie the XPDFForm to a document immediately, because otherwise I would have no place where
             ////// to store the resources.
             ////if (document == null)
-            ////  throw new ArgumentNullException("document", "An XPdfForm template must be associated with a document.");
+            ////  throw new ArgumentNullException("document", "An XPDFForm template must be associated with a document.");
 
             ////_formState = FormState.Created;
             ////_document = document;
-            ////pdfForm = new PdfFormXObject(document, this);
+            ////pdfForm = new PDFFormXObject(document, this);
             ////templateSize = size;
-            ////PdfRectangle rect = new PdfRectangle(new XPoint(), size);
-            ////pdfForm.Elements.SetRectangle(PdfFormXObject.Keys.BBox, rect);
+            ////PDFRectangle rect = new PDFRectangle(new XPoint(), size);
+            ////pdfForm.Elements.SetRectangle(PDFFormXObject.Keys.BBox, rect);
         }
 
         /// <summary>
@@ -170,7 +170,7 @@ namespace PDFSharp.Drawing
         /// <param name="document">The PDF document.</param>
         /// <param name="width">The width of the page.</param>
         /// <param name="height">The height of the page</param>
-        public XForm(PdfDocument document, XUnit width, XUnit height)
+        public XForm(PDFDocument document, XUnit width, XUnit height)
             : this(document, new XRect(0, 0, width, height))
         { }
 
@@ -234,16 +234,16 @@ namespace PDFSharp.Drawing
             Gfx.Dispose();
             Gfx = null;
 
-            if (PdfRenderer != null)
+            if (PDFRenderer != null)
             {
-                //pdfForm.CreateStream(PdfEncoders.RawEncoding.GetBytes(PdfRenderer.GetContent()));
-                PdfRenderer.Close();
-                Debug.Assert(PdfRenderer == null);
+                //pdfForm.CreateStream(PDFEncoders.RawEncoding.GetBytes(PDFRenderer.GetContent()));
+                PDFRenderer.Close();
+                Debug.Assert(PDFRenderer == null);
 
                 if (_document.Options.CompressContentStreams)
                 {
                     _pdfForm.Stream.Value = Filtering.FlateDecode.Encode(_pdfForm.Stream.Value, _document.Options.FlateEncodeMode);
-                    _pdfForm.Elements["/Filter"] = new PdfName("/FlateDecode");
+                    _pdfForm.Elements["/Filter"] = new PDFName("/FlateDecode");
                 }
                 int length = _pdfForm.Stream.Length;
                 _pdfForm.Elements.SetInteger("/Length", length);
@@ -256,12 +256,12 @@ namespace PDFSharp.Drawing
         /// <summary>
         /// Gets the owning document.
         /// </summary>
-        internal PdfDocument Owner { get; }
+        internal PDFDocument Owner { get; }
 
         /// <summary>
         /// Gets the color model used in the underlying PDF document.
         /// </summary>
-        internal PdfColorMode ColorMode => Owner == null ? PdfColorMode.Undefined : Owner.Options.ColorMode;
+        internal PDFColorMode ColorMode => Owner == null ? PDFColorMode.Undefined : Owner.Options.ColorMode;
 
         /// <summary>
         /// Gets a value indicating whether this instance is a template.
@@ -336,34 +336,34 @@ namespace PDFSharp.Drawing
             set
             {
                 if (_formState == FormState.Finished)
-                    throw new InvalidOperationException("After a XPdfForm was once drawn it must not be modified.");
+                    throw new InvalidOperationException("After a XPDFForm was once drawn it must not be modified.");
                 _transform = value;
             }
         }
         internal XMatrix _transform;
 
-        internal PdfResources Resources
+        internal PDFResources Resources
         {
             get
             {
                 Debug.Assert(IsTemplate, "This function is for form templates only.");
-                return PdfForm.Resources;
+                return PDFForm.Resources;
                 //if (resources == null)
-                //  resources = (PdfResources)pdfForm.Elements.GetValue(PdfFormXObject.Keys.Resources, VCF.Create); // VCF.CreateIndirect
+                //  resources = (PDFResources)pdfForm.Elements.GetValue(PDFFormXObject.Keys.Resources, VCF.Create); // VCF.CreateIndirect
                 //return resources;
             }
         }
-        //PdfResources resources;
+        //PDFResources resources;
 
         /// <summary>
         /// Implements the interface because the primary function is internal.
         /// </summary>
-        PdfResources IContentStream.Resources => Resources;
+        PDFResources IContentStream.Resources => Resources;
 
         /// <summary>
         /// Gets the resource name of the specified font within this form.
         /// </summary>
-        internal string GetFontName(XFont font, out PdfFont pdfFont)
+        internal string GetFontName(XFont font, out PDFFont pdfFont)
         {
             Debug.Assert(IsTemplate, "This function is for form templates only.");
             pdfFont = Owner.FontTable.GetFont(font);
@@ -372,13 +372,13 @@ namespace PDFSharp.Drawing
             return name;
         }
 
-        string IContentStream.GetFontName(XFont font, out PdfFont pdfFont) => GetFontName(font, out pdfFont);
+        string IContentStream.GetFontName(XFont font, out PDFFont pdfFont) => GetFontName(font, out pdfFont);
 
         /// <summary>
         /// Tries to get the resource name of the specified font data within this form.
         /// Returns null if no such font exists.
         /// </summary>
-        internal string TryGetFontName(string idName, out PdfFont pdfFont)
+        internal string TryGetFontName(string idName, out PDFFont pdfFont)
         {
             Debug.Assert(IsTemplate, "This function is for form templates only.");
             pdfFont = Owner.FontTable.TryGetFont(idName);
@@ -391,18 +391,18 @@ namespace PDFSharp.Drawing
         /// <summary>
         /// Gets the resource name of the specified font data within this form.
         /// </summary>
-        internal string GetFontName(string idName, byte[] fontData, out PdfFont pdfFont)
+        internal string GetFontName(string idName, byte[] fontData, out PDFFont pdfFont)
         {
             Debug.Assert(IsTemplate, "This function is for form templates only.");
             pdfFont = Owner.FontTable.GetFont(idName, fontData);
-            //pdfFont = new PdfType0Font(Owner, idName, fontData);
+            //pdfFont = new PDFType0Font(Owner, idName, fontData);
             //pdfFont.Document = _document;
             Debug.Assert(pdfFont != null);
             string name = Resources.AddFont(pdfFont);
             return name;
         }
 
-        string IContentStream.GetFontName(string idName, byte[] fontData, out PdfFont pdfFont) => GetFontName(idName, fontData, out pdfFont);
+        string IContentStream.GetFontName(string idName, byte[] fontData, out PDFFont pdfFont) => GetFontName(idName, fontData, out pdfFont);
 
         /// <summary>
         /// Gets the resource name of the specified image within this form.
@@ -410,7 +410,7 @@ namespace PDFSharp.Drawing
         internal string GetImageName(XImage image)
         {
             Debug.Assert(IsTemplate, "This function is for form templates only.");
-            PdfImage pdfImage = Owner.ImageTable.GetImage(image);
+            PDFImage pdfImage = Owner.ImageTable.GetImage(image);
             Debug.Assert(pdfImage != null);
             string name = Resources.AddImage(pdfImage);
             return name;
@@ -421,7 +421,7 @@ namespace PDFSharp.Drawing
         /// </summary>
         string IContentStream.GetImageName(XImage image) => GetImageName(image);
 
-        internal PdfFormXObject PdfForm
+        internal PDFFormXObject PDFForm
         {
             get
             {
@@ -438,7 +438,7 @@ namespace PDFSharp.Drawing
         internal string GetFormName(XForm form)
         {
             Debug.Assert(IsTemplate, "This function is for form templates only.");
-            PdfFormXObject pdfForm = Owner.FormTable.GetForm(form);
+            PDFFormXObject pdfForm = Owner.FormTable.GetForm(form);
             Debug.Assert(pdfForm != null);
             string name = Resources.AddForm(pdfForm);
             return name;
@@ -450,12 +450,12 @@ namespace PDFSharp.Drawing
         string IContentStream.GetFormName(XForm form) => GetFormName(form);
 
         /// <summary>
-        /// The PdfFormXObject gets invalid when PageNumber or transform changed. This is because a modification
-        /// of an XPdfForm must not change objects that are already been drawn.
+        /// The PDFFormXObject gets invalid when PageNumber or transform changed. This is because a modification
+        /// of an XPDFForm must not change objects that are already been drawn.
         /// </summary>
-        internal PdfFormXObject _pdfForm;  // TODO: make private
+        internal PDFFormXObject _pdfForm;  // TODO: make private
 
-        internal XGraphicsPdfRenderer PdfRenderer;
+        internal XGraphicsPDFRenderer PDFRenderer;
 
 #if WPF && !SILVERLIGHT
         /// <summary>

@@ -49,7 +49,7 @@ using SysSize = Windows.Foundation.Size;
 #if !EDF_CORE
 using PDFSharp.Internal;
 #else
-using PdfSharp.Internal;
+using PDFSharp.Internal;
 #endif
 
 #if !EDF_CORE

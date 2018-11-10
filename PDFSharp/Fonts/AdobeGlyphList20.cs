@@ -29,7 +29,7 @@
 
 using System;
 #if DEBUG_
-namespace PdfSharp.Fonts
+namespace PDFSharp.Fonts
 {
   /// <summary>
   /// Pre-defined names for Unicode characters.

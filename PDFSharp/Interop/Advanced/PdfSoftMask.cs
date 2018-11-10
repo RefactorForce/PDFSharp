@@ -40,13 +40,13 @@ namespace PDFSharp.Interop.Advanced
     /// <summary>
     /// Represents a PDF soft mask.
     /// </summary>
-    public class PdfSoftMask : PdfDictionary
+    public class PDFSoftMask : PDFDictionary
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfXObject"/> class.
+        /// Initializes a new instance of the <see cref="PDFXObject"/> class.
         /// </summary>
         /// <param name="document">The document that owns the object.</param>
-        public PdfSoftMask(PdfDocument document)
+        public PDFSoftMask(PDFDocument document)
             : base(document) => Elements.SetName(Keys.Type, "/Mask");
 
         /// <summary>

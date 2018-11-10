@@ -32,16 +32,16 @@ namespace PDFSharp.Interop
     /// <summary>
     /// Represents the PDF document viewer preferences dictionary.
     /// </summary>
-    public sealed class PdfViewerPreferences : PdfDictionary
+    public sealed class PDFViewerPreferences : PDFDictionary
     {
-        internal PdfViewerPreferences(PdfDocument document)
+        internal PDFViewerPreferences(PDFDocument document)
             : base(document)
         { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfViewerPreferences"/> class.
+        /// Initializes a new instance of the <see cref="PDFViewerPreferences"/> class.
         /// </summary>
-        PdfViewerPreferences(PdfDictionary dict)
+        PDFViewerPreferences(PDFDictionary dict)
             : base(dict)
         { }
 
@@ -115,17 +115,17 @@ namespace PDFSharp.Interop
         /// but can be used to determine the relative positioning of pages when displayed 
         /// side by side or printed n-up. Default value: LeftToRight.
         /// </summary>
-        public PdfReadingDirection? Direction
+        public PDFReadingDirection? Direction
         {
             get
             {
                 switch (Elements.GetName(Keys.Direction))
                 {
                     case "L2R":
-                        return PdfReadingDirection.LeftToRight;
+                        return PDFReadingDirection.LeftToRight;
 
                     case "R2L":
-                        return PdfReadingDirection.RightToLeft;
+                        return PDFReadingDirection.RightToLeft;
                 }
                 return null;
             }
@@ -135,7 +135,7 @@ namespace PDFSharp.Interop
                 {
                     switch (value.Value)
                     {
-                        case PdfReadingDirection.RightToLeft:
+                        case PDFReadingDirection.RightToLeft:
                             Elements.SetName(Keys.Direction, "R2L");
                             break;
 

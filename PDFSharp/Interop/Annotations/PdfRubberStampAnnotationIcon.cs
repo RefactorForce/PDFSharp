@@ -32,7 +32,7 @@ namespace PDFSharp.Interop.Annotations
     /// <summary>
     /// Specifies the predefined icon names of rubber stamp annotations.
     /// </summary>
-    public enum PdfRubberStampAnnotationIcon
+    public enum PDFRubberStampAnnotationIcon
     {
         /// <summary>
         /// A pre-defined rubber stamp annotation icon.

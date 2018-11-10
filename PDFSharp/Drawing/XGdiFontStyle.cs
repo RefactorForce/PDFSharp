@@ -41,7 +41,7 @@ namespace PDFSharp.Drawing
     {
         // Must be identical to both:
         // System.DrawingCore.FontStyle and
-        // PdfSharp.Drawing.FontStyle
+        // PDFSharp.Drawing.FontStyle
 
         /// <summary>
         /// Normal text.

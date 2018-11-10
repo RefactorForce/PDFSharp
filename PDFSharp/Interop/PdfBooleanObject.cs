@@ -37,23 +37,23 @@ namespace PDFSharp.Interop
     /// an external PDF file, the value is converted into a direct object.
     /// </summary>
     [DebuggerDisplay("({Value})")]
-    public sealed class PdfBooleanObject : PdfObject
+    public sealed class PDFBooleanObject : PDFObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfBooleanObject"/> class.
+        /// Initializes a new instance of the <see cref="PDFBooleanObject"/> class.
         /// </summary>
-        public PdfBooleanObject()
+        public PDFBooleanObject()
         { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfBooleanObject"/> class.
+        /// Initializes a new instance of the <see cref="PDFBooleanObject"/> class.
         /// </summary>
-        public PdfBooleanObject(bool value) => Value = value;
+        public PDFBooleanObject(bool value) => Value = value;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfBooleanObject"/> class.
+        /// Initializes a new instance of the <see cref="PDFBooleanObject"/> class.
         /// </summary>
-        public PdfBooleanObject(PdfDocument document, bool value)
+        public PDFBooleanObject(PDFDocument document, bool value)
             : base(document) => Value = value;
 
         /// <summary>
@@ -71,7 +71,7 @@ namespace PDFSharp.Interop
         /// <summary>
         /// Writes the keyword «false» or «true».
         /// </summary>
-        internal override void WriteObject(PdfWriter writer)
+        internal override void WriteObject(PDFWriter writer)
         {
             writer.WriteBeginObject(this);
             writer.Write(Value);

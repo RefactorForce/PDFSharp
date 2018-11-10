@@ -56,9 +56,9 @@ namespace PDFSharp.Internal
 
     internal static class ParserDiagnostics
     {
-        public static void ThrowParserException(string message) => throw new PdfReaderException(message);
+        public static void ThrowParserException(string message) => throw new PDFReaderException(message);
 
-        public static void ThrowParserException(string message, Exception innerException) => throw new PdfReaderException(message, innerException);
+        public static void ThrowParserException(string message, Exception innerException) => throw new PDFReaderException(message, innerException);
 
         public static void HandleUnexpectedCharacter(char ch)
         {

@@ -36,18 +36,18 @@ namespace PDFSharp.Interop
     /// Represents a direct boolean value.
     /// </summary>
     [DebuggerDisplay("({Value})")]
-    public sealed class PdfBoolean : PdfItem
+    public sealed class PDFBoolean : PDFItem
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfBoolean"/> class.
+        /// Initializes a new instance of the <see cref="PDFBoolean"/> class.
         /// </summary>
-        public PdfBoolean()
+        public PDFBoolean()
         { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfBoolean"/> class.
+        /// Initializes a new instance of the <see cref="PDFBoolean"/> class.
         /// </summary>
-        public PdfBoolean(bool value) => Value = value;
+        public PDFBoolean(bool value) => Value = value;
 
         /// <summary>
         /// Gets the value of this instance as boolean value.
@@ -59,12 +59,12 @@ namespace PDFSharp.Interop
         /// <summary>
         /// A pre-defined value that represents <c>true</c>.
         /// </summary>
-        public static readonly PdfBoolean True = new PdfBoolean(true);
+        public static readonly PDFBoolean True = new PDFBoolean(true);
 
         /// <summary>
         /// A pre-defined value that represents <c>false</c>.
         /// </summary>
-        public static readonly PdfBoolean False = new PdfBoolean(false);
+        public static readonly PDFBoolean False = new PDFBoolean(false);
 
         /// <summary>
         /// Returns 'false' or 'true'.
@@ -74,6 +74,6 @@ namespace PDFSharp.Interop
         /// <summary>
         /// Writes 'true' or 'false'.
         /// </summary>
-        internal override void WriteObject(PdfWriter writer) => writer.Write(this);
+        internal override void WriteObject(PDFWriter writer) => writer.Write(this);
     }
 }

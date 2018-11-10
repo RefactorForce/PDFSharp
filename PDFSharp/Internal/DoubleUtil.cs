@@ -32,7 +32,7 @@ using System.Runtime.InteropServices;
 #if !EDF_CORE
 using PDFSharp.Drawing;
 #else
-using PdfSharp.Drawing;
+using PDFSharp.Drawing;
 #endif
 
 #if !EDF_CORE

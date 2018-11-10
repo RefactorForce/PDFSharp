@@ -41,7 +41,7 @@ namespace PDFSharp.Interop.Content
         /// Reads the content stream(s) of the specified page.
         /// </summary>
         /// <param name="page">The page.</param>
-        static public CSequence ReadContent(PdfPage page)
+        static public CSequence ReadContent(PDFPage page)
         {
             CParser parser = new CParser(page);
             CSequence sequence = parser.ReadContent();

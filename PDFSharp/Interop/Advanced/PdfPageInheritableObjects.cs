@@ -34,9 +34,9 @@ namespace PDFSharp.Interop.Advanced
     /// <summary>
     /// Represents a PDF page object.
     /// </summary>
-    internal class PdfPageInheritableObjects : PdfDictionary
+    internal class PDFPageInheritableObjects : PDFDictionary
     {
-        public PdfPageInheritableObjects()
+        public PDFPageInheritableObjects()
         { }
 
         // TODO Inheritable Resources not yet supported
@@ -44,9 +44,9 @@ namespace PDFSharp.Interop.Advanced
         /// <summary>
         /// 
         /// </summary>
-        public PdfRectangle MediaBox { get; set; }
+        public PDFRectangle MediaBox { get; set; }
 
-        public PdfRectangle CropBox { get; set; }
+        public PDFRectangle CropBox { get; set; }
 
         public int Rotate
         {

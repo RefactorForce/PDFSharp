@@ -39,12 +39,12 @@ namespace PDFSharp.Interop
     /// <summary>
     /// Represents a collection of outlines.
     /// </summary>
-    public class PdfOutlineCollection : PdfObject, ICollection<PdfOutline>, IList<PdfOutline>
+    public class PDFOutlineCollection : PDFObject, ICollection<PDFOutline>, IList<PDFOutline>
     {
         /// <summary>
-        /// Can only be created as part of PdfOutline.
+        /// Can only be created as part of PDFOutline.
         /// </summary>
-        internal PdfOutlineCollection(PdfDocument document, PdfOutline parent)
+        internal PDFOutlineCollection(PDFDocument document, PDFOutline parent)
             : base(document) => _parent = parent;
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace PDFSharp.Interop
         /// <summary>
         /// Removes the first occurrence of a specific item from the collection.
         /// </summary>
-        public bool Remove(PdfOutline item)
+        public bool Remove(PDFOutline item)
         {
             if (_outlines.Remove(item))
             {
@@ -86,7 +86,7 @@ namespace PDFSharp.Interop
         /// <summary>
         /// Adds the specified outline.
         /// </summary>
-        public void Add(PdfOutline outline)
+        public void Add(PDFOutline outline)
         {
             if (outline == null)
                 throw new ArgumentNullException("outline");
@@ -121,10 +121,10 @@ namespace PDFSharp.Interop
         {
             if (Count > 0)
             {
-                PdfOutline[] array = new PdfOutline[Count];
+                PDFOutline[] array = new PDFOutline[Count];
                 _outlines.CopyTo(array);
                 _outlines.Clear();
-                foreach (PdfOutline item in array)
+                foreach (PDFOutline item in array)
                 {
                     RemoveFromOutlinesTree(item);
                 }
@@ -134,12 +134,12 @@ namespace PDFSharp.Interop
         /// <summary>
         /// Determines whether the specified element is in the collection.
         /// </summary>
-        public bool Contains(PdfOutline item) => _outlines.Contains(item);
+        public bool Contains(PDFOutline item) => _outlines.Contains(item);
 
         /// <summary>
         /// Copies the collection to an array, starting at the specified index of the target array.
         /// </summary>
-        public void CopyTo(PdfOutline[] array, int arrayIndex) => _outlines.CopyTo(array, arrayIndex);
+        public void CopyTo(PDFOutline[] array, int arrayIndex) => _outlines.CopyTo(array, arrayIndex);
 
         /// <summary>
         /// Adds the specified outline entry.
@@ -149,9 +149,9 @@ namespace PDFSharp.Interop
         /// <param name="opened">Specifies whether the node is displayed expanded (opened) or collapsed.</param>
         /// <param name="style">The font style used to draw the outline text.</param>
         /// <param name="textColor">The color used to draw the outline text.</param>
-        public PdfOutline Add(string title, PdfPage destinationPage, bool opened, PdfOutlineStyle style, XColor textColor)
+        public PDFOutline Add(string title, PDFPage destinationPage, bool opened, PDFOutlineStyle style, XColor textColor)
         {
-            PdfOutline outline = new PdfOutline(title, destinationPage, opened, style, textColor);
+            PDFOutline outline = new PDFOutline(title, destinationPage, opened, style, textColor);
             Add(outline);
             return outline;
         }
@@ -163,9 +163,9 @@ namespace PDFSharp.Interop
         /// <param name="destinationPage">The destination page.</param>
         /// <param name="opened">Specifies whether the node is displayed expanded (opened) or collapsed.</param>
         /// <param name="style">The font style used to draw the outline text.</param>
-        public PdfOutline Add(string title, PdfPage destinationPage, bool opened, PdfOutlineStyle style)
+        public PDFOutline Add(string title, PDFPage destinationPage, bool opened, PDFOutlineStyle style)
         {
-            PdfOutline outline = new PdfOutline(title, destinationPage, opened, style);
+            PDFOutline outline = new PDFOutline(title, destinationPage, opened, style);
             Add(outline);
             return outline;
         }
@@ -176,19 +176,19 @@ namespace PDFSharp.Interop
         /// <param name="title">The outline text.</param>
         /// <param name="destinationPage">The destination page.</param>
         /// <param name="opened">Specifies whether the node is displayed expanded (opened) or collapsed.</param>
-        public PdfOutline Add(string title, PdfPage destinationPage, bool opened)
+        public PDFOutline Add(string title, PDFPage destinationPage, bool opened)
         {
-            PdfOutline outline = new PdfOutline(title, destinationPage, opened);
+            PDFOutline outline = new PDFOutline(title, destinationPage, opened);
             Add(outline);
             return outline;
         }
 
         /// <summary>
-        /// Creates a PdfOutline and adds it into the outline collection.
+        /// Creates a PDFOutline and adds it into the outline collection.
         /// </summary>
-        public PdfOutline Add(string title, PdfPage destinationPage)
+        public PDFOutline Add(string title, PDFPage destinationPage)
         {
-            PdfOutline outline = new PdfOutline(title, destinationPage);
+            PDFOutline outline = new PDFOutline(title, destinationPage);
             Add(outline);
             return outline;
         }
@@ -196,12 +196,12 @@ namespace PDFSharp.Interop
         /// <summary>
         /// Gets the index of the specified item.
         /// </summary>
-        public int IndexOf(PdfOutline item) => _outlines.IndexOf(item);
+        public int IndexOf(PDFOutline item) => _outlines.IndexOf(item);
 
         /// <summary>
         /// Inserts the item at the specified index.
         /// </summary>
-        public void Insert(int index, PdfOutline outline)
+        public void Insert(int index, PDFOutline outline)
         {
             if (outline == null)
                 throw new ArgumentNullException("outline");
@@ -217,15 +217,15 @@ namespace PDFSharp.Interop
         /// </summary>
         public void RemoveAt(int index)
         {
-            PdfOutline outline = _outlines[index];
+            PDFOutline outline = _outlines[index];
             _outlines.RemoveAt(index);
             RemoveFromOutlinesTree(outline);
         }
 
         /// <summary>
-        /// Gets the <see cref="PdfOutline"/> at the specified index.
+        /// Gets the <see cref="PDFOutline"/> at the specified index.
         /// </summary>
-        public PdfOutline this[int index]
+        public PDFOutline this[int index]
         {
             get
             {
@@ -248,19 +248,19 @@ namespace PDFSharp.Interop
         /// <summary>
         /// Returns an enumerator that iterates through the outline collection.
         /// </summary>
-        public IEnumerator<PdfOutline> GetEnumerator() => _outlines.GetEnumerator();
+        public IEnumerator<PDFOutline> GetEnumerator() => _outlines.GetEnumerator();
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
         internal int CountOpen()
         {
             int count = 0;
-            //foreach (PdfOutline outline in _outlines)
+            //foreach (PDFOutline outline in _outlines)
             //    count += outline.CountOpen();
             return count;
         }
 
-        void AddToOutlinesTree(PdfOutline outline)
+        void AddToOutlinesTree(PDFOutline outline)
         {
             if (outline == null)
                 throw new ArgumentNullException("outline");
@@ -292,7 +292,7 @@ namespace PDFSharp.Interop
             //}
         }
 
-        void RemoveFromOutlinesTree(PdfOutline outline)
+        void RemoveFromOutlinesTree(PDFOutline outline)
         {
             if (outline == null)
                 throw new ArgumentNullException("outline");
@@ -307,8 +307,8 @@ namespace PDFSharp.Interop
         /// <summary>
         /// The parent outine of this collection.
         /// </summary>
-        readonly PdfOutline _parent;
+        readonly PDFOutline _parent;
 
-        readonly List<PdfOutline> _outlines = new List<PdfOutline>();
+        readonly List<PDFOutline> _outlines = new List<PDFOutline>();
     }
 }

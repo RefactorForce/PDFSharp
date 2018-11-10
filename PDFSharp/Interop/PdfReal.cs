@@ -37,19 +37,19 @@ namespace PDFSharp.Interop
     /// Represents a direct real value.
     /// </summary>
     [DebuggerDisplay("({Value})")]
-    public sealed class PdfReal : PdfNumber
+    public sealed class PDFReal : PDFNumber
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfReal"/> class.
+        /// Initializes a new instance of the <see cref="PDFReal"/> class.
         /// </summary>
-        public PdfReal()
+        public PDFReal()
         { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfReal"/> class.
+        /// Initializes a new instance of the <see cref="PDFReal"/> class.
         /// </summary>
         /// <param name="value">The value.</param>
-        public PdfReal(double value) => Value = value;
+        public PDFReal(double value) => Value = value;
 
         /// <summary>
         /// Gets the value as double.
@@ -66,6 +66,6 @@ namespace PDFSharp.Interop
         /// <summary>
         /// Writes the real value with up to three digits.
         /// </summary>
-        internal override void WriteObject(PdfWriter writer) => writer.Write(this);
+        internal override void WriteObject(PDFWriter writer) => writer.Write(this);
     }
 }

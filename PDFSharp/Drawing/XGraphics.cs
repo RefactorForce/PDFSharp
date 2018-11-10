@@ -47,7 +47,7 @@ using GdiMatrix = System.DrawingCore.Drawing2D.Matrix;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using PdfSharp.Windows;
+using PDFSharp.Windows;
 using SysPoint = System.Windows.Point;
 using SysSize = System.Windows.Size;
 using SysRect = System.Windows.Rect;
@@ -75,7 +75,7 @@ using SysSize = Windows.Foundation.Size;
 using SysRect = Windows.Foundation.Rect;
 #endif
 using PDFSharp.Interop;
-using PDFSharp.Drawing.Pdf;
+using PDFSharp.Drawing.PDF;
 using PDFSharp.Internal;
 using PDFSharp.Interop.Advanced;
 
@@ -93,7 +93,7 @@ namespace PDFSharp.Drawing  // #??? Clean up
     enum InternalGraphicsMode
     {
         DrawingGdiGraphics,
-        DrawingPdfContent,
+        DrawingPDFContent,
         DrawingBitmap,
     }
 
@@ -345,33 +345,33 @@ namespace PDFSharp.Drawing  // #??? Clean up
         /// <summary>
         /// Initializes a new instance of the XGraphics class for drawing on a PDF page.
         /// </summary>
-        XGraphics(PdfPage page, XGraphicsPdfPageOptions options, XGraphicsUnit pageUnit, XPageDirection pageDirection)
+        XGraphics(PDFPage page, XGraphicsPDFPageOptions options, XGraphicsUnit pageUnit, XPageDirection pageDirection)
         {
             if (page == null)
                 throw new ArgumentNullException("page");
 
             if (page.Owner == null)
-                throw new ArgumentException("You cannot draw on a page that is not owned by a PdfDocument object.", "page");
+                throw new ArgumentException("You cannot draw on a page that is not owned by a PDFDocument object.", "page");
 
             if (page.RenderContent != null)
                 throw new InvalidOperationException("An XGraphics object already exists for this page and must be disposed before a new one can be created.");
 
             if (page.Owner.IsReadOnly)
-                throw new InvalidOperationException("Cannot create XGraphics for a page of a document that cannot be modified. Use PdfDocumentOpenMode.Modify.");
+                throw new InvalidOperationException("Cannot create XGraphics for a page of a document that cannot be modified. Use PDFDocumentOpenMode.Modify.");
 
             _gsStack = new GraphicsStateStack(this);
-            PdfContent content = null;
+            PDFContent content = null;
             switch (options)
             {
-                case XGraphicsPdfPageOptions.Replace:
+                case XGraphicsPDFPageOptions.Replace:
                     page.Contents.Elements.Clear();
-                    goto case XGraphicsPdfPageOptions.Append;
+                    goto case XGraphicsPDFPageOptions.Append;
 
-                case XGraphicsPdfPageOptions.Prepend:
+                case XGraphicsPDFPageOptions.Prepend:
                     content = page.Contents.PrependContent();
                     break;
 
-                case XGraphicsPdfPageOptions.Append:
+                case XGraphicsPDFPageOptions.Append:
                     content = page.Contents.AppendContent();
                     break;
             }
@@ -396,9 +396,9 @@ namespace PDFSharp.Drawing  // #??? Clean up
             TargetContext = XGraphicTargetContext.WPF;
 #endif
 #if GDI && WPF
-            TargetContext = PdfSharp.Internal.TargetContextHelper.TargetContext;
+            TargetContext = PDFSharp.Internal.TargetContextHelper.TargetContext;
 #endif
-            _renderer = new XGraphicsPdfRenderer(page, this, options);
+            _renderer = new XGraphicsPDFRenderer(page, this, options);
             _pageSizePoints = new XSize(page.Width, page.Height);
             switch (pageUnit)
             {
@@ -444,7 +444,7 @@ namespace PDFSharp.Drawing  // #??? Clean up
             TargetContext = XGraphicTargetContext.CORE;
             _drawGraphics = false;
             if (form.Owner != null)
-                _renderer = new XGraphicsPdfRenderer(form, this);
+                _renderer = new XGraphicsPDFRenderer(form, this);
             PageSize = form.Size;
             Initialize();
 #endif
@@ -520,7 +520,7 @@ namespace PDFSharp.Drawing  // #??? Clean up
                     _gfx = Graphics.FromHwnd(IntPtr.Zero);
                 }
                 if (form.Owner != null)
-                    _renderer = new PdfSharp.Drawing.Pdf.XGraphicsPdfRenderer(form, this);
+                    _renderer = new PDFSharp.Drawing.PDF.XGraphicsPDFRenderer(form, this);
                 _pageSize = form.Size;
             }
             finally { Lock.ExitGdiPlus(); }
@@ -542,7 +542,7 @@ namespace PDFSharp.Drawing  // #??? Clean up
                 _dc = _dv.RenderOpen();
             }
             if (form.Owner != null)
-                _renderer = new PdfSharp.Drawing.Pdf.XGraphicsPdfRenderer(form, this);
+                _renderer = new PDFSharp.Drawing.PDF.XGraphicsPDFRenderer(form, this);
             _pageSize = form.Size;
             Initialize();
 #else
@@ -560,10 +560,10 @@ namespace PDFSharp.Drawing  // #??? Clean up
         {
 #if CORE
             //throw new InvalidOperationException("No measure context in CORE build.");
-            PdfDocument dummy = new PdfDocument();
-            PdfPage page = dummy.AddPage();
+            PDFDocument dummy = new PDFDocument();
+            PDFPage page = dummy.AddPage();
             //XGraphics gfx = new XGraphics(((System.DrawingCore.Graphics)null, size, pageUnit, pageDirection);
-            XGraphics gfx = FromPdfPage(page, XGraphicsPdfPageOptions.Append, pageUnit, pageDirection);
+            XGraphics gfx = FromPDFPage(page, XGraphicsPDFPageOptions.Append, pageUnit, pageDirection);
             return gfx;
 #endif
 #if GDI && !WPF
@@ -653,57 +653,57 @@ namespace PDFSharp.Drawing  // #??? Clean up
 #endif
 
         /// <summary>
-        /// Creates a new instance of the XGraphics class from a PdfSharp.Pdf.PdfPage object.
+        /// Creates a new instance of the XGraphics class from a PDFSharp.PDF.PDFPage object.
         /// </summary>
-        public static XGraphics FromPdfPage(PdfPage page) => new XGraphics(page, XGraphicsPdfPageOptions.Append, XGraphicsUnit.Point, XPageDirection.Downwards);
+        public static XGraphics FromPDFPage(PDFPage page) => new XGraphics(page, XGraphicsPDFPageOptions.Append, XGraphicsUnit.Point, XPageDirection.Downwards);
 
         /// <summary>
-        /// Creates a new instance of the XGraphics class from a PdfSharp.Pdf.PdfPage object.
+        /// Creates a new instance of the XGraphics class from a PDFSharp.PDF.PDFPage object.
         /// </summary>
-        public static XGraphics FromPdfPage(PdfPage page, XGraphicsUnit unit) => new XGraphics(page, XGraphicsPdfPageOptions.Append, unit, XPageDirection.Downwards);
+        public static XGraphics FromPDFPage(PDFPage page, XGraphicsUnit unit) => new XGraphics(page, XGraphicsPDFPageOptions.Append, unit, XPageDirection.Downwards);
 
         /// <summary>
-        /// Creates a new instance of the XGraphics class from a PdfSharp.Pdf.PdfPage object.
+        /// Creates a new instance of the XGraphics class from a PDFSharp.PDF.PDFPage object.
         /// </summary>
-        public static XGraphics FromPdfPage(PdfPage page, XPageDirection pageDirection) => new XGraphics(page, XGraphicsPdfPageOptions.Append, XGraphicsUnit.Point, pageDirection);
+        public static XGraphics FromPDFPage(PDFPage page, XPageDirection pageDirection) => new XGraphics(page, XGraphicsPDFPageOptions.Append, XGraphicsUnit.Point, pageDirection);
 
         /// <summary>
-        /// Creates a new instance of the XGraphics class from a PdfSharp.Pdf.PdfPage object.
+        /// Creates a new instance of the XGraphics class from a PDFSharp.PDF.PDFPage object.
         /// </summary>
-        public static XGraphics FromPdfPage(PdfPage page, XGraphicsPdfPageOptions options) => new XGraphics(page, options, XGraphicsUnit.Point, XPageDirection.Downwards);
+        public static XGraphics FromPDFPage(PDFPage page, XGraphicsPDFPageOptions options) => new XGraphics(page, options, XGraphicsUnit.Point, XPageDirection.Downwards);
 
         /// <summary>
-        /// Creates a new instance of the XGraphics class from a PdfSharp.Pdf.PdfPage object.
+        /// Creates a new instance of the XGraphics class from a PDFSharp.PDF.PDFPage object.
         /// </summary>
-        public static XGraphics FromPdfPage(PdfPage page, XGraphicsPdfPageOptions options, XPageDirection pageDirection) => new XGraphics(page, options, XGraphicsUnit.Point, pageDirection);
+        public static XGraphics FromPDFPage(PDFPage page, XGraphicsPDFPageOptions options, XPageDirection pageDirection) => new XGraphics(page, options, XGraphicsUnit.Point, pageDirection);
 
         /// <summary>
-        /// Creates a new instance of the XGraphics class from a PdfSharp.Pdf.PdfPage object.
+        /// Creates a new instance of the XGraphics class from a PDFSharp.PDF.PDFPage object.
         /// </summary>
-        public static XGraphics FromPdfPage(PdfPage page, XGraphicsPdfPageOptions options, XGraphicsUnit unit) => new XGraphics(page, options, unit, XPageDirection.Downwards);
+        public static XGraphics FromPDFPage(PDFPage page, XGraphicsPDFPageOptions options, XGraphicsUnit unit) => new XGraphics(page, options, unit, XPageDirection.Downwards);
 
         /// <summary>
-        /// Creates a new instance of the XGraphics class from a PdfSharp.Pdf.PdfPage object.
+        /// Creates a new instance of the XGraphics class from a PDFSharp.PDF.PDFPage object.
         /// </summary>
-        public static XGraphics FromPdfPage(PdfPage page, XGraphicsPdfPageOptions options, XGraphicsUnit unit, XPageDirection pageDirection) => new XGraphics(page, options, unit, pageDirection);
+        public static XGraphics FromPDFPage(PDFPage page, XGraphicsPDFPageOptions options, XGraphicsUnit unit, XPageDirection pageDirection) => new XGraphics(page, options, unit, pageDirection);
 
         /// <summary>
-        /// Creates a new instance of the XGraphics class from a PdfSharp.Drawing.XPdfForm object.
+        /// Creates a new instance of the XGraphics class from a PDFSharp.Drawing.XPDFForm object.
         /// </summary>
-        public static XGraphics FromPdfForm(XPdfForm form) => form.Gfx ?? new XGraphics(form);
+        public static XGraphics FromPDFForm(XPDFForm form) => form.Gfx ?? new XGraphics(form);
 
         /// <summary>
-        /// Creates a new instance of the XGraphics class from a PdfSharp.Drawing.XForm object.
+        /// Creates a new instance of the XGraphics class from a PDFSharp.Drawing.XForm object.
         /// </summary>
         public static XGraphics FromForm(XForm form) => form.Gfx ?? new XGraphics(form);
 
         /// <summary>
-        /// Creates a new instance of the XGraphics class from a PdfSharp.Drawing.XForm object.
+        /// Creates a new instance of the XGraphics class from a PDFSharp.Drawing.XForm object.
         /// </summary>
         public static XGraphics FromImage(XImage image) => FromImage(image, XGraphicsUnit.Point);
 
         /// <summary>
-        /// Creates a new instance of the XGraphics class from a PdfSharp.Drawing.XImage object.
+        /// Creates a new instance of the XGraphics class from a PDFSharp.Drawing.XImage object.
         /// </summary>
         public static XGraphics FromImage(XImage image, XGraphicsUnit unit)
         {
@@ -740,7 +740,7 @@ namespace PDFSharp.Drawing  // #??? Clean up
             _pageOrigin = new XPoint();
 
             double pageHeight = PageSize.Height;
-            PdfPage targetPage = PdfPage;
+            PDFPage targetPage = PDFPage;
             XPoint trimOffset = new XPoint();
             if (targetPage != null && targetPage.TrimMargins.AreSet)
             {
@@ -903,7 +903,7 @@ namespace PDFSharp.Drawing  // #??? Clean up
         /// </summary>
         // ReSharper disable once InconsistentNaming
         // ReSharper disable once ConvertToAutoProperty
-        public PdfFontEncoding MUH  // MigraDoc Unicode Hack...
+        public PDFFontEncoding MUH  // MigraDoc Unicode Hack...
         { get; set; }
 
         /// <summary>
@@ -3715,7 +3715,7 @@ namespace PDFSharp.Drawing  // #??? Clean up
             if (image == null)
                 throw new ArgumentNullException("image");
 
-            CheckXPdfFormConsistence(image);
+            CheckXPDFFormConsistence(image);
 
             double width = image.PointWidth;
             double height = image.PointHeight;
@@ -3808,7 +3808,7 @@ namespace PDFSharp.Drawing  // #??? Clean up
             if (image == null)
                 throw new ArgumentNullException("image");
 
-            CheckXPdfFormConsistence(image);
+            CheckXPDFFormConsistence(image);
 
             if (_drawGraphics)
             {
@@ -3836,10 +3836,10 @@ namespace PDFSharp.Drawing  // #??? Clean up
                         else
                         {
                             XImage placeholder = null;
-                            XPdfForm pdfForm = image as XPdfForm;
+                            XPDFForm pdfForm = image as XPDFForm;
                             if (pdfForm != null)
                             {
-                                //XPdfForm pf = pdfForm;
+                                //XPDFForm pf = pdfForm;
                                 if (pdfForm.PlaceHolder != null)
                                     placeholder = pdfForm.PlaceHolder;
                             }
@@ -3875,9 +3875,9 @@ namespace PDFSharp.Drawing  // #??? Clean up
                     else
                     {
                         XImage placeholder = null;
-                        if (image is XPdfForm)
+                        if (image is XPDFForm)
                         {
-                            XPdfForm pf = image as XPdfForm;
+                            XPDFForm pf = image as XPDFForm;
                             if (pf.PlaceHolder != null)
                                 placeholder = pf.PlaceHolder;
                         }
@@ -3930,7 +3930,7 @@ namespace PDFSharp.Drawing  // #??? Clean up
             if (image == null)
                 throw new ArgumentNullException("image");
 
-            CheckXPdfFormConsistence(image);
+            CheckXPDFFormConsistence(image);
 
             if (_drawGraphics)
             {
@@ -4045,7 +4045,7 @@ namespace PDFSharp.Drawing  // #??? Clean up
         /// <summary>
         /// Checks whether drawing is allowed and disposes the XGraphics object, if necessary.
         /// </summary>
-        void CheckXPdfFormConsistence(XImage image)
+        void CheckXPDFFormConsistence(XImage image)
         {
             if (image is XForm xForm)
             {
@@ -4053,15 +4053,15 @@ namespace PDFSharp.Drawing  // #??? Clean up
                 xForm.Finish();
 
                 // ReSharper disable once MergeSequentialChecks
-                if (_renderer != null && _renderer as XGraphicsPdfRenderer != null)
+                if (_renderer != null && _renderer as XGraphicsPDFRenderer != null)
                 {
-                    if (xForm.Owner != null && xForm.Owner != ((XGraphicsPdfRenderer)_renderer).Owner)
+                    if (xForm.Owner != null && xForm.Owner != ((XGraphicsPDFRenderer)_renderer).Owner)
                         throw new InvalidOperationException(
-                            "A XPdfForm object is always bound to the document it was created for and cannot be drawn in the context of another document.");
+                            "A XPDFForm object is always bound to the document it was created for and cannot be drawn in the context of another document.");
 
-                    if (xForm == ((XGraphicsPdfRenderer)_renderer)._form)
+                    if (xForm == ((XGraphicsPDFRenderer)_renderer)._form)
                         throw new InvalidOperationException(
-                            "A XPdfForm cannot be drawn on itself.");
+                            "A XPDFForm cannot be drawn on itself.");
                 }
             }
         }
@@ -4877,18 +4877,18 @@ namespace PDFSharp.Drawing  // #??? Clean up
         ///// <summary>
         ///// Testcode
         ///// </summary>
-        //public void TestXObject(PdfDocument thisDoc, PdfPage thisPage, int page,
-        //      PdfDocument externalDoc, ImportedObjectTable impDoc)
+        //public void TestXObject(PDFDocument thisDoc, PDFPage thisPage, int page,
+        //      PDFDocument externalDoc, ImportedObjectTable impDoc)
         //{
-        //    PdfPage impPage = externalDoc.Pages[page];
+        //    PDFPage impPage = externalDoc.Pages[page];
         //    //      impDoc.ImportPage(impPage);
-        //    PdfFormXObject form = new PdfFormXObject(thisDoc, impDoc, impPage);
+        //    PDFFormXObject form = new PDFFormXObject(thisDoc, impDoc, impPage);
         //    thisDoc.xrefTable.Add(form);
 
-        //    PdfDictionary xobjects = new PdfDictionary();
+        //    PDFDictionary xobjects = new PDFDictionary();
         //    xobjects.Elements["/X42"] = form.XRef;
-        //    thisPage.Resources.Elements[PdfResources.Keys.XObject] = xobjects;
-        //    ((XGraphicsPdfRenderer)renderer).DrawXObject("/X42");
+        //    thisPage.Resources.Elements[PDFResources.Keys.XObject] = xobjects;
+        //    ((XGraphicsPDFRenderer)renderer).DrawXObject("/X42");
         //}
 
         internal void DisassociateImage()
@@ -4945,7 +4945,7 @@ namespace PDFSharp.Drawing  // #??? Clean up
 #endif
 
         /// <summary>
-        /// Interface to an (optional) renderer. Currently it is the XGraphicsPdfRenderer, if defined.
+        /// Interface to an (optional) renderer. Currently it is the XGraphicsPDFRenderer, if defined.
         /// </summary>
         IXGraphicsRenderer _renderer;
 
@@ -4958,7 +4958,7 @@ namespace PDFSharp.Drawing  // #??? Clean up
         /// Gets the PDF page that serves as drawing surface if PDF is rendered,
         /// or null, if no such object exists.
         /// </summary>
-        public PdfPage PdfPage => (_renderer as XGraphicsPdfRenderer)?._page;
+        public PDFPage PDFPage => (_renderer as XGraphicsPDFRenderer)?._page;
 
 #if GDI
         /// <summary>

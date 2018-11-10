@@ -32,7 +32,7 @@ namespace PDFSharp.Interop.IO
     /// <summary>
     /// Determines how a PDF document is opened. 
     /// </summary>
-    public enum PdfDocumentOpenMode
+    public enum PDFDocumentOpenMode
     {
         /// <summary>
         /// The PDF stream is completely read into memory and can be modified. Pages can be deleted or

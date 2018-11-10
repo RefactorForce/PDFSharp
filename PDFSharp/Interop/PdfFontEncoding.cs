@@ -34,7 +34,7 @@ namespace PDFSharp.Interop
     /// <summary>
     /// Specifies the encoding schema used for an XFont when converted into PDF.
     /// </summary>
-    public enum PdfFontEncoding
+    public enum PDFFontEncoding
     {
         // TABLE
 
@@ -60,7 +60,7 @@ namespace PDFSharp.Interop
         [Obsolete("Use WinAnsi or Unicode")]
         Automatic = 1,  // Force Unicode when used.
 
-        // Implementation note: PdfFontEncoding uses incorrect terms.
+        // Implementation note: PDFFontEncoding uses incorrect terms.
         // WinAnsi correspond to WinAnsiEncoding, while Unicode uses glyph indices.
         // Furthermre the term WinAnsi is an oxymoron.
         // Reference: TABLE  D.1 Latin-text encodings / Page 996

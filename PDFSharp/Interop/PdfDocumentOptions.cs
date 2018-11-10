@@ -34,9 +34,9 @@ namespace PDFSharp.Interop
     /// <summary>
     /// Holds information how to handle the document when it is saved as PDF stream.
     /// </summary>
-    public sealed class PdfDocumentOptions
+    public sealed class PDFDocumentOptions
     {
-        internal PdfDocumentOptions(PdfDocument document)
+        internal PDFDocumentOptions(PDFDocument document)
         {
             //_deflateContents = true;
             //_writeProcedureSets = true;
@@ -45,7 +45,7 @@ namespace PDFSharp.Interop
         /// <summary>
         /// Gets or sets the color mode.
         /// </summary>
-        public PdfColorMode ColorMode { get; set; } = PdfColorMode.Rgb;
+        public PDFColorMode ColorMode { get; set; } = PDFColorMode.Rgb;
 
         /// <summary>
         /// Gets or sets a value indicating whether to compress content streams of PDF pages.
@@ -65,7 +65,7 @@ namespace PDFSharp.Interop
         /// <summary>
         /// Gets or sets the flate encode mode. Besides the balanced default mode you can set modes for best compression (slower) or best speed (larger files).
         /// </summary>
-        public PdfFlateEncodeMode FlateEncodeMode { get; set; } = PdfFlateEncodeMode.Default;
+        public PDFFlateEncodeMode FlateEncodeMode { get; set; } = PDFFlateEncodeMode.Default;
 
         /// <summary>
         /// Gets or sets a value indicating whether to compress bilevel images using CCITT compression.
@@ -77,6 +77,6 @@ namespace PDFSharp.Interop
         /// <summary>
         /// Gets or sets a value indicating whether to compress JPEG images with the FlateDecode filter.
         /// </summary>
-        public PdfUseFlateDecoderForJpegImages UseFlateDecoderForJpegImages { get; set; } = PdfUseFlateDecoderForJpegImages.Never;
+        public PDFUseFlateDecoderForJpegImages UseFlateDecoderForJpegImages { get; set; } = PDFUseFlateDecoderForJpegImages.Never;
     }
 }

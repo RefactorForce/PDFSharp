@@ -38,13 +38,13 @@ namespace PDFSharp.Interop.Advanced
     /// <summary>
     /// Represents a composite font. Used for Unicode encoding.
     /// </summary>
-    internal sealed class PdfType0Font : PdfFont
+    internal sealed class PDFType0Font : PDFFont
     {
-        public PdfType0Font(PdfDocument document)
+        public PDFType0Font(PDFDocument document)
             : base(document)
         { }
 
-        public PdfType0Font(PdfDocument document, XFont font, bool vertical)
+        public PDFType0Font(PDFDocument document, XFont font, bool vertical)
             : base(document)
         {
             Elements.SetName(Keys.Type, "/Font");
@@ -52,18 +52,18 @@ namespace PDFSharp.Interop.Advanced
             Elements.SetName(Keys.Encoding, vertical ? "/Identity-V" : "/Identity-H");
 
             OpenTypeDescriptor ttDescriptor = (OpenTypeDescriptor)FontDescriptorCache.GetOrCreateDescriptorFor(font);
-            FontDescriptor = new PdfFontDescriptor(document, ttDescriptor);
-            FontOptions = font.PdfOptions;
+            FontDescriptor = new PDFFontDescriptor(document, ttDescriptor);
+            FontOptions = font.PDFOptions;
             Debug.Assert(FontOptions != null);
 
             _cmapInfo = new CMapInfo(ttDescriptor);
-            DescendantFont = new PdfCIDFont(document, FontDescriptor, font)
+            DescendantFont = new PDFCIDFont(document, FontDescriptor, font)
             {
                 CMapInfo = _cmapInfo
             };
 
             // Create ToUnicode map
-            _toUnicode = new PdfToUnicodeMap(document, _cmapInfo);
+            _toUnicode = new PDFToUnicodeMap(document, _cmapInfo);
             document.Internals.AddObject(_toUnicode);
             Elements.Add(Keys.ToUnicode, _toUnicode);
 
@@ -74,13 +74,13 @@ namespace PDFSharp.Interop.Advanced
             FontDescriptor.FontName = BaseFont;
             DescendantFont.BaseFont = BaseFont;
 
-            PdfArray descendantFonts = new PdfArray(document);
+            PDFArray descendantFonts = new PDFArray(document);
             Owner._irefTable.Add(DescendantFont);
             descendantFonts.Elements.Add(DescendantFont.Reference);
             Elements[Keys.DescendantFonts] = descendantFonts;
         }
 
-        public PdfType0Font(PdfDocument document, string idName, byte[] fontData, bool vertical)
+        public PDFType0Font(PDFDocument document, string idName, byte[] fontData, bool vertical)
             : base(document)
         {
             Elements.SetName(Keys.Type, "/Font");
@@ -88,18 +88,18 @@ namespace PDFSharp.Interop.Advanced
             Elements.SetName(Keys.Encoding, vertical ? "/Identity-V" : "/Identity-H");
 
             OpenTypeDescriptor ttDescriptor = (OpenTypeDescriptor)FontDescriptorCache.GetOrCreateDescriptor(idName, fontData);
-            FontDescriptor = new PdfFontDescriptor(document, ttDescriptor);
-            FontOptions = new XPdfFontOptions(PdfFontEncoding.Unicode);
+            FontDescriptor = new PDFFontDescriptor(document, ttDescriptor);
+            FontOptions = new XPDFFontOptions(PDFFontEncoding.Unicode);
             Debug.Assert(FontOptions != null);
 
             _cmapInfo = new CMapInfo(ttDescriptor);
-            DescendantFont = new PdfCIDFont(document, FontDescriptor, fontData)
+            DescendantFont = new PDFCIDFont(document, FontDescriptor, fontData)
             {
                 CMapInfo = _cmapInfo
             };
 
             // Create ToUnicode map
-            _toUnicode = new PdfToUnicodeMap(document, _cmapInfo);
+            _toUnicode = new PDFToUnicodeMap(document, _cmapInfo);
             document.Internals.AddObject(_toUnicode);
             Elements.Add(Keys.ToUnicode, _toUnicode);
 
@@ -107,19 +107,19 @@ namespace PDFSharp.Interop.Advanced
             BaseFont = ttDescriptor.FontName;
 
             // CID fonts are always embedded
-            if (!BaseFont.Contains("+"))  // HACK in PdfType0Font
+            if (!BaseFont.Contains("+"))  // HACK in PDFType0Font
                 BaseFont = CreateEmbeddedFontSubsetName(BaseFont);
 
             FontDescriptor.FontName = BaseFont;
             DescendantFont.BaseFont = BaseFont;
 
-            PdfArray descendantFonts = new PdfArray(document);
+            PDFArray descendantFonts = new PDFArray(document);
             Owner._irefTable.Add(DescendantFont);
             descendantFonts.Elements.Add(DescendantFont.Reference);
             Elements[Keys.DescendantFonts] = descendantFonts;
         }
 
-        XPdfFontOptions FontOptions { get; }
+        XPDFFontOptions FontOptions { get; }
 
         public string BaseFont
         {
@@ -127,7 +127,7 @@ namespace PDFSharp.Interop.Advanced
             set => Elements.SetName(Keys.BaseFont, value);
         }
 
-        internal PdfCIDFont DescendantFont { get; }
+        internal PDFCIDFont DescendantFont { get; }
 
         internal override void PrepareForSave()
         {
@@ -143,14 +143,14 @@ namespace PDFSharp.Interop.Advanced
                 int[] glyphWidths = new int[count];
 
                 for (int idx = 0; idx < count; idx++)
-                    glyphWidths[idx] = descriptor.GlyphIndexToPdfWidth(glyphIndices[idx]);
+                    glyphWidths[idx] = descriptor.GlyphIndexToPDFWidth(glyphIndices[idx]);
 
                 //TODO: optimize order of indices
 
                 for (int idx = 0; idx < count; idx++)
                     w.AppendFormat("{0}[{1}]", glyphIndices[idx], glyphWidths[idx]);
                 w.Append("]");
-                DescendantFont.Elements.SetValue(PdfCIDFont.Keys.W, new PdfLiteral(w.ToString()));
+                DescendantFont.Elements.SetValue(PDFCIDFont.Keys.W, new PDFLiteral(w.ToString()));
 
             }
             DescendantFont.PrepareForSave();
@@ -160,7 +160,7 @@ namespace PDFSharp.Interop.Advanced
         /// <summary>
         /// Predefined keys of this dictionary.
         /// </summary>
-        public new sealed class Keys : PdfFont.Keys
+        public new sealed class Keys : PDFFont.Keys
         {
             /// <summary>
             /// (Required) The type of PDF object that this dictionary describes;

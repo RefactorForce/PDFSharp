@@ -34,33 +34,33 @@ namespace PDFSharp.Interop.Advanced
     /// <summary>
     /// Contains all used ExtGState objects of a document.
     /// </summary>
-    public sealed class PdfExtGStateTable : PdfResourceTable
+    public sealed class PDFExtGStateTable : PDFResourceTable
     {
         /// <summary>
         /// Initializes a new instance of this class, which is a singleton for each document.
         /// </summary>
-        public PdfExtGStateTable(PdfDocument document)
+        public PDFExtGStateTable(PDFDocument document)
             : base(document)
         { }
 
 
         /// <summary>
-        /// Gets a PdfExtGState with the key 'CA' set to the specified alpha value.
+        /// Gets a PDFExtGState with the key 'CA' set to the specified alpha value.
         /// </summary>
-        public PdfExtGState GetExtGStateStroke(double alpha, bool overprint)
+        public PDFExtGState GetExtGStateStroke(double alpha, bool overprint)
         {
-            string key = PdfExtGState.MakeKey(alpha, overprint);
-            if (!_strokeAlphaValues.TryGetValue(key, out PdfExtGState extGState))
+            string key = PDFExtGState.MakeKey(alpha, overprint);
+            if (!_strokeAlphaValues.TryGetValue(key, out PDFExtGState extGState))
             {
-                extGState = new PdfExtGState(Owner)
+                extGState = new PDFExtGState(Owner)
                 {
-                    //extGState.Elements[PdfExtGState.Keys.CA] = new PdfReal(alpha);
+                    //extGState.Elements[PDFExtGState.Keys.CA] = new PDFReal(alpha);
                     StrokeAlpha = alpha
                 };
                 if (overprint)
                 {
                     extGState.StrokeOverprint = true;
-                    extGState.Elements.SetInteger(PdfExtGState.Keys.OPM, 1);
+                    extGState.Elements.SetInteger(PDFExtGState.Keys.OPM, 1);
                 }
                 _strokeAlphaValues[key] = extGState;
             }
@@ -68,22 +68,22 @@ namespace PDFSharp.Interop.Advanced
         }
 
         /// <summary>
-        /// Gets a PdfExtGState with the key 'ca' set to the specified alpha value.
+        /// Gets a PDFExtGState with the key 'ca' set to the specified alpha value.
         /// </summary>
-        public PdfExtGState GetExtGStateNonStroke(double alpha, bool overprint)
+        public PDFExtGState GetExtGStateNonStroke(double alpha, bool overprint)
         {
-            string key = PdfExtGState.MakeKey(alpha, overprint);
-            if (!_nonStrokeStates.TryGetValue(key, out PdfExtGState extGState))
+            string key = PDFExtGState.MakeKey(alpha, overprint);
+            if (!_nonStrokeStates.TryGetValue(key, out PDFExtGState extGState))
             {
-                extGState = new PdfExtGState(Owner)
+                extGState = new PDFExtGState(Owner)
                 {
-                    //extGState.Elements[PdfExtGState.Keys.ca] = new PdfReal(alpha);
+                    //extGState.Elements[PDFExtGState.Keys.ca] = new PDFReal(alpha);
                     NonStrokeAlpha = alpha
                 };
                 if (overprint)
                 {
                     extGState.NonStrokeOverprint = true;
-                    extGState.Elements.SetInteger(PdfExtGState.Keys.OPM, 1);
+                    extGState.Elements.SetInteger(PDFExtGState.Keys.OPM, 1);
                 }
 
                 _nonStrokeStates[key] = extGState;
@@ -91,7 +91,7 @@ namespace PDFSharp.Interop.Advanced
             return extGState;
         }
 
-        readonly Dictionary<string, PdfExtGState> _strokeAlphaValues = new Dictionary<string, PdfExtGState>();
-        readonly Dictionary<string, PdfExtGState> _nonStrokeStates = new Dictionary<string, PdfExtGState>();
+        readonly Dictionary<string, PDFExtGState> _strokeAlphaValues = new Dictionary<string, PDFExtGState>();
+        readonly Dictionary<string, PDFExtGState> _nonStrokeStates = new Dictionary<string, PDFExtGState>();
     }
 }

@@ -34,16 +34,16 @@ namespace PDFSharp.Interop.Advanced
     /// <summary>
     /// Base class for FontTable, ImageTable, FormXObjectTable etc.
     /// </summary>
-    public class PdfResourceTable
+    public class PDFResourceTable
     {
         /// <summary>
         /// Base class for document wide resource tables.
         /// </summary>
-        public PdfResourceTable(PdfDocument owner) => Owner = owner ?? throw new ArgumentNullException("owner");
+        public PDFResourceTable(PDFDocument owner) => Owner = owner ?? throw new ArgumentNullException("owner");
 
         /// <summary>
         /// Gets the owning document of this resource table.
         /// </summary>
-        protected PdfDocument Owner { get; }
+        protected PDFDocument Owner { get; }
     }
 }

@@ -35,18 +35,18 @@ namespace PDFSharp.Interop.Advanced
     /// <summary>
     /// Represents a PDF cross-reference stream.
     /// </summary>
-    internal sealed class PdfCrossReferenceStream : PdfTrailer  // Reference: 3.4.7  Cross-Reference Streams / Page 106
+    internal sealed class PDFCrossReferenceStream : PDFTrailer  // Reference: 3.4.7  Cross-Reference Streams / Page 106
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfObjectStream"/> class.
+        /// Initializes a new instance of the <see cref="PDFObjectStream"/> class.
         /// </summary>
-        public PdfCrossReferenceStream(PdfDocument document)
+        public PDFCrossReferenceStream(PDFDocument document)
             : base(document)
         {
 #if DEBUG && CORE
-            if (Internal.PdfDiagnostics.TraceXrefStreams)
+            if (Internal.PDFDiagnostics.TraceXrefStreams)
             {
-                Debug.WriteLine("PdfCrossReferenceStream created.");
+                Debug.WriteLine("PDFCrossReferenceStream created.");
             }
 #endif
         }
@@ -67,7 +67,7 @@ namespace PDFSharp.Interop.Advanced
         /// <summary>
         /// Predefined keys for cross-reference dictionaries.
         /// </summary>
-        public new class Keys : PdfTrailer.Keys  // Reference: TABLE 3.15  Additional entries specific to a cross-reference stream dictionary / Page 107
+        public new class Keys : PDFTrailer.Keys  // Reference: TABLE 3.15  Additional entries specific to a cross-reference stream dictionary / Page 107
         {
             /// <summary>
             /// (Required) The type of PDF object that this dictionary describes;

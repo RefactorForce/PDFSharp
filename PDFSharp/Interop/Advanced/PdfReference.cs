@@ -38,23 +38,23 @@ using PDFSharp.Interop.IO;
 namespace PDFSharp.Interop.Advanced
 {
     /// <summary>
-    /// Represents an indirect reference to a PdfObject.
+    /// Represents an indirect reference to a PDFObject.
     /// </summary>
     [DebuggerDisplay("iref({ObjectNumber}, {GenerationNumber})")]
-    public sealed class PdfReference : PdfItem
+    public sealed class PDFReference : PDFItem
     {
-        // About PdfReference 
+        // About PDFReference 
         // 
-        // * A PdfReference holds either the ObjectID or the PdfObject or both.
+        // * A PDFReference holds either the ObjectID or the PDFObject or both.
         // 
-        // * Each PdfObject has a PdfReference if and only if it is an indirect object. Direct objects have
-        //   no PdfReference, because they are embedded in a parent objects.
+        // * Each PDFObject has a PDFReference if and only if it is an indirect object. Direct objects have
+        //   no PDFReference, because they are embedded in a parent objects.
         //
-        // * PdfReference objects are used to reference PdfObject instances. A value in a PDF dictionary
-        //   or array that is a PdfReference represents an indirect reference. A value in a PDF dictionary or
-        //   or array that is a PdfObject represents a direct (or embeddded) object.
+        // * PDFReference objects are used to reference PDFObject instances. A value in a PDF dictionary
+        //   or array that is a PDFReference represents an indirect reference. A value in a PDF dictionary or
+        //   or array that is a PDFObject represents a direct (or embeddded) object.
         //
-        // * When a PDF file is imported, the PdfXRefTable is filled with PdfReference objects keeping the
+        // * When a PDF file is imported, the PDFXRefTable is filled with PDFReference objects keeping the
         //   ObjectsIDs and file positions (offsets) of all indirect objects.
         //
         // * Indirect objects can easily be renumbered because they do not rely on their ObjectsIDs.
@@ -63,9 +63,9 @@ namespace PDFSharp.Interop.Advanced
         //   except that they must be different in pairs.
 
         /// <summary>
-        /// Initializes a new PdfReference instance for the specified indirect object.
+        /// Initializes a new PDFReference instance for the specified indirect object.
         /// </summary>
-        public PdfReference(PdfObject pdfObject)
+        public PDFReference(PDFObject pdfObject)
         {
             if (pdfObject.Reference != null)
                 throw new InvalidOperationException("Must not create iref for an object that already has one.");
@@ -77,9 +77,9 @@ namespace PDFSharp.Interop.Advanced
         }
 
         /// <summary>
-        /// Initializes a new PdfReference instance from the specified object identifier and file position.
+        /// Initializes a new PDFReference instance from the specified object identifier and file position.
         /// </summary>
-        public PdfReference(PdfObjectID objectID, int position)
+        public PDFReference(PDFObjectID objectID, int position)
         {
             _objectID = objectID;
             Position = position;
@@ -91,7 +91,7 @@ namespace PDFSharp.Interop.Advanced
         /// <summary>
         /// Writes the object in PDF iref table format.
         /// </summary>
-        internal void WriteXRefEnty(PdfWriter writer)
+        internal void WriteXRefEnty(PDFWriter writer)
         {
             // PDFsharp does not yet support PDF 1.5 object streams.
 
@@ -104,12 +104,12 @@ namespace PDFSharp.Interop.Advanced
         /// <summary>
         /// Writes an indirect reference.
         /// </summary>
-        internal override void WriteObject(PdfWriter writer) => writer.Write(this);
+        internal override void WriteObject(PDFWriter writer) => writer.Write(this);
 
         /// <summary>
         /// Gets or sets the object identifier.
         /// </summary>
-        public PdfObjectID ObjectID
+        public PDFObjectID ObjectID
         {
             get => _objectID;
             set
@@ -121,14 +121,14 @@ namespace PDFSharp.Interop.Advanced
                 _objectID = value;
                 if (Document != null)
                 {
-                    //PdfXRefTable table = Document.xrefTable;
+                    //PDFXRefTable table = Document.xrefTable;
                     //table.Remove(this);
                     //objectID = value;
                     //table.Add(this);
                 }
             }
         }
-        PdfObjectID _objectID;
+        PDFObjectID _objectID;
 
         /// <summary>
         /// Gets the object number of the object identifier.
@@ -141,7 +141,7 @@ namespace PDFSharp.Interop.Advanced
         public int GenerationNumber => _objectID.GenerationNumber;
 
         /// <summary>
-        /// Gets or sets the file position of the related PdfObject.
+        /// Gets or sets the file position of the related PDFObject.
         /// </summary>
         public int Position { get; set; }
 
@@ -153,48 +153,48 @@ namespace PDFSharp.Interop.Advanced
         //bool inUse;
 
         /// <summary>
-        /// Gets or sets the referenced PdfObject.
+        /// Gets or sets the referenced PDFObject.
         /// </summary>
-        public PdfObject Value
+        public PDFObject Value
         {
             get => _value;
             set
             {
-                Debug.Assert(value != null, "The value of a PdfReference must never be null.");
+                Debug.Assert(value != null, "The value of a PDFReference must never be null.");
                 Debug.Assert(value.Reference == null || ReferenceEquals(value.Reference, this), "The reference of the value must be null or this.");
                 _value = value;
                 // value must never be null
                 value.Reference = this;
             }
         }
-        PdfObject _value;
+        PDFObject _value;
 
         /// <summary>
         /// Hack for dead objects.
         /// </summary>
-        internal void SetObject(PdfObject value) => _value = value;
+        internal void SetObject(PDFObject value) => _value = value;
 
         /// <summary>
         /// Gets or sets the document this object belongs to.
         /// </summary>
-        public PdfDocument Document { get; set; }
+        public PDFDocument Document { get; set; }
 
         /// <summary>
         /// Gets a string representing the object identifier.
         /// </summary>
         public override string ToString() => _objectID + " R";
 
-        internal static PdfReferenceComparer Comparer => new PdfReferenceComparer();
+        internal static PDFReferenceComparer Comparer => new PDFReferenceComparer();
 
         /// <summary>
-        /// Implements a comparer that compares PdfReference objects by their PdfObjectID.
+        /// Implements a comparer that compares PDFReference objects by their PDFObjectID.
         /// </summary>
-        internal class PdfReferenceComparer : IComparer<PdfReference>
+        internal class PDFReferenceComparer : IComparer<PDFReference>
         {
-            public int Compare(PdfReference x, PdfReference y)
+            public int Compare(PDFReference x, PDFReference y)
             {
-                PdfReference l = x;
-                PdfReference r = y;
+                PDFReference l = x;
+                PDFReference r = y;
                 return l != null ? r != null ? l._objectID.CompareTo(r._objectID) : -1 : r != null ? 1 : 0;
             }
         }

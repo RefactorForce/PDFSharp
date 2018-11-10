@@ -53,7 +53,7 @@ using SysRect = Windows.Foundation.Rect;
 #if !EDF_CORE
 using PDFSharp.Internal;
 #else
-using PdfSharp.Internal;
+using PDFSharp.Internal;
 #endif
 
 namespace PDFSharp.Drawing

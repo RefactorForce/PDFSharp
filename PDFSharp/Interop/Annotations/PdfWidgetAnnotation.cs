@@ -32,19 +32,19 @@ namespace PDFSharp.Interop.Annotations
     /// <summary>
     /// Represents a text annotation.
     /// </summary>
-    internal sealed class PdfWidgetAnnotation : PdfAnnotation
+    internal sealed class PDFWidgetAnnotation : PDFAnnotation
     {
-        public PdfWidgetAnnotation() => Initialize();
+        public PDFWidgetAnnotation() => Initialize();
 
-        public PdfWidgetAnnotation(PdfDocument document)
+        public PDFWidgetAnnotation(PDFDocument document)
             : base(document) => Initialize();
 
-        void Initialize() => Elements.SetName(PdfAnnotation.Keys.Subtype, "/Widget");
+        void Initialize() => Elements.SetName(PDFAnnotation.Keys.Subtype, "/Widget");
 
         /// <summary>
         /// Predefined keys of this dictionary.
         /// </summary>
-        internal new class Keys : PdfAnnotation.Keys
+        internal new class Keys : PDFAnnotation.Keys
         {
             /// <summary>
             /// (Optional) The annotation’s highlighting mode, the visual effect to be used when

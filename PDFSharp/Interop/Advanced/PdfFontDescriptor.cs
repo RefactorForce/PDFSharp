@@ -36,7 +36,7 @@ namespace PDFSharp.Interop.Advanced
     /// The PDF font descriptor flags.
     /// </summary>
     [Flags]
-    enum PdfFontDescriptorFlags
+    enum PDFFontDescriptorFlags
     {
         /// <summary>
         /// All glyphs have the same width (as opposed to proportional or variable-pitch
@@ -97,28 +97,28 @@ namespace PDFSharp.Interop.Advanced
     /// A PDF font descriptor specifies metrics and other attributes of a simple font, 
     /// as distinct from the metrics of individual glyphs.
     /// </summary>
-    public sealed class PdfFontDescriptor : PdfDictionary
+    public sealed class PDFFontDescriptor : PDFDictionary
     {
-        internal PdfFontDescriptor(PdfDocument document, OpenTypeDescriptor descriptor)
+        internal PDFFontDescriptor(PDFDocument document, OpenTypeDescriptor descriptor)
             : base(document)
         {
             _descriptor = descriptor;
             Elements.SetName(Keys.Type, "/FontDescriptor");
 
-            Elements.SetInteger(Keys.Ascent, _descriptor.DesignUnitsToPdf(_descriptor.Ascender));
-            Elements.SetInteger(Keys.CapHeight, _descriptor.DesignUnitsToPdf(_descriptor.CapHeight));
-            Elements.SetInteger(Keys.Descent, _descriptor.DesignUnitsToPdf(_descriptor.Descender));
+            Elements.SetInteger(Keys.Ascent, _descriptor.DesignUnitsToPDF(_descriptor.Ascender));
+            Elements.SetInteger(Keys.CapHeight, _descriptor.DesignUnitsToPDF(_descriptor.CapHeight));
+            Elements.SetInteger(Keys.Descent, _descriptor.DesignUnitsToPDF(_descriptor.Descender));
             Elements.SetInteger(Keys.Flags, (int)FlagsFromDescriptor(_descriptor));
-            Elements.SetRectangle(Keys.FontBBox, new PdfRectangle(
-              _descriptor.DesignUnitsToPdf(_descriptor.XMin),
-              _descriptor.DesignUnitsToPdf(_descriptor.YMin),
-              _descriptor.DesignUnitsToPdf(_descriptor.XMax),
-              _descriptor.DesignUnitsToPdf(_descriptor.YMax)));
-            // not here, done in PdfFont later... 
+            Elements.SetRectangle(Keys.FontBBox, new PDFRectangle(
+              _descriptor.DesignUnitsToPDF(_descriptor.XMin),
+              _descriptor.DesignUnitsToPDF(_descriptor.YMin),
+              _descriptor.DesignUnitsToPDF(_descriptor.XMax),
+              _descriptor.DesignUnitsToPDF(_descriptor.YMax)));
+            // not here, done in PDFFont later... 
             //Elements.SetName(Keys.FontName, "abc"); //descriptor.FontName);
             Elements.SetReal(Keys.ItalicAngle, _descriptor.ItalicAngle);
             Elements.SetInteger(Keys.StemV, _descriptor.StemV);
-            Elements.SetInteger(Keys.XHeight, _descriptor.DesignUnitsToPdf(_descriptor.XHeight));
+            Elements.SetInteger(Keys.XHeight, _descriptor.DesignUnitsToPDF(_descriptor.XHeight));
         }
 
         //HACK OpenTypeDescriptor descriptor
@@ -139,11 +139,11 @@ namespace PDFSharp.Interop.Advanced
         public bool IsSymbolFont { get; private set; }
 
         // HACK FlagsFromDescriptor(OpenTypeDescriptor descriptor)
-        PdfFontDescriptorFlags FlagsFromDescriptor(OpenTypeDescriptor descriptor)
+        PDFFontDescriptorFlags FlagsFromDescriptor(OpenTypeDescriptor descriptor)
         {
-            PdfFontDescriptorFlags flags = 0;
+            PDFFontDescriptorFlags flags = 0;
             IsSymbolFont = descriptor.FontFace.cmap.symbol;
-            flags |= descriptor.FontFace.cmap.symbol ? PdfFontDescriptorFlags.Symbolic : PdfFontDescriptorFlags.Nonsymbolic;
+            flags |= descriptor.FontFace.cmap.symbol ? PDFFontDescriptorFlags.Symbolic : PDFFontDescriptorFlags.Nonsymbolic;
             return flags;
         }
 

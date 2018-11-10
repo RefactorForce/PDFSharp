@@ -35,23 +35,23 @@ namespace PDFSharp.Interop.Annotations
     /// <summary>
     /// Represents the base class of all annotations.
     /// </summary>
-    public abstract class PdfAnnotation : PdfDictionary
+    public abstract class PDFAnnotation : PDFDictionary
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfAnnotation"/> class.
+        /// Initializes a new instance of the <see cref="PDFAnnotation"/> class.
         /// </summary>
-        protected PdfAnnotation() => Initialize();
+        protected PDFAnnotation() => Initialize();
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfAnnotation"/> class.
+        /// Initializes a new instance of the <see cref="PDFAnnotation"/> class.
         /// </summary>
-        protected PdfAnnotation(PdfDocument document)
+        protected PDFAnnotation(PDFDocument document)
             : base(document) => Initialize();
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfAnnotation"/> class.
+        /// Initializes a new instance of the <see cref="PDFAnnotation"/> class.
         /// </summary>
-        internal PdfAnnotation(PdfDictionary dict)
+        internal PDFAnnotation(PDFDictionary dict)
             : base(dict)
         { }
 
@@ -64,7 +64,7 @@ namespace PDFSharp.Interop.Annotations
 
         /// <summary>
         /// Removes an annotation from the document
-        /// <seealso cref="PdfAnnotations.Remove(PdfAnnotation)"/>
+        /// <seealso cref="PDFAnnotations.Remove(PDFAnnotation)"/>
         /// </summary>
         [Obsolete("Use 'Parent.Remove(this)'")]
         public void Delete() => Parent.Remove(this);
@@ -72,9 +72,9 @@ namespace PDFSharp.Interop.Annotations
         /// <summary>
         /// Gets or sets the annotation flags of this instance.
         /// </summary>
-        public PdfAnnotationFlags Flags
+        public PDFAnnotationFlags Flags
         {
-            get => (PdfAnnotationFlags)Elements.GetInteger(Keys.F);
+            get => (PDFAnnotationFlags)Elements.GetInteger(Keys.F);
             set
             {
                 Elements.SetInteger(Keys.F, (int)value);
@@ -83,15 +83,15 @@ namespace PDFSharp.Interop.Annotations
         }
 
         /// <summary>
-        /// Gets or sets the PdfAnnotations object that this annotation belongs to.
+        /// Gets or sets the PDFAnnotations object that this annotation belongs to.
         /// </summary>
-        public PdfAnnotations Parent { get; set; }
+        public PDFAnnotations Parent { get; set; }
 
         /// <summary>
         /// Gets or sets the annotation rectangle, defining the location of the annotation
         /// on the page in default user space units.
         /// </summary>
-        public PdfRectangle Rectangle
+        public PDFRectangle Rectangle
         {
             get => Elements.GetRectangle(Keys.Rect, true);
             set
@@ -154,8 +154,8 @@ namespace PDFSharp.Interop.Annotations
         {
             get
             {
-                PdfItem item = Elements[Keys.C];
-                if (item is PdfArray array)  // TODO: check for iref?
+                PDFItem item = Elements[Keys.C];
+                if (item is PDFArray array)  // TODO: check for iref?
                 {
                     if (array.Elements.Count == 3)
                     {
@@ -171,7 +171,7 @@ namespace PDFSharp.Interop.Annotations
             set
             {
                 // TODO: an array.SetColor(clr) function may be useful here
-                PdfArray array = new PdfArray(Owner, new PdfReal[] { new PdfReal(value.R / 255.0), new PdfReal(value.G / 255.0), new PdfReal(value.B / 255.0) });
+                PDFArray array = new PDFArray(Owner, new PDFReal[] { new PDFReal(value.R / 255.0), new PDFReal(value.G / 255.0), new PDFReal(value.B / 255.0) });
                 Elements[Keys.C] = array;
                 Elements.SetDateTime(Keys.M, DateTime.Now);
             }

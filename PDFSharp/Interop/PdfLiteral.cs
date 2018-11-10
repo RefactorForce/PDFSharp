@@ -43,28 +43,28 @@ namespace PDFSharp.Interop
     /// Represents text that is written 'as it is' into the PDF stream. This class can lead to invalid PDF files.
     /// E.g. strings in a literal are not encrypted when the document is saved with a password.
     /// </summary>
-    public sealed class PdfLiteral : PdfItem
+    public sealed class PDFLiteral : PDFItem
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfLiteral"/> class.
+        /// Initializes a new instance of the <see cref="PDFLiteral"/> class.
         /// </summary>
-        public PdfLiteral()
+        public PDFLiteral()
         { }
 
         /// <summary>
         /// Initializes a new instance with the specified string.
         /// </summary>
-        public PdfLiteral(string value) => Value = value;
+        public PDFLiteral(string value) => Value = value;
 
         /// <summary>
         /// Initializes a new instance with the culture invariant formatted specified arguments.
         /// </summary>
-        public PdfLiteral(string format, params object[] args) => Value = PdfEncoders.Format(format, args);
+        public PDFLiteral(string format, params object[] args) => Value = PDFEncoders.Format(format, args);
 
         /// <summary>
         /// Creates a literal from an XMatrix
         /// </summary>
-        public static PdfLiteral FromMatrix(XMatrix matrix) => new PdfLiteral("[" + PdfEncoders.ToString(matrix) + "]");
+        public static PDFLiteral FromMatrix(XMatrix matrix) => new PDFLiteral("[" + PDFEncoders.ToString(matrix) + "]");
 
         /// <summary>
         /// Gets the value as litaral string.
@@ -78,6 +78,6 @@ namespace PDFSharp.Interop
         /// </summary>
         public override string ToString() => Value;
 
-        internal override void WriteObject(PdfWriter writer) => writer.Write(this);
+        internal override void WriteObject(PDFWriter writer) => writer.Write(this);
     }
 }

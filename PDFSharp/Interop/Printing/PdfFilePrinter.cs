@@ -30,7 +30,7 @@
 // Removed
 
 #if true_
-namespace PdfSharp.Pdf.Printing
+namespace PDFSharp.PDF.Printing
 {
     // Some googled inforamtion about command line switches:
     // 
@@ -60,29 +60,29 @@ namespace PdfSharp.Pdf.Printing
     /// If this stuff does not work, <c>please</c> don't write me mails!
     /// If you enhance this class, please let me know.
     /// </summary>
-    public class PdfFilePrinter
+    public class PDFFilePrinter
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfFilePrinter"/> class.
+        /// Initializes a new instance of the <see cref="PDFFilePrinter"/> class.
         /// </summary>
-        public PdfFilePrinter()
+        public PDFFilePrinter()
         { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfFilePrinter"/> class.
+        /// Initializes a new instance of the <see cref="PDFFilePrinter"/> class.
         /// </summary>
         /// <param name="pdfFileName">Name of the PDF file.</param>
-        public PdfFilePrinter(string pdfFileName)
+        public PDFFilePrinter(string pdfFileName)
         {
-            PdfFileName = pdfFileName;
+            PDFFileName = pdfFileName;
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfFilePrinter"/> class.
+        /// Initializes a new instance of the <see cref="PDFFilePrinter"/> class.
         /// </summary>
         /// <param name="pdfFileName">Name of the PDF file.</param>
         /// <param name="printerName">Name of the printer.</param>
-        public PdfFilePrinter(string pdfFileName, string printerName)
+        public PDFFilePrinter(string pdfFileName, string printerName)
         {
             _pdfFileName = pdfFileName;
             _printerName = printerName;
@@ -91,7 +91,7 @@ namespace PdfSharp.Pdf.Printing
         /// <summary>
         /// Gets or sets the name of the PDF file to print.
         /// </summary>
-        public string PdfFileName
+        public string PDFFileName
         {
             get { return _pdfFileName; }
             set { _pdfFileName = value; }

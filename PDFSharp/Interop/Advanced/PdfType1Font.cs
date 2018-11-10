@@ -33,20 +33,20 @@ using System;
 using System.Collections;
 using System.Text;
 using System.IO;
-using PdfSharp.Internal;
+using PDFSharp.Internal;
 
-namespace PdfSharp.Pdf.Advanced
+namespace PDFSharp.PDF.Advanced
 {
     /// <summary>
     /// Not implemented - just for illustration of the class hierarchy.
     /// </summary>
-    internal sealed class PdfType1Font : PdfFont
+    internal sealed class PDFType1Font : PDFFont
     {
-        public PdfType1Font(PdfDocument document)
+        public PDFType1Font(PDFDocument document)
             : base(document)
         {
-            Elements["\\Type"] = new PdfName("Font");
-            Elements["\\Subtype"] = new PdfName("Type1");
+            Elements["\\Type"] = new PDFName("Font");
+            Elements["\\Subtype"] = new PDFName("Type1");
         }
 
         //public string BaseFont
@@ -72,7 +72,7 @@ namespace PdfSharp.Pdf.Advanced
         /// <summary>
         /// Predefined keys of this dictionary.
         /// </summary>
-        public new sealed class Keys : PdfFont.Keys
+        public new sealed class Keys : PDFFont.Keys
         {
             /// <summary>
             /// (Required) The type of PDF object that this dictionary describes;
@@ -127,7 +127,7 @@ namespace PdfSharp.Pdf.Advanced
             /// in which 1000 units corresponds to 1 unit in text space. These widths must be 
             /// consistent with the actual widths given in the font program. 
             /// </summary>
-            [KeyInfo(KeyType.Array, typeof(PdfArray))]
+            [KeyInfo(KeyType.Array, typeof(PDFArray))]
             public const string Widths = "/Widths";
 
             /// <summary>
@@ -137,7 +137,7 @@ namespace PdfSharp.Pdf.Advanced
             /// FontDescriptor must either all be present or all be absent. Ordinarily, they are
             /// absent; specifying them enables a standard font to be overridden.
             /// </summary>
-            [KeyInfo(KeyType.Dictionary | KeyType.MustBeIndirect, typeof(PdfFontDescriptor))]
+            [KeyInfo(KeyType.Dictionary | KeyType.MustBeIndirect, typeof(PDFFontDescriptor))]
             public new const string FontDescriptor = "/FontDescriptor";
 
             /// <summary>

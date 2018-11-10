@@ -44,7 +44,7 @@ using PDFSharp.Interop.Internal;
 
 // ReSharper disable CompareOfFloatsByEqualityOperator
 
-namespace PDFSharp.Drawing.Pdf
+namespace PDFSharp.Drawing.PDF
 {
     /// <summary>
     /// Represents the current PDF graphics state.
@@ -52,14 +52,14 @@ namespace PDFSharp.Drawing.Pdf
     /// <remarks>
     /// Completely revised for PDFsharp 1.4.
     /// </remarks>
-    internal sealed class PdfGraphicsState : ICloneable
+    internal sealed class PDFGraphicsState : ICloneable
     {
-        public PdfGraphicsState(XGraphicsPdfRenderer renderer) => _renderer = renderer;
-        readonly XGraphicsPdfRenderer _renderer;
+        public PDFGraphicsState(XGraphicsPDFRenderer renderer) => _renderer = renderer;
+        readonly XGraphicsPDFRenderer _renderer;
 
-        public PdfGraphicsState Clone()
+        public PDFGraphicsState Clone()
         {
-            PdfGraphicsState state = (PdfGraphicsState)MemberwiseClone();
+            PDFGraphicsState state = (PDFGraphicsState)MemberwiseClone();
             return state;
         }
 
@@ -88,7 +88,7 @@ namespace PDFSharp.Drawing.Pdf
         XColor _realizedStrokeColor = XColor.Empty;
         bool _realizedStrokeOverPrint;
 
-        public void RealizePen(XPen pen, PdfColorMode colorMode)
+        public void RealizePen(XPen pen, PDFColorMode colorMode)
         {
             const string frmt2 = Config.SignificantFigures2;
             const string format = Config.SignificantFigures3;
@@ -163,13 +163,13 @@ namespace PDFSharp.Drawing.Pdf
                             {
                                 if (idx > 0)
                                     pdf.Append(' ');
-                                pdf.Append(PdfEncoders.ToString(pen._dashPattern[idx] * pen._width));
+                                pdf.Append(PDFEncoders.ToString(pen._dashPattern[idx] * pen._width));
                             }
                             // Make an even number of values look like in GDI+
                             if (len > 0 && len % 2 == 1)
                             {
                                 pdf.Append(' ');
-                                pdf.Append(PdfEncoders.ToString(0.2 * pen._width));
+                                pdf.Append(PDFEncoders.ToString(0.2 * pen._width));
                             }
                             pdf.AppendFormat(CultureInfo.InvariantCulture, "]{0:" + format + "} d\n", pen._dashOffset * pen._width);
                             string pattern = pdf.ToString();
@@ -187,11 +187,11 @@ namespace PDFSharp.Drawing.Pdf
                 _realizedDashStyle = dashStyle;
             }
 
-            if (colorMode != PdfColorMode.Cmyk)
+            if (colorMode != PDFColorMode.Cmyk)
             {
                 if (_realizedStrokeColor.Rgb != color.Rgb)
                 {
-                    _renderer.Append(PdfEncoders.ToString(color, PdfColorMode.Rgb));
+                    _renderer.Append(PDFEncoders.ToString(color, PDFColorMode.Rgb));
                     _renderer.Append(" RG\n");
                 }
             }
@@ -199,14 +199,14 @@ namespace PDFSharp.Drawing.Pdf
             {
                 if (!ColorSpaceHelper.IsEqualCmyk(_realizedStrokeColor, color))
                 {
-                    _renderer.Append(PdfEncoders.ToString(color, PdfColorMode.Cmyk));
+                    _renderer.Append(PDFEncoders.ToString(color, PDFColorMode.Cmyk));
                     _renderer.Append(" K\n");
                 }
             }
 
             if (_renderer.Owner.Version >= 14 && (_realizedStrokeColor.A != color.A || _realizedStrokeOverPrint != overPrint))
             {
-                PdfExtGState extGState = _renderer.Owner.ExtGStateTable.GetExtGStateStroke(color.A, overPrint);
+                PDFExtGState extGState = _renderer.Owner.ExtGStateTable.GetExtGStateStroke(color.A, overPrint);
                 string gs = _renderer.Resources.AddExtGState(extGState);
                 _renderer.AppendFormatString("{0} gs\n", gs);
 
@@ -225,7 +225,7 @@ namespace PDFSharp.Drawing.Pdf
         XColor _realizedFillColor = XColor.Empty;
         bool _realizedNonStrokeOverPrint;
 
-        public void RealizeBrush(XBrush brush, PdfColorMode colorMode, int renderingMode, double fontEmSize)
+        public void RealizeBrush(XBrush brush, PDFColorMode colorMode, int renderingMode, double fontEmSize)
         {
             // Rendering mode 2 is used for bold simulation.
             // Reference: TABLE 5.3  Text rendering modes / Page 402
@@ -259,7 +259,7 @@ namespace PDFSharp.Drawing.Pdf
                     Debug.Assert(UnrealizedCtm.IsIdentity, "Must realize ctm first.");
                     XMatrix matrix = _renderer.DefaultViewMatrix;
                     matrix.Prepend(EffectiveCtm);
-                    PdfShadingPattern pattern = new PdfShadingPattern(_renderer.Owner);
+                    PDFShadingPattern pattern = new PDFShadingPattern(_renderer.Owner);
                     pattern.SetupFromBrush(gradientBrush, matrix, _renderer);
                     string name = _renderer.Resources.AddPattern(pattern);
                     _renderer.AppendFormatString("/Pattern cs\n", name);
@@ -271,25 +271,25 @@ namespace PDFSharp.Drawing.Pdf
             }
         }
 
-        private void RealizeFillColor(XColor color, bool overPrint, PdfColorMode colorMode)
+        private void RealizeFillColor(XColor color, bool overPrint, PDFColorMode colorMode)
         {
             color = ColorSpaceHelper.EnsureColorMode(colorMode, color);
 
-            if (colorMode != PdfColorMode.Cmyk)
+            if (colorMode != PDFColorMode.Cmyk)
             {
                 if (_realizedFillColor.IsEmpty || _realizedFillColor.Rgb != color.Rgb)
                 {
-                    _renderer.Append(PdfEncoders.ToString(color, PdfColorMode.Rgb));
+                    _renderer.Append(PDFEncoders.ToString(color, PDFColorMode.Rgb));
                     _renderer.Append(" rg\n");
                 }
             }
             else
             {
-                Debug.Assert(colorMode == PdfColorMode.Cmyk);
+                Debug.Assert(colorMode == PDFColorMode.Cmyk);
 
                 if (_realizedFillColor.IsEmpty || !ColorSpaceHelper.IsEqualCmyk(_realizedFillColor, color))
                 {
-                    _renderer.Append(PdfEncoders.ToString(color, PdfColorMode.Cmyk));
+                    _renderer.Append(PDFEncoders.ToString(color, PDFColorMode.Cmyk));
                     _renderer.Append(" k\n");
                 }
             }
@@ -297,7 +297,7 @@ namespace PDFSharp.Drawing.Pdf
             if (_renderer.Owner.Version >= 14 && (_realizedFillColor.A != color.A || _realizedNonStrokeOverPrint != overPrint))
             {
 
-                PdfExtGState extGState = _renderer.Owner.ExtGStateTable.GetExtGStateNonStroke(color.A, overPrint);
+                PDFExtGState extGState = _renderer.Owner.ExtGStateTable.GetExtGStateNonStroke(color.A, overPrint);
                 string gs = _renderer.Resources.AddExtGState(extGState);
                 _renderer.AppendFormatString("{0} gs\n", gs);
 
@@ -309,7 +309,7 @@ namespace PDFSharp.Drawing.Pdf
             _realizedNonStrokeOverPrint = overPrint;
         }
 
-        internal void RealizeNonStrokeTransparency(double transparency, PdfColorMode colorMode)
+        internal void RealizeNonStrokeTransparency(double transparency, PDFColorMode colorMode)
         {
             XColor color = _realizedFillColor;
             color.A = transparency;
@@ -320,7 +320,7 @@ namespace PDFSharp.Drawing.Pdf
 
         #region Text
 
-        internal PdfFont _realizedFont;
+        internal PDFFont _realizedFont;
         string _realizedFontName = String.Empty;
         double _realizedFontSize;
         int _realizedRenderingMode;  // Reference: TABLE 5.2  Text state operators / Page 398

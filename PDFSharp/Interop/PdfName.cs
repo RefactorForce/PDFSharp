@@ -38,18 +38,18 @@ namespace PDFSharp.Interop
     /// Represents a PDF name value.
     /// </summary>
     [DebuggerDisplay("({Value})")]
-    public sealed class PdfName : PdfItem
+    public sealed class PDFName : PDFItem
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfName"/> class.
+        /// Initializes a new instance of the <see cref="PDFName"/> class.
         /// </summary>
-        public PdfName() => Value = "/";  // Empty name.
+        public PDFName() => Value = "/";  // Empty name.
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfName"/> class.
+        /// Initializes a new instance of the <see cref="PDFName"/> class.
         /// Parameter value always must start with a '/'.
         /// </summary>
-        public PdfName(string value)
+        public PDFName(string value)
         {
             if (value == null)
                 throw new ArgumentNullException("value");
@@ -84,41 +84,41 @@ namespace PDFSharp.Interop
         /// <summary>
         /// Determines whether the specified name and string are equal.
         /// </summary>
-        public static bool operator ==(PdfName name, string str) => name is null ? str == null : name.Value == str;
+        public static bool operator ==(PDFName name, string str) => name is null ? str == null : name.Value == str;
 
         /// <summary>
         /// Determines whether the specified name and string are not equal.
         /// </summary>
-        public static bool operator !=(PdfName name, string str) => name is null ? str != null : name.Value != str;
+        public static bool operator !=(PDFName name, string str) => name is null ? str != null : name.Value != str;
 
         /// <summary>
         /// Represents the empty name.
         /// </summary>
-        public static readonly PdfName Empty = new PdfName("/");
+        public static readonly PDFName Empty = new PDFName("/");
 
         /// <summary>
         /// Writes the name including the leading slash.
         /// </summary>
-        internal override void WriteObject(PdfWriter writer) =>
+        internal override void WriteObject(PDFWriter writer) =>
             // TODO: what if unicode character are part of the name? 
             writer.Write(this);
 
         /// <summary>
         /// Gets the comparer for this type.
         /// </summary>
-        public static PdfXNameComparer Comparer => new PdfXNameComparer();
+        public static PDFXNameComparer Comparer => new PDFXNameComparer();
 
         /// <summary>
-        /// Implements a comparer that compares PdfName objects.
+        /// Implements a comparer that compares PDFName objects.
         /// </summary>
-        public class PdfXNameComparer : IComparer<PdfName>
+        public class PDFXNameComparer : IComparer<PDFName>
         {
             /// <summary>
             /// Compares two objects and returns a value indicating whether one is less than, equal to, or greater than the other.
             /// </summary>
             /// <param name="l">The first object to compare.</param>
             /// <param name="r">The second object to compare.</param>
-            public int Compare(PdfName l, PdfName r) =>
+            public int Compare(PDFName l, PDFName r) =>
 #if true_
 #else
                 l != null ? r != null ? String.Compare(l.Value, r.Value, StringComparison.Ordinal) : -1 : r != null ? 1 : 0;

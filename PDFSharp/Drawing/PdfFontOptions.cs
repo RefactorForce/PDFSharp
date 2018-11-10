@@ -42,45 +42,45 @@ namespace PDFSharp.Drawing
     /// <summary>
     /// Specifies details about how the font is used in PDF creation.
     /// </summary>
-    public class XPdfFontOptions
+    public class XPDFFontOptions
     {
-        internal XPdfFontOptions() { }
+        internal XPDFFontOptions() { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="XPdfFontOptions"/> class.
+        /// Initializes a new instance of the <see cref="XPDFFontOptions"/> class.
         /// </summary>
         [Obsolete("Must not specify an embedding option anymore.")]
-        public XPdfFontOptions(PdfFontEncoding encoding, PdfFontEmbedding embedding) => FontEncoding = encoding;
+        public XPDFFontOptions(PDFFontEncoding encoding, PDFFontEmbedding embedding) => FontEncoding = encoding;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="XPdfFontOptions"/> class.
+        /// Initializes a new instance of the <see cref="XPDFFontOptions"/> class.
         /// </summary>
-        public XPdfFontOptions(PdfFontEncoding encoding) => FontEncoding = encoding;
+        public XPDFFontOptions(PDFFontEncoding encoding) => FontEncoding = encoding;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="XPdfFontOptions"/> class.
+        /// Initializes a new instance of the <see cref="XPDFFontOptions"/> class.
         /// </summary>
         [Obsolete("Must not specify an embedding option anymore.")]
-        public XPdfFontOptions(PdfFontEmbedding embedding) => FontEncoding = PdfFontEncoding.WinAnsi;
+        public XPDFFontOptions(PDFFontEmbedding embedding) => FontEncoding = PDFFontEncoding.WinAnsi;
 
         /// <summary>
         /// Gets a value indicating the font embedding.
         /// </summary>
-        public PdfFontEmbedding FontEmbedding => PdfFontEmbedding.Always;
+        public PDFFontEmbedding FontEmbedding => PDFFontEmbedding.Always;
 
         /// <summary>
         /// Gets a value indicating how the font is encoded.
         /// </summary>
-        public PdfFontEncoding FontEncoding { get; }
+        public PDFFontEncoding FontEncoding { get; }
 
         /// <summary>
         /// Gets the default options with WinAnsi encoding and always font embedding.
         /// </summary>
-        public static XPdfFontOptions WinAnsiDefault => new XPdfFontOptions(PdfFontEncoding.WinAnsi);
+        public static XPDFFontOptions WinAnsiDefault => new XPDFFontOptions(PDFFontEncoding.WinAnsi);
 
         /// <summary>
         /// Gets the default options with Unicode encoding and always font embedding.
         /// </summary>
-        public static XPdfFontOptions UnicodeDefault => new XPdfFontOptions(PdfFontEncoding.Unicode);
+        public static XPDFFontOptions UnicodeDefault => new XPDFFontOptions(PDFFontEncoding.Unicode);
     }
 }

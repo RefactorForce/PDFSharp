@@ -35,11 +35,11 @@ namespace PDFSharp.Interop.Advanced
 {
     internal interface IContentStream
     {
-        PdfResources Resources { get; }
+        PDFResources Resources { get; }
 
-        string GetFontName(XFont font, out PdfFont pdfFont);
+        string GetFontName(XFont font, out PDFFont pdfFont);
 
-        string GetFontName(string idName, byte[] fontData, out PdfFont pdfFont);
+        string GetFontName(string idName, byte[] fontData, out PDFFont pdfFont);
 
         string GetImageName(XImage image);
 

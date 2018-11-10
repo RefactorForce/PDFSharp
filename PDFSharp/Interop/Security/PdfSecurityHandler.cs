@@ -34,13 +34,13 @@ namespace PDFSharp.Interop.Security
     /// <summary>
     /// Represents the base of all security handlers.
     /// </summary>
-    public abstract class PdfSecurityHandler : PdfDictionary
+    public abstract class PDFSecurityHandler : PDFDictionary
     {
-        internal PdfSecurityHandler(PdfDocument document)
+        internal PDFSecurityHandler(PDFDocument document)
             : base(document)
         { }
 
-        internal PdfSecurityHandler(PdfDictionary dict)
+        internal PDFSecurityHandler(PDFDictionary dict)
             : base(dict)
         { }
 

@@ -32,7 +32,7 @@ namespace PDFSharp.Interop.Security
     /// <summary>
     /// Specifies the security level of the PDF document.
     /// </summary>
-    public enum PdfDocumentSecurityLevel
+    public enum PDFDocumentSecurityLevel
     {
         /// <summary>
         /// Document is not protected.

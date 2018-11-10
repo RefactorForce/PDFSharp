@@ -35,7 +35,7 @@ namespace PDFSharp.Interop
     /// Specifies how text strings are encoded. A text string is any text used outside of a page content 
     /// stream, e.g. document information, outline text, annotation text etc.
     /// </summary>
-    public enum PdfTextStringEncoding
+    public enum PDFTextStringEncoding
     {
         /// <summary>
         /// Specifies that hypertext uses PDF DocEncoding.

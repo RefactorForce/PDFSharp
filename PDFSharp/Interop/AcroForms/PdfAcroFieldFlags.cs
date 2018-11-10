@@ -35,7 +35,7 @@ namespace PDFSharp.Interop.AcroForms
     /// Specifies the flags of AcroForm fields.
     /// </summary>
     [Flags]
-    public enum PdfAcroFieldFlags
+    public enum PDFAcroFieldFlags
     {
         // ----- Common to all fields -----------------------------------------------------------------
 

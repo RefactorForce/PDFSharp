@@ -41,7 +41,7 @@ namespace PDFSharp.Interop.Content
     {
         public ContentWriter(Stream contentStream) => Stream = contentStream;
 #if DEBUG
-        //layout = PdfWriterLayout.Verbose;
+        //layout = PDFWriterLayout.Verbose;
 #endif
 
 
@@ -62,19 +62,19 @@ namespace PDFSharp.Interop.Content
 
         public int Position => (int)Stream.Position;
 
-        //public PdfWriterLayout Layout
+        //public PDFWriterLayout Layout
         //{
         //  get { return layout; }
         //  set { layout = value; }
         //}
-        //PdfWriterLayout layout;
+        //PDFWriterLayout layout;
 
-        //public PdfWriterOptions Options
+        //public PDFWriterOptions Options
         //{
         //  get { return options; }
         //  set { options = value; }
         //}
-        //PdfWriterOptions options;
+        //PDFWriterOptions options;
 
         // -----------------------------------------------------------
 
@@ -93,7 +93,7 @@ namespace PDFSharp.Interop.Content
             if (String.IsNullOrEmpty(rawString))
                 return;
             //AppendBlank(rawString[0]);
-            byte[] bytes = PdfEncoders.RawEncoding.GetBytes(rawString);
+            byte[] bytes = PDFEncoders.RawEncoding.GetBytes(rawString);
             Stream.Write(bytes, 0, bytes.Length);
             _lastCat = GetCategory((char)bytes[bytes.Length - 1]);
         }
@@ -103,7 +103,7 @@ namespace PDFSharp.Interop.Content
             if (String.IsNullOrEmpty(rawString))
                 return;
             //AppendBlank(rawString[0]);
-            byte[] bytes = PdfEncoders.RawEncoding.GetBytes(rawString);
+            byte[] bytes = PDFEncoders.RawEncoding.GetBytes(rawString);
             Stream.Write(bytes, 0, bytes.Length);
             Stream.Write(new byte[] { (byte)'\n' }, 0, 1);
             _lastCat = GetCategory((char)bytes[bytes.Length - 1]);
@@ -149,7 +149,7 @@ namespace PDFSharp.Interop.Content
             switch (_lastCat)
             {
                 //case CharCat.NewLine:
-                //  if (this.layout == PdfWriterLayout.Verbose)
+                //  if (this.layout == PDFWriterLayout.Verbose)
                 //    WriteIndent();
                 //  break;
 
@@ -157,7 +157,7 @@ namespace PDFSharp.Interop.Content
                     break;
 
                 //case CharCat.Character:
-                //  if (this.layout == PdfWriterLayout.Verbose)
+                //  if (this.layout == PDFWriterLayout.Verbose)
                 //  {
                 //    //if (cat == CharCat.Character || ch == '/')
                 //    this.stream.WriteByte((byte)' ');

@@ -29,7 +29,7 @@
 
 namespace PDFSharp.Interop.Internal
 {
-    class PdfDiagnostics
+    class PDFDiagnostics
     {
         public static bool TraceCompressedObjects { get; set; } = true;
 

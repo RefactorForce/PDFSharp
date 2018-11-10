@@ -58,14 +58,14 @@ using PDFSharp.Interop.Advanced;
 // ReSharper disable RedundantNameQualifier
 // ReSharper disable CompareOfFloatsByEqualityOperator
 
-namespace PDFSharp.Drawing.Pdf
+namespace PDFSharp.Drawing.PDF
 {
     /// <summary>
-    /// Represents a drawing surface for PdfPages.
+    /// Represents a drawing surface for PDFPages.
     /// </summary>
-    internal class XGraphicsPdfRenderer : IXGraphicsRenderer
+    internal class XGraphicsPDFRenderer : IXGraphicsRenderer
     {
-        public XGraphicsPdfRenderer(PdfPage page, XGraphics gfx, XGraphicsPdfPageOptions options)
+        public XGraphicsPDFRenderer(PDFPage page, XGraphics gfx, XGraphicsPDFPageOptions options)
         {
             _page = page;
             _colorMode = page._document.Options.ColorMode;
@@ -73,17 +73,17 @@ namespace PDFSharp.Drawing.Pdf
             Gfx = gfx;
             _content = new StringBuilder();
             page.RenderContent._pdfRenderer = this;
-            _gfxState = new PdfGraphicsState(this);
+            _gfxState = new PDFGraphicsState(this);
         }
 
-        public XGraphicsPdfRenderer(XForm form, XGraphics gfx)
+        public XGraphicsPDFRenderer(XForm form, XGraphics gfx)
         {
             _form = form;
             _colorMode = form.Owner.Options.ColorMode;
             Gfx = gfx;
             _content = new StringBuilder();
-            form.PdfRenderer = this;
-            _gfxState = new PdfGraphicsState(this);
+            form.PDFRenderer = this;
+            _gfxState = new PDFGraphicsState(this);
         }
 
         /// <summary>
@@ -95,14 +95,14 @@ namespace PDFSharp.Drawing.Pdf
             return _content.ToString();
         }
 
-        public XGraphicsPdfPageOptions PageOptions { get; }
+        public XGraphicsPDFPageOptions PageOptions { get; }
 
         public void Close()
         {
             if (_page != null)
             {
-                PdfContent content2 = _page.RenderContent;
-                content2.CreateStream(PdfEncoders.RawEncoding.GetBytes(GetContent()));
+                PDFContent content2 = _page.RenderContent;
+                content2.CreateStream(PDFEncoders.RawEncoding.GetBytes(GetContent()));
 
                 Gfx = null;
                 _page.RenderContent._pdfRenderer = null;
@@ -111,9 +111,9 @@ namespace PDFSharp.Drawing.Pdf
             }
             else if (_form != null)
             {
-                _form._pdfForm.CreateStream(PdfEncoders.RawEncoding.GetBytes(GetContent()));
+                _form._pdfForm.CreateStream(PDFEncoders.RawEncoding.GetBytes(GetContent()));
                 Gfx = null;
-                _form.PdfRenderer = null;
+                _form.PDFRenderer = null;
                 _form = null;
             }
         }
@@ -491,7 +491,7 @@ namespace PDFSharp.Drawing.Pdf
                 }
             }
 
-            PdfFont realizedFont = _gfxState._realizedFont;
+            PDFFont realizedFont = _gfxState._realizedFont;
             Debug.Assert(realizedFont != null);
             realizedFont.AddChars(s);
 
@@ -516,14 +516,14 @@ namespace PDFSharp.Drawing.Pdf
                 }
                 s = sb.ToString();
 
-                byte[] bytes = PdfEncoders.RawUnicodeEncoding.GetBytes(s);
-                bytes = PdfEncoders.FormatStringLiteral(bytes, true, false, true, null);
-                text = PdfEncoders.RawEncoding.GetString(bytes, 0, bytes.Length);
+                byte[] bytes = PDFEncoders.RawUnicodeEncoding.GetBytes(s);
+                bytes = PDFEncoders.FormatStringLiteral(bytes, true, false, true, null);
+                text = PDFEncoders.RawEncoding.GetString(bytes, 0, bytes.Length);
             }
             else
             {
-                byte[] bytes = PdfEncoders.WinAnsiEncoding.GetBytes(s);
-                text = PdfEncoders.ToStringLiteral(bytes, false, null);
+                byte[] bytes = PDFEncoders.WinAnsiEncoding.GetBytes(s);
+                text = PDFEncoders.ToStringLiteral(bytes, false, null);
             }
 
             // Map absolute position to PDF world space.
@@ -657,22 +657,22 @@ namespace PDFSharp.Drawing.Pdf
                 XForm form = (XForm)image;
                 form.Finish();
 
-                PdfFormXObject pdfForm = Owner.FormTable.GetForm(form);
+                PDFFormXObject pdfForm = Owner.FormTable.GetForm(form);
 
                 double cx = width / image.PointWidth;
                 double cy = height / image.PointHeight;
 
                 if (cx != 0 && cy != 0)
                 {
-                    XPdfForm xForm = image as XPdfForm;
+                    XPDFForm xForm = image as XPDFForm;
                     if (Gfx.PageDirection == XPageDirection.Downwards)
                     {
-                        // If we have an XPdfForm, then we take the MediaBox into account.
+                        // If we have an XPDFForm, then we take the MediaBox into account.
                         double xDraw = x;
                         double yDraw = y;
                         if (xForm != null)
                         {
-                            // Yes, it is an XPdfForm - adjust the position where the page will be drawn.
+                            // Yes, it is an XPDFForm - adjust the position where the page will be drawn.
                             xDraw -= xForm.Page.MediaBox.X1;
                             yDraw += xForm.Page.MediaBox.Y1;
                         }
@@ -720,21 +720,21 @@ namespace PDFSharp.Drawing.Pdf
                 XForm form = (XForm)image;
                 form.Finish();
 
-                PdfFormXObject pdfForm = Owner.FormTable.GetForm(form);
+                PDFFormXObject pdfForm = Owner.FormTable.GetForm(form);
 
                 double cx = width / image.PointWidth;
                 double cy = height / image.PointHeight;
 
                 if (cx != 0 && cy != 0)
                 {
-                    XPdfForm xForm = image as XPdfForm;
+                    XPDFForm xForm = image as XPDFForm;
                     if (Gfx.PageDirection == XPageDirection.Downwards)
                     {
                         double xDraw = x;
                         double yDraw = y;
                         if (xForm != null)
                         {
-                            // Yes, it is an XPdfForm - adjust the position where the page will be drawn.
+                            // Yes, it is an XPDFForm - adjust the position where the page will be drawn.
                             xDraw -= xForm.Page.MediaBox.X1;
                             yDraw += xForm.Page.MediaBox.Y1;
                         }
@@ -1840,23 +1840,23 @@ namespace PDFSharp.Drawing.Pdf
             int count = points.Length;
             for (int idx = 0; idx < count; idx++)
             {
-                string info = PdfEncoders.Format("{0:X}   {1:####0.000} {2:####0.000}", types[idx], points[idx].X, points[idx].Y);
+                string info = PDFEncoders.Format("{0:X}   {1:####0.000} {2:####0.000}", types[idx], points[idx].X, points[idx].Y);
                 Debug.WriteLine(info, "PathData");
             }
         }
 #endif
 
         /// <summary>
-        /// Gets the owning PdfDocument of this page or form.
+        /// Gets the owning PDFDocument of this page or form.
         /// </summary>
-        internal PdfDocument Owner => _page != null ? _page.Owner : _form.Owner;
+        internal PDFDocument Owner => _page != null ? _page.Owner : _form.Owner;
 
         internal XGraphics Gfx { get; private set; }
 
         /// <summary>
-        /// Gets the PdfResources of this page or form.
+        /// Gets the PDFResources of this page or form.
         /// </summary>
-        internal PdfResources Resources => _page != null ? _page.Resources : _form.Resources;
+        internal PDFResources Resources => _page != null ? _page.Resources : _form.Resources;
 
         /// <summary>
         /// Gets the size of this page or form.
@@ -1866,7 +1866,7 @@ namespace PDFSharp.Drawing.Pdf
         /// <summary>
         /// Gets the resource name of the specified font within this page or form.
         /// </summary>
-        internal string GetFontName(XFont font, out PdfFont pdfFont) => _page != null ? _page.GetFontName(font, out pdfFont) : _form.GetFontName(font, out pdfFont);
+        internal string GetFontName(XFont font, out PDFFont pdfFont) => _page != null ? _page.GetFontName(font, out pdfFont) : _form.GetFontName(font, out pdfFont);
 
         /// <summary>
         /// Gets the resource name of the specified image within this page or form.
@@ -1878,9 +1878,9 @@ namespace PDFSharp.Drawing.Pdf
         /// </summary>
         internal string GetFormName(XForm form) => _page != null ? _page.GetFormName(form) : _form.GetFormName(form);
 
-        internal PdfPage _page;
+        internal PDFPage _page;
         internal XForm _form;
-        internal PdfColorMode _colorMode;
+        internal PDFColorMode _colorMode;
         readonly StringBuilder _content;
 
         /// <summary>
@@ -1924,10 +1924,10 @@ namespace PDFSharp.Drawing.Pdf
             Append("Q\n");
         }
 
-        PdfGraphicsState RestoreState(InternalGraphicsState state)
+        PDFGraphicsState RestoreState(InternalGraphicsState state)
         {
             int count = 1;
-            PdfGraphicsState top = _gfxStateStack.Pop();
+            PDFGraphicsState top = _gfxStateStack.Pop();
             while (top.InternalState != state)
             {
                 Append("Q\n");
@@ -1942,12 +1942,12 @@ namespace PDFSharp.Drawing.Pdf
         /// <summary>
         /// The current graphical state.
         /// </summary>
-        PdfGraphicsState _gfxState;
+        PDFGraphicsState _gfxState;
 
         /// <summary>
         /// The graphical state stack.
         /// </summary>
-        readonly Stack<PdfGraphicsState> _gfxStateStack = new Stack<PdfGraphicsState>();
+        readonly Stack<PDFGraphicsState> _gfxStateStack = new Stack<PDFGraphicsState>();
 
         #endregion
 

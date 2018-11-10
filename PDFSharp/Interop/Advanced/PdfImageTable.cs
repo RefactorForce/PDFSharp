@@ -38,19 +38,19 @@ namespace PDFSharp.Interop.Advanced
     /// <summary>
     /// Contains all used images of a document.
     /// </summary>
-    internal sealed class PdfImageTable : PdfResourceTable
+    internal sealed class PDFImageTable : PDFResourceTable
     {
         /// <summary>
         /// Initializes a new instance of this class, which is a singleton for each document.
         /// </summary>
-        public PdfImageTable(PdfDocument document)
+        public PDFImageTable(PDFDocument document)
             : base(document)
         { }
 
         /// <summary>
-        /// Gets a PdfImage from an XImage. If no PdfImage already exists, a new one is created.
+        /// Gets a PDFImage from an XImage. If no PDFImage already exists, a new one is created.
         /// </summary>
-        public PdfImage GetImage(XImage image)
+        public PDFImage GetImage(XImage image)
         {
             ImageSelector selector = image._selector;
             if (selector == null)
@@ -58,9 +58,9 @@ namespace PDFSharp.Interop.Advanced
                 selector = new ImageSelector(image);
                 image._selector = selector;
             }
-            if (!_images.TryGetValue(selector, out PdfImage pdfImage))
+            if (!_images.TryGetValue(selector, out PDFImage pdfImage))
             {
-                pdfImage = new PdfImage(Owner, image);
+                pdfImage = new PDFImage(Owner, image);
                 //pdfImage.Document = _document;
                 Debug.Assert(pdfImage.Owner == Owner);
                 _images[selector] = pdfImage;
@@ -69,12 +69,12 @@ namespace PDFSharp.Interop.Advanced
         }
 
         /// <summary>
-        /// Map from ImageSelector to PdfImage.
+        /// Map from ImageSelector to PDFImage.
         /// </summary>
-        readonly Dictionary<ImageSelector, PdfImage> _images = new Dictionary<ImageSelector, PdfImage>();
+        readonly Dictionary<ImageSelector, PDFImage> _images = new Dictionary<ImageSelector, PDFImage>();
 
         /// <summary>
-        /// A collection of information that uniquely identifies a particular PdfImage.
+        /// A collection of information that uniquely identifies a particular PDFImage.
         /// </summary>
         public class ImageSelector
         {

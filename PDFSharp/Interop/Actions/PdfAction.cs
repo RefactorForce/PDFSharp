@@ -32,18 +32,18 @@ namespace PDFSharp.Interop.Actions
     /// <summary>
     /// Represents the base class for all PDF actions.
     /// </summary>
-    public abstract class PdfAction : PdfDictionary
+    public abstract class PDFAction : PDFDictionary
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfAction"/> class.
+        /// Initializes a new instance of the <see cref="PDFAction"/> class.
         /// </summary>
-        protected PdfAction() => Elements.SetName(Keys.Type, "/Action");
+        protected PDFAction() => Elements.SetName(Keys.Type, "/Action");
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfAction"/> class.
+        /// Initializes a new instance of the <see cref="PDFAction"/> class.
         /// </summary>
         /// <param name="document">The document that owns this object.</param>
-        protected PdfAction(PdfDocument document)
+        protected PDFAction(PDFDocument document)
             : base(document) => Elements.SetName(Keys.Type, "/Action");
 
         /// <summary>

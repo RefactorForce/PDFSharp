@@ -38,7 +38,7 @@ using System.Windows.Media;
 namespace PDFSharp.Drawing
 {
     /// <summary>
-    /// Represents an abstract drawing surface for PdfPages.
+    /// Represents an abstract drawing surface for PDFPages.
     /// </summary>
     internal interface IXGraphicsRenderer
     {

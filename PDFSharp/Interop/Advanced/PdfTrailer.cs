@@ -37,20 +37,20 @@ namespace PDFSharp.Interop.Advanced
 {
     /// <summary>
     /// Represents a PDF trailer dictionary. Even though trailers are dictionaries they never have a cross
-    /// reference entry in PdfReferenceTable.
+    /// reference entry in PDFReferenceTable.
     /// </summary>
-    internal class PdfTrailer : PdfDictionary  // Reference: 3.4.4  File Trailer / Page 96
+    internal class PDFTrailer : PDFDictionary  // Reference: 3.4.4  File Trailer / Page 96
     {
         /// <summary>
-        /// Initializes a new instance of PdfTrailer.
+        /// Initializes a new instance of PDFTrailer.
         /// </summary>
-        public PdfTrailer(PdfDocument document)
+        public PDFTrailer(PDFDocument document)
             : base(document) => _document = document;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfTrailer"/> class from a <see cref="PdfCrossReferenceStream"/>.
+        /// Initializes a new instance of the <see cref="PDFTrailer"/> class from a <see cref="PDFCrossReferenceStream"/>.
         /// </summary>
-        public PdfTrailer(PdfCrossReferenceStream trailer)
+        public PDFTrailer(PDFCrossReferenceStream trailer)
             : base(trailer._document)
         {
             _document = trailer._document;
@@ -60,7 +60,7 @@ namespace PDFSharp.Interop.Advanced
             // /Root 1 0 R
             // /Size 10
 
-            PdfReference iref = trailer.Elements.GetReference(Keys.Info);
+            PDFReference iref = trailer.Elements.GetReference(Keys.Info);
             if (iref != null)
                 Elements.SetReference(Keys.Info, iref);
 
@@ -68,7 +68,7 @@ namespace PDFSharp.Interop.Advanced
 
             Elements.SetInteger(Keys.Size, trailer.Elements.GetInteger(Keys.Size));
 
-            PdfArray id = trailer.Elements.GetArray(Keys.ID);
+            PDFArray id = trailer.Elements.GetArray(Keys.ID);
             if (id != null)
                 Elements.SetValue(Keys.ID, id);
         }
@@ -85,13 +85,13 @@ namespace PDFSharp.Interop.Advanced
         //  get {return Elements.GetInteger(Keys.Prev);}
         //}
 
-        public PdfDocumentInformation Info => (PdfDocumentInformation)Elements.GetValue(Keys.Info, VCF.CreateIndirect);
+        public PDFDocumentInformation Info => (PDFDocumentInformation)Elements.GetValue(Keys.Info, VCF.CreateIndirect);
 
         /// <summary>
         /// (Required; must be an indirect reference)
         /// The catalog dictionary for the PDF document contained in the file.
         /// </summary>
-        public PdfCatalog Root => (PdfCatalog)Elements.GetValue(Keys.Root, VCF.CreateIndirect);
+        public PDFCatalog Root => (PDFCatalog)Elements.GetValue(Keys.Root, VCF.CreateIndirect);
 
         /// <summary>
         /// Gets the first or second document identifier.
@@ -101,10 +101,10 @@ namespace PDFSharp.Interop.Advanced
             if (index < 0 || index > 1)
                 throw new ArgumentOutOfRangeException("index", index, "Index must be 0 or 1.");
 
-            if (!(Elements[Keys.ID] is PdfArray array) || array.Elements.Count < 2)
+            if (!(Elements[Keys.ID] is PDFArray array) || array.Elements.Count < 2)
                 return "";
-            PdfItem item = array.Elements[index];
-            return item is PdfString ? ((PdfString)item).Value : "";
+            PDFItem item = array.Elements[index];
+            return item is PDFString ? ((PDFString)item).Value : "";
         }
 
         /// <summary>
@@ -115,21 +115,21 @@ namespace PDFSharp.Interop.Advanced
             if (index < 0 || index > 1)
                 throw new ArgumentOutOfRangeException("index", index, "Index must be 0 or 1.");
 
-            if (!(Elements[Keys.ID] is PdfArray array) || array.Elements.Count < 2)
+            if (!(Elements[Keys.ID] is PDFArray array) || array.Elements.Count < 2)
                 array = CreateNewDocumentIDs();
-            array.Elements[index] = new PdfString(value, PdfStringFlags.HexLiteral);
+            array.Elements[index] = new PDFString(value, PDFStringFlags.HexLiteral);
         }
 
         /// <summary>
         /// Creates and sets two identical new document IDs.
         /// </summary>
-        internal PdfArray CreateNewDocumentIDs()
+        internal PDFArray CreateNewDocumentIDs()
         {
-            PdfArray array = new PdfArray(_document);
+            PDFArray array = new PDFArray(_document);
             byte[] docID = Guid.NewGuid().ToByteArray();
-            string id = PdfEncoders.RawEncoding.GetString(docID, 0, docID.Length);
-            array.Elements.Add(new PdfString(id, PdfStringFlags.HexLiteral));
-            array.Elements.Add(new PdfString(id, PdfStringFlags.HexLiteral));
+            string id = PDFEncoders.RawEncoding.GetString(docID, 0, docID.Length);
+            array.Elements.Add(new PDFString(id, PDFStringFlags.HexLiteral));
+            array.Elements.Add(new PDFString(id, PDFStringFlags.HexLiteral));
             Elements[Keys.ID] = array;
             return array;
         }
@@ -137,25 +137,25 @@ namespace PDFSharp.Interop.Advanced
         /// <summary>
         /// Gets the standard security handler.
         /// </summary>
-        public PdfStandardSecurityHandler SecurityHandler
+        public PDFStandardSecurityHandler SecurityHandler
         {
             get
             {
                 if (_securityHandler == null)
-                    _securityHandler = (PdfStandardSecurityHandler)Elements.GetValue(Keys.Encrypt, VCF.CreateIndirect);
+                    _securityHandler = (PDFStandardSecurityHandler)Elements.GetValue(Keys.Encrypt, VCF.CreateIndirect);
                 return _securityHandler;
             }
         }
-        internal PdfStandardSecurityHandler _securityHandler;
+        internal PDFStandardSecurityHandler _securityHandler;
 
-        internal override void WriteObject(PdfWriter writer)
+        internal override void WriteObject(PDFWriter writer)
         {
             // Delete /XRefStm entry, if any.
             // HACK: 
             _elements.Remove(Keys.XRefStm);
 
             // Don't encrypt myself
-            PdfStandardSecurityHandler securityHandler = writer.SecurityHandler;
+            PDFStandardSecurityHandler securityHandler = writer.SecurityHandler;
             writer.SecurityHandler = null;
             base.WriteObject(writer);
             writer.SecurityHandler = securityHandler;
@@ -167,7 +167,7 @@ namespace PDFSharp.Interop.Advanced
         internal void Finish()
         {
             // /Root
-            if (_document._trailer.Elements[Keys.Root] is PdfReference iref && iref.Value == null)
+            if (_document._trailer.Elements[Keys.Root] is PDFReference iref && iref.Value == null)
             {
                 iref = _document._irefTable[iref.ObjectID];
                 Debug.Assert(iref.Value != null);
@@ -175,7 +175,7 @@ namespace PDFSharp.Interop.Advanced
             }
 
             // /Info
-            iref = _document._trailer.Elements[Keys.Info] as PdfReference;
+            iref = _document._trailer.Elements[Keys.Info] as PDFReference;
             if (iref != null && iref.Value == null)
             {
                 iref = _document._irefTable[iref.ObjectID];
@@ -184,7 +184,7 @@ namespace PDFSharp.Interop.Advanced
             }
 
             // /Encrypt
-            iref = _document._trailer.Elements[Keys.Encrypt] as PdfReference;
+            iref = _document._trailer.Elements[Keys.Encrypt] as PDFReference;
             if (iref != null)
             {
                 iref = _document._irefTable[iref.ObjectID];
@@ -232,19 +232,19 @@ namespace PDFSharp.Interop.Advanced
             /// (Required; must be an indirect reference) The catalog dictionary for the PDF document
             /// contained in the file.
             /// </summary>
-            [KeyInfo(KeyType.Dictionary | KeyType.Required, typeof(PdfCatalog))]
+            [KeyInfo(KeyType.Dictionary | KeyType.Required, typeof(PDFCatalog))]
             public const string Root = "/Root";
 
             /// <summary>
             /// (Required if document is encrypted; PDF 1.1) The document’s encryption dictionary.
             /// </summary>
-            [KeyInfo(KeyType.Dictionary | KeyType.Optional, typeof(PdfStandardSecurityHandler))]
+            [KeyInfo(KeyType.Dictionary | KeyType.Optional, typeof(PDFStandardSecurityHandler))]
             public const string Encrypt = "/Encrypt";
 
             /// <summary>
             /// (Optional; must be an indirect reference) The document’s information dictionary.
             /// </summary>
-            [KeyInfo(KeyType.Dictionary | KeyType.Optional, typeof(PdfDocumentInformation))]
+            [KeyInfo(KeyType.Dictionary | KeyType.Optional, typeof(PDFDocumentInformation))]
             public const string Info = "/Info";
 
             /// <summary>

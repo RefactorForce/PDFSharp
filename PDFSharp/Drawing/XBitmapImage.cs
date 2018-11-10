@@ -41,7 +41,7 @@ using PDFSharp.Internal;
 using System.DrawingCore;
 using System.DrawingCore.Drawing2D;
 using System.DrawingCore.Imaging;
-using PdfSharp.Internal;
+using PDFSharp.Internal;
 
 #endif
 #if WPF
@@ -49,13 +49,13 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 #if !GDI
-using PdfSharp.Internal;
+using PDFSharp.Internal;
 #endif
 
 #endif
 #if NETFX_CORE
 using Windows.UI.Xaml.Media.Imaging;
-using PdfSharp.Internal;
+using PDFSharp.Internal;
 
 #endif
 

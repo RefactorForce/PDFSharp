@@ -49,12 +49,12 @@ namespace PDFSharp.Interop.Filters
         /// <summary>
         /// Encodes the specified data.
         /// </summary>
-        public override byte[] Encode(byte[] data) => Encode(data, PdfFlateEncodeMode.Default);
+        public override byte[] Encode(byte[] data) => Encode(data, PDFFlateEncodeMode.Default);
 
         /// <summary>
         /// Encodes the specified data.
         /// </summary>
-        public byte[] Encode(byte[] data, PdfFlateEncodeMode mode)
+        public byte[] Encode(byte[] data, PDFFlateEncodeMode mode)
         {
             MemoryStream ms = new MemoryStream();
 
@@ -132,10 +132,10 @@ namespace PDFSharp.Interop.Filters
             int level = Deflater.DEFAULT_COMPRESSION;
             switch (mode)
             {
-                case PdfFlateEncodeMode.BestCompression:
+                case PDFFlateEncodeMode.BestCompression:
                     level = Deflater.BEST_COMPRESSION;
                     break;
-                case PdfFlateEncodeMode.BestSpeed:
+                case PDFFlateEncodeMode.BestSpeed:
                     level = Deflater.BEST_SPEED;
                     break;
             }

@@ -35,19 +35,19 @@ namespace PDFSharp.Interop.AcroForms
     /// <summary>
     /// Represents the base class for all choice field dictionaries.
     /// </summary>
-    public abstract class PdfChoiceField : PdfAcroField
+    public abstract class PDFChoiceField : PDFAcroField
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfChoiceField"/> class.
+        /// Initializes a new instance of the <see cref="PDFChoiceField"/> class.
         /// </summary>
-        protected PdfChoiceField(PdfDocument document)
+        protected PDFChoiceField(PDFDocument document)
             : base(document)
         { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfChoiceField"/> class.
+        /// Initializes a new instance of the <see cref="PDFChoiceField"/> class.
         /// </summary>
-        protected PdfChoiceField(PdfDictionary dict)
+        protected PDFChoiceField(PDFDictionary dict)
             : base(dict)
         { }
 
@@ -56,17 +56,17 @@ namespace PDFSharp.Interop.AcroForms
         /// </summary>
         protected int IndexInOptArray(string value)
         {
-            PdfArray opt = Elements.GetArray(Keys.Opt);
+            PDFArray opt = Elements.GetArray(Keys.Opt);
 
 #if DEBUG  // Check with //R080317 implemention
-            PdfArray opt2 = null;
-            if (Elements[Keys.Opt] is PdfArray)
-                opt2 = Elements[Keys.Opt] as PdfArray;
-            else if (Elements[Keys.Opt] is Advanced.PdfReference)
+            PDFArray opt2 = null;
+            if (Elements[Keys.Opt] is PDFArray)
+                opt2 = Elements[Keys.Opt] as PDFArray;
+            else if (Elements[Keys.Opt] is Advanced.PDFReference)
             {
                 //falls das Array nicht direkt am Element hängt, 
                 //das Array aus dem referenzierten Element holen
-                opt2 = ((Advanced.PdfReference)Elements[Keys.Opt]).Value as PdfArray;
+                opt2 = ((Advanced.PDFReference)Elements[Keys.Opt]).Value as PDFArray;
             }
             Debug.Assert(ReferenceEquals(opt, opt2));
 #endif
@@ -76,13 +76,13 @@ namespace PDFSharp.Interop.AcroForms
                 int count = opt.Elements.Count;
                 for (int idx = 0; idx < count; idx++)
                 {
-                    PdfItem item = opt.Elements[idx];
-                    if (item is PdfString)
+                    PDFItem item = opt.Elements[idx];
+                    if (item is PDFString)
                     {
                         if (item.ToString() == value)
                             return idx;
                     }
-                    else if (item is PdfArray array)
+                    else if (item is PDFArray array)
                     {
                         if (array.Elements.Count != 0)
                         {
@@ -100,18 +100,18 @@ namespace PDFSharp.Interop.AcroForms
         /// </summary>
         protected string ValueInOptArray(int index)
         {
-            PdfArray opt = Elements.GetArray(Keys.Opt);
+            PDFArray opt = Elements.GetArray(Keys.Opt);
             if (opt != null)
             {
                 int count = opt.Elements.Count;
                 if (index < 0 || index >= count)
                     throw new ArgumentOutOfRangeException("index");
 
-                PdfItem item = opt.Elements[index];
-                if (item is PdfString)
+                PDFItem item = opt.Elements[index];
+                if (item is PDFString)
                     return item.ToString();
 
-                if (item is PdfArray array)
+                if (item is PDFArray array)
                 {
                     if (array.Elements.Count != 0)
                         return array.Elements[0].ToString();
@@ -124,7 +124,7 @@ namespace PDFSharp.Interop.AcroForms
         /// Predefined keys of this dictionary. 
         /// The description comes from PDF 1.4 Reference.
         /// </summary>
-        public new class Keys : PdfAcroField.Keys
+        public new class Keys : PDFAcroField.Keys
         {
             // ReSharper disable InconsistentNaming
 

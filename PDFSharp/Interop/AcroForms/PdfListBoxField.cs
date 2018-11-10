@@ -32,16 +32,16 @@ namespace PDFSharp.Interop.AcroForms
     /// <summary>
     /// Represents the list box field.
     /// </summary>
-    public sealed class PdfListBoxField : PdfChoiceField
+    public sealed class PDFListBoxField : PDFChoiceField
     {
         /// <summary>
-        /// Initializes a new instance of PdfListBoxField.
+        /// Initializes a new instance of PDFListBoxField.
         /// </summary>
-        internal PdfListBoxField(PdfDocument document)
+        internal PDFListBoxField(PDFDocument document)
             : base(document)
         { }
 
-        internal PdfListBoxField(PdfDictionary dict)
+        internal PDFListBoxField(PDFDictionary dict)
             : base(dict)
         { }
 
@@ -52,13 +52,13 @@ namespace PDFSharp.Interop.AcroForms
         {
             get
             {
-                string value = Elements.GetString(PdfAcroField.Keys.V);
+                string value = Elements.GetString(PDFAcroField.Keys.V);
                 return IndexInOptArray(value);
             }
             set
             {
                 string key = ValueInOptArray(value);
-                Elements.SetString(PdfAcroField.Keys.V, key);
+                Elements.SetString(PDFAcroField.Keys.V, key);
             }
         }
 
@@ -66,7 +66,7 @@ namespace PDFSharp.Interop.AcroForms
         /// Predefined keys of this dictionary. 
         /// The description comes from PDF 1.4 Reference.
         /// </summary>
-        public new class Keys : PdfAcroField.Keys
+        public new class Keys : PDFAcroField.Keys
         {
             // List boxes have no additional entries.
 

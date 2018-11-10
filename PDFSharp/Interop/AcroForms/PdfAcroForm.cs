@@ -33,34 +33,34 @@ namespace PDFSharp.Interop.AcroForms
     /// Represents an interactive form (or AcroForm), a collection of fields for
     /// gathering information interactively from the user.
     /// </summary>
-    public sealed class PdfAcroForm : PdfDictionary
+    public sealed class PDFAcroForm : PDFDictionary
     {
         /// <summary>
         /// Initializes a new instance of AcroForm.
         /// </summary>
-        internal PdfAcroForm(PdfDocument document)
+        internal PDFAcroForm(PDFDocument document)
             : base(document) => _document = document;
 
-        internal PdfAcroForm(PdfDictionary dictionary)
+        internal PDFAcroForm(PDFDictionary dictionary)
             : base(dictionary)
         { }
 
         /// <summary>
         /// Gets the fields collection of this form.
         /// </summary>
-        public PdfAcroField.PdfAcroFieldCollection Fields
+        public PDFAcroField.PDFAcroFieldCollection Fields
         {
             get
             {
                 if (_fields == null)
                 {
                     object o = Elements.GetValue(Keys.Fields, VCF.CreateIndirect);
-                    _fields = (PdfAcroField.PdfAcroFieldCollection)o;
+                    _fields = (PDFAcroField.PDFAcroFieldCollection)o;
                 }
                 return _fields;
             }
         }
-        PdfAcroField.PdfAcroFieldCollection _fields;
+        PDFAcroField.PDFAcroFieldCollection _fields;
 
         /// <summary>
         /// Predefined keys of this dictionary. 
@@ -74,7 +74,7 @@ namespace PDFSharp.Interop.AcroForms
             /// (Required) An array of references to the document’s root fields (those with
             /// no ancestors in the field hierarchy).
             /// </summary>
-            [KeyInfo(KeyType.Array | KeyType.Required, typeof(PdfAcroField.PdfAcroFieldCollection))]
+            [KeyInfo(KeyType.Array | KeyType.Required, typeof(PDFAcroField.PDFAcroFieldCollection))]
             public const string Fields = "/Fields";
 
             /// <summary>

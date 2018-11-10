@@ -33,7 +33,7 @@ namespace PDFSharp.Interop.Advanced
     /// <summary>
     /// TODO
     /// </summary>
-    public static class PdfPageInterals
+    public static class PDFPageInterals
     {
         // TODO
     }

@@ -32,7 +32,7 @@ namespace PDFSharp.Interop
     /// <summary>
     /// Specifies how the document should be displayed by a viewer when opened.
     /// </summary>
-    public enum PdfReadingDirection
+    public enum PDFReadingDirection
     {
         /// <summary>
         /// Left to right.

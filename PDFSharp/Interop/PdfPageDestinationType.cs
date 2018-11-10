@@ -34,7 +34,7 @@ namespace PDFSharp.Interop
     /// <summary>
     /// Specifies the type of a page destination in outline items, annotations, or actions..
     ///  </summary>
-    public enum PdfPageDestinationType  // Reference: TABLE 8.2  Destination Syntax / Page 582
+    public enum PDFPageDestinationType  // Reference: TABLE 8.2  Destination Syntax / Page 582
     {
         // Except for FitR the documentation text is outdated.
 

@@ -36,44 +36,44 @@ using System.DrawingCore.Imaging;
 using System.Windows.Media;
 #endif
 using PDFSharp.Drawing;
-using PDFSharp.Drawing.Pdf;
+using PDFSharp.Drawing.PDF;
 
 namespace PDFSharp.Interop.Advanced
 {
     /// <summary>
     /// Represents a shading pattern dictionary.
     /// </summary>
-    public sealed class PdfShadingPattern : PdfDictionaryWithContentStream
+    public sealed class PDFShadingPattern : PDFDictionaryWithContentStream
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfShadingPattern"/> class.
+        /// Initializes a new instance of the <see cref="PDFShadingPattern"/> class.
         /// </summary>
-        public PdfShadingPattern(PdfDocument document)
+        public PDFShadingPattern(PDFDocument document)
             : base(document)
         {
             Elements.SetName(Keys.Type, "/Pattern");
-            Elements[Keys.PatternType] = new PdfInteger(2);
+            Elements[Keys.PatternType] = new PDFInteger(2);
         }
 
         /// <summary>
         /// Setups the shading pattern from the specified brush.
         /// </summary>
-        internal void SetupFromBrush(XLinearGradientBrush brush, XMatrix matrix, XGraphicsPdfRenderer renderer)
+        internal void SetupFromBrush(XLinearGradientBrush brush, XMatrix matrix, XGraphicsPDFRenderer renderer)
         {
             if (brush == null)
                 throw new ArgumentNullException("brush");
 
-            PdfShading shading = new PdfShading(_document);
+            PDFShading shading = new PDFShading(_document);
             shading.SetupFromBrush(brush, renderer);
             Elements[Keys.Shading] = shading;
-            //Elements[Keys.Matrix] = new PdfLiteral("[" + PdfEncoders.ToString(matrix) + "]");
+            //Elements[Keys.Matrix] = new PDFLiteral("[" + PDFEncoders.ToString(matrix) + "]");
             Elements.SetMatrix(Keys.Matrix, matrix);
         }
 
         /// <summary>
         /// Common keys for all streams.
         /// </summary>
-        internal sealed new class Keys : PdfDictionaryWithContentStream.Keys
+        internal sealed new class Keys : PDFDictionaryWithContentStream.Keys
         {
             /// <summary>
             /// (Optional) The type of PDF object that this dictionary describes; if present,

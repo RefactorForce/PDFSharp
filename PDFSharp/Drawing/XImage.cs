@@ -76,7 +76,7 @@ namespace PDFSharp.Drawing
         //
         // XImage                           <-- ImageSource
         //   XForm
-        //   PdfForm
+        //   PDFForm
         //   XBitmapSource               <-- BitmapSource
         //     XBitmapImage             <-- BitmapImage
 
@@ -335,7 +335,7 @@ namespace PDFSharp.Drawing
         /// Creates an image from the specified file.
         /// </summary>
         /// <param name="path">The path to a BMP, PNG, GIF, JPEG, TIFF, or PDF file.</param>
-        public static XImage FromFile(string path) => PdfReader.TestPdfFile(path) > 0 ? new XPdfForm(path) : new XImage(path);
+        public static XImage FromFile(string path) => PDFReader.TestPDFFile(path) > 0 ? new XPDFForm(path) : new XImage(path);
 
         /// <summary>
         /// Creates an image from the specified stream.<br/>
@@ -347,7 +347,7 @@ namespace PDFSharp.Drawing
             if (stream == null)
                 throw new ArgumentNullException("stream");
 
-            return PdfReader.TestPdfFile(stream) > 0 ? new XPdfForm(stream) : new XImage(stream);
+            return PDFReader.TestPDFFile(stream) > 0 ? new XPDFForm(stream) : new XImage(stream);
         }
 
 #if DEBUG
@@ -359,7 +359,7 @@ namespace PDFSharp.Drawing
         /// <param name="platformIndependent">Uses an platform-independent implementation if set to true.
         /// The platform-dependent implementation, if available, will support more image formats.</param>
         /// <param name="document">The document used to obtain the options.</param>
-        internal static XImage FromFile(string path, bool platformIndependent, PdfDocument document)
+        internal static XImage FromFile(string path, bool platformIndependent, PDFDocument document)
         {
             if (!platformIndependent)
                 return FromFile(path);
@@ -387,7 +387,7 @@ namespace PDFSharp.Drawing
         /// <param name="platformIndependent">Uses an platform-independent implementation if set to true.
         /// The platform-dependent implementation, if available, will support more image formats.</param>
         /// <param name="document">The document used to obtain the options.</param>
-        internal static XImage FromStream(Stream stream, bool platformIndependent, PdfDocument document)
+        internal static XImage FromStream(Stream stream, bool platformIndependent, PDFDocument document)
         {
             if (!platformIndependent)
                 return FromStream(stream);
@@ -435,7 +435,7 @@ namespace PDFSharp.Drawing
             //if (path.StartsWith("base64:")) // The Image is stored in the string here, so the file exists.
             //    return true;
 
-            PdfReader.TestPdfFile(path) > 0 ? true : File.Exists(path);
+            PDFReader.TestPDFFile(path) > 0 ? true : File.Exists(path);
 #if !NETFX_CORE && !UWP
 #else
             return false;
@@ -1515,9 +1515,9 @@ namespace PDFSharp.Drawing
         internal Stream _stream;
 
         /// <summary>
-        /// Cache PdfImageTable.ImageSelector to speed up finding the right PdfImage
+        /// Cache PDFImageTable.ImageSelector to speed up finding the right PDFImage
         /// if this image is used more than once.
         /// </summary>
-        internal PdfImageTable.ImageSelector _selector;
+        internal PDFImageTable.ImageSelector _selector;
     }
 }

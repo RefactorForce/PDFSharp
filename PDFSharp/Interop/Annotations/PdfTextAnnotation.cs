@@ -34,31 +34,31 @@ namespace PDFSharp.Interop.Annotations
     /// <summary>
     /// Represents a text annotation.
     /// </summary>
-    public sealed class PdfTextAnnotation : PdfAnnotation
+    public sealed class PDFTextAnnotation : PDFAnnotation
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfTextAnnotation"/> class.
+        /// Initializes a new instance of the <see cref="PDFTextAnnotation"/> class.
         /// </summary>
-        public PdfTextAnnotation() => Initialize();
+        public PDFTextAnnotation() => Initialize();
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfTextAnnotation"/> class.
+        /// Initializes a new instance of the <see cref="PDFTextAnnotation"/> class.
         /// </summary>
-        public PdfTextAnnotation(PdfDocument document)
+        public PDFTextAnnotation(PDFDocument document)
             : base(document) => Initialize();
 
         void Initialize()
         {
-            Elements.SetName(PdfAnnotation.Keys.Subtype, "/Text");
+            Elements.SetName(PDFAnnotation.Keys.Subtype, "/Text");
             // By default make a yellow comment.
-            Icon = PdfTextAnnotationIcon.Comment;
+            Icon = PDFTextAnnotationIcon.Comment;
             //Color = XColors.Yellow;
         }
 
-        //    public static PdfTextAnnotation CreateDocumentLink(PdfRectangle rect, int destinatinPage)
+        //    public static PDFTextAnnotation CreateDocumentLink(PDFRectangle rect, int destinatinPage)
         //    {
-        //      PdfTextAnnotation link = new PdfTextAnnotation();
-        //      //link.linkType = PdfTextAnnotation.LinkType.Document;
+        //      PDFTextAnnotation link = new PDFTextAnnotation();
+        //      //link.linkType = PDFTextAnnotation.LinkType.Document;
         //      //link.Rectangle = rect;
         //      //link.destPage = destinatinPage;
         //      return link;
@@ -76,22 +76,22 @@ namespace PDFSharp.Interop.Annotations
         /// <summary>
         /// Gets or sets an icon to be used in displaying the annotation.
         /// </summary>
-        public PdfTextAnnotationIcon Icon
+        public PDFTextAnnotationIcon Icon
         {
             get
             {
                 string value = Elements.GetName(Keys.Name);
                 if (value == "")
-                    return PdfTextAnnotationIcon.NoIcon;
+                    return PDFTextAnnotationIcon.NoIcon;
                 value = value.Substring(1);
-                return !Enum.IsDefined(typeof(PdfTextAnnotationIcon), value)
-                    ? PdfTextAnnotationIcon.NoIcon
-                    : (PdfTextAnnotationIcon)Enum.Parse(typeof(PdfTextAnnotationIcon), value, false);
+                return !Enum.IsDefined(typeof(PDFTextAnnotationIcon), value)
+                    ? PDFTextAnnotationIcon.NoIcon
+                    : (PDFTextAnnotationIcon)Enum.Parse(typeof(PDFTextAnnotationIcon), value, false);
             }
             set
             {
-                if (Enum.IsDefined(typeof(PdfTextAnnotationIcon), value) &&
-                  PdfTextAnnotationIcon.NoIcon != value)
+                if (Enum.IsDefined(typeof(PDFTextAnnotationIcon), value) &&
+                  PDFTextAnnotationIcon.NoIcon != value)
                 {
                     Elements.SetName(Keys.Name, "/" + value.ToString());
                 }
@@ -103,7 +103,7 @@ namespace PDFSharp.Interop.Annotations
         /// <summary>
         /// Predefined keys of this dictionary.
         /// </summary>
-        internal new class Keys : PdfAnnotation.Keys
+        internal new class Keys : PDFAnnotation.Keys
         {
             /// <summary>
             /// (Optional) A flag specifying whether the annotation should initially be displayed open.

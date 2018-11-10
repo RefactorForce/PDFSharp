@@ -35,7 +35,7 @@ namespace PDFSharp.Interop.IO
     /// INTERNAL USE ONLY.
     /// </summary>
     [Flags]
-    internal enum PdfWriterOptions
+    internal enum PDFWriterOptions
     {
         /// <summary>
         /// If only this flag is specified the result is a regular valid PDF stream.

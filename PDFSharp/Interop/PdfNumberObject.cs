@@ -32,19 +32,19 @@ namespace PDFSharp.Interop
     /// <summary>
     /// Base class for indirect number values (not yet used, maybe superfluous).
     /// </summary>
-    public abstract class PdfNumberObject : PdfObject
+    public abstract class PDFNumberObject : PDFObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfNumberObject"/> class.
+        /// Initializes a new instance of the <see cref="PDFNumberObject"/> class.
         /// </summary>
-        protected PdfNumberObject()
+        protected PDFNumberObject()
         { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfNumberObject"/> class.
+        /// Initializes a new instance of the <see cref="PDFNumberObject"/> class.
         /// </summary>
         /// <param name="document">The document.</param>
-        protected PdfNumberObject(PdfDocument document)
+        protected PDFNumberObject(PDFDocument document)
             : base(document)
         { }
     }

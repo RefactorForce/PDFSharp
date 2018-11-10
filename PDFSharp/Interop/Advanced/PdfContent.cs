@@ -29,7 +29,7 @@
 
 using System;
 using System.Diagnostics;
-using PDFSharp.Drawing.Pdf;
+using PDFSharp.Drawing.PDF;
 using PDFSharp.Interop.Filters;
 using PDFSharp.Interop.IO;
 
@@ -40,31 +40,31 @@ namespace PDFSharp.Interop.Advanced
     /// If an imported page has an array of content streams, the streams are concatenated to
     /// one single stream.
     /// </summary>
-    public sealed class PdfContent : PdfDictionary
+    public sealed class PDFContent : PDFDictionary
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfContent"/> class.
+        /// Initializes a new instance of the <see cref="PDFContent"/> class.
         /// </summary>
-        public PdfContent(PdfDocument document)
+        public PDFContent(PDFDocument document)
             : base(document)
         { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfContent"/> class.
+        /// Initializes a new instance of the <see cref="PDFContent"/> class.
         /// </summary>
-        internal PdfContent(PdfPage page)
+        internal PDFContent(PDFPage page)
             : base(page?.Owner)
         {
             //_pageContent = new PageContent(page);
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfContent"/> class.
+        /// Initializes a new instance of the <see cref="PDFContent"/> class.
         /// </summary>
         /// <param name="dict">The dict.</param>
-        public PdfContent(PdfDictionary dict) // HACK PdfContent
+        public PDFContent(PDFDictionary dict) // HACK PDFContent
             : base(dict) =>
-            // A PdfContent dictionary is always unfiltered.
+            // A PDFContent dictionary is always unfiltered.
             Decode();
 
         /// <summary>
@@ -76,7 +76,7 @@ namespace PDFSharp.Interop.Advanced
             {
                 if (value)
                 {
-                    PdfItem filter = Elements["/Filter"];
+                    PDFItem filter = Elements["/Filter"];
                     if (filter == null)
                     {
                         byte[] bytes = Filtering.FlateDecode.Encode(Stream.Value, _document.Options.FlateEncodeMode);
@@ -95,7 +95,7 @@ namespace PDFSharp.Interop.Advanced
         {
             if (Stream != null && Stream.Value != null)
             {
-                PdfItem item = Elements["/Filter"];
+                PDFItem item = Elements["/Filter"];
                 if (item != null)
                 {
                     byte[] bytes = Filtering.Decode(Stream.Value, item);
@@ -137,12 +137,12 @@ namespace PDFSharp.Interop.Advanced
             }
         }
 
-        internal override void WriteObject(PdfWriter writer)
+        internal override void WriteObject(PDFWriter writer)
         {
             if (_pdfRenderer != null)
             {
                 // GetContent also disposes the underlying XGraphics object, if one exists
-                //Stream = new PdfStream(PdfEncoders.RawEncoding.GetBytes(pdfRenderer.GetContent()), this);
+                //Stream = new PDFStream(PDFEncoders.RawEncoding.GetBytes(pdfRenderer.GetContent()), this);
                 _pdfRenderer.Close();
                 Debug.Assert(_pdfRenderer == null);
             }
@@ -153,7 +153,7 @@ namespace PDFSharp.Interop.Advanced
                 if (Owner.Options.CompressContentStreams && Elements.GetName("/Filter").Length == 0)
                 {
                     Stream.Value = Filtering.FlateDecode.Encode(Stream.Value, _document.Options.FlateEncodeMode);
-                    //Elements["/Filter"] = new PdfName("/FlateDecode");
+                    //Elements["/Filter"] = new PDFName("/FlateDecode");
                     Elements.SetName("/Filter", "/FlateDecode");
                 }
                 Elements.SetInteger("/Length", Stream.Length);
@@ -162,12 +162,12 @@ namespace PDFSharp.Interop.Advanced
             base.WriteObject(writer);
         }
 
-        internal XGraphicsPdfRenderer _pdfRenderer;
+        internal XGraphicsPDFRenderer _pdfRenderer;
 
         /// <summary>
         /// Predefined keys of this dictionary.
         /// </summary>
-        internal sealed class Keys : PdfStream.Keys
+        internal sealed class Keys : PDFStream.Keys
         {
             /// <summary>
             /// Gets the KeysMeta for these keys.

@@ -42,10 +42,10 @@ namespace PDFSharp.Interop.Content
     /// </summary>
     public sealed class CParser
     {
-        public CParser(PdfPage page)
+        public CParser(PDFPage page)
         {
             _page = page;
-            PdfContent content = page.Contents.CreateSingleContent();
+            PDFContent content = page.Contents.CreateSingleContent();
             byte[] bytes = content.Stream.Value;
             _lexer = new CLexer(bytes);
         }
@@ -220,7 +220,7 @@ namespace PDFSharp.Interop.Content
         }
 
         readonly CSequence _operands = new CSequence();
-        readonly PdfPage _page;
+        readonly PDFPage _page;
         readonly CLexer _lexer;
     }
 }

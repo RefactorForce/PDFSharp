@@ -32,7 +32,7 @@ namespace PDFSharp.Interop
     /// <summary>
     /// This class is undocumented and may change or drop in future releases.
     /// </summary>
-    public enum PdfCustomValueCompressionMode
+    public enum PDFCustomValueCompressionMode
     {
         /// <summary>
         /// Use document default to determine compression.

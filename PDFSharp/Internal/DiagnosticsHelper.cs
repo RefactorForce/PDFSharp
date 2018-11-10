@@ -123,7 +123,7 @@ namespace PDFSharp.Internal
         /// Creates font and enforces bold/italic simulation.
         /// </summary>
         public static XFont CreateSpecialFont(string familyName, double emSize, XFontStyle style,
-            XPdfFontOptions pdfOptions, XStyleSimulations styleSimulations) => new XFont(familyName, emSize, style, pdfOptions, styleSimulations);
+            XPDFFontOptions pdfOptions, XStyleSimulations styleSimulations) => new XFont(familyName, emSize, style, pdfOptions, styleSimulations);
 
         /// <summary>
         /// Dumps the font caches to a string.

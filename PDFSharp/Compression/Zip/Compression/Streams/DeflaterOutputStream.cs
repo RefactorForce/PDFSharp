@@ -47,7 +47,7 @@ using PDFSharp.SharpZipLib.Checksums;
 
 //#if !NETCF_1_0
 //using System.Security.Cryptography;
-//using PdfSharp.SharpZipLib.Encryption;
+//using PDFSharp.SharpZipLib.Encryption;
 //#endif
 
 namespace PDFSharp.SharpZipLib.Zip.Compression.Streams

@@ -38,23 +38,23 @@ namespace PDFSharp.Interop
     /// an external PDF file, the value is converted into a direct object.
     /// </summary>
     [DebuggerDisplay("({Value})")]
-    public sealed class PdfIntegerObject : PdfNumberObject
+    public sealed class PDFIntegerObject : PDFNumberObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfIntegerObject"/> class.
+        /// Initializes a new instance of the <see cref="PDFIntegerObject"/> class.
         /// </summary>
-        public PdfIntegerObject()
+        public PDFIntegerObject()
         { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfIntegerObject"/> class.
+        /// Initializes a new instance of the <see cref="PDFIntegerObject"/> class.
         /// </summary>
-        public PdfIntegerObject(int value) => Value = value;
+        public PDFIntegerObject(int value) => Value = value;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfIntegerObject"/> class.
+        /// Initializes a new instance of the <see cref="PDFIntegerObject"/> class.
         /// </summary>
-        public PdfIntegerObject(PdfDocument document, int value)
+        public PDFIntegerObject(PDFDocument document, int value)
             : base(document) => Value = value;
 
         /// <summary>
@@ -72,7 +72,7 @@ namespace PDFSharp.Interop
         /// <summary>
         /// Writes the integer literal.
         /// </summary>
-        internal override void WriteObject(PdfWriter writer)
+        internal override void WriteObject(PDFWriter writer)
         {
             writer.WriteBeginObject(this);
             writer.Write(Value);

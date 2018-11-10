@@ -59,7 +59,7 @@ using System.Diagnostics;
 
 namespace PDFSharp.Interop.Advanced
 {
-    partial class PdfImage
+    partial class PDFImage
     {
         internal readonly static uint[] WhiteTerminatingCodes =
         {
@@ -811,7 +811,7 @@ namespace PDFSharp.Interop.Advanced
         [Obsolete]
         internal void WriteEOL() =>
             // Not needed for PDF.
-            WriteTableLine(PdfImage.WhiteMakeUpCodes, 40);
+            WriteTableLine(PDFImage.WhiteMakeUpCodes, 40);
 
         /// <summary>
         /// Flushes the buffer and returns the count of bytes written to the array.

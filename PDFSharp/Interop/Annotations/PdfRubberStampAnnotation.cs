@@ -35,45 +35,45 @@ namespace PDFSharp.Interop.Annotations
     /// <summary>
     /// Represents a rubber stamp annotation.
     /// </summary>
-    public sealed class PdfRubberStampAnnotation : PdfAnnotation
+    public sealed class PDFRubberStampAnnotation : PDFAnnotation
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfRubberStampAnnotation"/> class.
+        /// Initializes a new instance of the <see cref="PDFRubberStampAnnotation"/> class.
         /// </summary>
-        public PdfRubberStampAnnotation() => Initialize();
+        public PDFRubberStampAnnotation() => Initialize();
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfRubberStampAnnotation"/> class.
+        /// Initializes a new instance of the <see cref="PDFRubberStampAnnotation"/> class.
         /// </summary>
         /// <param name="document">The document.</param>
-        public PdfRubberStampAnnotation(PdfDocument document)
+        public PDFRubberStampAnnotation(PDFDocument document)
             : base(document) => Initialize();
 
         void Initialize()
         {
-            Elements.SetName(PdfAnnotation.Keys.Subtype, "/Stamp");
+            Elements.SetName(PDFAnnotation.Keys.Subtype, "/Stamp");
             Color = XColors.Yellow;
         }
 
         /// <summary>
         /// Gets or sets an icon to be used in displaying the annotation.
         /// </summary>
-        public PdfRubberStampAnnotationIcon Icon
+        public PDFRubberStampAnnotationIcon Icon
         {
             get
             {
                 string value = Elements.GetName(Keys.Name);
                 if (value == "")
-                    return PdfRubberStampAnnotationIcon.NoIcon;
+                    return PDFRubberStampAnnotationIcon.NoIcon;
                 value = value.Substring(1);
-                return !Enum.IsDefined(typeof(PdfRubberStampAnnotationIcon), value)
-                    ? PdfRubberStampAnnotationIcon.NoIcon
-                    : (PdfRubberStampAnnotationIcon)Enum.Parse(typeof(PdfRubberStampAnnotationIcon), value, false);
+                return !Enum.IsDefined(typeof(PDFRubberStampAnnotationIcon), value)
+                    ? PDFRubberStampAnnotationIcon.NoIcon
+                    : (PDFRubberStampAnnotationIcon)Enum.Parse(typeof(PDFRubberStampAnnotationIcon), value, false);
             }
             set
             {
-                if (Enum.IsDefined(typeof(PdfRubberStampAnnotationIcon), value) &&
-                  PdfRubberStampAnnotationIcon.NoIcon != value)
+                if (Enum.IsDefined(typeof(PDFRubberStampAnnotationIcon), value) &&
+                  PDFRubberStampAnnotationIcon.NoIcon != value)
                 {
                     Elements.SetName(Keys.Name, "/" + value.ToString());
                 }
@@ -85,7 +85,7 @@ namespace PDFSharp.Interop.Annotations
         /// <summary>
         /// Predefined keys of this dictionary.
         /// </summary>
-        internal new class Keys : PdfAnnotation.Keys
+        internal new class Keys : PDFAnnotation.Keys
         {
             /// <summary>
             /// (Optional) The name of an icon to be used in displaying the annotation. Viewer

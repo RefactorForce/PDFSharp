@@ -33,10 +33,10 @@ using PDFSharp.Interop.Advanced;
 
 namespace PDFSharp.Drawing.Internal
 {
-    // $THHO THHO4THHO add support for PdfDocument.Options.
+    // $THHO THHO4THHO add support for PDFDocument.Options.
     internal class ImageImporterBmp : ImageImporterRoot, IImageImporter
     {
-        public ImportedImage ImportImage(StreamReaderHelper stream, PdfDocument document)
+        public ImportedImage ImportImage(StreamReaderHelper stream, PDFDocument document)
         {
             try
             {
@@ -174,7 +174,7 @@ namespace PDFSharp.Drawing.Internal
         /// <summary>
         /// Initializes a new instance of the <see cref="ImportedImageBitmap"/> class.
         /// </summary>
-        public ImportedImageBitmap(IImageImporter importer, ImagePrivateDataBitmap data, PdfDocument document)
+        public ImportedImageBitmap(IImageImporter importer, ImagePrivateDataBitmap data, PDFDocument document)
             : base(importer, data, document)
         { }
 
@@ -203,7 +203,7 @@ namespace PDFSharp.Drawing.Internal
         {
         }
 
-        internal ImageDataBitmap(PdfDocument document) => _document = document;
+        internal ImageDataBitmap(PDFDocument document) => _document = document;
 
         /// <summary>
         /// Gets the data.
@@ -245,7 +245,7 @@ namespace PDFSharp.Drawing.Internal
 
         public bool IsGray;
 
-        internal readonly PdfDocument _document;
+        internal readonly PDFDocument _document;
     }
 
     /// <summary>
@@ -499,7 +499,7 @@ namespace PDFSharp.Drawing.Internal
                 //k = (int) kTmp;
 
                 byte[] tempG4 = new byte[imageData.Length];
-                int ccittSizeG4 = PdfImage.DoFaxEncodingGroup4(ref tempG4, Data, (uint)bytesFileOffset, (uint)width, (uint)height);
+                int ccittSizeG4 = PDFImage.DoFaxEncodingGroup4(ref tempG4, Data, (uint)bytesFileOffset, (uint)width, (uint)height);
 
                 isFaxEncoding = /*ccittSize > 0 ||*/ ccittSizeG4 > 0;
                 if (isFaxEncoding)

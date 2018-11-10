@@ -33,15 +33,15 @@ namespace PDFSharp.Interop.Advanced
     /// Provides access to the internal PDF object data structures. This class prevents the public
     /// interfaces from pollution with to much internal functions.
     /// </summary>
-    public class PdfObjectInternals
+    public class PDFObjectInternals
     {
-        internal PdfObjectInternals(PdfObject obj) => _obj = obj;
-        readonly PdfObject _obj;
+        internal PDFObjectInternals(PDFObject obj) => _obj = obj;
+        readonly PDFObject _obj;
 
         /// <summary>
-        /// Gets the object identifier. Returns PdfObjectID.Empty for direct objects.
+        /// Gets the object identifier. Returns PDFObjectID.Empty for direct objects.
         /// </summary>
-        public PdfObjectID ObjectID => _obj.ObjectID;
+        public PDFObjectID ObjectID => _obj.ObjectID;
 
         /// <summary>
         /// Gets the object number.
@@ -57,6 +57,6 @@ namespace PDFSharp.Interop.Advanced
         /// Gets the name of the current type.
         /// Not a very useful property, but can be used for data binding.
         /// </summary>
-        public string TypeID => _obj is PdfArray ? "array" : _obj is PdfDictionary ? "dictionary" : _obj.GetType().Name;
+        public string TypeID => _obj is PDFArray ? "array" : _obj is PDFDictionary ? "dictionary" : _obj.GetType().Name;
     }
 }

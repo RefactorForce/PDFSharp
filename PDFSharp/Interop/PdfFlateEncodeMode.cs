@@ -32,7 +32,7 @@ namespace PDFSharp.Interop
     /// <summary>
     /// Sets the mode for the Deflater (FlateEncoder).
     /// </summary>
-    public enum PdfFlateEncodeMode
+    public enum PDFFlateEncodeMode
     {
         /// <summary>
         /// The default mode.

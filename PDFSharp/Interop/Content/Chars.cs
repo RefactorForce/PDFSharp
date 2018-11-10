@@ -32,7 +32,7 @@
 namespace PDFSharp.Interop.Content
 {
     /// <summary>
-    /// Character table by name. Same as PdfSharp.Pdf.IO.Chars. Not yet clear if necessary.
+    /// Character table by name. Same as PDFSharp.PDF.IO.Chars. Not yet clear if necessary.
     /// </summary>
     internal static class Chars
     {

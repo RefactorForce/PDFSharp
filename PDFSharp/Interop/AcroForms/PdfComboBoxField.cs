@@ -34,16 +34,16 @@ namespace PDFSharp.Interop.AcroForms
     /// <summary>
     /// Represents the combo box field.
     /// </summary>
-    public sealed class PdfComboBoxField : PdfChoiceField
+    public sealed class PDFComboBoxField : PDFChoiceField
     {
         /// <summary>
-        /// Initializes a new instance of PdfComboBoxField.
+        /// Initializes a new instance of PDFComboBoxField.
         /// </summary>
-        internal PdfComboBoxField(PdfDocument document)
+        internal PDFComboBoxField(PDFDocument document)
             : base(document)
         { }
 
-        internal PdfComboBoxField(PdfDictionary dict)
+        internal PDFComboBoxField(PDFDictionary dict)
             : base(dict)
         { }
 
@@ -54,7 +54,7 @@ namespace PDFSharp.Interop.AcroForms
         {
             get
             {
-                string value = Elements.GetString(PdfAcroField.Keys.V);
+                string value = Elements.GetString(PDFAcroField.Keys.V);
                 return IndexInOptArray(value);
             }
             set
@@ -63,7 +63,7 @@ namespace PDFSharp.Interop.AcroForms
                 if (value != -1) //R080325
                 {
                     string key = ValueInOptArray(value);
-                    Elements.SetString(PdfAcroField.Keys.V, key);
+                    Elements.SetString(PDFAcroField.Keys.V, key);
                     Elements.SetInteger("/I", value); //R080304 !!!!!!! sonst reagiert die Combobox überhaupt nicht !!!!!
                 }
             }
@@ -73,16 +73,16 @@ namespace PDFSharp.Interop.AcroForms
         /// Gets or sets the value of the field.
         /// </summary>
         // xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx		  
-        public override PdfItem Value //R080304
+        public override PDFItem Value //R080304
         {
-            get => Elements[PdfAcroField.Keys.V];
+            get => Elements[PDFAcroField.Keys.V];
             set
             {
                 if (ReadOnly)
                     throw new InvalidOperationException("The field is read only.");
-                if (value is PdfString || value is PdfName)
+                if (value is PDFString || value is PDFName)
                 {
-                    Elements[PdfAcroField.Keys.V] = value;
+                    Elements[PDFAcroField.Keys.V] = value;
                     SelectedIndex = SelectedIndex; //R080304 !!!
                     if (SelectedIndex == -1)
                     {
@@ -90,7 +90,7 @@ namespace PDFSharp.Interop.AcroForms
                         try
                         {
                             //anhängen
-                            ((PdfArray)((PdfItem[])Elements.Values)[2]).Elements.Add(Value);
+                            ((PDFArray)((PDFItem[])Elements.Values)[2]).Elements.Add(Value);
                             SelectedIndex = SelectedIndex;
                         }
                         catch { }
@@ -105,7 +105,7 @@ namespace PDFSharp.Interop.AcroForms
         /// Predefined keys of this dictionary. 
         /// The description comes from PDF 1.4 Reference.
         /// </summary>
-        public new class Keys : PdfAcroField.Keys
+        public new class Keys : PDFAcroField.Keys
         {
             // Combo boxes have no additional entries.
 

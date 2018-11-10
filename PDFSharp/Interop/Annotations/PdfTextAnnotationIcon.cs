@@ -32,7 +32,7 @@ namespace PDFSharp.Interop.Annotations
     /// <summary>
     /// Specifies the pre-defined icon names of text annotations.
     /// </summary>
-    public enum PdfTextAnnotationIcon
+    public enum PDFTextAnnotationIcon
     {
         /// <summary>
         /// A pre-defined annotation icon.

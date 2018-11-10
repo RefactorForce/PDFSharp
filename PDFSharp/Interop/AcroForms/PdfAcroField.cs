@@ -37,19 +37,19 @@ namespace PDFSharp.Interop.AcroForms
     /// <summary>
     /// Represents the base class for all interactive field dictionaries.
     /// </summary>
-    public abstract class PdfAcroField : PdfDictionary
+    public abstract class PDFAcroField : PDFDictionary
     {
         /// <summary>
-        /// Initializes a new instance of PdfAcroField.
+        /// Initializes a new instance of PDFAcroField.
         /// </summary>
-        internal PdfAcroField(PdfDocument document)
+        internal PDFAcroField(PDFDocument document)
             : base(document)
         { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfAcroField"/> class. Used for type transformation.
+        /// Initializes a new instance of the <see cref="PDFAcroField"/> class. Used for type transformation.
         /// </summary>
-        protected PdfAcroField(PdfDictionary dict)
+        protected PDFAcroField(PDFDictionary dict)
             : base(dict)
         { }
 
@@ -68,25 +68,25 @@ namespace PDFSharp.Interop.AcroForms
         /// <summary>
         /// Gets the field flags of this instance.
         /// </summary>
-        public PdfAcroFieldFlags Flags => (PdfAcroFieldFlags)Elements.GetInteger(Keys.Ff);
+        public PDFAcroFieldFlags Flags => (PDFAcroFieldFlags)Elements.GetInteger(Keys.Ff);
 
-        internal PdfAcroFieldFlags SetFlags
+        internal PDFAcroFieldFlags SetFlags
         {
-            get => (PdfAcroFieldFlags)Elements.GetInteger(Keys.Ff);
+            get => (PDFAcroFieldFlags)Elements.GetInteger(Keys.Ff);
             set => Elements.SetInteger(Keys.Ff, (int)value);
         }
 
         /// <summary>
         /// Gets or sets the value of the field.
         /// </summary>
-        public virtual PdfItem Value
+        public virtual PDFItem Value
         {
             get => Elements[Keys.V];
             set
             {
                 if (ReadOnly)
                     throw new InvalidOperationException("The field is read only.");
-                if (value is PdfString || value is PdfName)
+                if (value is PDFString || value is PDFName)
                     Elements[Keys.V] = value;
                 else
                     throw new NotImplementedException("Values other than string cannot be set.");
@@ -98,25 +98,25 @@ namespace PDFSharp.Interop.AcroForms
         /// </summary>
         public bool ReadOnly
         {
-            get => (Flags & PdfAcroFieldFlags.ReadOnly) != 0;
+            get => (Flags & PDFAcroFieldFlags.ReadOnly) != 0;
             set
             {
                 if (value)
-                    SetFlags |= PdfAcroFieldFlags.ReadOnly;
+                    SetFlags |= PDFAcroFieldFlags.ReadOnly;
                 else
-                    SetFlags &= ~PdfAcroFieldFlags.ReadOnly;
+                    SetFlags &= ~PDFAcroFieldFlags.ReadOnly;
             }
         }
 
         /// <summary>
         /// Gets the field with the specified name.
         /// </summary>
-        public PdfAcroField this[string name] => GetValue(name);
+        public PDFAcroField this[string name] => GetValue(name);
 
         /// <summary>
         /// Gets a child field by name.
         /// </summary>
-        protected virtual PdfAcroField GetValue(string name) => String.IsNullOrEmpty(name) ? (this) : HasKids ? Fields.GetValue(name) : null;
+        protected virtual PDFAcroField GetValue(string name) => String.IsNullOrEmpty(name) ? (this) : HasKids ? Fields.GetValue(name) : null;
 
         /// <summary>
         /// Indicates whether the field has child fields.
@@ -125,8 +125,8 @@ namespace PDFSharp.Interop.AcroForms
         {
             get
             {
-                PdfItem item = Elements[Keys.Kids];
-                return item == null ? false : item is PdfArray ? ((PdfArray)item).Elements.Count > 0 : false;
+                PDFItem item = Elements[Keys.Kids];
+                return item == null ? false : item is PDFArray ? ((PDFArray)item).Elements.Count > 0 : false;
             }
         }
 
@@ -145,7 +145,7 @@ namespace PDFSharp.Interop.AcroForms
             List<string> names = new List<string>();
             if (HasKids)
             {
-                PdfAcroFieldCollection fields = Fields;
+                PDFAcroFieldCollection fields = Fields;
                 fields.GetDescendantNames(ref names, null);
             }
             List<string> temp = new List<string>();
@@ -160,22 +160,22 @@ namespace PDFSharp.Interop.AcroForms
         public string[] GetAppearanceNames()
         {
             Dictionary<string, object> names = new Dictionary<string, object>();
-            if (Elements["/AP"] is PdfDictionary dict)
+            if (Elements["/AP"] is PDFDictionary dict)
             {
                 AppDict(dict, names);
 
                 if (HasKids)
                 {
-                    PdfItem[] kids = Fields.Elements.Items;
-                    foreach (PdfItem pdfItem in kids)
+                    PDFItem[] kids = Fields.Elements.Items;
+                    foreach (PDFItem pdfItem in kids)
                     {
-                        if (pdfItem is PdfReference)
+                        if (pdfItem is PDFReference)
                         {
-                            if (((PdfReference)pdfItem).Value is PdfDictionary xxx)
+                            if (((PDFReference)pdfItem).Value is PDFDictionary xxx)
                                 AppDict(xxx, names);
                         }
                     }
-                    //((PdfDictionary)(((PdfReference)(Fields.Elements.Items[1])).Value)).Elements.SetName(Keys.V, name1);
+                    //((PDFDictionary)(((PDFReference)(Fields.Elements.Items[1])).Value)).Elements.SetName(Keys.V, name1);
 
                 }
             }
@@ -184,27 +184,27 @@ namespace PDFSharp.Interop.AcroForms
             return array;
         }
 
-        //static string[] AppearanceNames(PdfDictionary dictIn)
+        //static string[] AppearanceNames(PDFDictionary dictIn)
         //{
         //  Dictionary<string, object> names = new Dictionary<string, object>();
-        //  PdfDictionary dict = dictIn["/AP"] as PdfDictionary;
+        //  PDFDictionary dict = dictIn["/AP"] as PDFDictionary;
         //  if (dict != null)
         //  {
         //    AppDict(dict, names);
 
         //    if (HasKids)
         //    {
-        //      PdfItem[] kids = Fields.Elements.Items;
-        //      foreach (PdfItem pdfItem in kids)
+        //      PDFItem[] kids = Fields.Elements.Items;
+        //      foreach (PDFItem pdfItem in kids)
         //      {
-        //        if (pdfItem is PdfReference)
+        //        if (pdfItem is PDFReference)
         //        {
-        //          PdfDictionary xxx = ((PdfReference)pdfItem).Value as PdfDictionary;
+        //          PDFDictionary xxx = ((PDFReference)pdfItem).Value as PDFDictionary;
         //          if (xxx != null)
         //            AppDict(xxx, names);
         //        }
         //      }
-        //      //((PdfDictionary)(((PdfReference)(Fields.Elements.Items[1])).Value)).Elements.SetName(Keys.V, name1);
+        //      //((PDFDictionary)(((PDFReference)(Fields.Elements.Items[1])).Value)).Elements.SetName(Keys.V, name1);
 
         //    }
         //  }
@@ -213,15 +213,15 @@ namespace PDFSharp.Interop.AcroForms
         //  return array;
         //}
 
-        static void AppDict(PdfDictionary dict, Dictionary<string, object> names)
+        static void AppDict(PDFDictionary dict, Dictionary<string, object> names)
         {
-            if (dict.Elements["/D"] is PdfDictionary sub)
+            if (dict.Elements["/D"] is PDFDictionary sub)
                 AppDict2(sub, names);
-            if ((sub = dict.Elements["/N"] as PdfDictionary) != null)
+            if ((sub = dict.Elements["/N"] as PDFDictionary) != null)
                 AppDict2(sub, names);
         }
 
-        static void AppDict2(PdfDictionary dict, Dictionary<string, object> names)
+        static void AppDict2(PDFDictionary dict, Dictionary<string, object> names)
         {
             foreach (string key in dict.Elements.Keys)
             {
@@ -234,7 +234,7 @@ namespace PDFSharp.Interop.AcroForms
         {
             if (HasKids)
             {
-                PdfAcroFieldCollection fields = Fields;
+                PDFAcroFieldCollection fields = Fields;
                 string t = Elements.GetString(Keys.T);
                 Debug.Assert(t != "");
                 if (t.Length > 0)
@@ -263,26 +263,26 @@ namespace PDFSharp.Interop.AcroForms
         /// <summary>
         /// Gets the collection of fields within this field.
         /// </summary>
-        public PdfAcroFieldCollection Fields
+        public PDFAcroFieldCollection Fields
         {
             get
             {
                 if (_fields == null)
                 {
                     object o = Elements.GetValue(Keys.Kids, VCF.CreateIndirect);
-                    _fields = (PdfAcroFieldCollection)o;
+                    _fields = (PDFAcroFieldCollection)o;
                 }
                 return _fields;
             }
         }
-        PdfAcroFieldCollection _fields;
+        PDFAcroFieldCollection _fields;
 
         /// <summary>
         /// Holds a collection of interactive fields.
         /// </summary>
-        public sealed class PdfAcroFieldCollection : PdfArray
+        public sealed class PDFAcroFieldCollection : PDFArray
         {
-            PdfAcroFieldCollection(PdfArray array)
+            PDFAcroFieldCollection(PDFArray array)
                 : base(array)
             { }
 
@@ -301,7 +301,7 @@ namespace PDFSharp.Interop.AcroForms
                     int count = Elements.Count;
                     string[] names = new string[count];
                     for (int idx = 0; idx < count; idx++)
-                        names[idx] = ((PdfDictionary)((PdfReference)Elements[idx]).Value).Elements.GetString(Keys.T);
+                        names[idx] = ((PDFDictionary)((PDFReference)Elements[idx]).Value).Elements.GetString(Keys.T);
                     return names;
                 }
             }
@@ -316,7 +316,7 @@ namespace PDFSharp.Interop.AcroForms
                     List<string> names = new List<string>();
                     GetDescendantNames(ref names, null);
                     //List<string> temp = new List<string>();
-                    //foreach (PdfName name in names)
+                    //foreach (PDFName name in names)
                     //  temp.Add(name.ToString());
                     return names.ToArray();
                 }
@@ -327,7 +327,7 @@ namespace PDFSharp.Interop.AcroForms
                 int count = Elements.Count;
                 for (int idx = 0; idx < count; idx++)
                 {
-                    PdfAcroField field = this[idx];
+                    PDFAcroField field = this[idx];
                     if (field != null)
                         field.GetDescendantNames(ref names, partialName);
                 }
@@ -335,19 +335,19 @@ namespace PDFSharp.Interop.AcroForms
 
             /// <summary>
             /// Gets a field from the collection. For your convenience an instance of a derived class like
-            /// PdfTextField or PdfCheckBox is returned if PDFsharp can guess the actual type of the dictionary.
+            /// PDFTextField or PDFCheckBox is returned if PDFsharp can guess the actual type of the dictionary.
             /// If the actual type cannot be guessed by PDFsharp the function returns an instance
-            /// of PdfGenericField.
+            /// of PDFGenericField.
             /// </summary>
-            public PdfAcroField this[int index]
+            public PDFAcroField this[int index]
             {
                 get
                 {
-                    PdfItem item = Elements[index];
-                    Debug.Assert(item is PdfReference);
-                    PdfDictionary dict = ((PdfReference)item).Value as PdfDictionary;
+                    PDFItem item = Elements[index];
+                    Debug.Assert(item is PDFReference);
+                    PDFDictionary dict = ((PDFReference)item).Value as PDFDictionary;
                     Debug.Assert(dict != null);
-                    PdfAcroField field = dict as PdfAcroField;
+                    PDFAcroField field = dict as PDFAcroField;
                     if (field == null && dict != null)
                     {
                         // Do type transformation
@@ -361,9 +361,9 @@ namespace PDFSharp.Interop.AcroForms
             /// <summary>
             /// Gets the field with the specified name.
             /// </summary>
-            public PdfAcroField this[string name] => GetValue(name);
+            public PDFAcroField this[string name] => GetValue(name);
 
-            internal PdfAcroField GetValue(string name)
+            internal PDFAcroField GetValue(string name)
             {
                 if (String.IsNullOrEmpty(name))
                     return null;
@@ -375,7 +375,7 @@ namespace PDFSharp.Interop.AcroForms
                 int count = Elements.Count;
                 for (int idx = 0; idx < count; idx++)
                 {
-                    PdfAcroField field = this[idx];
+                    PDFAcroField field = this[idx];
                     if (field.Name == prefix)
                         return field.GetValue(suffix);
                 }
@@ -383,36 +383,36 @@ namespace PDFSharp.Interop.AcroForms
             }
 
             /// <summary>
-            /// Create a derived type like PdfTextField or PdfCheckBox if possible.
+            /// Create a derived type like PDFTextField or PDFCheckBox if possible.
             /// If the actual cannot be guessed by PDFsharp the function returns an instance
-            /// of PdfGenericField.
+            /// of PDFGenericField.
             /// </summary>
-            PdfAcroField CreateAcroField(PdfDictionary dict)
+            PDFAcroField CreateAcroField(PDFDictionary dict)
             {
                 string ft = dict.Elements.GetName(Keys.FT);
-                PdfAcroFieldFlags flags = (PdfAcroFieldFlags)dict.Elements.GetInteger(Keys.Ff);
+                PDFAcroFieldFlags flags = (PDFAcroFieldFlags)dict.Elements.GetInteger(Keys.Ff);
                 switch (ft)
                 {
                     case "/Btn":
-                        if ((flags & PdfAcroFieldFlags.Pushbutton) != 0)
-                            return new PdfPushButtonField(dict);
+                        if ((flags & PDFAcroFieldFlags.Pushbutton) != 0)
+                            return new PDFPushButtonField(dict);
 
-                        if ((flags & PdfAcroFieldFlags.Radio) != 0)
-                            return new PdfRadioButtonField(dict);
+                        if ((flags & PDFAcroFieldFlags.Radio) != 0)
+                            return new PDFRadioButtonField(dict);
 
-                        return new PdfCheckBoxField(dict);
+                        return new PDFCheckBoxField(dict);
 
                     case "/Tx":
-                        return new PdfTextField(dict);
+                        return new PDFTextField(dict);
 
                     case "/Ch":
-                        return (flags & PdfAcroFieldFlags.Combo) != 0 ? new PdfComboBoxField(dict) : (PdfAcroField)new PdfListBoxField(dict);
+                        return (flags & PDFAcroFieldFlags.Combo) != 0 ? new PDFComboBoxField(dict) : (PDFAcroField)new PDFListBoxField(dict);
 
                     case "/Sig":
-                        return new PdfSignatureField(dict);
+                        return new PDFSignatureField(dict);
 
                     default:
-                        return new PdfGenericField(dict);
+                        return new PDFGenericField(dict);
                 }
             }
         }
@@ -453,7 +453,7 @@ namespace PDFSharp.Interop.AcroForms
             /// <summary>
             /// (Optional) An array of indirect references to the immediate children of this field.
             /// </summary>
-            [KeyInfo(KeyType.Array | KeyType.Optional, typeof(PdfAcroFieldCollection))]
+            [KeyInfo(KeyType.Array | KeyType.Optional, typeof(PDFAcroFieldCollection))]
             public const string Kids = "/Kids";
 
             /// <summary>

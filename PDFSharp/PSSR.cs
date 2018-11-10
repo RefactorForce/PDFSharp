@@ -40,7 +40,7 @@ using PDFSharp.Interop;
 namespace PDFSharp
 {
     /// <summary>
-    /// The Pdf-Sharp-String-Resources.
+    /// The PDF-Sharp-String-Resources.
     /// </summary>
     // ReSharper disable once InconsistentNaming
     static class PSSR
@@ -124,7 +124,7 @@ namespace PDFSharp
 
         public static string ObsoleteFunktionCalled => "The function is obsolete and must not be called.";
 
-        public static string OwningDocumentRequired => "The PDF object must belong to a PdfDocument, but property Document is null.";
+        public static string OwningDocumentRequired => "The PDF object must belong to a PDFDocument, but property Document is null.";
 
         public static string FileNotFound(string path) => Format("The file '{0}' does not exist.", path);
 
@@ -156,7 +156,7 @@ namespace PDFSharp
 
         // ----- PDF ----------------------------------------------------------------------------------
 
-        public static string InvalidPdf => "The file is not a valid PDF document.";
+        public static string InvalidPDF => "The file is not a valid PDF document.";
 
         public static string InvalidVersionNumber => "Invalid version number. Valid values are 12, 13, and 14.";
 
@@ -179,18 +179,18 @@ namespace PDFSharp
 
         public static string MultiplePageInsert => "The page cannot be added to this document because the document already owned this page.";
 
-        public static string UnexpectedTokenInPdfFile => "Unexpected token in PDF file. The PDF file may be corrupt. If it is not, please send us the file for service.";
+        public static string UnexpectedTokenInPDFFile => "Unexpected token in PDF file. The PDF file may be corrupt. If it is not, please send us the file for service.";
 
-        public static string InappropriateColorSpace(PdfColorMode colorMode, XColorSpace colorSpace)
+        public static string InappropriateColorSpace(PDFColorMode colorMode, XColorSpace colorSpace)
         {
             string mode;
             switch (colorMode)
             {
-                case PdfColorMode.Rgb:
+                case PDFColorMode.Rgb:
                     mode = "RGB";
                     break;
 
-                case PdfColorMode.Cmyk:
+                case PDFColorMode.Cmyk:
                     mode = "CMYK";
                     break;
 
@@ -225,7 +225,7 @@ namespace PDFSharp
         public static string CannotGetGlyphTypeface(string fontName) => Format("Cannot get a matching glyph typeface for font '{0}'.", fontName);
 
 
-        // ----- PdfParser ----------------------------------------------------------------------------
+        // ----- PDFParser ----------------------------------------------------------------------------
 
         public static string UnexpectedToken(string token) => Format(PSMsgID.UnexpectedToken, token);//return Format("Token '{0}' was not expected.", token);
 
@@ -254,10 +254,10 @@ namespace PDFSharp
                             System.Threading.Thread.CurrentThread.CurrentUICulture = System.Globalization.CultureInfo.InvariantCulture;
 #endif
 #if !NETFX_CORE && !UWP
-                            _resmngr = new ResourceManager("PdfSharp.Resources.Messages",
+                            _resmngr = new ResourceManager("PDFSharp.Resources.Messages",
                                 Assembly.GetExecutingAssembly());
 #else
-                            _resmngr = new ResourceManager("PdfSharp.Resources.Messages",
+                            _resmngr = new ResourceManager("PDFSharp.Resources.Messages",
                                 typeof(PSSR).GetTypeInfo().Assembly);
 #endif
                         }

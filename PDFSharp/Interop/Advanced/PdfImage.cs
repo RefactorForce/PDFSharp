@@ -49,12 +49,12 @@ namespace PDFSharp.Interop.Advanced
     /// <summary>
     /// Represents an image.
     /// </summary>
-    public sealed partial class PdfImage : PdfXObject
+    public sealed partial class PDFImage : PDFXObject
     {
         /// <summary>
-        /// Initializes a new instance of PdfImage from an XImage.
+        /// Initializes a new instance of PDFImage from an XImage.
         /// </summary>
-        public PdfImage(PdfDocument document, XImage image)
+        public PDFImage(PDFDocument document, XImage image)
             : base(document)
         {
             Elements.SetName(Keys.Type, "/XObject");
@@ -64,11 +64,11 @@ namespace PDFSharp.Interop.Advanced
 
 #if !SILVERLIGHT
             ////// TODO: identify images used multiple times. If the image already exists use the same XRef.
-            ////_defaultName = PdfImageTable.NextImageName;
+            ////_defaultName = PDFImageTable.NextImageName;
 
             switch (Image.Format.Guid.ToString("B").ToUpper())
             {
-                // Pdf supports Jpeg, therefore we can write what we've read:
+                // PDF supports Jpeg, therefore we can write what we've read:
                 case "{B96B3CAE-0728-11D3-9D7B-0000F81EF32E}":  //XImageFormat.Jpeg
                     InitializeJpeg();
                     break;
@@ -83,8 +83,8 @@ namespace PDFSharp.Interop.Advanced
                     InitializeNonJpeg();
                     break;
 
-                case "{84570158-DBF0-4C6B-8368-62D6A3CA76E0}":  //XImageFormat.Pdf:
-                    Debug.Assert(false, "XPdfForm not expected here.");
+                case "{84570158-DBF0-4C6B-8368-62D6A3CA76E0}":  //XImageFormat.PDF:
+                    Debug.Assert(false, "XPDFForm not expected here.");
                     break;
 
                 default:
@@ -183,51 +183,51 @@ namespace PDFSharp.Interop.Advanced
                     // monochrome mask is either sufficient or
                     // provided for compatibility with older reader versions
                     byte[] maskDataCompressed = fd.Encode(mask.MaskData, _document.Options.FlateEncodeMode);
-                    PdfDictionary pdfMask = new PdfDictionary(_document);
+                    PDFDictionary pdfMask = new PDFDictionary(_document);
                     pdfMask.Elements.SetName(Keys.Type, "/XObject");
                     pdfMask.Elements.SetName(Keys.Subtype, "/Image");
 
                     Owner._irefTable.Add(pdfMask);
-                    pdfMask.Stream = new PdfStream(maskDataCompressed, pdfMask);
-                    pdfMask.Elements[Keys.Length] = new PdfInteger(maskDataCompressed.Length);
-                    pdfMask.Elements[Keys.Filter] = new PdfName("/FlateDecode");
-                    pdfMask.Elements[Keys.Width] = new PdfInteger(width);
-                    pdfMask.Elements[Keys.Height] = new PdfInteger(height);
-                    pdfMask.Elements[Keys.BitsPerComponent] = new PdfInteger(1);
-                    pdfMask.Elements[Keys.ImageMask] = new PdfBoolean(true);
+                    pdfMask.Stream = new PDFStream(maskDataCompressed, pdfMask);
+                    pdfMask.Elements[Keys.Length] = new PDFInteger(maskDataCompressed.Length);
+                    pdfMask.Elements[Keys.Filter] = new PDFName("/FlateDecode");
+                    pdfMask.Elements[Keys.Width] = new PDFInteger(width);
+                    pdfMask.Elements[Keys.Height] = new PDFInteger(height);
+                    pdfMask.Elements[Keys.BitsPerComponent] = new PDFInteger(1);
+                    pdfMask.Elements[Keys.ImageMask] = new PDFBoolean(true);
                     Elements[Keys.Mask] = pdfMask.Reference;
                 }
                 if (hasMask && hasAlphaMask && pdfVersion >= 14)
                 {
                     // The image provides an alpha mask (requires Arcrobat 5.0 or higher)
                     byte[] alphaMaskCompressed = fd.Encode(alphaMask, _document.Options.FlateEncodeMode);
-                    PdfDictionary smask = new PdfDictionary(_document);
+                    PDFDictionary smask = new PDFDictionary(_document);
                     smask.Elements.SetName(Keys.Type, "/XObject");
                     smask.Elements.SetName(Keys.Subtype, "/Image");
 
                     Owner._irefTable.Add(smask);
-                    smask.Stream = new PdfStream(alphaMaskCompressed, smask);
-                    smask.Elements[Keys.Length] = new PdfInteger(alphaMaskCompressed.Length);
-                    smask.Elements[Keys.Filter] = new PdfName("/FlateDecode");
-                    smask.Elements[Keys.Width] = new PdfInteger(width);
-                    smask.Elements[Keys.Height] = new PdfInteger(height);
-                    smask.Elements[Keys.BitsPerComponent] = new PdfInteger(8);
-                    smask.Elements[Keys.ColorSpace] = new PdfName("/DeviceGray");
+                    smask.Stream = new PDFStream(alphaMaskCompressed, smask);
+                    smask.Elements[Keys.Length] = new PDFInteger(alphaMaskCompressed.Length);
+                    smask.Elements[Keys.Filter] = new PDFName("/FlateDecode");
+                    smask.Elements[Keys.Width] = new PDFInteger(width);
+                    smask.Elements[Keys.Height] = new PDFInteger(height);
+                    smask.Elements[Keys.BitsPerComponent] = new PDFInteger(8);
+                    smask.Elements[Keys.ColorSpace] = new PDFName("/DeviceGray");
                     Elements[Keys.SMask] = smask.Reference;
                 }
 
                 byte[] imageDataCompressed = fd.Encode(imageData, _document.Options.FlateEncodeMode);
 
-                Stream = new PdfStream(imageDataCompressed, this);
-                Elements[Keys.Length] = new PdfInteger(imageDataCompressed.Length);
-                Elements[Keys.Filter] = new PdfName("/FlateDecode");
-                Elements[Keys.Width] = new PdfInteger(width);
-                Elements[Keys.Height] = new PdfInteger(height);
-                Elements[Keys.BitsPerComponent] = new PdfInteger(8);
+                Stream = new PDFStream(imageDataCompressed, this);
+                Elements[Keys.Length] = new PDFInteger(imageDataCompressed.Length);
+                Elements[Keys.Filter] = new PDFName("/FlateDecode");
+                Elements[Keys.Width] = new PDFInteger(width);
+                Elements[Keys.Height] = new PDFInteger(height);
+                Elements[Keys.BitsPerComponent] = new PDFInteger(8);
                 // TODO: CMYK
-                Elements[Keys.ColorSpace] = new PdfName("/DeviceRGB");
+                Elements[Keys.ColorSpace] = new PDFName("/DeviceRGB");
                 if (_image.Interpolate)
-                    Elements[Keys.Interpolate] = PdfBoolean.True;
+                    Elements[Keys.Interpolate] = PDFBoolean.True;
             }
         }
 #endif
@@ -356,31 +356,31 @@ namespace PDFSharp.Interop.Advanced
                 }
             }
 
-            bool tryFlateDecode = _document.Options.UseFlateDecoderForJpegImages == PdfUseFlateDecoderForJpegImages.Automatic;
-            bool useFlateDecode = _document.Options.UseFlateDecoderForJpegImages == PdfUseFlateDecoderForJpegImages.Always;
+            bool tryFlateDecode = _document.Options.UseFlateDecoderForJpegImages == PDFUseFlateDecoderForJpegImages.Automatic;
+            bool useFlateDecode = _document.Options.UseFlateDecoderForJpegImages == PDFUseFlateDecoderForJpegImages.Always;
 
             FlateDecode fd = new FlateDecode();
             byte[] imageDataCompressed = (useFlateDecode || tryFlateDecode) ? fd.Encode(imageBits, _document.Options.FlateEncodeMode) : null;
             if (useFlateDecode || tryFlateDecode && imageDataCompressed.Length < imageBits.Length)
             {
-                Stream = new PdfStream(imageDataCompressed, this);
-                Elements[PdfStream.Keys.Length] = new PdfInteger(imageDataCompressed.Length);
-                PdfArray arrayFilters = new PdfArray(_document);
-                arrayFilters.Elements.Add(new PdfName("/FlateDecode"));
-                arrayFilters.Elements.Add(new PdfName("/DCTDecode"));
-                Elements[PdfStream.Keys.Filter] = arrayFilters;
+                Stream = new PDFStream(imageDataCompressed, this);
+                Elements[PDFStream.Keys.Length] = new PDFInteger(imageDataCompressed.Length);
+                PDFArray arrayFilters = new PDFArray(_document);
+                arrayFilters.Elements.Add(new PDFName("/FlateDecode"));
+                arrayFilters.Elements.Add(new PDFName("/DCTDecode"));
+                Elements[PDFStream.Keys.Filter] = arrayFilters;
             }
             else
             {
-                Stream = new PdfStream(imageBits, this);
-                Elements[PdfStream.Keys.Length] = new PdfInteger(streamLength);
-                Elements[PdfStream.Keys.Filter] = new PdfName("/DCTDecode");
+                Stream = new PDFStream(imageBits, this);
+                Elements[PDFStream.Keys.Length] = new PDFInteger(streamLength);
+                Elements[PDFStream.Keys.Filter] = new PDFName("/DCTDecode");
             }
             if (Image.Interpolate)
-                Elements[Keys.Interpolate] = PdfBoolean.True;
-            Elements[Keys.Width] = new PdfInteger(Image.PixelWidth);
-            Elements[Keys.Height] = new PdfInteger(Image.PixelHeight);
-            Elements[Keys.BitsPerComponent] = new PdfInteger(8);
+                Elements[Keys.Interpolate] = PDFBoolean.True;
+            Elements[Keys.Width] = new PDFInteger(Image.PixelWidth);
+            Elements[Keys.Height] = new PDFInteger(Image.PixelHeight);
+            Elements[Keys.BitsPerComponent] = new PDFInteger(8);
 
 #if CORE || GDI || WPF
             if (Image._importedImage != null)
@@ -389,15 +389,15 @@ namespace PDFSharp.Interop.Advanced
                     Image._importedImage.Information.ImageFormat == ImageInformation.ImageFormats.JPEGRGBW)
                 {
                     // TODO: Test with CMYK JPEG files (so far I only found ImageFlags.ColorSpaceYcck JPEG files ...)
-                    Elements[Keys.ColorSpace] = new PdfName("/DeviceCMYK");
+                    Elements[Keys.ColorSpace] = new PDFName("/DeviceCMYK");
                     if (Image._importedImage.Information.ImageFormat == ImageInformation.ImageFormats.JPEGRGBW)
-                        Elements["/Decode"] = new PdfLiteral("[1 0 1 0 1 0 1 0]"); // Invert colors from RGBW to CMYK.
+                        Elements["/Decode"] = new PDFLiteral("[1 0 1 0 1 0 1 0]"); // Invert colors from RGBW to CMYK.
                 }
                 else
                 {
                     Elements[Keys.ColorSpace] = Image._importedImage.Information.ImageFormat == ImageInformation.ImageFormats.JPEGGRAY
-                        ? new PdfName("/DeviceGray")
-                        : new PdfName("/DeviceRGB");
+                        ? new PDFName("/DeviceGray")
+                        : new PDFName("/DeviceRGB");
                 }
             }
 #endif
@@ -407,13 +407,13 @@ namespace PDFSharp.Interop.Advanced
                 if ((Image._gdiImage.Flags & ((int)ImageFlags.ColorSpaceCmyk | (int)ImageFlags.ColorSpaceYcck)) != 0)
                 {
                     // TODO: Test with CMYK JPEG files (so far I only found ImageFlags.ColorSpaceYcck JPEG files ...)
-                    Elements[Keys.ColorSpace] = new PdfName("/DeviceCMYK");
+                    Elements[Keys.ColorSpace] = new PDFName("/DeviceCMYK");
                     if ((Image._gdiImage.Flags & (int)ImageFlags.ColorSpaceYcck) != 0)
-                        Elements["/Decode"] = new PdfLiteral("[1 0 1 0 1 0 1 0]"); // Invert colors? Why??
+                        Elements["/Decode"] = new PDFLiteral("[1 0 1 0 1 0 1 0]"); // Invert colors? Why??
                 }
                 else
                 {
-                    Elements[Keys.ColorSpace] = (Image._gdiImage.Flags & (int)ImageFlags.ColorSpaceGray) != 0 ? new PdfName("/DeviceGray") : new PdfName("/DeviceRGB");
+                    Elements[Keys.ColorSpace] = (Image._gdiImage.Flags & (int)ImageFlags.ColorSpaceGray) != 0 ? new PDFName("/DeviceGray") : new PDFName("/DeviceRGB");
                 }
             }
 #endif
@@ -423,17 +423,17 @@ namespace PDFSharp.Interop.Advanced
                 if ((_image._gdiImage.Flags & ((int)ImageFlags.ColorSpaceCmyk | (int)ImageFlags.ColorSpaceYcck)) != 0)
                 {
                     // TODO: Test with CMYK JPEG files (so far I only found ImageFlags.ColorSpaceYcck JPEG files ...)
-                    Elements[Keys.ColorSpace] = new PdfName("/DeviceCMYK");
+                    Elements[Keys.ColorSpace] = new PDFName("/DeviceCMYK");
                     if ((_image._gdiImage.Flags & (int)ImageFlags.ColorSpaceYcck) != 0)
-                        Elements["/Decode"] = new PdfLiteral("[1 0 1 0 1 0 1 0]"); // Invert colors? Why??
+                        Elements["/Decode"] = new PDFLiteral("[1 0 1 0 1 0 1 0]"); // Invert colors? Why??
                 }
                 else if ((_image._gdiImage.Flags & (int)ImageFlags.ColorSpaceGray) != 0)
                 {
-                    Elements[Keys.ColorSpace] = new PdfName("/DeviceGray");
+                    Elements[Keys.ColorSpace] = new PDFName("/DeviceGray");
                 }
                 else
                 {
-                    Elements[Keys.ColorSpace] = new PdfName("/DeviceRGB");
+                    Elements[Keys.ColorSpace] = new PDFName("/DeviceRGB");
                 }
             }
 #endif
@@ -449,16 +449,16 @@ namespace PDFSharp.Interop.Advanced
             if (isCmyk)
             {
                 // TODO: Test with CMYK JPEG files (so far I only found ImageFlags.ColorSpaceYcck JPEG files ...)
-                Elements[Keys.ColorSpace] = new PdfName("/DeviceCMYK");
-                Elements["/Decode"] = new PdfLiteral("[1 0 1 0 1 0 1 0]");  // Invert colors? Why??
+                Elements[Keys.ColorSpace] = new PDFName("/DeviceCMYK");
+                Elements["/Decode"] = new PDFLiteral("[1 0 1 0 1 0 1 0]");  // Invert colors? Why??
             }
             else if (isGrey)
             {
-                Elements[Keys.ColorSpace] = new PdfName("/DeviceGray");
+                Elements[Keys.ColorSpace] = new PDFName("/DeviceGray");
             }
             else
             {
-                Elements[Keys.ColorSpace] = new PdfName("/DeviceRGB");
+                Elements[Keys.ColorSpace] = new PDFName("/DeviceRGB");
             }
 #endif
         }
@@ -607,27 +607,27 @@ namespace PDFSharp.Interop.Advanced
                     // Color mask requires Reader 4.0 or higher.
                     if (!segmentedColorMask && pdfVersion >= 13 && !idb.IsGray)
                     {
-                        PdfArray array = new PdfArray(_document);
-                        array.Elements.Add(new PdfInteger(firstMaskColor));
-                        array.Elements.Add(new PdfInteger(lastMaskColor));
+                        PDFArray array = new PDFArray(_document);
+                        array.Elements.Add(new PDFInteger(firstMaskColor));
+                        array.Elements.Add(new PDFInteger(lastMaskColor));
                         Elements[Keys.Mask] = array;
                     }
                     else
                     {
                         // Monochrome mask.
                         byte[] maskDataCompressed = fd.Encode(idb.BitmapMask, _document.Options.FlateEncodeMode);
-                        PdfDictionary pdfMask = new PdfDictionary(_document);
+                        PDFDictionary pdfMask = new PDFDictionary(_document);
                         pdfMask.Elements.SetName(Keys.Type, "/XObject");
                         pdfMask.Elements.SetName(Keys.Subtype, "/Image");
 
                         Owner._irefTable.Add(pdfMask);
-                        pdfMask.Stream = new PdfStream(maskDataCompressed, pdfMask);
-                        pdfMask.Elements[PdfStream.Keys.Length] = new PdfInteger(maskDataCompressed.Length);
-                        pdfMask.Elements[PdfStream.Keys.Filter] = new PdfName("/FlateDecode");
-                        pdfMask.Elements[Keys.Width] = new PdfInteger((int)ii.Width);
-                        pdfMask.Elements[Keys.Height] = new PdfInteger((int)ii.Height);
-                        pdfMask.Elements[Keys.BitsPerComponent] = new PdfInteger(1);
-                        pdfMask.Elements[Keys.ImageMask] = new PdfBoolean(true);
+                        pdfMask.Stream = new PDFStream(maskDataCompressed, pdfMask);
+                        pdfMask.Elements[PDFStream.Keys.Length] = new PDFInteger(maskDataCompressed.Length);
+                        pdfMask.Elements[PDFStream.Keys.Filter] = new PDFName("/FlateDecode");
+                        pdfMask.Elements[Keys.Width] = new PDFInteger((int)ii.Width);
+                        pdfMask.Elements[Keys.Height] = new PDFInteger((int)ii.Height);
+                        pdfMask.Elements[Keys.BitsPerComponent] = new PDFInteger(1);
+                        pdfMask.Elements[Keys.ImageMask] = new PDFBoolean(true);
                         Elements[Keys.Mask] = pdfMask.Reference;
                     }
                 }
@@ -645,56 +645,56 @@ namespace PDFSharp.Interop.Advanced
 
                     if (idb.LengthFax < imageDataCompressed.Length)
                     {
-                        Stream = new PdfStream(idb.DataFax, this);
-                        Elements[PdfStream.Keys.Length] = new PdfInteger(idb.LengthFax);
-                        Elements[PdfStream.Keys.Filter] = new PdfName("/CCITTFaxDecode");
-                        PdfDictionary dictionary = new PdfDictionary();
+                        Stream = new PDFStream(idb.DataFax, this);
+                        Elements[PDFStream.Keys.Length] = new PDFInteger(idb.LengthFax);
+                        Elements[PDFStream.Keys.Filter] = new PDFName("/CCITTFaxDecode");
+                        PDFDictionary dictionary = new PDFDictionary();
                         if (idb.K != 0)
-                            dictionary.Elements.Add("/K", new PdfInteger(idb.K));
+                            dictionary.Elements.Add("/K", new PDFInteger(idb.K));
                         if (idb.IsBitonal < 0)
-                            dictionary.Elements.Add("/BlackIs1", new PdfBoolean(true));
-                        dictionary.Elements.Add("/EndOfBlock", new PdfBoolean(false));
-                        dictionary.Elements.Add("/Columns", new PdfInteger((int)ii.Width));
-                        dictionary.Elements.Add("/Rows", new PdfInteger((int)ii.Height));
-                        Elements[PdfStream.Keys.DecodeParms] = dictionary;
+                            dictionary.Elements.Add("/BlackIs1", new PDFBoolean(true));
+                        dictionary.Elements.Add("/EndOfBlock", new PDFBoolean(false));
+                        dictionary.Elements.Add("/Columns", new PDFInteger((int)ii.Width));
+                        dictionary.Elements.Add("/Rows", new PDFInteger((int)ii.Height));
+                        Elements[PDFStream.Keys.DecodeParms] = dictionary;
                     }
                     else
                     {
-                        Stream = new PdfStream(imageDataFaxCompressed, this);
-                        Elements[PdfStream.Keys.Length] = new PdfInteger(imageDataFaxCompressed.Length);
-                        PdfArray arrayFilters = new PdfArray(_document);
-                        arrayFilters.Elements.Add(new PdfName("/FlateDecode"));
-                        arrayFilters.Elements.Add(new PdfName("/CCITTFaxDecode"));
-                        Elements[PdfStream.Keys.Filter] = arrayFilters;
-                        PdfArray arrayDecodeParms = new PdfArray(_document);
+                        Stream = new PDFStream(imageDataFaxCompressed, this);
+                        Elements[PDFStream.Keys.Length] = new PDFInteger(imageDataFaxCompressed.Length);
+                        PDFArray arrayFilters = new PDFArray(_document);
+                        arrayFilters.Elements.Add(new PDFName("/FlateDecode"));
+                        arrayFilters.Elements.Add(new PDFName("/CCITTFaxDecode"));
+                        Elements[PDFStream.Keys.Filter] = arrayFilters;
+                        PDFArray arrayDecodeParms = new PDFArray(_document);
 
-                        PdfDictionary dictFlateDecodeParms = new PdfDictionary();
+                        PDFDictionary dictFlateDecodeParms = new PDFDictionary();
 
-                        PdfDictionary dictCcittFaxDecodeParms = new PdfDictionary();
+                        PDFDictionary dictCcittFaxDecodeParms = new PDFDictionary();
                         if (idb.K != 0)
-                            dictCcittFaxDecodeParms.Elements.Add("/K", new PdfInteger(idb.K));
+                            dictCcittFaxDecodeParms.Elements.Add("/K", new PDFInteger(idb.K));
                         if (idb.IsBitonal < 0)
-                            dictCcittFaxDecodeParms.Elements.Add("/BlackIs1", new PdfBoolean(true));
-                        dictCcittFaxDecodeParms.Elements.Add("/EndOfBlock", new PdfBoolean(false));
-                        dictCcittFaxDecodeParms.Elements.Add("/Columns", new PdfInteger((int)ii.Width));
-                        dictCcittFaxDecodeParms.Elements.Add("/Rows", new PdfInteger((int)ii.Height));
+                            dictCcittFaxDecodeParms.Elements.Add("/BlackIs1", new PDFBoolean(true));
+                        dictCcittFaxDecodeParms.Elements.Add("/EndOfBlock", new PDFBoolean(false));
+                        dictCcittFaxDecodeParms.Elements.Add("/Columns", new PDFInteger((int)ii.Width));
+                        dictCcittFaxDecodeParms.Elements.Add("/Rows", new PDFInteger((int)ii.Height));
 
                         arrayDecodeParms.Elements.Add(dictFlateDecodeParms); // How to add the "null object"?
                         arrayDecodeParms.Elements.Add(dictCcittFaxDecodeParms);
-                        Elements[PdfStream.Keys.DecodeParms] = arrayDecodeParms;
+                        Elements[PDFStream.Keys.DecodeParms] = arrayDecodeParms;
                     }
                 }
                 else
                 {
                     // /FlateDecode creates the smaller file (or no monochrome bitmap).
-                    Stream = new PdfStream(imageDataCompressed, this);
-                    Elements[PdfStream.Keys.Length] = new PdfInteger(imageDataCompressed.Length);
-                    Elements[PdfStream.Keys.Filter] = new PdfName("/FlateDecode");
+                    Stream = new PDFStream(imageDataCompressed, this);
+                    Elements[PDFStream.Keys.Length] = new PDFInteger(imageDataCompressed.Length);
+                    Elements[PDFStream.Keys.Filter] = new PDFName("/FlateDecode");
                 }
 
-                Elements[Keys.Width] = new PdfInteger((int)ii.Width);
-                Elements[Keys.Height] = new PdfInteger((int)ii.Height);
-                Elements[Keys.BitsPerComponent] = new PdfInteger(bits);
+                Elements[Keys.Width] = new PDFInteger((int)ii.Width);
+                Elements[Keys.Height] = new PDFInteger((int)ii.Height);
+                Elements[Keys.BitsPerComponent] = new PDFInteger(bits);
                 // TODO: CMYK
 
                 // CCITT encoding: we need color palette for isBitonal == 0.
@@ -702,37 +702,37 @@ namespace PDFSharp.Interop.Advanced
                 if (usesCcittEncoding && idb.IsBitonal == 0 ||
                   !usesCcittEncoding && idb.IsBitonal <= 0 && !idb.IsGray)
                 {
-                    PdfDictionary colorPalette = null;
-                    colorPalette = new PdfDictionary(_document);
+                    PDFDictionary colorPalette = null;
+                    colorPalette = new PDFDictionary(_document);
                     byte[] packedPaletteData = idb.PaletteDataLength >= 48 ? fd.Encode(idb.PaletteData, _document.Options.FlateEncodeMode) : null; // don't compress small palettes
                     if (packedPaletteData != null && packedPaletteData.Length + 20 < idb.PaletteDataLength) // +20: compensate for the overhead (estimated value)
                     {
                         // Create compressed color palette.
                         colorPalette.CreateStream(packedPaletteData);
-                        colorPalette.Elements[PdfStream.Keys.Length] = new PdfInteger(packedPaletteData.Length);
-                        colorPalette.Elements[PdfStream.Keys.Filter] = new PdfName("/FlateDecode");
+                        colorPalette.Elements[PDFStream.Keys.Length] = new PDFInteger(packedPaletteData.Length);
+                        colorPalette.Elements[PDFStream.Keys.Filter] = new PDFName("/FlateDecode");
                     }
                     else
                     {
                         // Create uncompressed color palette.
                         colorPalette.CreateStream(idb.PaletteData);
-                        colorPalette.Elements[PdfStream.Keys.Length] = new PdfInteger(idb.PaletteDataLength);
+                        colorPalette.Elements[PDFStream.Keys.Length] = new PDFInteger(idb.PaletteDataLength);
                     }
                     Owner._irefTable.Add(colorPalette);
 
-                    PdfArray arrayColorSpace = new PdfArray(_document);
-                    arrayColorSpace.Elements.Add(new PdfName("/Indexed"));
-                    arrayColorSpace.Elements.Add(new PdfName("/DeviceRGB"));
-                    arrayColorSpace.Elements.Add(new PdfInteger((int)ii.ColorsUsed - 1));
+                    PDFArray arrayColorSpace = new PDFArray(_document);
+                    arrayColorSpace.Elements.Add(new PDFName("/Indexed"));
+                    arrayColorSpace.Elements.Add(new PDFName("/DeviceRGB"));
+                    arrayColorSpace.Elements.Add(new PDFInteger((int)ii.ColorsUsed - 1));
                     arrayColorSpace.Elements.Add(colorPalette.Reference);
                     Elements[Keys.ColorSpace] = arrayColorSpace;
                 }
                 else
                 {
-                    Elements[Keys.ColorSpace] = new PdfName("/DeviceGray");
+                    Elements[Keys.ColorSpace] = new PDFName("/DeviceGray");
                 }
                 if (Image.Interpolate)
-                    Elements[Keys.Interpolate] = PdfBoolean.True;
+                    Elements[Keys.Interpolate] = PDFBoolean.True;
             }
         }
 
@@ -750,51 +750,51 @@ namespace PDFSharp.Interop.Advanced
                 // Monochrome mask is either sufficient or
                 // provided for compatibility with older reader versions.
                 byte[] maskDataCompressed = fd.Encode(idb.BitmapMask, _document.Options.FlateEncodeMode);
-                PdfDictionary pdfMask = new PdfDictionary(_document);
+                PDFDictionary pdfMask = new PDFDictionary(_document);
                 pdfMask.Elements.SetName(Keys.Type, "/XObject");
                 pdfMask.Elements.SetName(Keys.Subtype, "/Image");
 
                 Owner._irefTable.Add(pdfMask);
-                pdfMask.Stream = new PdfStream(maskDataCompressed, pdfMask);
-                pdfMask.Elements[PdfStream.Keys.Length] = new PdfInteger(maskDataCompressed.Length);
-                pdfMask.Elements[PdfStream.Keys.Filter] = new PdfName("/FlateDecode");
-                pdfMask.Elements[Keys.Width] = new PdfInteger((int)ii.Width);
-                pdfMask.Elements[Keys.Height] = new PdfInteger((int)ii.Height);
-                pdfMask.Elements[Keys.BitsPerComponent] = new PdfInteger(1);
-                pdfMask.Elements[Keys.ImageMask] = new PdfBoolean(true);
+                pdfMask.Stream = new PDFStream(maskDataCompressed, pdfMask);
+                pdfMask.Elements[PDFStream.Keys.Length] = new PDFInteger(maskDataCompressed.Length);
+                pdfMask.Elements[PDFStream.Keys.Filter] = new PDFName("/FlateDecode");
+                pdfMask.Elements[Keys.Width] = new PDFInteger((int)ii.Width);
+                pdfMask.Elements[Keys.Height] = new PDFInteger((int)ii.Height);
+                pdfMask.Elements[Keys.BitsPerComponent] = new PDFInteger(1);
+                pdfMask.Elements[Keys.ImageMask] = new PDFBoolean(true);
                 Elements[Keys.Mask] = pdfMask.Reference;
             }
             if (hasMask && hasAlphaMask && pdfVersion >= 14)
             {
                 // The image provides an alpha mask (requires Arcrobat 5.0 or higher).
                 byte[] alphaMaskCompressed = fd.Encode(idb.AlphaMask, _document.Options.FlateEncodeMode);
-                PdfDictionary smask = new PdfDictionary(_document);
+                PDFDictionary smask = new PDFDictionary(_document);
                 smask.Elements.SetName(Keys.Type, "/XObject");
                 smask.Elements.SetName(Keys.Subtype, "/Image");
 
                 Owner._irefTable.Add(smask);
-                smask.Stream = new PdfStream(alphaMaskCompressed, smask);
-                smask.Elements[PdfStream.Keys.Length] = new PdfInteger(alphaMaskCompressed.Length);
-                smask.Elements[PdfStream.Keys.Filter] = new PdfName("/FlateDecode");
-                smask.Elements[Keys.Width] = new PdfInteger((int)ii.Width);
-                smask.Elements[Keys.Height] = new PdfInteger((int)ii.Height);
-                smask.Elements[Keys.BitsPerComponent] = new PdfInteger(8);
-                smask.Elements[Keys.ColorSpace] = new PdfName("/DeviceGray");
+                smask.Stream = new PDFStream(alphaMaskCompressed, smask);
+                smask.Elements[PDFStream.Keys.Length] = new PDFInteger(alphaMaskCompressed.Length);
+                smask.Elements[PDFStream.Keys.Filter] = new PDFName("/FlateDecode");
+                smask.Elements[Keys.Width] = new PDFInteger((int)ii.Width);
+                smask.Elements[Keys.Height] = new PDFInteger((int)ii.Height);
+                smask.Elements[Keys.BitsPerComponent] = new PDFInteger(8);
+                smask.Elements[Keys.ColorSpace] = new PDFName("/DeviceGray");
                 Elements[Keys.SMask] = smask.Reference;
             }
 
             byte[] imageDataCompressed = fd.Encode(idb.Data, _document.Options.FlateEncodeMode);
 
-            Stream = new PdfStream(imageDataCompressed, this);
-            Elements[PdfStream.Keys.Length] = new PdfInteger(imageDataCompressed.Length);
-            Elements[PdfStream.Keys.Filter] = new PdfName("/FlateDecode");
-            Elements[Keys.Width] = new PdfInteger((int)ii.Width);
-            Elements[Keys.Height] = new PdfInteger((int)ii.Height);
-            Elements[Keys.BitsPerComponent] = new PdfInteger(8);
+            Stream = new PDFStream(imageDataCompressed, this);
+            Elements[PDFStream.Keys.Length] = new PDFInteger(imageDataCompressed.Length);
+            Elements[PDFStream.Keys.Filter] = new PDFName("/FlateDecode");
+            Elements[Keys.Width] = new PDFInteger((int)ii.Width);
+            Elements[Keys.Height] = new PDFInteger((int)ii.Height);
+            Elements[Keys.BitsPerComponent] = new PDFInteger(8);
             // TODO: CMYK
-            Elements[Keys.ColorSpace] = new PdfName("/DeviceRGB");
+            Elements[Keys.ColorSpace] = new PDFName("/DeviceRGB");
             if (Image.Interpolate)
-                Elements[Keys.Interpolate] = PdfBoolean.True;
+                Elements[Keys.Interpolate] = PDFBoolean.True;
         }
 #endif
 
@@ -942,51 +942,51 @@ namespace PDFSharp.Interop.Advanced
                     // Monochrome mask is either sufficient or
                     // provided for compatibility with older reader versions.
                     byte[] maskDataCompressed = fd.Encode(mask.MaskData, _document.Options.FlateEncodeMode);
-                    PdfDictionary pdfMask = new PdfDictionary(_document);
+                    PDFDictionary pdfMask = new PDFDictionary(_document);
                     pdfMask.Elements.SetName(Keys.Type, "/XObject");
                     pdfMask.Elements.SetName(Keys.Subtype, "/Image");
 
                     Owner._irefTable.Add(pdfMask);
-                    pdfMask.Stream = new PdfStream(maskDataCompressed, pdfMask);
-                    pdfMask.Elements[PdfStream.Keys.Length] = new PdfInteger(maskDataCompressed.Length);
-                    pdfMask.Elements[PdfStream.Keys.Filter] = new PdfName("/FlateDecode");
-                    pdfMask.Elements[Keys.Width] = new PdfInteger(width);
-                    pdfMask.Elements[Keys.Height] = new PdfInteger(height);
-                    pdfMask.Elements[Keys.BitsPerComponent] = new PdfInteger(1);
-                    pdfMask.Elements[Keys.ImageMask] = new PdfBoolean(true);
+                    pdfMask.Stream = new PDFStream(maskDataCompressed, pdfMask);
+                    pdfMask.Elements[PDFStream.Keys.Length] = new PDFInteger(maskDataCompressed.Length);
+                    pdfMask.Elements[PDFStream.Keys.Filter] = new PDFName("/FlateDecode");
+                    pdfMask.Elements[Keys.Width] = new PDFInteger(width);
+                    pdfMask.Elements[Keys.Height] = new PDFInteger(height);
+                    pdfMask.Elements[Keys.BitsPerComponent] = new PDFInteger(1);
+                    pdfMask.Elements[Keys.ImageMask] = new PDFBoolean(true);
                     Elements[Keys.Mask] = pdfMask.Reference;
                 }
                 if (hasMask && hasAlphaMask && pdfVersion >= 14)
                 {
                     // The image provides an alpha mask (requires Arcrobat 5.0 or higher).
                     byte[] alphaMaskCompressed = fd.Encode(alphaMask, _document.Options.FlateEncodeMode);
-                    PdfDictionary smask = new PdfDictionary(_document);
+                    PDFDictionary smask = new PDFDictionary(_document);
                     smask.Elements.SetName(Keys.Type, "/XObject");
                     smask.Elements.SetName(Keys.Subtype, "/Image");
 
                     Owner._irefTable.Add(smask);
-                    smask.Stream = new PdfStream(alphaMaskCompressed, smask);
-                    smask.Elements[PdfStream.Keys.Length] = new PdfInteger(alphaMaskCompressed.Length);
-                    smask.Elements[PdfStream.Keys.Filter] = new PdfName("/FlateDecode");
-                    smask.Elements[Keys.Width] = new PdfInteger(width);
-                    smask.Elements[Keys.Height] = new PdfInteger(height);
-                    smask.Elements[Keys.BitsPerComponent] = new PdfInteger(8);
-                    smask.Elements[Keys.ColorSpace] = new PdfName("/DeviceGray");
+                    smask.Stream = new PDFStream(alphaMaskCompressed, smask);
+                    smask.Elements[PDFStream.Keys.Length] = new PDFInteger(alphaMaskCompressed.Length);
+                    smask.Elements[PDFStream.Keys.Filter] = new PDFName("/FlateDecode");
+                    smask.Elements[Keys.Width] = new PDFInteger(width);
+                    smask.Elements[Keys.Height] = new PDFInteger(height);
+                    smask.Elements[Keys.BitsPerComponent] = new PDFInteger(8);
+                    smask.Elements[Keys.ColorSpace] = new PDFName("/DeviceGray");
                     Elements[Keys.SMask] = smask.Reference;
                 }
 
                 byte[] imageDataCompressed = fd.Encode(imageData, _document.Options.FlateEncodeMode);
 
-                Stream = new PdfStream(imageDataCompressed, this);
-                Elements[PdfStream.Keys.Length] = new PdfInteger(imageDataCompressed.Length);
-                Elements[PdfStream.Keys.Filter] = new PdfName("/FlateDecode");
-                Elements[Keys.Width] = new PdfInteger(width);
-                Elements[Keys.Height] = new PdfInteger(height);
-                Elements[Keys.BitsPerComponent] = new PdfInteger(8);
+                Stream = new PDFStream(imageDataCompressed, this);
+                Elements[PDFStream.Keys.Length] = new PDFInteger(imageDataCompressed.Length);
+                Elements[PDFStream.Keys.Filter] = new PDFName("/FlateDecode");
+                Elements[Keys.Width] = new PDFInteger(width);
+                Elements[Keys.Height] = new PDFInteger(height);
+                Elements[Keys.BitsPerComponent] = new PDFInteger(8);
                 // TODO: CMYK
-                Elements[Keys.ColorSpace] = new PdfName("/DeviceRGB");
+                Elements[Keys.ColorSpace] = new PDFName("/DeviceRGB");
                 if (Image.Interpolate)
-                    Elements[Keys.Interpolate] = PdfBoolean.True;
+                    Elements[Keys.Interpolate] = PDFBoolean.True;
             }
         }
 
@@ -1262,27 +1262,27 @@ namespace PDFSharp.Interop.Advanced
                     // Color mask requires Reader 4.0 or higher.
                     if (!segmentedColorMask && pdfVersion >= 13 && !isGray)
                     {
-                        PdfArray array = new PdfArray(_document);
-                        array.Elements.Add(new PdfInteger(firstMaskColor));
-                        array.Elements.Add(new PdfInteger(lastMaskColor));
+                        PDFArray array = new PDFArray(_document);
+                        array.Elements.Add(new PDFInteger(firstMaskColor));
+                        array.Elements.Add(new PDFInteger(lastMaskColor));
                         Elements[Keys.Mask] = array;
                     }
                     else
                     {
                         // Monochrome mask.
                         byte[] maskDataCompressed = fd.Encode(mask.MaskData, _document.Options.FlateEncodeMode);
-                        PdfDictionary pdfMask = new PdfDictionary(_document);
+                        PDFDictionary pdfMask = new PDFDictionary(_document);
                         pdfMask.Elements.SetName(Keys.Type, "/XObject");
                         pdfMask.Elements.SetName(Keys.Subtype, "/Image");
 
                         Owner._irefTable.Add(pdfMask);
-                        pdfMask.Stream = new PdfStream(maskDataCompressed, pdfMask);
-                        pdfMask.Elements[PdfStream.Keys.Length] = new PdfInteger(maskDataCompressed.Length);
-                        pdfMask.Elements[PdfStream.Keys.Filter] = new PdfName("/FlateDecode");
-                        pdfMask.Elements[Keys.Width] = new PdfInteger(width);
-                        pdfMask.Elements[Keys.Height] = new PdfInteger(height);
-                        pdfMask.Elements[Keys.BitsPerComponent] = new PdfInteger(1);
-                        pdfMask.Elements[Keys.ImageMask] = new PdfBoolean(true);
+                        pdfMask.Stream = new PDFStream(maskDataCompressed, pdfMask);
+                        pdfMask.Elements[PDFStream.Keys.Length] = new PDFInteger(maskDataCompressed.Length);
+                        pdfMask.Elements[PDFStream.Keys.Filter] = new PDFName("/FlateDecode");
+                        pdfMask.Elements[Keys.Width] = new PDFInteger(width);
+                        pdfMask.Elements[Keys.Height] = new PDFInteger(height);
+                        pdfMask.Elements[Keys.BitsPerComponent] = new PDFInteger(1);
+                        pdfMask.Elements[Keys.ImageMask] = new PDFBoolean(true);
                         Elements[Keys.Mask] = pdfMask.Reference;
                     }
                 }
@@ -1300,57 +1300,57 @@ namespace PDFSharp.Interop.Advanced
 
                     if (imageDataFax.Length < imageDataCompressed.Length)
                     {
-                        Stream = new PdfStream(imageDataFax, this);
-                        Elements[PdfStream.Keys.Length] = new PdfInteger(imageDataFax.Length);
-                        Elements[PdfStream.Keys.Filter] = new PdfName("/CCITTFaxDecode");
-                        PdfDictionary dictionary = new PdfDictionary();
+                        Stream = new PDFStream(imageDataFax, this);
+                        Elements[PDFStream.Keys.Length] = new PDFInteger(imageDataFax.Length);
+                        Elements[PDFStream.Keys.Filter] = new PDFName("/CCITTFaxDecode");
+                        PDFDictionary dictionary = new PDFDictionary();
                         if (k != 0)
-                            dictionary.Elements.Add("/K", new PdfInteger(k));
+                            dictionary.Elements.Add("/K", new PDFInteger(k));
                         if (isBitonal < 0)
-                            dictionary.Elements.Add("/BlackIs1", new PdfBoolean(true));
-                        dictionary.Elements.Add("/EndOfBlock", new PdfBoolean(false));
-                        dictionary.Elements.Add("/Columns", new PdfInteger(width));
-                        dictionary.Elements.Add("/Rows", new PdfInteger(height));
+                            dictionary.Elements.Add("/BlackIs1", new PDFBoolean(true));
+                        dictionary.Elements.Add("/EndOfBlock", new PDFBoolean(false));
+                        dictionary.Elements.Add("/Columns", new PDFInteger(width));
+                        dictionary.Elements.Add("/Rows", new PDFInteger(height));
                         //array2.Elements.Add(dictionary);
-                        Elements[PdfStream.Keys.DecodeParms] = dictionary; // array2;
+                        Elements[PDFStream.Keys.DecodeParms] = dictionary; // array2;
                     }
                     else
                     {
-                        Stream = new PdfStream(imageDataFaxCompressed, this);
-                        Elements[PdfStream.Keys.Length] = new PdfInteger(imageDataFaxCompressed.Length);
-                        PdfArray arrayFilters = new PdfArray(_document);
-                        arrayFilters.Elements.Add(new PdfName("/FlateDecode"));
-                        arrayFilters.Elements.Add(new PdfName("/CCITTFaxDecode"));
-                        Elements[PdfStream.Keys.Filter] = arrayFilters;
-                        PdfArray arrayDecodeParms = new PdfArray(_document);
+                        Stream = new PDFStream(imageDataFaxCompressed, this);
+                        Elements[PDFStream.Keys.Length] = new PDFInteger(imageDataFaxCompressed.Length);
+                        PDFArray arrayFilters = new PDFArray(_document);
+                        arrayFilters.Elements.Add(new PDFName("/FlateDecode"));
+                        arrayFilters.Elements.Add(new PDFName("/CCITTFaxDecode"));
+                        Elements[PDFStream.Keys.Filter] = arrayFilters;
+                        PDFArray arrayDecodeParms = new PDFArray(_document);
 
-                        PdfDictionary dictFlateDecodeParms = new PdfDictionary();
+                        PDFDictionary dictFlateDecodeParms = new PDFDictionary();
 
-                        PdfDictionary dictCcittFaxDecodeParms = new PdfDictionary();
+                        PDFDictionary dictCcittFaxDecodeParms = new PDFDictionary();
                         if (k != 0)
-                            dictCcittFaxDecodeParms.Elements.Add("/K", new PdfInteger(k));
+                            dictCcittFaxDecodeParms.Elements.Add("/K", new PDFInteger(k));
                         if (isBitonal < 0)
-                            dictCcittFaxDecodeParms.Elements.Add("/BlackIs1", new PdfBoolean(true));
-                        dictCcittFaxDecodeParms.Elements.Add("/EndOfBlock", new PdfBoolean(false));
-                        dictCcittFaxDecodeParms.Elements.Add("/Columns", new PdfInteger(width));
-                        dictCcittFaxDecodeParms.Elements.Add("/Rows", new PdfInteger(height));
+                            dictCcittFaxDecodeParms.Elements.Add("/BlackIs1", new PDFBoolean(true));
+                        dictCcittFaxDecodeParms.Elements.Add("/EndOfBlock", new PDFBoolean(false));
+                        dictCcittFaxDecodeParms.Elements.Add("/Columns", new PDFInteger(width));
+                        dictCcittFaxDecodeParms.Elements.Add("/Rows", new PDFInteger(height));
 
                         arrayDecodeParms.Elements.Add(dictFlateDecodeParms); // How to add the "null object"?
                         arrayDecodeParms.Elements.Add(dictCcittFaxDecodeParms);
-                        Elements[PdfStream.Keys.DecodeParms] = arrayDecodeParms;
+                        Elements[PDFStream.Keys.DecodeParms] = arrayDecodeParms;
                     }
                 }
                 else
                 {
                     // /FlateDecode creates the smaller file (or no monochrome bitmap).
-                    Stream = new PdfStream(imageDataCompressed, this);
-                    Elements[PdfStream.Keys.Length] = new PdfInteger(imageDataCompressed.Length);
-                    Elements[PdfStream.Keys.Filter] = new PdfName("/FlateDecode");
+                    Stream = new PDFStream(imageDataCompressed, this);
+                    Elements[PDFStream.Keys.Length] = new PDFInteger(imageDataCompressed.Length);
+                    Elements[PDFStream.Keys.Filter] = new PDFName("/FlateDecode");
                 }
 
-                Elements[Keys.Width] = new PdfInteger(width);
-                Elements[Keys.Height] = new PdfInteger(height);
-                Elements[Keys.BitsPerComponent] = new PdfInteger(bits);
+                Elements[Keys.Width] = new PDFInteger(width);
+                Elements[Keys.Height] = new PDFInteger(height);
+                Elements[Keys.BitsPerComponent] = new PDFInteger(bits);
                 // TODO: CMYK
 
                 // CCITT encoding: we need color palette for isBitonal == 0.
@@ -1358,44 +1358,44 @@ namespace PDFSharp.Interop.Advanced
                 if (usesCcittEncoding && isBitonal == 0 ||
                   !usesCcittEncoding && isBitonal <= 0 && !isGray)
                 {
-                    PdfDictionary colorPalette = null;
-                    colorPalette = new PdfDictionary(_document);
+                    PDFDictionary colorPalette = null;
+                    colorPalette = new PDFDictionary(_document);
                     byte[] packedPaletteData = paletteData.Length >= 48 ? fd.Encode(paletteData, _document.Options.FlateEncodeMode) : null; // don't compress small palettes
                     if (packedPaletteData != null && packedPaletteData.Length + 20 < paletteData.Length) // +20: compensate for the overhead (estimated value)
                     {
                         // Create compressed color palette.
                         colorPalette.CreateStream(packedPaletteData);
-                        colorPalette.Elements[PdfStream.Keys.Length] = new PdfInteger(packedPaletteData.Length);
-                        colorPalette.Elements[PdfStream.Keys.Filter] = new PdfName("/FlateDecode");
+                        colorPalette.Elements[PDFStream.Keys.Length] = new PDFInteger(packedPaletteData.Length);
+                        colorPalette.Elements[PDFStream.Keys.Filter] = new PDFName("/FlateDecode");
                     }
                     else
                     {
                         // Create uncompressed color palette.
                         colorPalette.CreateStream(paletteData);
-                        colorPalette.Elements[PdfStream.Keys.Length] = new PdfInteger(paletteData.Length);
+                        colorPalette.Elements[PDFStream.Keys.Length] = new PDFInteger(paletteData.Length);
                     }
                     Owner._irefTable.Add(colorPalette);
 
-                    PdfArray arrayColorSpace = new PdfArray(_document);
-                    arrayColorSpace.Elements.Add(new PdfName("/Indexed"));
-                    arrayColorSpace.Elements.Add(new PdfName("/DeviceRGB"));
-                    arrayColorSpace.Elements.Add(new PdfInteger(paletteColors - 1));
+                    PDFArray arrayColorSpace = new PDFArray(_document);
+                    arrayColorSpace.Elements.Add(new PDFName("/Indexed"));
+                    arrayColorSpace.Elements.Add(new PDFName("/DeviceRGB"));
+                    arrayColorSpace.Elements.Add(new PDFInteger(paletteColors - 1));
                     arrayColorSpace.Elements.Add(colorPalette.Reference);
                     Elements[Keys.ColorSpace] = arrayColorSpace;
                 }
                 else
                 {
-                    Elements[Keys.ColorSpace] = new PdfName("/DeviceGray");
+                    Elements[Keys.ColorSpace] = new PDFName("/DeviceGray");
                 }
                 if (Image.Interpolate)
-                    Elements[Keys.Interpolate] = PdfBoolean.True;
+                    Elements[Keys.Interpolate] = PDFBoolean.True;
             }
         }
 
         /// <summary>
         /// Common keys for all streams.
         /// </summary>
-        public sealed new class Keys : PdfXObject.Keys
+        public sealed new class Keys : PDFXObject.Keys
         {
             // ReSharper disable InconsistentNaming
 

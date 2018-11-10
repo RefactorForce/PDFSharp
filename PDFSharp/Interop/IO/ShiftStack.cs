@@ -41,11 +41,11 @@ namespace PDFSharp.Interop.IO
     {
         // TODO: make Lexer.PeekChars(20) and scan for 'R' to detect indirect references
 
-        public ShiftStack() => _items = new List<PdfItem>();
+        public ShiftStack() => _items = new List<PDFItem>();
 
-        public PdfItem[] ToArray(int start, int length)
+        public PDFItem[] ToArray(int start, int length)
         {
-            PdfItem[] items = new PdfItem[length];
+            PDFItem[] items = new PDFItem[length];
             for (int i = 0, j = start; i < length; i++, j++)
                 items[i] = _items[j];
             return items;
@@ -62,7 +62,7 @@ namespace PDFSharp.Interop.IO
         /// <summary>
         /// Gets the value at the specified index. Valid index is in range 0 up to sp-1.
         /// </summary>
-        public PdfItem this[int index]
+        public PDFItem this[int index]
         {
             get
             {
@@ -75,7 +75,7 @@ namespace PDFSharp.Interop.IO
         /// <summary>
         /// Gets an item relative to the current stack pointer. The index must be a negative value (-1, -2, etc.).
         /// </summary>
-        public PdfItem GetItem(int relativeIndex)
+        public PDFItem GetItem(int relativeIndex)
         {
             if (relativeIndex >= 0 || -relativeIndex > SP)
                 throw new ArgumentOutOfRangeException("relativeIndex", relativeIndex, "Value out of stack range.");
@@ -89,13 +89,13 @@ namespace PDFSharp.Interop.IO
         {
             if (relativeIndex >= 0 || -relativeIndex > SP)
                 throw new ArgumentOutOfRangeException("relativeIndex", relativeIndex, "Value out of stack range.");
-            return ((PdfInteger)_items[SP + relativeIndex]).Value;
+            return ((PDFInteger)_items[SP + relativeIndex]).Value;
         }
 
         /// <summary>
         /// Pushes the specified item onto the stack.
         /// </summary>
-        public void Shift(PdfItem item)
+        public void Shift(PDFItem item)
         {
             Debug.Assert(item != null);
             _items.Add(item);
@@ -116,7 +116,7 @@ namespace PDFSharp.Interop.IO
         /// <summary>
         /// Replaces the last 'count' items with the specified item.
         /// </summary>
-        public void Reduce(PdfItem item, int count)
+        public void Reduce(PDFItem item, int count)
         {
             Debug.Assert(item != null);
             Reduce(count);
@@ -127,6 +127,6 @@ namespace PDFSharp.Interop.IO
         /// <summary>
         /// An array representing the stack.
         /// </summary>
-        readonly List<PdfItem> _items;
+        readonly List<PDFItem> _items;
     }
 }

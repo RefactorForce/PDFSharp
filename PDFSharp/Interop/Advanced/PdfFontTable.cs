@@ -49,19 +49,19 @@ namespace PDFSharp.Interop.Advanced
     /// <summary>
     /// Contains all used fonts of a document.
     /// </summary>
-    internal sealed class PdfFontTable : PdfResourceTable
+    internal sealed class PDFFontTable : PDFResourceTable
     {
         /// <summary>
         /// Initializes a new instance of this class, which is a singleton for each document.
         /// </summary>
-        public PdfFontTable(PdfDocument document)
+        public PDFFontTable(PDFDocument document)
             : base(document)
         { }
 
         /// <summary>
-        /// Gets a PdfFont from an XFont. If no PdfFont already exists, a new one is created.
+        /// Gets a PDFFont from an XFont. If no PDFFont already exists, a new one is created.
         /// </summary>
-        public PdfFont GetFont(XFont font)
+        public PDFFont GetFont(XFont font)
         {
             string selector = font.Selector;
             if (selector == null)
@@ -69,9 +69,9 @@ namespace PDFSharp.Interop.Advanced
                 selector = ComputeKey(font); //new FontSelector(font);
                 font.Selector = selector;
             }
-            if (!_fonts.TryGetValue(selector, out PdfFont pdfFont))
+            if (!_fonts.TryGetValue(selector, out PDFFont pdfFont))
             {
-                pdfFont = font.Unicode ? new PdfType0Font(Owner, font, font.IsVertical) : (PdfFont)new PdfTrueTypeFont(Owner, font);
+                pdfFont = font.Unicode ? new PDFType0Font(Owner, font, font.IsVertical) : (PDFFont)new PDFTrueTypeFont(Owner, font);
                 //pdfFont.Document = _document;
                 Debug.Assert(pdfFont.Owner == Owner);
                 _fonts[selector] = pdfFont;
@@ -81,19 +81,19 @@ namespace PDFSharp.Interop.Advanced
 
 #if true
         /// <summary>
-        /// Gets a PdfFont from a font program. If no PdfFont already exists, a new one is created.
+        /// Gets a PDFFont from a font program. If no PDFFont already exists, a new one is created.
         /// </summary>
-        public PdfFont GetFont(string idName, byte[] fontData)
+        public PDFFont GetFont(string idName, byte[] fontData)
         {
             Debug.Assert(false);
             //FontSelector selector = new FontSelector(idName);
             string selector = null; // ComputeKey(font); //new FontSelector(font);
-            if (!_fonts.TryGetValue(selector, out PdfFont pdfFont))
+            if (!_fonts.TryGetValue(selector, out PDFFont pdfFont))
             {
                 //if (font.Unicode)
-                pdfFont = new PdfType0Font(Owner, idName, fontData, false);
+                pdfFont = new PDFType0Font(Owner, idName, fontData, false);
                 //else
-                //  pdfFont = new PdfTrueTypeFont(_owner, font);
+                //  pdfFont = new PDFTrueTypeFont(_owner, font);
                 //pdfFont.Document = _document;
                 Debug.Assert(pdfFont.Owner == Owner);
                 _fonts[selector] = pdfFont;
@@ -103,15 +103,15 @@ namespace PDFSharp.Interop.Advanced
 #endif
 
         /// <summary>
-        /// Tries to gets a PdfFont from the font dictionary.
-        /// Returns null if no such PdfFont exists.
+        /// Tries to gets a PDFFont from the font dictionary.
+        /// Returns null if no such PDFFont exists.
         /// </summary>
-        public PdfFont TryGetFont(string idName)
+        public PDFFont TryGetFont(string idName)
         {
             Debug.Assert(false);
             //FontSelector selector = new FontSelector(idName);
             string selector = null;
-            _fonts.TryGetValue(selector, out PdfFont pdfFont);
+            _fonts.TryGetValue(selector, out PDFFont pdfFont);
             return pdfFont;
         }
 
@@ -124,13 +124,13 @@ namespace PDFSharp.Interop.Advanced
         }
 
         /// <summary>
-        /// Map from PdfFontSelector to PdfFont.
+        /// Map from PDFFontSelector to PDFFont.
         /// </summary>
-        readonly Dictionary<string, PdfFont> _fonts = new Dictionary<string, PdfFont>();
+        readonly Dictionary<string, PDFFont> _fonts = new Dictionary<string, PDFFont>();
 
         public void PrepareForSave()
         {
-            foreach (PdfFont font in _fonts.Values)
+            foreach (PDFFont font in _fonts.Values)
                 font.PrepareForSave();
         }
     }

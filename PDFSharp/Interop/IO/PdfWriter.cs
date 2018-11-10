@@ -42,15 +42,15 @@ namespace PDFSharp.Interop.IO
     /// <summary>
     /// Represents a writer for generation of PDF streams. 
     /// </summary>
-    internal class PdfWriter
+    internal class PDFWriter
     {
-        public PdfWriter(Stream pdfStream, PdfStandardSecurityHandler securityHandler)
+        public PDFWriter(Stream pdfStream, PDFStandardSecurityHandler securityHandler)
         {
             Stream = pdfStream;
             SecurityHandler = securityHandler;
             //System.Xml.XmlTextWriter
 #if DEBUG
-            Layout = PdfWriterLayout.Verbose;
+            Layout = PDFWriterLayout.Verbose;
 #endif
         }
 
@@ -74,9 +74,9 @@ namespace PDFSharp.Interop.IO
         /// <summary>
         /// Gets or sets the kind of layout.
         /// </summary>
-        public PdfWriterLayout Layout { get; set; }
+        public PDFWriterLayout Layout { get; set; }
 
-        public PdfWriterOptions Options { get; set; }
+        public PDFWriterOptions Options { get; set; }
 
         // -----------------------------------------------------------
 
@@ -93,7 +93,7 @@ namespace PDFSharp.Interop.IO
         /// <summary>
         /// Writes the specified value to the PDF stream.
         /// </summary>
-        public void Write(PdfBoolean value)
+        public void Write(PDFBoolean value)
         {
             WriteSeparator(CharCat.Character);
             WriteRaw(value.Value ? "true" : "false");
@@ -123,7 +123,7 @@ namespace PDFSharp.Interop.IO
         /// <summary>
         /// Writes the specified value to the PDF stream.
         /// </summary>
-        public void Write(PdfInteger value)
+        public void Write(PDFInteger value)
         {
             WriteSeparator(CharCat.Character);
             _lastCat = CharCat.Character;
@@ -133,7 +133,7 @@ namespace PDFSharp.Interop.IO
         /// <summary>
         /// Writes the specified value to the PDF stream.
         /// </summary>
-        public void Write(PdfUInteger value)
+        public void Write(PDFUInteger value)
         {
             WriteSeparator(CharCat.Character);
             _lastCat = CharCat.Character;
@@ -153,7 +153,7 @@ namespace PDFSharp.Interop.IO
         /// <summary>
         /// Writes the specified value to the PDF stream.
         /// </summary>
-        public void Write(PdfReal value)
+        public void Write(PDFReal value)
         {
             WriteSeparator(CharCat.Character);
             WriteRaw(value.Value.ToString(Config.SignificantFigures7, CultureInfo.InvariantCulture));
@@ -163,39 +163,39 @@ namespace PDFSharp.Interop.IO
         /// <summary>
         /// Writes the specified value to the PDF stream.
         /// </summary>
-        public void Write(PdfString value)
+        public void Write(PDFString value)
         {
             WriteSeparator(CharCat.Delimiter);
 #if true
-            PdfStringEncoding encoding = (PdfStringEncoding)(value.Flags & PdfStringFlags.EncodingMask);
-            string pdf = (value.Flags & PdfStringFlags.HexLiteral) == 0 ?
-                PdfEncoders.ToStringLiteral(value.Value, encoding, SecurityHandler) :
-                PdfEncoders.ToHexStringLiteral(value.Value, encoding, SecurityHandler);
+            PDFStringEncoding encoding = (PDFStringEncoding)(value.Flags & PDFStringFlags.EncodingMask);
+            string pdf = (value.Flags & PDFStringFlags.HexLiteral) == 0 ?
+                PDFEncoders.ToStringLiteral(value.Value, encoding, SecurityHandler) :
+                PDFEncoders.ToHexStringLiteral(value.Value, encoding, SecurityHandler);
             WriteRaw(pdf);
 #else
-            switch (value.Flags & PdfStringFlags.EncodingMask)
+            switch (value.Flags & PDFStringFlags.EncodingMask)
             {
-                case PdfStringFlags.Undefined:
-                case PdfStringFlags.PDFDocEncoding:
-                    if ((value.Flags & PdfStringFlags.HexLiteral) == 0)
-                        WriteRaw(PdfEncoders.DocEncode(value.Value, false));
+                case PDFStringFlags.Undefined:
+                case PDFStringFlags.PDFDocEncoding:
+                    if ((value.Flags & PDFStringFlags.HexLiteral) == 0)
+                        WriteRaw(PDFEncoders.DocEncode(value.Value, false));
                     else
-                        WriteRaw(PdfEncoders.DocEncodeHex(value.Value, false));
+                        WriteRaw(PDFEncoders.DocEncodeHex(value.Value, false));
                     break;
 
-                case PdfStringFlags.WinAnsiEncoding:
+                case PDFStringFlags.WinAnsiEncoding:
                     throw new NotImplementedException("Unexpected encoding: WinAnsiEncoding");
 
-                case PdfStringFlags.Unicode:
-                    if ((value.Flags & PdfStringFlags.HexLiteral) == 0)
-                        WriteRaw(PdfEncoders.DocEncode(value.Value, true));
+                case PDFStringFlags.Unicode:
+                    if ((value.Flags & PDFStringFlags.HexLiteral) == 0)
+                        WriteRaw(PDFEncoders.DocEncode(value.Value, true));
                     else
-                        WriteRaw(PdfEncoders.DocEncodeHex(value.Value, true));
+                        WriteRaw(PDFEncoders.DocEncodeHex(value.Value, true));
                     break;
 
-                case PdfStringFlags.StandardEncoding:
-                case PdfStringFlags.MacRomanEncoding:
-                case PdfStringFlags.MacExpertEncoding:
+                case PDFStringFlags.StandardEncoding:
+                case PDFStringFlags.MacRomanEncoding:
+                case PDFStringFlags.MacExpertEncoding:
                 default:
                     throw new NotImplementedException("Unexpected encoding");
             }
@@ -206,7 +206,7 @@ namespace PDFSharp.Interop.IO
         /// <summary>
         /// Writes the specified value to the PDF stream.
         /// </summary>
-        public void Write(PdfName value)
+        public void Write(PDFName value)
         {
             WriteSeparator(CharCat.Delimiter, '/');
             string name = value.Value;
@@ -241,22 +241,22 @@ namespace PDFSharp.Interop.IO
             _lastCat = CharCat.Character;
         }
 
-        public void Write(PdfLiteral value)
+        public void Write(PDFLiteral value)
         {
             WriteSeparator(CharCat.Character);
             WriteRaw(value.Value);
             _lastCat = CharCat.Character;
         }
 
-        public void Write(PdfRectangle rect)
+        public void Write(PDFRectangle rect)
         {
             const string format = Config.SignificantFigures3;
             WriteSeparator(CharCat.Delimiter, '/');
-            WriteRaw(PdfEncoders.Format("[{0:" + format + "} {1:" + format + "} {2:" + format + "} {3:" + format + "}]", rect.X1, rect.Y1, rect.X2, rect.Y2));
+            WriteRaw(PDFEncoders.Format("[{0:" + format + "} {1:" + format + "} {2:" + format + "} {3:" + format + "}]", rect.X1, rect.Y1, rect.X2, rect.Y2));
             _lastCat = CharCat.Delimiter;
         }
 
-        public void Write(PdfReference iref)
+        public void Write(PDFReference iref)
         {
             WriteSeparator(CharCat.Character);
             WriteRaw(iref.ToString());
@@ -266,9 +266,9 @@ namespace PDFSharp.Interop.IO
         public void WriteDocString(string text, bool unicode)
         {
             WriteSeparator(CharCat.Delimiter);
-            //WriteRaw(PdfEncoders.DocEncode(text, unicode));
-            byte[] bytes = !unicode ? PdfEncoders.DocEncoding.GetBytes(text) : PdfEncoders.UnicodeEncoding.GetBytes(text);
-            bytes = PdfEncoders.FormatStringLiteral(bytes, unicode, true, false, SecurityHandler);
+            //WriteRaw(PDFEncoders.DocEncode(text, unicode));
+            byte[] bytes = !unicode ? PDFEncoders.DocEncoding.GetBytes(text) : PDFEncoders.UnicodeEncoding.GetBytes(text);
+            bytes = PDFEncoders.FormatStringLiteral(bytes, unicode, true, false, SecurityHandler);
             Write(bytes);
             _lastCat = CharCat.Delimiter;
         }
@@ -276,9 +276,9 @@ namespace PDFSharp.Interop.IO
         public void WriteDocString(string text)
         {
             WriteSeparator(CharCat.Delimiter);
-            //WriteRaw(PdfEncoders.DocEncode(text, false));
-            byte[] bytes = PdfEncoders.DocEncoding.GetBytes(text);
-            bytes = PdfEncoders.FormatStringLiteral(bytes, false, false, false, SecurityHandler);
+            //WriteRaw(PDFEncoders.DocEncode(text, false));
+            byte[] bytes = PDFEncoders.DocEncoding.GetBytes(text);
+            bytes = PDFEncoders.FormatStringLiteral(bytes, false, false, false, SecurityHandler);
             Write(bytes);
             _lastCat = CharCat.Delimiter;
         }
@@ -286,9 +286,9 @@ namespace PDFSharp.Interop.IO
         public void WriteDocStringHex(string text)
         {
             WriteSeparator(CharCat.Delimiter);
-            //WriteRaw(PdfEncoders.DocEncodeHex(text));
-            byte[] bytes = PdfEncoders.DocEncoding.GetBytes(text);
-            bytes = PdfEncoders.FormatStringLiteral(bytes, false, false, true, SecurityHandler);
+            //WriteRaw(PDFEncoders.DocEncodeHex(text));
+            byte[] bytes = PDFEncoders.DocEncoding.GetBytes(text);
+            bytes = PDFEncoders.FormatStringLiteral(bytes, false, false, true, SecurityHandler);
             Stream.Write(bytes, 0, bytes.Length);
             _lastCat = CharCat.Delimiter;
         }
@@ -296,7 +296,7 @@ namespace PDFSharp.Interop.IO
         /// <summary>
         /// Begins a direct or indirect dictionary or array.
         /// </summary>
-        public void WriteBeginObject(PdfObject obj)
+        public void WriteBeginObject(PDFObject obj)
         {
             bool indirect = obj.IsIndirect;
             if (indirect)
@@ -308,21 +308,21 @@ namespace PDFSharp.Interop.IO
             _stack.Add(new StackItem(obj));
             if (indirect)
             {
-                if (obj is PdfArray)
+                if (obj is PDFArray)
                     WriteRaw("[\n");
-                else if (obj is PdfDictionary)
+                else if (obj is PDFDictionary)
                     WriteRaw("<<\n");
                 _lastCat = CharCat.NewLine;
             }
             else
             {
-                if (obj is PdfArray)
+                if (obj is PDFArray)
                 {
                     WriteSeparator(CharCat.Delimiter);
                     WriteRaw('[');
                     _lastCat = CharCat.Delimiter;
                 }
-                else if (obj is PdfDictionary)
+                else if (obj is PDFDictionary)
                 {
                     NewLine();
                     WriteSeparator(CharCat.Delimiter);
@@ -330,7 +330,7 @@ namespace PDFSharp.Interop.IO
                     _lastCat = CharCat.NewLine;
                 }
             }
-            if (Layout == PdfWriterLayout.Verbose)
+            if (Layout == PDFWriterLayout.Verbose)
                 IncreaseIndent();
         }
 
@@ -340,16 +340,16 @@ namespace PDFSharp.Interop.IO
         public void WriteEndObject()
         {
             int count = _stack.Count;
-            Debug.Assert(count > 0, "PdfWriter stack underflow.");
+            Debug.Assert(count > 0, "PDFWriter stack underflow.");
 
             StackItem stackItem = _stack[count - 1];
             _stack.RemoveAt(count - 1);
 
-            PdfObject value = stackItem.Object;
+            PDFObject value = stackItem.Object;
             bool indirect = value.IsIndirect;
-            if (Layout == PdfWriterLayout.Verbose)
+            if (Layout == PDFWriterLayout.Verbose)
                 DecreaseIndent();
-            if (value is PdfArray)
+            if (value is PDFArray)
             {
                 if (indirect)
                 {
@@ -362,7 +362,7 @@ namespace PDFSharp.Interop.IO
                     _lastCat = CharCat.Delimiter;
                 }
             }
-            else if (value is PdfDictionary)
+            else if (value is PDFDictionary)
             {
                 if (indirect)
                 {
@@ -381,7 +381,7 @@ namespace PDFSharp.Interop.IO
             {
                 NewLine();
                 WriteRaw("endobj\n");
-                if (Layout == PdfWriterLayout.Verbose)
+                if (Layout == PDFWriterLayout.Verbose)
                     WriteRaw("%--------------------------------------------------------------------------------------------------\n");
             }
         }
@@ -389,10 +389,10 @@ namespace PDFSharp.Interop.IO
         /// <summary>
         /// Writes the stream of the specified dictionary.
         /// </summary>
-        public void WriteStream(PdfDictionary value, bool omitStream)
+        public void WriteStream(PDFDictionary value, bool omitStream)
         {
             StackItem stackItem = _stack[_stack.Count - 1];
-            Debug.Assert(stackItem.Object is PdfDictionary);
+            Debug.Assert(stackItem.Object is PDFDictionary);
             Debug.Assert(stackItem.Object.IsIndirect);
             stackItem.HasStream = true;
 
@@ -425,7 +425,7 @@ namespace PDFSharp.Interop.IO
             if (String.IsNullOrEmpty(rawString))
                 return;
 
-            byte[] bytes = PdfEncoders.RawEncoding.GetBytes(rawString);
+            byte[] bytes = PDFEncoders.RawEncoding.GetBytes(rawString);
             Stream.Write(bytes, 0, bytes.Length);
             _lastCat = GetCategory((char)bytes[bytes.Length - 1]);
         }
@@ -447,9 +447,9 @@ namespace PDFSharp.Interop.IO
             _lastCat = GetCategory((char)bytes[bytes.Length - 1]);
         }
 
-        void WriteObjectAddress(PdfObject value)
+        void WriteObjectAddress(PDFObject value)
         {
-            if (Layout == PdfWriterLayout.Verbose)
+            if (Layout == PDFWriterLayout.Verbose)
                 WriteRaw(String.Format("{0} {1} obj   % {2}\n",
                     value.ObjectID.ObjectNumber, value.ObjectID.GenerationNumber,
                     value.GetType().FullName));
@@ -457,7 +457,7 @@ namespace PDFSharp.Interop.IO
                 WriteRaw(String.Format("{0} {1} obj\n", value.ObjectID.ObjectNumber, value.ObjectID.GenerationNumber));
         }
 
-        public void WriteFileHeader(PdfDocument document)
+        public void WriteFileHeader(PDFDocument document)
         {
             StringBuilder header = new StringBuilder("%PDF-");
             int version = document._version;
@@ -465,7 +465,7 @@ namespace PDFSharp.Interop.IO
               (version % 10).ToString(CultureInfo.InvariantCulture) + "\n%\xD3\xF4\xCC\xE1\n");
             WriteRaw(header.ToString());
 
-            if (Layout == PdfWriterLayout.Verbose)
+            if (Layout == PDFWriterLayout.Verbose)
             {
                 WriteRaw(String.Format("% PDFsharp Version {0} (verbose mode)\n", ProductVersionInfo.Version));
                 // Keep some space for later fix-up.
@@ -479,13 +479,13 @@ namespace PDFSharp.Interop.IO
             }
         }
 
-        public void WriteEof(PdfDocument document, int startxref)
+        public void WriteEof(PDFDocument document, int startxref)
         {
             WriteRaw("startxref\n");
             WriteRaw(startxref.ToString(CultureInfo.InvariantCulture));
             WriteRaw("\n%%EOF\n");
             int fileSize = (int)Stream.Position;
-            if (Layout == PdfWriterLayout.Verbose)
+            if (Layout == PDFWriterLayout.Verbose)
             {
                 TimeSpan duration = DateTime.Now - document._creation;
 
@@ -542,7 +542,7 @@ namespace PDFSharp.Interop.IO
             switch (_lastCat)
             {
                 case CharCat.NewLine:
-                    if (Layout == PdfWriterLayout.Verbose)
+                    if (Layout == PDFWriterLayout.Verbose)
                         WriteIndent();
                     break;
 
@@ -550,7 +550,7 @@ namespace PDFSharp.Interop.IO
                     break;
 
                 case CharCat.Character:
-                    if (Layout == PdfWriterLayout.Verbose)
+                    if (Layout == PDFWriterLayout.Verbose)
                     {
                         //if (cat == CharCat.Character || ch == '/')
                         Stream.WriteByte((byte)' ');
@@ -587,13 +587,13 @@ namespace PDFSharp.Interop.IO
         /// </summary>
         internal Stream Stream { get; private set; }
 
-        internal PdfStandardSecurityHandler SecurityHandler { get; set; }
+        internal PDFStandardSecurityHandler SecurityHandler { get; set; }
 
         class StackItem
         {
-            public StackItem(PdfObject value) => Object = value;
+            public StackItem(PDFObject value) => Object = value;
 
-            public readonly PdfObject Object;
+            public readonly PDFObject Object;
             public bool HasStream;
         }
 

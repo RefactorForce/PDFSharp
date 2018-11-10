@@ -32,30 +32,30 @@ using System;
 namespace PDFSharp.Interop.IO
 {
     /// <summary>
-    /// Exception thrown by PdfReader.
+    /// Exception thrown by PDFReader.
     /// </summary>
-    public class PdfReaderException : PdfSharpException
+    public class PDFReaderException : PDFSharpException
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfReaderException"/> class.
+        /// Initializes a new instance of the <see cref="PDFReaderException"/> class.
         /// </summary>
-        public PdfReaderException()
+        public PDFReaderException()
         { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfReaderException"/> class.
+        /// Initializes a new instance of the <see cref="PDFReaderException"/> class.
         /// </summary>
         /// <param name="message">The message.</param>
-        public PdfReaderException(string message)
+        public PDFReaderException(string message)
             : base(message)
         { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfReaderException"/> class.
+        /// Initializes a new instance of the <see cref="PDFReaderException"/> class.
         /// </summary>
         /// <param name="message">The message.</param>
         /// <param name="innerException">The inner exception.</param>
-        public PdfReaderException(string message, Exception innerException)
+        public PDFReaderException(string message, Exception innerException)
             :
             base(message, innerException)
         { }
