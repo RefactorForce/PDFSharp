@@ -29,7 +29,7 @@
 
 using System;
 
-namespace PdfSharp.Charting.Renderers
+namespace PDFSharp.Charting.Renderers
 {
     /// <summary>
     /// Represents a Y axis renderer used for charts of type BarStacked2D.
@@ -50,8 +50,8 @@ namespace PdfSharp.Charting.Renderers
         /// </summary>
         protected override void CalcYAxis(out double yMin, out double yMax)
         {
-            yMin = double.MaxValue;
-            yMax = double.MinValue;
+            yMin = Double.MaxValue;
+            yMax = Double.MinValue;
 
             ChartRendererInfo cri = (ChartRendererInfo)_rendererParms.RendererInfo;
 
@@ -68,7 +68,7 @@ namespace PdfSharp.Charting.Renderers
                         break;
 
                     ColumnRendererInfo column = (ColumnRendererInfo)sri._pointRendererInfos[pointIdx];
-                    if (column.Point != null && !double.IsNaN(column.Point._value))
+                    if (column.Point != null && !Double.IsNaN(column.Point._value))
                     {
                         if (column.Point._value < 0)
                             valueSumNeg += column.Point._value;

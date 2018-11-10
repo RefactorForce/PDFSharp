@@ -31,10 +31,10 @@ using System;
 using System.Diagnostics;
 using System.Collections;
 using System.Collections.Generic;
-using PdfSharp.Pdf.Advanced;
-using PdfSharp.Pdf.IO;
+using PDFSharp.Pdf.Advanced;
+using PDFSharp.Pdf.IO;
 
-namespace PdfSharp.Pdf
+namespace PDFSharp.Pdf
 {
     // NOT YET IN USE ANYMORE. REPLACEED PdfSharp.Pdf.Advanced.PdfCrossReferenceTable.
 

@@ -31,7 +31,7 @@ using System;
 using System.Diagnostics;
 using System.Globalization;
 
-namespace PdfSharp.Pdf
+namespace PDFSharp.Pdf
 {
     /// <summary>
     /// Represents a PDF object identifier, a pair of object and generation number.
@@ -130,14 +130,9 @@ namespace PdfSharp.Pdf
         /// <summary>
         /// Compares the current object id with another object.
         /// </summary>
-        public int CompareTo(object obj)
-        {
-            if (obj is PdfObjectID id)
-            {
-                return ObjectNumber == id.ObjectNumber ? _generationNumber - id._generationNumber : ObjectNumber - id.ObjectNumber;
-            }
-            return 1;
-        }
+        public int CompareTo(object obj) => obj is PdfObjectID id
+                ? ObjectNumber == id.ObjectNumber ? _generationNumber - id._generationNumber : ObjectNumber - id.ObjectNumber
+                : 1;
 
         /// <summary>
         /// Gets the DebuggerDisplayAttribute text.

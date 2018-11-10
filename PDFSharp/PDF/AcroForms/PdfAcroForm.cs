@@ -27,7 +27,7 @@
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
-namespace PdfSharp.Pdf.AcroForms
+namespace PDFSharp.Pdf.AcroForms
 {
     /// <summary>
     /// Represents an interactive form (or AcroForm), a collection of fields for

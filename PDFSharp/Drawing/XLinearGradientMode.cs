@@ -27,7 +27,7 @@
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
-namespace PdfSharp.Drawing
+namespace PDFSharp.Drawing
 {
     /// <summary>
     /// Specifies the direction of a linear gradient.

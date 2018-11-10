@@ -31,12 +31,12 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using PdfSharp.Internal;
-using PdfSharp.Pdf.Advanced;
-using PdfSharp.Pdf.Security;
-using PdfSharp.Pdf.Internal;
+using PDFSharp.Internal;
+using PDFSharp.Pdf.Advanced;
+using PDFSharp.Pdf.Security;
+using PDFSharp.Pdf.Internal;
 
-namespace PdfSharp.Pdf.IO
+namespace PDFSharp.Pdf.IO
 {
     /// <summary>
     /// Encapsulates the arguments of the PdfPasswordProvider delegate.

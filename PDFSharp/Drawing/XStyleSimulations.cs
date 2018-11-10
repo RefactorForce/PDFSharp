@@ -29,7 +29,7 @@
 
 using System;
 
-namespace PdfSharp.Drawing
+namespace PDFSharp.Drawing
 {
     /// <summary>
     /// Describes the simulation style of a font.

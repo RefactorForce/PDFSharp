@@ -42,7 +42,7 @@ using System;
 using System.Runtime.Serialization;
 #endif
 
-namespace PdfSharp.SharpZipLib.Zip
+namespace PDFSharp.SharpZipLib.Zip
 {
     /// <summary>
     /// Represents exception conditions specific to Zip archive handling

@@ -27,7 +27,7 @@
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
-namespace PdfSharp.Pdf.Security
+namespace PDFSharp.Pdf.Security
 {
     /// <summary>
     /// Specifies the security level of the PDF document.

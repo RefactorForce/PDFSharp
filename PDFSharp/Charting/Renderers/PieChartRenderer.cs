@@ -28,9 +28,9 @@
 #endregion
 
 using System;
-using PdfSharp.Drawing;
+using PDFSharp.Drawing;
 
-namespace PdfSharp.Charting.Renderers
+namespace PDFSharp.Charting.Renderers
 {
     /// <summary>
     /// Represents a pie chart renderer.
@@ -50,8 +50,10 @@ namespace PdfSharp.Charting.Renderers
         /// </summary>
         internal override RendererInfo Init()
         {
-            ChartRendererInfo cri = new ChartRendererInfo();
-            cri._chart = (Chart)_rendererParms.DrawingItem;
+            ChartRendererInfo cri = new ChartRendererInfo
+            {
+                _chart = (Chart)_rendererParms.DrawingItem
+            };
             _rendererParms.RendererInfo = cri;
 
             InitSeries(cri);
@@ -163,10 +165,9 @@ namespace PdfSharp.Charting.Renderers
                         pri.LineFormat = sri.LineFormat;
                         if (point._lineFormat != null && !point._lineFormat._color.IsEmpty)
                             pri.LineFormat = new XPen(point._lineFormat._color);
-                        if (point._fillFormat != null && !point._fillFormat._color.IsEmpty)
-                            pri.FillFormat = new XSolidBrush(point._fillFormat._color);
-                        else
-                            pri.FillFormat = new XSolidBrush(PieColors.Item(pointIdx));
+                        pri.FillFormat = point._fillFormat != null && !point._fillFormat._color.IsEmpty
+                            ? new XSolidBrush(point._fillFormat._color)
+                            : new XSolidBrush(PieColors.Item(pointIdx));
                         pri.LineFormat.LineJoin = XLineJoin.Round;
                     }
                     sri._pointRendererInfos[pointIdx] = pri;

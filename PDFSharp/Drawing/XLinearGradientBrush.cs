@@ -29,7 +29,7 @@
 
 using System;
 using System.ComponentModel;
-using PdfSharp.Internal;
+using PDFSharp.Internal;
 #if GDI
 using System.DrawingCore;
 using System.DrawingCore.Drawing2D;
@@ -53,7 +53,7 @@ using Microsoft.Graphics.Canvas.Brushes;
 
 // ReSharper disable RedundantNameQualifier because it is required for hybrid build
 
-namespace PdfSharp.Drawing
+namespace PDFSharp.Drawing
 {
     /// <summary>
     /// Defines a Brush with a linear gradient.

@@ -29,7 +29,7 @@
 
 using System;
 
-namespace PdfSharp.Pdf
+namespace PDFSharp.Pdf
 {
     /// <summary>
     /// Represents the PDF document information dictionary.

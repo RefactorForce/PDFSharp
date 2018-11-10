@@ -31,7 +31,7 @@ using System;
 using System.Diagnostics;
 using System.Text;
 
-namespace PdfSharp.Pdf.Internal
+namespace PDFSharp.Pdf.Internal
 {
     /// <summary>
     /// An encoder for PDF DocEncoding.

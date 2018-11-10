@@ -27,7 +27,7 @@
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
-namespace PdfSharp.Charting
+namespace PDFSharp.Charting
 {
     /// <summary>
     /// Used to determine the vertical alignment of the axis title.

@@ -49,9 +49,9 @@ using WpfStyleSimulations = System.Windows.Media.StyleSimulations;
 #if UWP
 using Windows.UI.Xaml.Media;
 #endif
-using PdfSharp.Fonts;
-using PdfSharp.Fonts.OpenType;
-using PdfSharp.Internal;
+using PDFSharp.Fonts;
+using PDFSharp.Fonts.OpenType;
+using PDFSharp.Internal;
 
 #pragma warning disable 649
 #if SILVERLIGHT
@@ -61,7 +61,7 @@ using PdfSharp.Internal;
 #pragma warning disable 649
 #endif
 
-namespace PdfSharp.Drawing
+namespace PDFSharp.Drawing
 {
     /// <summary>
     /// Specifies a physical font face that corresponds to a font file on the disk or in memory.

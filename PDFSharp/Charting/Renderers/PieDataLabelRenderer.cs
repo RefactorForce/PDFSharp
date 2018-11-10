@@ -28,9 +28,9 @@
 #endregion
 
 using System;
-using PdfSharp.Drawing;
+using PDFSharp.Drawing;
 
-namespace PdfSharp.Charting.Renderers
+namespace PDFSharp.Charting.Renderers
 {
     /// <summary>
     /// Represents a data label renderer for pie charts.
@@ -138,8 +138,8 @@ namespace PdfSharp.Charting.Renderers
                         {
                             case DataLabelPosition.OutsideEnd:
                                 // Outer border of the circle.
-                                dleri.X = origin.X + (radius * Math.Cos(radMidAngle));
-                                dleri.Y = origin.Y + (radius * Math.Sin(radMidAngle));
+                                dleri.X = origin.X + radius * Math.Cos(radMidAngle);
+                                dleri.Y = origin.Y + radius * Math.Sin(radMidAngle);
                                 if (dleri.X < origin.X)
                                     dleri.X -= dleri.Width;
                                 if (dleri.Y < origin.Y)
@@ -148,8 +148,8 @@ namespace PdfSharp.Charting.Renderers
 
                             case DataLabelPosition.InsideEnd:
                                 // Inner border of the circle.
-                                dleri.X = origin.X + (radius * Math.Cos(radMidAngle));
-                                dleri.Y = origin.Y + (radius * Math.Sin(radMidAngle));
+                                dleri.X = origin.X + radius * Math.Cos(radMidAngle);
+                                dleri.Y = origin.Y + radius * Math.Sin(radMidAngle);
                                 if (dleri.X > origin.X)
                                     dleri.X -= dleri.Width;
                                 if (dleri.Y > origin.Y)
@@ -158,8 +158,8 @@ namespace PdfSharp.Charting.Renderers
 
                             case DataLabelPosition.Center:
                                 // Centered
-                                dleri.X = origin.X + (halfradius * Math.Cos(radMidAngle));
-                                dleri.Y = origin.Y + (halfradius * Math.Sin(radMidAngle));
+                                dleri.X = origin.X + halfradius * Math.Cos(radMidAngle);
+                                dleri.Y = origin.Y + halfradius * Math.Sin(radMidAngle);
                                 dleri.X -= dleri.Width / 2;
                                 dleri.Y -= dleri.Height / 2;
                                 break;

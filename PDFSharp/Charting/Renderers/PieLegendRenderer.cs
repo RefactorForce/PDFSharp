@@ -27,9 +27,9 @@
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
-using PdfSharp.Drawing;
+using PDFSharp.Drawing;
 
-namespace PdfSharp.Charting.Renderers
+namespace PDFSharp.Charting.Renderers
 {
     /// <summary>
     /// Represents the legend renderer specific to pie charts.
@@ -54,8 +54,10 @@ namespace PdfSharp.Charting.Renderers
             ChartRendererInfo cri = (ChartRendererInfo)_rendererParms.RendererInfo;
             if (cri._chart._legend != null)
             {
-                lri = new LegendRendererInfo();
-                lri._legend = cri._chart._legend;
+                lri = new LegendRendererInfo
+                {
+                    _legend = cri._chart._legend
+                };
 
                 lri.Font = Converter.ToXFont(lri._legend._font, cri.DefaultFont);
                 lri.FontColor = new XSolidBrush(XColors.Black);
@@ -72,10 +74,12 @@ namespace PdfSharp.Charting.Renderers
                 lri.Entries = new LegendEntryRendererInfo[sri._pointRendererInfos.Length];
                 foreach (PointRendererInfo pri in sri._pointRendererInfos)
                 {
-                    LegendEntryRendererInfo leri = new LegendEntryRendererInfo();
-                    leri._seriesRendererInfo = sri;
-                    leri._legendRendererInfo = lri;
-                    leri.EntryText = string.Empty;
+                    LegendEntryRendererInfo leri = new LegendEntryRendererInfo
+                    {
+                        _seriesRendererInfo = sri,
+                        _legendRendererInfo = lri,
+                        EntryText = System.String.Empty
+                    };
                     if (xseries != null)
                     {
                         if (xseries.Count > index)

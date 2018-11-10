@@ -42,12 +42,12 @@ using System.Windows.Media;
 using System.Windows.Markup;
 using WpfFontFamily = System.Windows.Media.FontFamily;
 #endif
-using PdfSharp.Fonts;
-using PdfSharp.Fonts.OpenType;
-using PdfSharp.Internal;
-using PdfSharp.Pdf;
+using PDFSharp.Fonts;
+using PDFSharp.Fonts.OpenType;
+using PDFSharp.Internal;
+using PDFSharp.Pdf;
 
-namespace PdfSharp.Drawing
+namespace PDFSharp.Drawing
 {
     /// <summary>
     /// Global cache of all internal font family objects.

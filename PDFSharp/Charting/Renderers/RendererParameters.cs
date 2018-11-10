@@ -27,9 +27,9 @@
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
-using PdfSharp.Drawing;
+using PDFSharp.Drawing;
 
-namespace PdfSharp.Charting.Renderers
+namespace PDFSharp.Charting.Renderers
 {
     /// <summary>
     /// Represents the necessary data for chart rendering.
@@ -67,8 +67,8 @@ namespace PdfSharp.Charting.Renderers
         /// </summary>
         public XGraphics Graphics
         {
-            get { return _gfx; }
-            set { _gfx = value; }
+            get => _gfx;
+            set => _gfx = value;
         }
         XGraphics _gfx;
 
@@ -77,8 +77,8 @@ namespace PdfSharp.Charting.Renderers
         /// </summary>
         public object DrawingItem
         {
-            get { return _item; }
-            set { _item = value; }
+            get => _item;
+            set => _item = value;
         }
         object _item;
 
@@ -87,8 +87,8 @@ namespace PdfSharp.Charting.Renderers
         /// </summary>
         public XRect Box
         {
-            get { return _box; }
-            set { _box = value; }
+            get => _box;
+            set => _box = value;
         }
         XRect _box;
 
@@ -97,8 +97,8 @@ namespace PdfSharp.Charting.Renderers
         /// </summary>
         public RendererInfo RendererInfo
         {
-            get { return _rendererInfo; }
-            set { _rendererInfo = value; }
+            get => _rendererInfo;
+            set => _rendererInfo = value;
         }
         RendererInfo _rendererInfo;
     }

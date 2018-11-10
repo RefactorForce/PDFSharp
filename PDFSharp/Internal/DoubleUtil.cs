@@ -30,13 +30,13 @@
 using System;
 using System.Runtime.InteropServices;
 #if !EDF_CORE
-using PdfSharp.Drawing;
+using PDFSharp.Drawing;
 #else
 using PdfSharp.Drawing;
 #endif
 
 #if !EDF_CORE
-namespace PdfSharp.Internal
+namespace PDFSharp.Internal
 #else
 namespace Edf.Internal
 #endif

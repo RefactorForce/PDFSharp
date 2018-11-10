@@ -28,9 +28,9 @@
 #endregion
 
 using System;
-using PdfSharp.Drawing;
+using PDFSharp.Drawing;
 
-namespace PdfSharp.Charting
+namespace PDFSharp.Charting
 {
     /// <summary>
     /// Font represents the formatting of characters in a paragraph.
@@ -64,10 +64,7 @@ namespace PdfSharp.Charting
         /// <summary>
         /// Creates a copy of the Font.
         /// </summary>
-        public new Font Clone()
-        {
-            return (Font)DeepCopy();
-        }
+        public new Font Clone() => (Font)DeepCopy();
         #endregion
 
         #region Properties
@@ -76,8 +73,8 @@ namespace PdfSharp.Charting
         /// </summary>
         public string Name
         {
-            get { return _name; }
-            set { _name = value; }
+            get => _name;
+            set => _name = value;
         }
         internal string _name = String.Empty;
 
@@ -86,8 +83,8 @@ namespace PdfSharp.Charting
         /// </summary>
         public XUnit Size
         {
-            get { return _size; }
-            set { _size = value; }
+            get => _size;
+            set => _size = value;
         }
         internal XUnit _size;
 
@@ -96,8 +93,8 @@ namespace PdfSharp.Charting
         /// </summary>
         public bool Bold
         {
-            get { return _bold; }
-            set { _bold = value; }
+            get => _bold;
+            set => _bold = value;
         }
         internal bool _bold;
 
@@ -106,8 +103,8 @@ namespace PdfSharp.Charting
         /// </summary>
         public bool Italic
         {
-            get { return _italic; }
-            set { _italic = value; }
+            get => _italic;
+            set => _italic = value;
         }
         internal bool _italic;
 
@@ -116,8 +113,8 @@ namespace PdfSharp.Charting
         /// </summary>
         public Underline Underline
         {
-            get { return _underline; }
-            set { _underline = value; }
+            get => _underline;
+            set => _underline = value;
         }
         internal Underline _underline;
 
@@ -126,8 +123,8 @@ namespace PdfSharp.Charting
         /// </summary>
         public XColor Color
         {
-            get { return _color; }
-            set { _color = value; }
+            get => _color;
+            set => _color = value;
         }
         internal XColor _color = XColor.Empty;
 
@@ -136,7 +133,7 @@ namespace PdfSharp.Charting
         /// </summary>
         public bool Superscript
         {
-            get { return _superscript; }
+            get => _superscript;
             set
             {
                 if (_superscript != value)
@@ -153,7 +150,7 @@ namespace PdfSharp.Charting
         /// </summary>
         public bool Subscript
         {
-            get { return _subscript; }
+            get => _subscript;
             set
             {
                 if (_subscript != value)

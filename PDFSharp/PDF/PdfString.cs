@@ -30,10 +30,10 @@
 using System;
 using System.Diagnostics;
 using System.Text;
-using PdfSharp.Pdf.IO;
-using PdfSharp.Pdf.Internal;
+using PDFSharp.Pdf.IO;
+using PDFSharp.Pdf.Internal;
 
-namespace PdfSharp.Pdf
+namespace PDFSharp.Pdf
 {
     /// <summary>
     /// Determines the encoding of a PdfString or PdfStringObject.

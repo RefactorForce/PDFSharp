@@ -27,7 +27,7 @@
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
-namespace PdfSharp
+namespace PDFSharp
 {
     /// <summary>
     /// Base namespace of PDFsharp. Most classes are implemented in nested namespaces like e. g. PdfSharp.Pdf.

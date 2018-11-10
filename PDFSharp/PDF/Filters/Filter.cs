@@ -27,10 +27,10 @@
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
-using PdfSharp.Pdf.IO;
-using PdfSharp.Pdf.Internal;
+using PDFSharp.Pdf.IO;
+using PDFSharp.Pdf.Internal;
 
-namespace PdfSharp.Pdf.Filters
+namespace PDFSharp.Pdf.Filters
 {
     /// <summary>
     /// Reserved for future extension.

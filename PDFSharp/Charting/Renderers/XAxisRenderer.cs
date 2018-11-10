@@ -27,7 +27,7 @@
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
-namespace PdfSharp.Charting.Renderers
+namespace PDFSharp.Charting.Renderers
 {
     /// <summary>
     /// Represents the base class for all X axis renderer.
@@ -44,9 +44,6 @@ namespace PdfSharp.Charting.Renderers
         /// <summary>
         /// Returns the default tick labels format string.
         /// </summary>
-        protected override string GetDefaultTickLabelsFormat()
-        {
-            return "0";
-        }
+        protected override string GetDefaultTickLabelsFormat() => "0";
     }
 }

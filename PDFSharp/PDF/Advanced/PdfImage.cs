@@ -40,11 +40,11 @@ using System.DrawingCore.Imaging;
 #if WPF
 using System.Windows.Media.Imaging;
 #endif
-using PdfSharp.Drawing;
-using PdfSharp.Drawing.Internal;
-using PdfSharp.Pdf.Filters;
+using PDFSharp.Drawing;
+using PDFSharp.Drawing.Internal;
+using PDFSharp.Pdf.Filters;
 
-namespace PdfSharp.Pdf.Advanced
+namespace PDFSharp.Pdf.Advanced
 {
     /// <summary>
     /// Represents an image.

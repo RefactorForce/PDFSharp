@@ -29,7 +29,7 @@
 
 using System;
 
-namespace PdfSharp.Drawing.BarCodes
+namespace PDFSharp.Drawing.BarCodes
 {
     /// <summary>
     /// Internal base class for several bar code types.

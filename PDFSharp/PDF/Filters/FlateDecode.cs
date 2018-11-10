@@ -29,15 +29,15 @@
 
 using System;
 using System.IO;
-using PdfSharp.Internal;
+using PDFSharp.Internal;
 #if NET_ZIP
 using System.IO.Compression;
 #else
-using PdfSharp.SharpZipLib.Zip.Compression;
-using PdfSharp.SharpZipLib.Zip.Compression.Streams;
+using PDFSharp.SharpZipLib.Zip.Compression;
+using PDFSharp.SharpZipLib.Zip.Compression.Streams;
 #endif
 
-namespace PdfSharp.Pdf.Filters
+namespace PDFSharp.Pdf.Filters
 {
     /// <summary>
     /// Implements the FlateDecode filter by wrapping SharpZipLib.

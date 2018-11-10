@@ -27,7 +27,7 @@
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
-namespace PdfSharp.Pdf
+namespace PDFSharp.Pdf
 {
     /// <summary>
     /// Sets the mode for the Deflater (FlateEncoder).

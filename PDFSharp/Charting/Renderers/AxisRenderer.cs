@@ -27,9 +27,9 @@
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
-using PdfSharp.Drawing;
+using PDFSharp.Drawing;
 
-namespace PdfSharp.Charting.Renderers
+namespace PDFSharp.Charting.Renderers
 {
     /// <summary>
     /// Represents the base for all specialized axis renderer. Initialization common too all
@@ -102,10 +102,7 @@ namespace PdfSharp.Charting.Renderers
             if (rendererInfo._axis._minorTickMarkInitialized)
                 rendererInfo.MinorTickMark = rendererInfo._axis.MinorTickMark;
 
-            if (rendererInfo._axis._majorTickMarkInitialized)
-                rendererInfo.MajorTickMark = rendererInfo._axis.MajorTickMark;
-            else
-                rendererInfo.MajorTickMark = TickMarkType.Outside;
+            rendererInfo.MajorTickMark = rendererInfo._axis._majorTickMarkInitialized ? rendererInfo._axis.MajorTickMark : TickMarkType.Outside;
 
             if (rendererInfo.MinorTickMark != TickMarkType.None)
                 rendererInfo.MinorTickMarkLineFormat = Converter.ToXPen(rendererInfo._axis._lineFormat, XColors.Black, DefaultMinorTickMarkLineWidth);

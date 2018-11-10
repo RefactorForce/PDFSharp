@@ -40,14 +40,14 @@ using System.Windows;
 using System.Windows.Media;
 #endif
 #if !EDF_CORE
-using PdfSharp.Internal;
+using PDFSharp.Internal;
 #else
 using PdfSharp.Internal;
 #endif
 
 // ReSharper disable RedundantNameQualifier
 #if !EDF_CORE
-namespace PdfSharp.Drawing
+namespace PDFSharp.Drawing
 #else
 namespace Edf.Drawing
 #endif

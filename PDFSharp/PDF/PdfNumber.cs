@@ -27,7 +27,7 @@
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
-namespace PdfSharp.Pdf
+namespace PDFSharp.Pdf
 {
     /// <summary>
     /// Base class for direct number values (not yet used, maybe superfluous).

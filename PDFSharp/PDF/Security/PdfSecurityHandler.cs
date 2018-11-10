@@ -29,7 +29,7 @@
 
 // ReSharper disable InconsistentNaming
 
-namespace PdfSharp.Pdf.Security
+namespace PDFSharp.Pdf.Security
 {
     /// <summary>
     /// Represents the base of all security handlers.

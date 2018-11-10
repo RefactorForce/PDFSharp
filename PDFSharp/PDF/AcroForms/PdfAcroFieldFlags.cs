@@ -29,7 +29,7 @@
 
 using System;
 
-namespace PdfSharp.Pdf.AcroForms
+namespace PDFSharp.Pdf.AcroForms
 {
     /// <summary>
     /// Specifies the flags of AcroForm fields.

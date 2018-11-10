@@ -30,9 +30,9 @@
 using System;
 using System.Diagnostics;
 using System.IO;
-using PdfSharp.Pdf.IO;
+using PDFSharp.Pdf.IO;
 
-namespace PdfSharp.Pdf.Advanced
+namespace PDFSharp.Pdf.Advanced
 {
     /// <summary>
     /// Represents an object stream that contains compressed objects.

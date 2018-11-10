@@ -34,9 +34,9 @@ using System.DrawingCore;
 #if WPF
 using System.Windows;
 #endif
-using PdfSharp.Drawing;
+using PDFSharp.Drawing;
 
-namespace PdfSharp
+namespace PDFSharp
 {
     /// <summary>
     /// Converter from <see cref="PageSize"/> to <see cref="XSize"/>.

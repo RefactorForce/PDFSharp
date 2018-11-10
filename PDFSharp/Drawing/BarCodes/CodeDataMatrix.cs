@@ -37,7 +37,7 @@ using System.Windows;
 using System.Windows.Media;
 #endif
 
-namespace PdfSharp.Drawing.BarCodes
+namespace PDFSharp.Drawing.BarCodes
 {
     /// <summary>
     /// Defines the DataMatrix 2D barcode. THIS IS AN EMPIRA INTERNAL IMPLEMENTATION. THE CODE IN

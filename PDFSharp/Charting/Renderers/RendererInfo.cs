@@ -28,9 +28,9 @@
 #endregion
 
 using System;
-using PdfSharp.Drawing;
+using PDFSharp.Drawing;
 
-namespace PdfSharp.Charting.Renderers
+namespace PDFSharp.Charting.Renderers
 {
     /// <summary>
     /// Represents the base class of all renderer infos.
@@ -50,8 +50,8 @@ namespace PdfSharp.Charting.Renderers
         /// </summary>
         internal virtual double X
         {
-            get { return _rect.X; }
-            set { _rect.X = value; }
+            get => _rect.X;
+            set => _rect.X = value;
         }
 
         /// <summary>
@@ -59,8 +59,8 @@ namespace PdfSharp.Charting.Renderers
         /// </summary>
         internal virtual double Y
         {
-            get { return _rect.Y; }
-            set { _rect.Y = value; }
+            get => _rect.Y;
+            set => _rect.Y = value;
         }
 
         /// <summary>
@@ -68,8 +68,8 @@ namespace PdfSharp.Charting.Renderers
         /// </summary>
         internal virtual double Width
         {
-            get { return _rect.Width; }
-            set { _rect.Width = value; }
+            get => _rect.Width;
+            set => _rect.Width = value;
         }
 
         /// <summary>
@@ -77,8 +77,8 @@ namespace PdfSharp.Charting.Renderers
         /// </summary>
         internal virtual double Height
         {
-            get { return _rect.Height; }
-            set { _rect.Height = value; }
+            get => _rect.Height;
+            set => _rect.Height = value;
         }
 
         /// <summary>
@@ -86,8 +86,8 @@ namespace PdfSharp.Charting.Renderers
         /// </summary>
         internal XSize Size
         {
-            get { return _rect.Size; }
-            set { _rect.Size = value; }
+            get => _rect.Size;
+            set => _rect.Size = value;
         }
 
         /// <summary>
@@ -95,8 +95,8 @@ namespace PdfSharp.Charting.Renderers
         /// </summary>
         internal XRect Rect
         {
-            get { return _rect; }
-            set { _rect = value; }
+            get => _rect;
+            set => _rect = value;
         }
         XRect _rect;
     }
@@ -231,7 +231,7 @@ namespace PdfSharp.Charting.Renderers
                 double sum = 0;
                 foreach (PointRendererInfo pri in _pointRendererInfos)
                 {
-                    if (!double.IsNaN(pri.Point._value))
+                    if (!Double.IsNaN(pri.Point._value))
                         sum += Math.Abs(pri.Point._value);
                 }
                 return sum;

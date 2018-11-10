@@ -38,7 +38,7 @@ using System.DrawingCore;
 using System.Windows.Media;
 #endif
 
-namespace PdfSharp.Drawing
+namespace PDFSharp.Drawing
 {
     /// <summary>
     /// Manages the localization of the color class.

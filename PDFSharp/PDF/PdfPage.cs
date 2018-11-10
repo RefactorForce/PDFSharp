@@ -31,12 +31,12 @@ using System;
 using System.Diagnostics;
 using System.Globalization;
 using System.ComponentModel;
-using PdfSharp.Pdf.IO;
-using PdfSharp.Drawing;
-using PdfSharp.Pdf.Advanced;
-using PdfSharp.Pdf.Annotations;
+using PDFSharp.Pdf.IO;
+using PDFSharp.Drawing;
+using PDFSharp.Pdf.Advanced;
+using PDFSharp.Pdf.Annotations;
 
-namespace PdfSharp.Pdf
+namespace PDFSharp.Pdf
 {
     /// <summary>
     /// Represents a page in a PDF document.

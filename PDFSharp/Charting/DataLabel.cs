@@ -32,7 +32,7 @@ using System;
 using System.ComponentModel;
 #endif
 
-namespace PdfSharp.Charting
+namespace PDFSharp.Charting
 {
     /// <summary>
     /// Represents a DataLabel of a Series
@@ -54,10 +54,7 @@ namespace PdfSharp.Charting
         /// <summary>
         /// Creates a deep copy of this object.
         /// </summary>
-        public new DataLabel Clone()
-        {
-            return (DataLabel)DeepCopy();
-        }
+        public new DataLabel Clone() => (DataLabel)DeepCopy();
 
         /// <summary>
         /// Implements the deep copy of the object.
@@ -80,18 +77,15 @@ namespace PdfSharp.Charting
         /// </summary>
         public string Format
         {
-            get { return _format; }
-            set { _format = value; }
+            get => _format;
+            set => _format = value;
         }
         internal string _format = String.Empty;
 
         /// <summary>
         /// Gets the Font for the DataLabel.
         /// </summary>
-        public Font Font
-        {
-            get { return _font ?? (_font = new Font(this)); }
-        }
+        public Font Font => _font ?? (_font = new Font(this));
         internal Font _font;
 
         /// <summary>
@@ -99,7 +93,7 @@ namespace PdfSharp.Charting
         /// </summary>
         public DataLabelPosition Position
         {
-            get { return (DataLabelPosition)_position; }
+            get => (DataLabelPosition)_position;
             set
             {
                 if (!Enum.IsDefined(typeof(DataLabelPosition), value))
@@ -117,7 +111,7 @@ namespace PdfSharp.Charting
         /// </summary>
         public DataLabelType Type
         {
-            get { return _type; }
+            get => _type;
             set
             {
                 if (!Enum.IsDefined(typeof(DataLabelType), value))

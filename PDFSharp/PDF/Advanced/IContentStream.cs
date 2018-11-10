@@ -29,9 +29,9 @@
 
 
 
-using PdfSharp.Drawing;
+using PDFSharp.Drawing;
 
-namespace PdfSharp.Pdf.Advanced
+namespace PDFSharp.Pdf.Advanced
 {
     internal interface IContentStream
     {

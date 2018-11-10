@@ -49,16 +49,16 @@ using Windows.UI.Xaml.Media;
 using SysPoint = Windows.Foundation.Point;
 using SysSize = Windows.Foundation.Size;
 #endif
-using PdfSharp.Fonts.OpenType;
-using PdfSharp.Internal;
-using PdfSharp.Pdf;
-using PdfSharp.Pdf.Internal;
-using PdfSharp.Pdf.Advanced;
+using PDFSharp.Fonts.OpenType;
+using PDFSharp.Internal;
+using PDFSharp.Pdf;
+using PDFSharp.Pdf.Internal;
+using PDFSharp.Pdf.Advanced;
 
 // ReSharper disable RedundantNameQualifier
 // ReSharper disable CompareOfFloatsByEqualityOperator
 
-namespace PdfSharp.Drawing.Pdf
+namespace PDFSharp.Drawing.Pdf
 {
     /// <summary>
     /// Represents a drawing surface for PdfPages.

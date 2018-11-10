@@ -30,7 +30,7 @@
 using System;
 using System.Diagnostics;
 using System.IO;
-using PdfSharp.Internal;
+using PDFSharp.Internal;
 #if CORE
 #endif
 #if CORE_WITH_GDI
@@ -52,7 +52,7 @@ using System.Windows.Media.Imaging;
 using Windows.UI.Xaml.Media.Imaging;
 #endif
 
-namespace PdfSharp.Drawing
+namespace PDFSharp.Drawing
 {
     /// <summary>
     /// Provides functionality to save a bitmap image in a specific format.

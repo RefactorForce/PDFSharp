@@ -31,10 +31,10 @@ using System;
 using System.Diagnostics;
 using System.Globalization;
 using System.Text;
-using PdfSharp.Drawing;
-using PdfSharp.Pdf.Security;
+using PDFSharp.Drawing;
+using PDFSharp.Pdf.Security;
 
-namespace PdfSharp.Pdf.Internal
+namespace PDFSharp.Pdf.Internal
 {
     /// <summary>
     /// Groups a set of static encoding helper functions.

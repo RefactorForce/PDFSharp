@@ -27,7 +27,7 @@
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
-namespace PdfSharp.Pdf.Actions
+namespace PDFSharp.Pdf.Actions
 {
     /// <summary>
     /// Represents a PDF Goto actions.

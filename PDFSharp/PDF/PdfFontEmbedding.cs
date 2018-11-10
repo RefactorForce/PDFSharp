@@ -29,7 +29,7 @@
 
 using System;
 
-namespace PdfSharp.Pdf
+namespace PDFSharp.Pdf
 {
     /// <summary>
     /// Specifies the embedding options of an XFont when converted into PDF.

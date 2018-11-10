@@ -27,9 +27,9 @@
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
-using PdfSharp.Drawing;
+using PDFSharp.Drawing;
 
-namespace PdfSharp.Charting.Renderers
+namespace PDFSharp.Charting.Renderers
 {
     /// <summary>
     /// Represents a plot area renderer of clustered columns, i. e. all columns are drawn side by side.
@@ -75,7 +75,7 @@ namespace PdfSharp.Charting.Renderers
                 double x = xMin + groupWidth / 2;
 
                 // Offset for columns of a particular series from the start of a clustered cloumn.
-                double dx = (columnWidth * seriesIdx) - (columnWidth / 2 * cri.seriesRendererInfos.Length);
+                double dx = columnWidth * seriesIdx - columnWidth / 2 * cri.seriesRendererInfos.Length;
 
                 foreach (ColumnRendererInfo column in sri._pointRendererInfos)
                 {
@@ -119,9 +119,6 @@ namespace PdfSharp.Charting.Renderers
         /// <summary>
         /// If yValue is within the range from yMin to yMax returns true, otherwise false.
         /// </summary>
-        protected override bool IsDataInside(double yMin, double yMax, double yValue)
-        {
-            return yValue <= yMax && yValue >= yMin;
-        }
+        protected override bool IsDataInside(double yMin, double yMax, double yValue) => yValue <= yMax && yValue >= yMin;
     }
 }

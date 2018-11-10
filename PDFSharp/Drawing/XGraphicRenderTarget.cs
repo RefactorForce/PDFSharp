@@ -29,7 +29,7 @@
 
 // ReSharper disable InconsistentNaming
 
-namespace PdfSharp.Drawing
+namespace PDFSharp.Drawing
 {
     ///<summary>
     /// Determines whether rendering based on GDI+ or WPF.

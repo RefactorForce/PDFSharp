@@ -37,7 +37,7 @@ using System.Diagnostics;
 //using FWord = System.Int16;
 //using UFWord = System.UInt16;
 
-namespace PdfSharp.Fonts.OpenType
+namespace PDFSharp.Fonts.OpenType
 {
     /// <summary>
     /// The indexToLoc table stores the offsets to the locations of the glyphs in the font,

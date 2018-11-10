@@ -29,7 +29,7 @@
 
 using System;
 
-namespace PdfSharp.Pdf
+namespace PDFSharp.Pdf
 {
     /// <summary>
     /// Base class for all dictionary Keys classes.

@@ -27,9 +27,9 @@
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
-using PdfSharp.Drawing;
+using PDFSharp.Drawing;
 
-namespace PdfSharp.Charting.Renderers
+namespace PDFSharp.Charting.Renderers
 {
     /// <summary>
     /// Represents the predefined column/bar chart colors.
@@ -39,10 +39,7 @@ namespace PdfSharp.Charting.Renderers
         /// <summary>
         /// Gets the color for column/bar charts from the specified index.
         /// </summary>
-        public static XColor Item(int index)
-        {
-            return XColor.FromArgb((int)_seriesColors[index]);
-        }
+        public static XColor Item(int index) => XColor.FromArgb((int)_seriesColors[index]);
 
         /// <summary>
         /// Colors for column/bar charts taken from Excel.
@@ -70,10 +67,7 @@ namespace PdfSharp.Charting.Renderers
         /// <summary>
         /// Gets the color for line charts from the specified index.
         /// </summary>
-        public static XColor Item(int index)
-        {
-            return XColor.FromArgb((int)_lineColors[index]);
-        }
+        public static XColor Item(int index) => XColor.FromArgb((int)_lineColors[index]);
 
         /// <summary>
         /// Colors for line charts taken from Excel.
@@ -101,10 +95,7 @@ namespace PdfSharp.Charting.Renderers
         /// <summary>
         /// Gets the color for pie charts from the specified index.
         /// </summary>
-        public static XColor Item(int index)
-        {
-            return XColor.FromArgb((int)_sectorColors[index]);
-        }
+        public static XColor Item(int index) => XColor.FromArgb((int)_sectorColors[index]);
 
         /// <summary>
         /// Colors for pie charts taken from Excel.

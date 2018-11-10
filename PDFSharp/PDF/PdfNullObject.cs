@@ -27,9 +27,9 @@
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
-using PdfSharp.Pdf.IO;
+using PDFSharp.Pdf.IO;
 
-namespace PdfSharp.Pdf
+namespace PDFSharp.Pdf
 {
     /// <summary>
     /// Represents an indirect null value. This type is not used by PDFsharp, but at least

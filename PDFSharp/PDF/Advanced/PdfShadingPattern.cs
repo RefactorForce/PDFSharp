@@ -35,10 +35,10 @@ using System.DrawingCore.Imaging;
 #if WPF
 using System.Windows.Media;
 #endif
-using PdfSharp.Drawing;
-using PdfSharp.Drawing.Pdf;
+using PDFSharp.Drawing;
+using PDFSharp.Drawing.Pdf;
 
-namespace PdfSharp.Pdf.Advanced
+namespace PDFSharp.Pdf.Advanced
 {
     /// <summary>
     /// Represents a shading pattern dictionary.

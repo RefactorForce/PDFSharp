@@ -30,7 +30,7 @@
 using System.Diagnostics;
 using System.IO;
 
-namespace PdfSharp.Fonts.OpenType
+namespace PDFSharp.Fonts.OpenType
 {
     /// <summary>
     /// Represents a writer for True Type font files. 

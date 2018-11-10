@@ -28,11 +28,11 @@
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
-using PdfSharp.Drawing;
-using PdfSharp.Pdf.Filters;
-using PdfSharp.Fonts.OpenType;
+using PDFSharp.Drawing;
+using PDFSharp.Pdf.Filters;
+using PDFSharp.Fonts.OpenType;
 
-namespace PdfSharp.Pdf.Advanced
+namespace PDFSharp.Pdf.Advanced
 {
     /// <summary>
     /// Represents a CIDFont dictionary.

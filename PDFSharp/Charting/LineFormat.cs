@@ -27,9 +27,9 @@
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
-using PdfSharp.Drawing;
+using PDFSharp.Drawing;
 
-namespace PdfSharp.Charting
+namespace PDFSharp.Charting
 {
     /// <summary>
     /// Defines the format of a line in a shape object.
@@ -51,10 +51,7 @@ namespace PdfSharp.Charting
         /// <summary>
         /// Creates a deep copy of this object.
         /// </summary>
-        public new LineFormat Clone()
-        {
-            return (LineFormat)DeepCopy();
-        }
+        public new LineFormat Clone() => (LineFormat)DeepCopy();
         #endregion
 
         #region Properties
@@ -63,8 +60,8 @@ namespace PdfSharp.Charting
         /// </summary>
         public bool Visible
         {
-            get { return _visible; }
-            set { _visible = value; }
+            get => _visible;
+            set => _visible = value;
         }
         internal bool _visible;
 
@@ -73,8 +70,8 @@ namespace PdfSharp.Charting
         /// </summary>
         public XUnit Width
         {
-            get { return _width; }
-            set { _width = value; }
+            get => _width;
+            set => _width = value;
         }
         internal XUnit _width;
 
@@ -83,8 +80,8 @@ namespace PdfSharp.Charting
         /// </summary>
         public XColor Color
         {
-            get { return _color; }
-            set { _color = value; }
+            get => _color;
+            set => _color = value;
         }
         internal XColor _color = XColor.Empty;
 
@@ -93,8 +90,8 @@ namespace PdfSharp.Charting
         /// </summary>
         public XDashStyle DashStyle
         {
-            get { return _dashStyle; }
-            set { _dashStyle = value; }
+            get => _dashStyle;
+            set => _dashStyle = value;
         }
         internal XDashStyle _dashStyle;
 
@@ -103,8 +100,8 @@ namespace PdfSharp.Charting
         /// </summary>
         public LineStyle Style
         {
-            get { return _style; }
-            set { _style = value; }
+            get => _style;
+            set => _style = value;
         }
         internal LineStyle _style;
         #endregion

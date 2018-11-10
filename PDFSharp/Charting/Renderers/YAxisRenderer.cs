@@ -29,7 +29,7 @@
 
 using System;
 
-namespace PdfSharp.Charting.Renderers
+namespace PDFSharp.Charting.Renderers
 {
     /// <summary>
     /// Represents the base class for all Y axis renderer.
@@ -48,7 +48,7 @@ namespace PdfSharp.Charting.Renderers
         /// </summary>
         protected void FineTuneYAxis(AxisRendererInfo rendererInfo, double yMin, double yMax)
         {
-            if (yMin == double.MaxValue && yMax == double.MinValue)
+            if (yMin == Double.MaxValue && yMax == Double.MinValue)
             {
                 // No series data given.
                 yMin = 0.0f;
@@ -91,40 +91,31 @@ namespace PdfSharp.Charting.Renderers
 
             AxisRendererInfo yari = rendererInfo;
             double stepWidth = normedStepWidth * Math.Pow(10.0, digits - 1.0);
-            if (yari._axis == null || double.IsNaN(yari._axis._majorTick))
-                yari.MajorTick = stepWidth;
-            else
-                yari.MajorTick = yari._axis._majorTick;
+            yari.MajorTick = yari._axis == null || Double.IsNaN(yari._axis._majorTick) ? stepWidth : yari._axis._majorTick;
 
             double roundFactor = stepWidth * 0.5;
-            if (yari._axis == null || double.IsNaN(yari._axis.MinimumScale))
+            if (yari._axis == null || Double.IsNaN(yari._axis.MinimumScale))
             {
                 double signumMin = (yMin != 0) ? yMin / Math.Abs(yMin) : 0;
-                yari.MinimumScale = (int)(Math.Abs((yMin - roundFactor) / stepWidth) - (1 * signumMin)) * stepWidth * signumMin;
+                yari.MinimumScale = (int)(Math.Abs((yMin - roundFactor) / stepWidth) - 1 * signumMin) * stepWidth * signumMin;
             }
             else
                 yari.MinimumScale = yari._axis.MinimumScale;
 
-            if (yari._axis == null || double.IsNaN(yari._axis.MaximumScale))
+            if (yari._axis == null || Double.IsNaN(yari._axis.MaximumScale))
             {
                 double signumMax = (yMax != 0) ? yMax / Math.Abs(yMax) : 0;
-                yari.MaximumScale = (int)(Math.Abs((yMax + roundFactor) / stepWidth) + (1 * signumMax)) * stepWidth * signumMax;
+                yari.MaximumScale = (int)(Math.Abs((yMax + roundFactor) / stepWidth) + 1 * signumMax) * stepWidth * signumMax;
             }
             else
                 yari.MaximumScale = yari._axis.MaximumScale;
 
-            if (yari._axis == null || double.IsNaN(yari._axis._minorTick))
-                yari.MinorTick = yari.MajorTick / 5;
-            else
-                yari.MinorTick = yari._axis._minorTick;
+            yari.MinorTick = yari._axis == null || Double.IsNaN(yari._axis._minorTick) ? yari.MajorTick / 5 : yari._axis._minorTick;
         }
 
         /// <summary>
         /// Returns the default tick labels format string.
         /// </summary>
-        protected override string GetDefaultTickLabelsFormat()
-        {
-            return "0.0";
-        }
+        protected override string GetDefaultTickLabelsFormat() => "0.0";
     }
 }

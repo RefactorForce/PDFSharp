@@ -49,17 +49,17 @@ using WpfGlyphTypeface = System.Windows.Media.GlyphTypeface;
 #if UWP
 using UwpFontFamily = Windows.UI.Xaml.Media.FontFamily;
 #endif
-using PdfSharp.Fonts;
-using PdfSharp.Fonts.OpenType;
-using PdfSharp.Internal;
-using PdfSharp.Pdf;
+using PDFSharp.Fonts;
+using PDFSharp.Fonts.OpenType;
+using PDFSharp.Internal;
+using PDFSharp.Pdf;
 
 #if SILVERLIGHT
 #pragma warning disable 649
 #endif
 // ReSharper disable ConvertToAutoProperty
 
-namespace PdfSharp.Drawing
+namespace PDFSharp.Drawing
 {
     /// <summary>
     /// Defines an object used to draw text.

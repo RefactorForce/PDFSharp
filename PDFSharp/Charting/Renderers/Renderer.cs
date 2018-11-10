@@ -27,7 +27,7 @@
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
-namespace PdfSharp.Charting.Renderers
+namespace PDFSharp.Charting.Renderers
 {
     /// <summary>
     /// Base class of all renderers.
@@ -46,10 +46,7 @@ namespace PdfSharp.Charting.Renderers
         /// Derived renderer should return an initialized and renderer specific rendererInfo,
         /// e. g. XAxisRenderer returns an new instance of AxisRendererInfo class.
         /// </summary>
-        internal virtual RendererInfo Init()
-        {
-            return null;
-        }
+        internal virtual RendererInfo Init() => null;
 
         /// <summary>
         /// Layouts and calculates the space used by the renderer's drawing item.

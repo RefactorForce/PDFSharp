@@ -29,8 +29,8 @@
 
 using System;
 using System.Globalization;
-using PdfSharp.Pdf.Content;
-using PdfSharp.Pdf.IO;
+using PDFSharp.Pdf.Content;
+using PDFSharp.Pdf.IO;
 
 #if GDI
 using System.DrawingCore;
@@ -39,7 +39,7 @@ using System.DrawingCore;
 using System.Windows;
 #endif
 
-namespace PdfSharp.Internal
+namespace PDFSharp.Internal
 {
     enum NotImplementedBehaviour
     {

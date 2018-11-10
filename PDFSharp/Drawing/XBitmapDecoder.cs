@@ -43,7 +43,7 @@ using System.Windows.Media.Imaging;
 using Windows.UI.Xaml.Media.Imaging;
 #endif
 
-namespace PdfSharp.Drawing
+namespace PDFSharp.Drawing
 {
     /// <summary>
     /// Provides functionality to load a bitmap image encoded in a specific format.

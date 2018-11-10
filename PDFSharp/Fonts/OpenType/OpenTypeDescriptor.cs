@@ -38,12 +38,12 @@ using System.DrawingCore.Drawing2D;
 using System.Windows;
 using System.Windows.Media;
 #endif
-using PdfSharp.Pdf.Internal;
+using PDFSharp.Pdf.Internal;
 #if !EDF_CORE
-using PdfSharp.Drawing;
+using PDFSharp.Drawing;
 #endif
 
-namespace PdfSharp.Fonts.OpenType
+namespace PDFSharp.Fonts.OpenType
 {
     /// <summary>
     /// The OpenType font descriptor.

@@ -28,9 +28,9 @@
 #endregion
 
 using System;
-using PdfSharp.Drawing;
+using PDFSharp.Drawing;
 
-namespace PdfSharp.Charting.Renderers
+namespace PDFSharp.Charting.Renderers
 {
     /// <summary>
     /// Represents a closed pie plot area renderer.
@@ -82,7 +82,7 @@ namespace PdfSharp.Charting.Renderers
             double startAngle = 270, sweepAngle = 0;
             foreach (SectorRendererInfo sector in sri._pointRendererInfos)
             {
-                if (!double.IsNaN(sector.Point._value) && sector.Point._value != 0)
+                if (!Double.IsNaN(sector.Point._value) && sector.Point._value != 0)
                 {
                     sweepAngle = 360 / (sumValues / Math.Abs(sector.Point._value));
 
@@ -94,8 +94,8 @@ namespace PdfSharp.Charting.Renderers
                 }
                 else
                 {
-                    sector.StartAngle = double.NaN;
-                    sector.SweepAngle = double.NaN;
+                    sector.StartAngle = Double.NaN;
+                    sector.SweepAngle = Double.NaN;
                 }
             }
         }

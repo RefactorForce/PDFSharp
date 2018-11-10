@@ -29,7 +29,7 @@
 
 using System;
 
-namespace PdfSharp.Drawing.BarCodes
+namespace PDFSharp.Drawing.BarCodes
 {
     /// <summary>
     /// Imlpementation of the Code 3 of 9 bar code.

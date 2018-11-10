@@ -45,12 +45,12 @@ using Windows.UI.Xaml.Media;
 using SysPoint = Windows.Foundation.Point;
 using SysSize = Windows.Foundation.Size;
 #endif
-using PdfSharp.Internal;
+using PDFSharp.Internal;
 
 // ReSharper disable RedundantNameQualifier
 // ReSharper disable CompareOfFloatsByEqualityOperator
 
-namespace PdfSharp.Drawing
+namespace PDFSharp.Drawing
 {
     /// <summary>
     /// Helper class for Geometry paths.

@@ -32,12 +32,12 @@ using System.Globalization;
 using System.Diagnostics;
 using System.Text;
 using System.IO;
-using PdfSharp.Internal;
-using PdfSharp.Pdf.Internal;
+using PDFSharp.Internal;
+using PDFSharp.Pdf.Internal;
 
 #pragma warning disable 1591
 
-namespace PdfSharp.Pdf.IO
+namespace PDFSharp.Pdf.IO
 {
     /// <summary>
     /// Lexical analyzer for PDF files. Technically a PDF file is a stream of bytes. Some chunks

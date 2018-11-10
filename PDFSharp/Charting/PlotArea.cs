@@ -27,9 +27,9 @@
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
-using PdfSharp.Drawing;
+using PDFSharp.Drawing;
 
-namespace PdfSharp.Charting
+namespace PDFSharp.Charting
 {
     /// <summary>
     /// Represents the area where the actual chart is drawn.
@@ -51,10 +51,7 @@ namespace PdfSharp.Charting
         /// <summary>
         /// Creates a deep copy of this object.
         /// </summary>
-        public new PlotArea Clone()
-        {
-            return (PlotArea)DeepCopy();
-        }
+        public new PlotArea Clone() => (PlotArea)DeepCopy();
 
         /// <summary>
         /// Implements the deep copy of the object.
@@ -80,19 +77,13 @@ namespace PdfSharp.Charting
         /// <summary>
         /// Gets the line format of the plot area's border.
         /// </summary>
-        public LineFormat LineFormat
-        {
-            get { return _lineFormat ?? (_lineFormat = new LineFormat(this)); }
-        }
+        public LineFormat LineFormat => _lineFormat ?? (_lineFormat = new LineFormat(this));
         internal LineFormat _lineFormat;
 
         /// <summary>
         /// Gets the background filling of the plot area.
         /// </summary>
-        public FillFormat FillFormat
-        {
-            get { return _fillFormat ?? (_fillFormat = new FillFormat(this)); }
-        }
+        public FillFormat FillFormat => _fillFormat ?? (_fillFormat = new FillFormat(this));
         internal FillFormat _fillFormat;
 
         /// <summary>
@@ -100,8 +91,8 @@ namespace PdfSharp.Charting
         /// </summary>
         public XUnit LeftPadding
         {
-            get { return _leftPadding; }
-            set { _leftPadding = value; }
+            get => _leftPadding;
+            set => _leftPadding = value;
         }
         internal XUnit _leftPadding;
 
@@ -110,8 +101,8 @@ namespace PdfSharp.Charting
         /// </summary>
         public XUnit RightPadding
         {
-            get { return _rightPadding; }
-            set { _rightPadding = value; }
+            get => _rightPadding;
+            set => _rightPadding = value;
         }
         internal XUnit _rightPadding;
 
@@ -120,8 +111,8 @@ namespace PdfSharp.Charting
         /// </summary>
         public XUnit TopPadding
         {
-            get { return _topPadding; }
-            set { _topPadding = value; }
+            get => _topPadding;
+            set => _topPadding = value;
         }
         internal XUnit _topPadding;
 
@@ -130,8 +121,8 @@ namespace PdfSharp.Charting
         /// </summary>
         public XUnit BottomPadding
         {
-            get { return _bottomPadding; }
-            set { _bottomPadding = value; }
+            get => _bottomPadding;
+            set => _bottomPadding = value;
         }
         internal XUnit _bottomPadding;
         #endregion

@@ -27,9 +27,9 @@
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
-using PdfSharp.Drawing;
+using PDFSharp.Drawing;
 
-namespace PdfSharp.Charting.Renderers
+namespace PDFSharp.Charting.Renderers
 {
     /// <summary>
     /// Represents a plot area renderer for bars.
@@ -103,10 +103,9 @@ namespace PdfSharp.Charting.Renderers
                     points[1].Y = xMax;
                     cri.plotAreaRendererInfo._matrix.TransformPoints(points);
 
-                    if (cri.yAxisRendererInfo.MinorGridlinesLineFormat != null)
-                        lineFormatRenderer = new LineFormatRenderer(gfx, cri.yAxisRendererInfo.MinorGridlinesLineFormat);
-                    else
-                        lineFormatRenderer = new LineFormatRenderer(gfx, cri.yAxisRendererInfo.MajorGridlinesLineFormat);
+                    lineFormatRenderer = cri.yAxisRendererInfo.MinorGridlinesLineFormat != null
+                        ? new LineFormatRenderer(gfx, cri.yAxisRendererInfo.MinorGridlinesLineFormat)
+                        : new LineFormatRenderer(gfx, cri.yAxisRendererInfo.MajorGridlinesLineFormat);
 
                     lineFormatRenderer.DrawLine(points[0], points[1]);
                 }

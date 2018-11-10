@@ -27,12 +27,12 @@
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
-using PdfSharp.Drawing;
-using PdfSharp.Pdf.Advanced;
-using PdfSharp.Pdf.Annotations;
-using PdfSharp.Pdf.Internal;
+using PDFSharp.Drawing;
+using PDFSharp.Pdf.Advanced;
+using PDFSharp.Pdf.Annotations;
+using PDFSharp.Pdf.Internal;
 
-namespace PdfSharp.Pdf.AcroForms
+namespace PDFSharp.Pdf.AcroForms
 {
     /// <summary>
     /// Represents the text field.

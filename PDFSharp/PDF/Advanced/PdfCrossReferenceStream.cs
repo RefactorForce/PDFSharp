@@ -30,7 +30,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace PdfSharp.Pdf.Advanced
+namespace PDFSharp.Pdf.Advanced
 {
     /// <summary>
     /// Represents a PDF cross-reference stream.

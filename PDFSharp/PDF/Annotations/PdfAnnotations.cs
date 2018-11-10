@@ -32,11 +32,11 @@ using System.Diagnostics;
 using System.Collections;
 using System.Text;
 using System.IO;
-using PdfSharp.Pdf.Advanced;
-using PdfSharp.Pdf.IO;
+using PDFSharp.Pdf.Advanced;
+using PDFSharp.Pdf.IO;
 using System.Collections.Generic;
 
-namespace PdfSharp.Pdf.Annotations
+namespace PDFSharp.Pdf.Annotations
 {
     /// <summary>
     /// Represents the annotations array of a page.

@@ -28,9 +28,9 @@
 #endregion
 
 using System;
-using PdfSharp.Drawing;
+using PDFSharp.Drawing;
 
-namespace PdfSharp.Charting.Renderers
+namespace PDFSharp.Charting.Renderers
 {
     /// <summary>
     /// Represents a Y axis renderer used for charts of type Bar2D.
@@ -53,8 +53,10 @@ namespace PdfSharp.Charting.Renderers
             Chart chart = (Chart)_rendererParms.DrawingItem;
             XGraphics gfx = _rendererParms.Graphics;
 
-            AxisRendererInfo yari = new AxisRendererInfo();
-            yari._axis = chart._yAxis;
+            AxisRendererInfo yari = new AxisRendererInfo
+            {
+                _axis = chart._yAxis
+            };
             InitScale(yari);
             if (yari._axis != null)
             {
@@ -101,9 +103,11 @@ namespace PdfSharp.Charting.Renderers
                 XSize titleSize = new XSize(0, 0);
                 if (yari._axisTitleRendererInfo != null)
                 {
-                    RendererParameters parms = new RendererParameters();
-                    parms.Graphics = gfx;
-                    parms.RendererInfo = yari;
+                    RendererParameters parms = new RendererParameters
+                    {
+                        Graphics = gfx,
+                        RendererInfo = yari
+                    };
                     AxisTitleRenderer atr = new AxisTitleRenderer(parms);
                     atr.Format();
                     titleSize.Height = yari._axisTitleRendererInfo.Height;
@@ -157,8 +161,10 @@ namespace PdfSharp.Charting.Renderers
                 }
             }
 
-            XStringFormat xsf = new XStringFormat();
-            xsf.LineAlignment = XLineAlignment.Near;
+            XStringFormat xsf = new XStringFormat
+            {
+                LineAlignment = XLineAlignment.Near
+            };
             int countTickLabels = (int)((yMax - yMin) / yMajorTick) + 1;
             for (int i = 0; i < countTickLabels; ++i)
             {
@@ -204,9 +210,11 @@ namespace PdfSharp.Charting.Renderers
             // Draw axis title
             if (yari._axisTitleRendererInfo != null)
             {
-                RendererParameters parms = new RendererParameters();
-                parms.Graphics = gfx;
-                parms.RendererInfo = yari;
+                RendererParameters parms = new RendererParameters
+                {
+                    Graphics = gfx,
+                    RendererInfo = yari
+                };
                 XRect rcTitle = yari.Rect;
                 rcTitle.Height = yari._axisTitleRendererInfo.Height;
                 rcTitle.Y += yari.Rect.Height - rcTitle.Height;
@@ -296,14 +304,14 @@ namespace PdfSharp.Charting.Renderers
         /// </summary>
         protected virtual void CalcYAxis(out double yMin, out double yMax)
         {
-            yMin = double.MaxValue;
-            yMax = double.MinValue;
+            yMin = Double.MaxValue;
+            yMax = Double.MinValue;
 
             foreach (Series series in ((Chart)_rendererParms.DrawingItem).SeriesCollection)
             {
                 foreach (Point point in series.Elements)
                 {
-                    if (!double.IsNaN(point._value))
+                    if (!Double.IsNaN(point._value))
                     {
                         yMin = Math.Min(yMin, point.Value);
                         yMax = Math.Max(yMax, point.Value);

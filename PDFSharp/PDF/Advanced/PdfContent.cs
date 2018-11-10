@@ -29,11 +29,11 @@
 
 using System;
 using System.Diagnostics;
-using PdfSharp.Drawing.Pdf;
-using PdfSharp.Pdf.Filters;
-using PdfSharp.Pdf.IO;
+using PDFSharp.Drawing.Pdf;
+using PDFSharp.Pdf.Filters;
+using PDFSharp.Pdf.IO;
 
-namespace PdfSharp.Pdf.Advanced
+namespace PDFSharp.Pdf.Advanced
 {
     /// <summary>
     /// Represents the content of a page. PDFsharp supports only one content stream per page.

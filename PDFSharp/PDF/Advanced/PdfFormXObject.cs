@@ -36,9 +36,9 @@ using System.DrawingCore.Imaging;
 #if WPF
 using System.Windows.Media;
 #endif
-using PdfSharp.Drawing;
+using PDFSharp.Drawing;
 
-namespace PdfSharp.Pdf.Advanced
+namespace PDFSharp.Pdf.Advanced
 {
     /// <summary>
     /// Represents an external form object (e.g. an imported page).

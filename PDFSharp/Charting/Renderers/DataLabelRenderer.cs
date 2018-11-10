@@ -27,9 +27,9 @@
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
-using PdfSharp.Drawing;
+using PDFSharp.Drawing;
 
-namespace PdfSharp.Charting.Renderers
+namespace PDFSharp.Charting.Renderers
 {
     /// <summary>
     /// Represents a data label renderer.
@@ -67,28 +67,23 @@ namespace PdfSharp.Charting.Renderers
                         dlri.Font = cri.DefaultDataLabelFont;
                         dlri.FontColor = new XSolidBrush(XColors.Black);
                         dlri.Position = DataLabelPosition.InsideEnd;
-                        if (cri._chart._type == ChartType.Pie2D || cri._chart._type == ChartType.PieExploded2D)
-                            dlri.Type = DataLabelType.Percent;
-                        else
-                            dlri.Type = DataLabelType.Value;
+                        dlri.Type = cri._chart._type == ChartType.Pie2D || cri._chart._type == ChartType.PieExploded2D
+                            ? DataLabelType.Percent
+                            : DataLabelType.Value;
                     }
                     else
                     {
                         dlri.Format = dl.Format.Length > 0 ? dl.Format : "0";
                         dlri.Font = Converter.ToXFont(dl._font, cri.DefaultDataLabelFont);
                         dlri.FontColor = Converter.ToXBrush(dl._font, XColors.Black);
-                        if (dl._positionInitialized)
-                            dlri.Position = dl._position;
-                        else
-                            dlri.Position = DataLabelPosition.OutsideEnd;
+                        dlri.Position = dl._positionInitialized ? dl._position : DataLabelPosition.OutsideEnd;
                         if (dl._typeInitialized)
                             dlri.Type = dl._type;
                         else
                         {
-                            if (cri._chart._type == ChartType.Pie2D || cri._chart._type == ChartType.PieExploded2D)
-                                dlri.Type = DataLabelType.Percent;
-                            else
-                                dlri.Type = DataLabelType.Value;
+                            dlri.Type = cri._chart._type == ChartType.Pie2D || cri._chart._type == ChartType.PieExploded2D
+                                ? DataLabelType.Percent
+                                : DataLabelType.Value;
                         }
                     }
 

@@ -29,7 +29,7 @@
 
 using System.Collections;
 
-namespace PdfSharp.Charting
+namespace PDFSharp.Charting
 {
     /// <summary>
     /// Represents a series of data on the X-Axis.
@@ -61,10 +61,7 @@ namespace PdfSharp.Charting
         /// <summary>
         /// Creates a deep copy of this object.
         /// </summary>
-        public new XSeries Clone()
-        {
-            return (XSeries)DeepCopy();
-        }
+        public new XSeries Clone() => (XSeries)DeepCopy();
 
         /// <summary>
         /// Implements the deep copy of the object.
@@ -83,45 +80,30 @@ namespace PdfSharp.Charting
         /// <summary>
         /// Adds a blank to the XSeries.
         /// </summary>
-        public void AddBlank()
-        {
-            _xSeriesElements.AddBlank();
-        }
+        public void AddBlank() => _xSeriesElements.AddBlank();
 
         /// <summary>
         /// Adds a value to the XSeries.
         /// </summary>
-        public XValue Add(string value)
-        {
-            return _xSeriesElements.Add(value);
-        }
+        public XValue Add(string value) => _xSeriesElements.Add(value);
 
         /// <summary>
         /// Adds an array of values to the XSeries.
         /// </summary>
-        public void Add(params string[] values)
-        {
-            _xSeriesElements.Add(values);
-        }
+        public void Add(params string[] values) => _xSeriesElements.Add(values);
 
         /// <summary>
         /// Gets the enumerator.
         /// </summary>
         /// <returns></returns>
-        public IEnumerator GetEnumerator()
-        {
-            return _xSeriesElements.GetEnumerator();
-        }
+        public IEnumerator GetEnumerator() => _xSeriesElements.GetEnumerator();
         #endregion
 
         #region Properties
         /// <summary>
         /// Gets the number of xvalues actually contained in the xseries.
         /// </summary>
-        public int Count
-        {
-            get { return _xSeriesElements.Count; }
-        }
+        public int Count => _xSeriesElements.Count;
         #endregion
     }
 }

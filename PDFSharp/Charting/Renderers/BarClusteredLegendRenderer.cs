@@ -27,9 +27,9 @@
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
-using PdfSharp.Drawing;
+using PDFSharp.Drawing;
 
-namespace PdfSharp.Charting.Renderers
+namespace PDFSharp.Charting.Renderers
 {
     /// <summary>
     /// Represents the legend renderer specific to bar charts.
@@ -55,12 +55,14 @@ namespace PdfSharp.Charting.Renderers
                 return;
 
             XGraphics gfx = _rendererParms.Graphics;
-            RendererParameters parms = new RendererParameters();
-            parms.Graphics = gfx;
+            RendererParameters parms = new RendererParameters
+            {
+                Graphics = gfx
+            };
 
             LegendEntryRenderer ler = new LegendEntryRenderer(parms);
 
-            bool verticalLegend = (lri._legend._docking == DockingType.Left || lri._legend._docking == DockingType.Right);
+            bool verticalLegend = lri._legend._docking == DockingType.Left || lri._legend._docking == DockingType.Right;
             int paddingFactor = 1;
             if (lri.BorderPen != null)
                 paddingFactor = 2;

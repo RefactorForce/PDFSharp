@@ -27,7 +27,7 @@
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
-namespace PdfSharp.Charting
+namespace PDFSharp.Charting
 {
     /// <summary>
     /// Represents the collection of the values in a data series.
@@ -57,18 +57,12 @@ namespace PdfSharp.Charting
         /// <summary>
         /// Creates a deep copy of this object.
         /// </summary>
-        public new SeriesElements Clone()
-        {
-            return (SeriesElements)DeepCopy();
-        }
+        public new SeriesElements Clone() => (SeriesElements)DeepCopy();
 
         /// <summary>
         /// Adds a blank to the series.
         /// </summary>
-        public void AddBlank()
-        {
-            base.Add(null);
-        }
+        public void AddBlank() => base.Add(null);
 
         /// <summary>
         /// Adds a new point with a real value to the series.

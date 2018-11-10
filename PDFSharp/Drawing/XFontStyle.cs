@@ -29,7 +29,7 @@
 
 using System;
 
-namespace PdfSharp.Drawing
+namespace PDFSharp.Drawing
 {
     /// <summary>
     /// Specifies style information applied to text.

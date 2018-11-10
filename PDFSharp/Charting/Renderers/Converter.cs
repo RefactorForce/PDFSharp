@@ -27,9 +27,9 @@
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
-using PdfSharp.Drawing;
+using PDFSharp.Drawing;
 
-namespace PdfSharp.Charting.Renderers
+namespace PDFSharp.Charting.Renderers
 {
     /// <summary>
     /// Provides functions which converts Charting.DOM objects into PdfSharp.Drawing objects.
@@ -68,19 +68,13 @@ namespace PdfSharp.Charting.Renderers
         /// Creates a XPen based on the specified line format. If not specified color and width will be taken
         /// from the defaultColor and defaultWidth parameter.
         /// </summary>
-        internal static XPen ToXPen(LineFormat lineFormat, XColor defaultColor, double defaultWidth)
-        {
-            return ToXPen(lineFormat, defaultColor, defaultWidth, XDashStyle.Solid);
-        }
+        internal static XPen ToXPen(LineFormat lineFormat, XColor defaultColor, double defaultWidth) => ToXPen(lineFormat, defaultColor, defaultWidth, XDashStyle.Solid);
 
         /// <summary>
         /// Creates a XPen based on the specified line format. If not specified color and width will be taken
         /// from the defaultPen parameter.
         /// </summary>
-        internal static XPen ToXPen(LineFormat lineFormat, XPen defaultPen)
-        {
-            return ToXPen(lineFormat, defaultPen.Color, defaultPen.Width, defaultPen.DashStyle);
-        }
+        internal static XPen ToXPen(LineFormat lineFormat, XPen defaultPen) => ToXPen(lineFormat, defaultPen.Color, defaultPen.Width, defaultPen.DashStyle);
 
         /// <summary>
         /// Creates a XPen based on the specified line format. If not specified color, width and dash style
@@ -91,8 +85,10 @@ namespace PdfSharp.Charting.Renderers
             XPen pen = null;
             if (lineFormat == null)
             {
-                pen = new XPen(defaultColor, defaultWidth);
-                pen.DashStyle = defaultDashStyle;
+                pen = new XPen(defaultColor, defaultWidth)
+                {
+                    DashStyle = defaultDashStyle
+                };
             }
             else
             {
@@ -106,9 +102,11 @@ namespace PdfSharp.Charting.Renderers
                 if (lineFormat.Visible && width == 0)
                     width = defaultWidth;
 
-                pen = new XPen(color, width);
-                pen.DashStyle = lineFormat._dashStyle;
-                pen.DashOffset = 10 * width;
+                pen = new XPen(color, width)
+                {
+                    DashStyle = lineFormat._dashStyle,
+                    DashOffset = 10 * width
+                };
             }
             return pen;
         }
@@ -117,22 +115,12 @@ namespace PdfSharp.Charting.Renderers
         /// Creates a XBrush based on the specified fill format. If not specified, color will be taken
         /// from the defaultColor parameter.
         /// </summary>
-        internal static XBrush ToXBrush(FillFormat fillFormat, XColor defaultColor)
-        {
-            if (fillFormat == null || fillFormat._color.IsEmpty)
-                return new XSolidBrush(defaultColor);
-            return new XSolidBrush(fillFormat._color);
-        }
+        internal static XBrush ToXBrush(FillFormat fillFormat, XColor defaultColor) => fillFormat == null || fillFormat._color.IsEmpty ? new XSolidBrush(defaultColor) : new XSolidBrush(fillFormat._color);
 
         /// <summary>
         /// Creates a XBrush based on the specified font color. If not specified, color will be taken
         /// from the defaultColor parameter.
         /// </summary>
-        internal static XBrush ToXBrush(Font font, XColor defaultColor)
-        {
-            if (font == null || font._color.IsEmpty)
-                return new XSolidBrush(defaultColor);
-            return new XSolidBrush(font._color);
-        }
+        internal static XBrush ToXBrush(Font font, XColor defaultColor) => font == null || font._color.IsEmpty ? new XSolidBrush(defaultColor) : new XSolidBrush(font._color);
     }
 }

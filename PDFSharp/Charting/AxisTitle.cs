@@ -29,7 +29,7 @@
 
 using System;
 
-namespace PdfSharp.Charting
+namespace PDFSharp.Charting
 {
     /// <summary>
     /// Represents the title of an axis.
@@ -51,10 +51,7 @@ namespace PdfSharp.Charting
         /// <summary>
         /// Creates a deep copy of this object.
         /// </summary>
-        public new AxisTitle Clone()
-        {
-            return (AxisTitle)DeepCopy();
-        }
+        public new AxisTitle Clone() => (AxisTitle)DeepCopy();
 
         /// <summary>
         /// Implements the deep copy of the object.
@@ -77,18 +74,15 @@ namespace PdfSharp.Charting
         /// </summary>
         public string Caption
         {
-            get { return _caption; }
-            set { _caption = value; }
+            get => _caption;
+            set => _caption = value;
         }
         internal string _caption = String.Empty;
 
         /// <summary>
         /// Gets the font of the title.
         /// </summary>
-        public Font Font
-        {
-            get { return _font ?? (_font = new Font(this)); }
-        }
+        public Font Font => _font ?? (_font = new Font(this));
         internal Font _font;
 
         /// <summary>
@@ -96,8 +90,8 @@ namespace PdfSharp.Charting
         /// </summary>
         public double Orientation
         {
-            get { return _orientation; }
-            set { _orientation = value; }
+            get => _orientation;
+            set => _orientation = value;
         }
         internal double _orientation;
 
@@ -106,8 +100,8 @@ namespace PdfSharp.Charting
         /// </summary>
         public HorizontalAlignment Alignment
         {
-            get { return _alignment; }
-            set { _alignment = value; }
+            get => _alignment;
+            set => _alignment = value;
         }
         internal HorizontalAlignment _alignment;
 
@@ -116,8 +110,8 @@ namespace PdfSharp.Charting
         /// </summary>
         public VerticalAlignment VerticalAlignment
         {
-            get { return _verticalAlignment; }
-            set { _verticalAlignment = value; }
+            get => _verticalAlignment;
+            set => _verticalAlignment = value;
         }
         internal VerticalAlignment _verticalAlignment;
         #endregion

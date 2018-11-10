@@ -29,7 +29,7 @@
 
 using System;
 
-namespace PdfSharp
+namespace PDFSharp
 {
     /// <summary>
     /// Base class of all exceptions in the PDFsharp frame work.

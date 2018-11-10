@@ -28,10 +28,10 @@
 #endregion
 
 using System.Diagnostics;
-using PdfSharp.Pdf.IO;
-using PdfSharp.Pdf.Internal;
+using PDFSharp.Pdf.IO;
+using PDFSharp.Pdf.Internal;
 
-namespace PdfSharp.Pdf
+namespace PDFSharp.Pdf
 {
     /// <summary>
     /// Represents an indirect text string value. This type is not used by PDFsharp. If it is imported from

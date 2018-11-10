@@ -27,10 +27,10 @@
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
-using PdfSharp.Pdf.Annotations;
-using PdfSharp.Pdf.Advanced;
+using PDFSharp.Pdf.Annotations;
+using PDFSharp.Pdf.Advanced;
 
-namespace PdfSharp.Pdf.AcroForms
+namespace PDFSharp.Pdf.AcroForms
 {
     /// <summary>
     /// Represents the check box field.

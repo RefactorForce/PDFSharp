@@ -41,7 +41,7 @@
 
 using System;
 using System.IO;
-using PdfSharp.SharpZipLib.Checksums;
+using PDFSharp.SharpZipLib.Checksums;
 
 // ReSharper disable RedundantThisQualifier
 
@@ -50,7 +50,7 @@ using PdfSharp.SharpZipLib.Checksums;
 //using PdfSharp.SharpZipLib.Encryption;
 //#endif
 
-namespace PdfSharp.SharpZipLib.Zip.Compression.Streams
+namespace PDFSharp.SharpZipLib.Zip.Compression.Streams
 {
     /// <summary>
     /// A special stream deflating or compressing the bytes that are

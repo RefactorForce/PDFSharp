@@ -32,7 +32,7 @@ using System;
 using System.ComponentModel;
 #endif
 
-namespace PdfSharp.Charting
+namespace PDFSharp.Charting
 {
     /// <summary>
     /// This class represents an axis in a chart.
@@ -48,10 +48,7 @@ namespace PdfSharp.Charting
         /// <summary>
         /// Creates a deep copy of this object.
         /// </summary>
-        public new Axis Clone()
-        {
-            return (Axis)DeepCopy();
-        }
+        public new Axis Clone() => (Axis)DeepCopy();
 
         /// <summary>
         /// Implements the deep copy of the object.
@@ -92,10 +89,7 @@ namespace PdfSharp.Charting
         /// <summary>
         /// Gets the title of the axis.
         /// </summary>
-        public AxisTitle Title
-        {
-            get { return _title ?? (_title = new AxisTitle(this)); }
-        }
+        public AxisTitle Title => _title ?? (_title = new AxisTitle(this));
         internal AxisTitle _title;
 
         /// <summary>
@@ -103,47 +97,47 @@ namespace PdfSharp.Charting
         /// </summary>
         public double MinimumScale
         {
-            get { return _minimumScale; }
-            set { _minimumScale = value; }
+            get => _minimumScale;
+            set => _minimumScale = value;
         }
-        internal double _minimumScale = double.NaN;
+        internal double _minimumScale = Double.NaN;
 
         /// <summary>
         /// Gets or sets the maximum value of the axis.
         /// </summary>
         public double MaximumScale
         {
-            get { return _maximumScale; }
-            set { _maximumScale = value; }
+            get => _maximumScale;
+            set => _maximumScale = value;
         }
-        internal double _maximumScale = double.NaN;
+        internal double _maximumScale = Double.NaN;
 
         /// <summary>
         /// Gets or sets the interval of the primary tick.
         /// </summary>
         public double MajorTick
         {
-            get { return _majorTick; }
-            set { _majorTick = value; }
+            get => _majorTick;
+            set => _majorTick = value;
         }
-        internal double _majorTick = double.NaN;
+        internal double _majorTick = Double.NaN;
 
         /// <summary>
         /// Gets or sets the interval of the secondary tick.
         /// </summary>
         public double MinorTick
         {
-            get { return _minorTick; }
-            set { _minorTick = value; }
+            get => _minorTick;
+            set => _minorTick = value;
         }
-        internal double _minorTick = double.NaN;
+        internal double _minorTick = Double.NaN;
 
         /// <summary>
         /// Gets or sets the type of the primary tick mark.
         /// </summary>
         public TickMarkType MajorTickMark
         {
-            get { return _majorTickMark; }
+            get => _majorTickMark;
             set
             {
                 if (!Enum.IsDefined(typeof(TickMarkType), value))
@@ -160,7 +154,7 @@ namespace PdfSharp.Charting
         /// </summary>
         public TickMarkType MinorTickMark
         {
-            get { return _minorTickMark; }
+            get => _minorTickMark;
             set
             {
                 if (!Enum.IsDefined(typeof(TickMarkType), value))
@@ -175,37 +169,25 @@ namespace PdfSharp.Charting
         /// <summary>
         /// Gets the label of the primary tick.
         /// </summary>
-        public TickLabels TickLabels
-        {
-            get { return _tickLabels ?? (_tickLabels = new TickLabels(this)); }
-        }
+        public TickLabels TickLabels => _tickLabels ?? (_tickLabels = new TickLabels(this));
         internal TickLabels _tickLabels;
 
         /// <summary>
         /// Gets the format of the axis line.
         /// </summary>
-        public LineFormat LineFormat
-        {
-            get { return _lineFormat ?? (_lineFormat = new LineFormat(this)); }
-        }
+        public LineFormat LineFormat => _lineFormat ?? (_lineFormat = new LineFormat(this));
         internal LineFormat _lineFormat;
 
         /// <summary>
         /// Gets the primary gridline object.
         /// </summary>
-        public Gridlines MajorGridlines
-        {
-            get { return _majorGridlines ?? (_majorGridlines = new Gridlines(this)); }
-        }
+        public Gridlines MajorGridlines => _majorGridlines ?? (_majorGridlines = new Gridlines(this));
         internal Gridlines _majorGridlines;
 
         /// <summary>
         /// Gets the secondary gridline object.
         /// </summary>
-        public Gridlines MinorGridlines
-        {
-            get { return _minorGridlines ?? (_minorGridlines = new Gridlines(this)); }
-        }
+        public Gridlines MinorGridlines => _minorGridlines ?? (_minorGridlines = new Gridlines(this));
         internal Gridlines _minorGridlines;
 
         /// <summary>
@@ -213,8 +195,8 @@ namespace PdfSharp.Charting
         /// </summary>
         public bool HasMajorGridlines
         {
-            get { return _hasMajorGridlines; }
-            set { _hasMajorGridlines = value; }
+            get => _hasMajorGridlines;
+            set => _hasMajorGridlines = value;
         }
         internal bool _hasMajorGridlines;
 
@@ -223,8 +205,8 @@ namespace PdfSharp.Charting
         /// </summary>
         public bool HasMinorGridlines
         {
-            get { return _hasMinorGridlines; }
-            set { _hasMinorGridlines = value; }
+            get => _hasMinorGridlines;
+            set => _hasMinorGridlines = value;
         }
         internal bool _hasMinorGridlines;
         #endregion

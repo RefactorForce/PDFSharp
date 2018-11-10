@@ -29,7 +29,7 @@
 
 using System;
 
-namespace PdfSharp.Pdf
+namespace PDFSharp.Pdf
 {
     /// <summary>
     /// Specifies the encoding schema used for an XFont when converted into PDF.

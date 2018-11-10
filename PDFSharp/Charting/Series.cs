@@ -28,12 +28,12 @@
 #endregion
 
 using System;
-using PdfSharp.Drawing;
+using PDFSharp.Drawing;
 #if !SILVERLIGHT
 using System.ComponentModel;
 #endif
 
-namespace PdfSharp.Charting
+namespace PDFSharp.Charting
 {
     /// <summary>
     /// Represents a series of data on the chart.
@@ -50,10 +50,7 @@ namespace PdfSharp.Charting
         /// <summary>
         /// Creates a deep copy of this object.
         /// </summary>
-        public new Series Clone()
-        {
-            return (Series)DeepCopy();
-        }
+        public new Series Clone() => (Series)DeepCopy();
 
         /// <summary>
         /// Implements the deep copy of the object.
@@ -87,36 +84,24 @@ namespace PdfSharp.Charting
         /// <summary>
         /// Adds a blank to the series.
         /// </summary>
-        public void AddBlank()
-        {
-            Elements.AddBlank();
-        }
+        public void AddBlank() => Elements.AddBlank();
 
         /// <summary>
         /// Adds a real value to the series.
         /// </summary>
-        public Point Add(double value)
-        {
-            return Elements.Add(value);
-        }
+        public Point Add(double value) => Elements.Add(value);
 
         /// <summary>
         /// Adds an array of real values to the series.
         /// </summary>
-        public void Add(params double[] values)
-        {
-            Elements.Add(values);
-        }
+        public void Add(params double[] values) => Elements.Add(values);
         #endregion
 
         #region Properties
         /// <summary>
         /// The actual value container of the series.
         /// </summary>
-        public SeriesElements Elements
-        {
-            get { return _seriesElements ?? (_seriesElements = new SeriesElements(this)); }
-        }
+        public SeriesElements Elements => _seriesElements ?? (_seriesElements = new SeriesElements(this));
         internal SeriesElements _seriesElements;
 
         /// <summary>
@@ -124,27 +109,21 @@ namespace PdfSharp.Charting
         /// </summary>
         public string Name
         {
-            get { return _name; }
-            set { _name = value; }
+            get => _name;
+            set => _name = value;
         }
         internal string _name = String.Empty;
 
         /// <summary>
         /// Gets the line format of the border of each data.
         /// </summary>
-        public LineFormat LineFormat
-        {
-            get { return _lineFormat ?? (_lineFormat = new LineFormat(this)); }
-        }
+        public LineFormat LineFormat => _lineFormat ?? (_lineFormat = new LineFormat(this));
         internal LineFormat _lineFormat;
 
         /// <summary>
         /// Gets the background filling of the data.
         /// </summary>
-        public FillFormat FillFormat
-        {
-            get { return _fillFormat ?? (_fillFormat = new FillFormat(this)); }
-        }
+        public FillFormat FillFormat => _fillFormat ?? (_fillFormat = new FillFormat(this));
         internal FillFormat _fillFormat;
 
         /// <summary>
@@ -152,8 +131,8 @@ namespace PdfSharp.Charting
         /// </summary>
         public XUnit MarkerSize
         {
-            get { return _markerSize; }
-            set { _markerSize = value; }
+            get => _markerSize;
+            set => _markerSize = value;
         }
         internal XUnit _markerSize;
 
@@ -162,7 +141,7 @@ namespace PdfSharp.Charting
         /// </summary>
         public MarkerStyle MarkerStyle
         {
-            get { return _markerStyle; }
+            get => _markerStyle;
             set
             {
                 if (!Enum.IsDefined(typeof(MarkerStyle), value))
@@ -180,8 +159,8 @@ namespace PdfSharp.Charting
         /// </summary>
         public XColor MarkerForegroundColor
         {
-            get { return _markerForegroundColor; }
-            set { _markerForegroundColor = value; }
+            get => _markerForegroundColor;
+            set => _markerForegroundColor = value;
         }
         internal XColor _markerForegroundColor = XColor.Empty;
 
@@ -190,8 +169,8 @@ namespace PdfSharp.Charting
         /// </summary>
         public XColor MarkerBackgroundColor
         {
-            get { return _markerBackgroundColor; }
-            set { _markerBackgroundColor = value; }
+            get => _markerBackgroundColor;
+            set => _markerBackgroundColor = value;
         }
         internal XColor _markerBackgroundColor = XColor.Empty;
 
@@ -201,7 +180,7 @@ namespace PdfSharp.Charting
         /// </summary>
         public ChartType ChartType
         {
-            get { return _chartType; }
+            get => _chartType;
             set
             {
                 if (!Enum.IsDefined(typeof(ChartType), value))
@@ -215,10 +194,7 @@ namespace PdfSharp.Charting
         /// <summary>
         /// Gets the DataLabel of the series.
         /// </summary>
-        public DataLabel DataLabel
-        {
-            get { return _dataLabel ?? (_dataLabel = new DataLabel(this)); }
-        }
+        public DataLabel DataLabel => _dataLabel ?? (_dataLabel = new DataLabel(this));
         internal DataLabel _dataLabel;
 
         /// <summary>
@@ -226,21 +202,15 @@ namespace PdfSharp.Charting
         /// </summary>
         public bool HasDataLabel
         {
-            get { return _hasDataLabel; }
-            set { _hasDataLabel = value; }
+            get => _hasDataLabel;
+            set => _hasDataLabel = value;
         }
         internal bool _hasDataLabel;
 
         /// <summary>
         /// Gets the element count of the series.
         /// </summary>
-        public int Count
-        {
-            get
-            {
-                return _seriesElements != null ? _seriesElements.Count : 0;
-            }
-        }
+        public int Count => _seriesElements != null ? _seriesElements.Count : 0;
         #endregion
     }
 }

@@ -29,7 +29,7 @@
 
 using System;
 
-namespace PdfSharp.Charting
+namespace PDFSharp.Charting
 {
     /// <summary>
     /// Represents the format of the label of each value on the axis.
@@ -51,10 +51,7 @@ namespace PdfSharp.Charting
         /// <summary>
         /// Creates a deep copy of this object.
         /// </summary>
-        public new TickLabels Clone()
-        {
-            return (TickLabels)DeepCopy();
-        }
+        public new TickLabels Clone() => (TickLabels)DeepCopy();
 
         /// <summary>
         /// Implements the deep copy of the object.
@@ -77,18 +74,15 @@ namespace PdfSharp.Charting
         /// </summary>
         public string Format
         {
-            get { return _format; }
-            set { _format = value; }
+            get => _format;
+            set => _format = value;
         }
         internal string _format = String.Empty;
 
         /// <summary>
         /// Gets the font of the label.
         /// </summary>
-        public Font Font
-        {
-            get { return _font ?? (_font = new Font(this)); }
-        }
+        public Font Font => _font ?? (_font = new Font(this));
         internal Font _font;
         #endregion
     }

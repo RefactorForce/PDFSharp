@@ -30,11 +30,11 @@
 using System;
 using System.Collections.Generic;
 using System.Collections;
-using PdfSharp.Drawing;
+using PDFSharp.Drawing;
 
 // Review: CountOpen does not work. - StL/14-10-05
 
-namespace PdfSharp.Pdf
+namespace PDFSharp.Pdf
 {
     /// <summary>
     /// Represents a collection of outlines.

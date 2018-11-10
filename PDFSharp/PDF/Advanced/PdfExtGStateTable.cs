@@ -29,7 +29,7 @@
 
 using System.Collections.Generic;
 
-namespace PdfSharp.Pdf.Advanced
+namespace PDFSharp.Pdf.Advanced
 {
     /// <summary>
     /// Contains all used ExtGState objects of a document.

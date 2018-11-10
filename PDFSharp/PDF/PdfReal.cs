@@ -29,9 +29,9 @@
 
 using System.Diagnostics;
 using System.Globalization;
-using PdfSharp.Pdf.IO;
+using PDFSharp.Pdf.IO;
 
-namespace PdfSharp.Pdf
+namespace PDFSharp.Pdf
 {
     /// <summary>
     /// Represents a direct real value.

@@ -30,9 +30,9 @@
 using System;
 using System.Diagnostics;
 using System.Text;
-using PdfSharp.Fonts;
+using PDFSharp.Fonts;
 
-namespace PdfSharp.Pdf.Advanced
+namespace PDFSharp.Pdf.Advanced
 {
     /// <summary>
     /// Represents a PDF font.

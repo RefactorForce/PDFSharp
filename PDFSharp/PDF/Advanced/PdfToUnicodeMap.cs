@@ -31,10 +31,10 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
-using PdfSharp.Fonts;
-using PdfSharp.Pdf.Filters;
+using PDFSharp.Fonts;
+using PDFSharp.Pdf.Filters;
 
-namespace PdfSharp.Pdf.Advanced
+namespace PDFSharp.Pdf.Advanced
 {
     /// <summary>
     /// Represents a ToUnicode map for composite font.

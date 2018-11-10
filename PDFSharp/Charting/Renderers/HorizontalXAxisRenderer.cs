@@ -28,9 +28,9 @@
 #endregion
 
 using System;
-using PdfSharp.Drawing;
+using PDFSharp.Drawing;
 
-namespace PdfSharp.Charting.Renderers
+namespace PDFSharp.Charting.Renderers
 {
     /// <summary>
     /// Represents an axis renderer used for charts of type Column2D or Line.
@@ -51,8 +51,10 @@ namespace PdfSharp.Charting.Renderers
         {
             Chart chart = (Chart)_rendererParms.DrawingItem;
 
-            AxisRendererInfo xari = new AxisRendererInfo();
-            xari._axis = chart._xAxis;
+            AxisRendererInfo xari = new AxisRendererInfo
+            {
+                _axis = chart._xAxis
+            };
             if (xari._axis != null)
             {
                 ChartRendererInfo cri = (ChartRendererInfo)_rendererParms.RendererInfo;

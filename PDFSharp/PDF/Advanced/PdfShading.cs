@@ -35,11 +35,11 @@ using System.DrawingCore.Imaging;
 #if WPF
 using System.Windows.Media;
 #endif
-using PdfSharp.Drawing;
-using PdfSharp.Drawing.Pdf;
-using PdfSharp.Pdf.Internal;
+using PDFSharp.Drawing;
+using PDFSharp.Drawing.Pdf;
+using PDFSharp.Pdf.Internal;
 
-namespace PdfSharp.Pdf.Advanced
+namespace PDFSharp.Pdf.Advanced
 {
     /// <summary>
     /// Represents a shading dictionary.

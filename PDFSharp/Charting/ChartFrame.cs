@@ -28,10 +28,10 @@
 #endregion
 
 using System.Collections.Generic;
-using PdfSharp.Drawing;
-using PdfSharp.Charting.Renderers;
+using PDFSharp.Drawing;
+using PDFSharp.Charting.Renderers;
 
-namespace PdfSharp.Charting
+namespace PDFSharp.Charting
 {
     /// <summary>
     /// Represents the frame which holds one or more charts.
@@ -58,8 +58,8 @@ namespace PdfSharp.Charting
         /// </summary>
         public XPoint Location
         {
-            get { return _location; }
-            set { _location = value; }
+            get => _location;
+            set => _location = value;
         }
         XPoint _location;
 
@@ -68,8 +68,8 @@ namespace PdfSharp.Charting
         /// </summary>
         public XSize Size
         {
-            get { return _size; }
-            set { _size = value; }
+            get => _size;
+            set => _size = value;
         }
         XSize _size;
 
@@ -118,8 +118,10 @@ namespace PdfSharp.Charting
             // draw each chart in list
             foreach (Chart chart in _chartList)
             {
-                RendererParameters parms = new RendererParameters(gfx, rect);
-                parms.DrawingItem = chart;
+                RendererParameters parms = new RendererParameters(gfx, rect)
+                {
+                    DrawingItem = chart
+                };
 
                 ChartRenderer renderer = GetChartRenderer(chart, parms);
                 renderer.Init();
@@ -166,8 +168,10 @@ namespace PdfSharp.Charting
             {
                 XRect chartRect = new XRect(0, 0, _size.Width, _size.Height);
                 Chart chart = (Chart)_chartList[0];
-                RendererParameters parms = new RendererParameters(gfx, chartRect);
-                parms.DrawingItem = chart;
+                RendererParameters parms = new RendererParameters(gfx, chartRect)
+                {
+                    DrawingItem = chart
+                };
 
                 ChartRenderer renderer = GetChartRenderer(chart, parms);
                 renderer.Init();

@@ -27,9 +27,9 @@
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
-using PdfSharp.Drawing;
+using PDFSharp.Drawing;
 
-namespace PdfSharp.Charting.Renderers
+namespace PDFSharp.Charting.Renderers
 {
     /// <summary>
     /// Represents a bar chart renderer.
@@ -49,8 +49,10 @@ namespace PdfSharp.Charting.Renderers
         /// </summary>
         internal override RendererInfo Init()
         {
-            ChartRendererInfo cri = new ChartRendererInfo();
-            cri._chart = (Chart)_rendererParms.DrawingItem;
+            ChartRendererInfo cri = new ChartRendererInfo
+            {
+                _chart = (Chart)_rendererParms.DrawingItem
+            };
             _rendererParms.RendererInfo = cri;
 
             InitSeriesRendererInfo();
@@ -213,8 +215,10 @@ namespace PdfSharp.Charting.Renderers
             // Lowest series is the first, like in Excel 
             for (int idx = 0; idx < seriesColl.Count; ++idx)
             {
-                SeriesRendererInfo sri = new SeriesRendererInfo();
-                sri._series = seriesColl[idx];
+                SeriesRendererInfo sri = new SeriesRendererInfo
+                {
+                    _series = seriesColl[idx]
+                };
                 cri.seriesRendererInfos[idx] = sri;
             }
 

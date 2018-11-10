@@ -27,7 +27,7 @@
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
-namespace PdfSharp.Drawing
+namespace PDFSharp.Drawing
 {
 #if PDFSHARP20
     enum FontStretchValues

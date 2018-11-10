@@ -49,9 +49,9 @@ using SysPoint = Windows.Foundation.Point;
 using SysSize = Windows.Foundation.Size;
 using SysRect = Windows.Foundation.Rect;
 #endif
-using PdfSharp.Internal;
+using PDFSharp.Internal;
 
-namespace PdfSharp.Drawing
+namespace PDFSharp.Drawing
 {
     /// <summary>
     /// Represents a series of connected lines and curves.

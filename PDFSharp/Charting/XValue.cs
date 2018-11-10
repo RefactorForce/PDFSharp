@@ -29,7 +29,7 @@
 
 using System;
 
-namespace PdfSharp.Charting
+namespace PDFSharp.Charting
 {
     /// <summary>
     /// Represents the actual value on the XSeries.
@@ -63,10 +63,7 @@ namespace PdfSharp.Charting
         /// <summary>
         /// Creates a deep copy of this object.
         /// </summary>
-        public new XValue Clone()
-        {
-            return (XValue)DeepCopy();
-        }
+        public new XValue Clone() => (XValue)DeepCopy();
         #endregion
     }
 }

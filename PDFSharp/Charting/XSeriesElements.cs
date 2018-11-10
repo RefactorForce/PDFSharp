@@ -27,7 +27,7 @@
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
-namespace PdfSharp.Charting
+namespace PDFSharp.Charting
 {
     /// <summary>
     /// Represents the collection of the value in an XSeries.
@@ -44,18 +44,12 @@ namespace PdfSharp.Charting
         /// <summary>
         /// Creates a deep copy of this object.
         /// </summary>
-        public new XSeriesElements Clone()
-        {
-            return (XSeriesElements)base.DeepCopy();
-        }
+        public new XSeriesElements Clone() => (XSeriesElements)base.DeepCopy();
 
         /// <summary>
         /// Adds a blank to the XSeries.
         /// </summary>
-        public void AddBlank()
-        {
-            base.Add(null);
-        }
+        public void AddBlank() => base.Add(null);
 
         /// <summary>
         /// Adds a value to the XSeries.

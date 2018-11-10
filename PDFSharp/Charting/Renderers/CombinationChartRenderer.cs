@@ -29,9 +29,9 @@
 
 using System;
 using System.Collections.Generic;
-using PdfSharp.Drawing;
+using PDFSharp.Drawing;
 
-namespace PdfSharp.Charting.Renderers
+namespace PDFSharp.Charting.Renderers
 {
     /// <summary>
     /// Represents a renderer for combinations of charts.
@@ -51,8 +51,10 @@ namespace PdfSharp.Charting.Renderers
         /// </summary>
         internal override RendererInfo Init()
         {
-            CombinationRendererInfo cri = new CombinationRendererInfo();
-            cri._chart = (Chart)_rendererParms.DrawingItem;
+            CombinationRendererInfo cri = new CombinationRendererInfo
+            {
+                _chart = (Chart)_rendererParms.DrawingItem
+            };
             _rendererParms.RendererInfo = cri;
 
             InitSeriesRendererInfo();
@@ -237,8 +239,10 @@ namespace PdfSharp.Charting.Renderers
             cri.seriesRendererInfos = new SeriesRendererInfo[seriesColl.Count];
             for (int idx = 0; idx < seriesColl.Count; ++idx)
             {
-                SeriesRendererInfo sri = new SeriesRendererInfo();
-                sri._series = seriesColl[idx];
+                SeriesRendererInfo sri = new SeriesRendererInfo
+                {
+                    _series = seriesColl[idx]
+                };
                 cri.seriesRendererInfos[idx] = sri;
             }
         }

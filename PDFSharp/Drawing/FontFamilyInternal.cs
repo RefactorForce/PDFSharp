@@ -29,7 +29,7 @@
 
 using System.Diagnostics;
 using System.Globalization;
-using PdfSharp.Internal;
+using PDFSharp.Internal;
 #if CORE || GDI
 using System.DrawingCore;
 using GdiFontFamily = System.DrawingCore.FontFamily;
@@ -43,7 +43,7 @@ using WpfFontFamily = System.Windows.Media.FontFamily;
 // ReSharper disable ConvertToAutoProperty
 // ReSharper disable ConvertPropertyToExpressionBody
 
-namespace PdfSharp.Drawing
+namespace PDFSharp.Drawing
 {
     /// <summary>
     /// Internal implementation class of XFontFamily.

@@ -27,7 +27,7 @@
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
-namespace PdfSharp.Drawing.BarCodes
+namespace PDFSharp.Drawing.BarCodes
 {
     /// <summary>
     /// Represents the base class of all codes.

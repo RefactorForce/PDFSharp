@@ -35,9 +35,9 @@ using System.DrawingCore.Drawing2D;
 #if WPF
 using System.Windows.Media;
 #endif
-using PdfSharp.Pdf;
+using PDFSharp.Pdf;
 
-namespace PdfSharp.Drawing
+namespace PDFSharp.Drawing
 {
     /// <summary>
     /// Specifies details about how the font is used in PDF creation.

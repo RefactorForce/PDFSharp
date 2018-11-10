@@ -33,9 +33,9 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using PdfSharp.Pdf.IO;
+using PDFSharp.Pdf.IO;
 
-namespace PdfSharp.Pdf.Advanced
+namespace PDFSharp.Pdf.Advanced
 {
     /// <summary>
     /// Represents an indirect reference to a PdfObject.

@@ -74,17 +74,17 @@ using SysPoint = Windows.Foundation.Point;
 using SysSize = Windows.Foundation.Size;
 using SysRect = Windows.Foundation.Rect;
 #endif
-using PdfSharp.Pdf;
-using PdfSharp.Drawing.Pdf;
-using PdfSharp.Internal;
-using PdfSharp.Pdf.Advanced;
+using PDFSharp.Pdf;
+using PDFSharp.Drawing.Pdf;
+using PDFSharp.Internal;
+using PDFSharp.Pdf.Advanced;
 
 #pragma warning disable 1587
 // ReSharper disable UseNullPropagation
 // ReSharper disable RedundantNameQualifier
 // ReSharper disable UseNameofExpression
 
-namespace PdfSharp.Drawing  // #??? Clean up
+namespace PDFSharp.Drawing  // #??? Clean up
 {
     /// <summary>
     /// Holds information about the current state of the XGraphics object.

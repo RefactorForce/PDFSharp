@@ -31,7 +31,7 @@ using System;
 using System.Diagnostics;
 using System.Globalization;
 using System.Runtime.InteropServices;
-using PdfSharp.Internal;
+using PDFSharp.Internal;
 #if GDI
 using System.DrawingCore;
 #endif
@@ -42,7 +42,7 @@ using System.Windows.Media;
 #pragma warning disable 1591
 
 #if !EDF_CORE
-namespace PdfSharp.Drawing
+namespace PDFSharp.Drawing
 #else
 namespace Edf.Drawing
 #endif

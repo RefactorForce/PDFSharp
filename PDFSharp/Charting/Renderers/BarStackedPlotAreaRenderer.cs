@@ -28,9 +28,9 @@
 #endregion
 
 using System;
-using PdfSharp.Drawing;
+using PDFSharp.Drawing;
 
-namespace PdfSharp.Charting.Renderers
+namespace PDFSharp.Charting.Renderers
 {
     /// <summary>
     /// Represents a plot area renderer of stacked bars, i. e. all bars are drawn one on another.
@@ -78,7 +78,7 @@ namespace PdfSharp.Charting.Renderers
                         break;
 
                     ColumnRendererInfo column = (ColumnRendererInfo)sri._pointRendererInfos[pointIdx];
-                    if (column.Point != null && !double.IsNaN(column.Point._value))
+                    if (column.Point != null && !Double.IsNaN(column.Point._value))
                     {
                         double y = column.Point._value;
                         if (y < 0)
@@ -114,9 +114,6 @@ namespace PdfSharp.Charting.Renderers
         /// <summary>
         /// If yValue is within the range from yMin to yMax returns true, otherwise false.
         /// </summary>
-        protected override bool IsDataInside(double yMin, double yMax, double yValue)
-        {
-            return yValue <= yMax && yValue >= yMin;
-        }
+        protected override bool IsDataInside(double yMin, double yMax, double yValue) => yValue <= yMax && yValue >= yMin;
     }
 }

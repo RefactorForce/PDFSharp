@@ -27,7 +27,7 @@
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
-namespace PdfSharp.Charting
+namespace PDFSharp.Charting
 {
     /// <summary>
     /// Represents the collection of values on the X-Axis.
@@ -49,10 +49,7 @@ namespace PdfSharp.Charting
         /// <summary>
         /// Creates a deep copy of this object.
         /// </summary>
-        public new XValues Clone()
-        {
-            return (XValues)DeepCopy();
-        }
+        public new XValues Clone() => (XValues)DeepCopy();
 
         /// <summary>
         /// Gets an XSeries by its index.

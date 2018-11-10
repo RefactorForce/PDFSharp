@@ -29,7 +29,7 @@
 
 using System.Collections.Generic;
 
-namespace PdfSharp.Pdf.Internal
+namespace PDFSharp.Pdf.Internal
 {
 #if true_
     /// <summary>

@@ -29,7 +29,7 @@
 
 using System;
 
-namespace PdfSharp.Drawing.BarCodes
+namespace PDFSharp.Drawing.BarCodes
 {
     // TODO: Mere with PDFsharp strings table
     /// <summary>

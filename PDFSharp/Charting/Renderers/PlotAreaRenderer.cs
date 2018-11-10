@@ -27,9 +27,9 @@
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
-using PdfSharp.Drawing;
+using PDFSharp.Drawing;
 
-namespace PdfSharp.Charting.Renderers
+namespace PDFSharp.Charting.Renderers
 {
     /// <summary>
     /// Base class for all plot area renderers.
@@ -48,8 +48,10 @@ namespace PdfSharp.Charting.Renderers
         /// </summary>
         internal override RendererInfo Init()
         {
-            PlotAreaRendererInfo pari = new PlotAreaRendererInfo();
-            pari._plotArea = ((ChartRendererInfo)_rendererParms.RendererInfo)._chart._plotArea;
+            PlotAreaRendererInfo pari = new PlotAreaRendererInfo
+            {
+                _plotArea = ((ChartRendererInfo)_rendererParms.RendererInfo)._chart._plotArea
+            };
             InitLineFormat(pari);
             InitFillFormat(pari);
             return pari;

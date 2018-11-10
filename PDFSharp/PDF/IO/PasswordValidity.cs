@@ -27,7 +27,7 @@
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
-namespace PdfSharp.Pdf.IO
+namespace PDFSharp.Pdf.IO
 {
     /// <summary>
     /// Determines the type of the password.

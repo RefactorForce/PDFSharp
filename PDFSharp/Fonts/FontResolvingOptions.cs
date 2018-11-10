@@ -34,9 +34,9 @@ using System.DrawingCore.Text;
 #if WPF
 using System.Windows.Media;
 #endif
-using PdfSharp.Drawing;
+using PDFSharp.Drawing;
 
-namespace PdfSharp.Fonts
+namespace PDFSharp.Fonts
 {
     /// <summary>
     /// Parameters that affect font selection.

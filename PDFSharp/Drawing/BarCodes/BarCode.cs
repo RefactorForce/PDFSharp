@@ -30,7 +30,7 @@
 using System;
 using System.ComponentModel;
 
-namespace PdfSharp.Drawing.BarCodes
+namespace PDFSharp.Drawing.BarCodes
 {
     /// <summary>
     /// Represents the base class of all bar codes.

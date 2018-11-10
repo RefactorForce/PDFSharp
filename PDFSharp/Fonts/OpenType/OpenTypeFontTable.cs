@@ -37,7 +37,7 @@ using System.Diagnostics;
 using PdfSharp;
 #endif
 
-namespace PdfSharp.Fonts.OpenType
+namespace PDFSharp.Fonts.OpenType
 {
     // TODO: Create a font driver for reading and writing OpenType font files.
 

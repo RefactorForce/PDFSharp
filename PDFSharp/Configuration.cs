@@ -29,7 +29,7 @@
 
 using System;
 
-namespace PdfSharp
+namespace PDFSharp
 {
     /// <summary>
     /// Floating point formatting.

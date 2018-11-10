@@ -29,7 +29,7 @@
 
 using System;
 
-namespace PdfSharp.Pdf
+namespace PDFSharp.Pdf
 {
     /// <summary>
     /// Specifies the type of a key's value in a dictionary.

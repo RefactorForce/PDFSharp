@@ -31,7 +31,7 @@
 
 // ReSharper disable InconsistentNaming
 
-namespace PdfSharp.Pdf.Content.Objects
+namespace PDFSharp.Pdf.Content.Objects
 {
     /// <summary>
     /// The names of the op-codes. 

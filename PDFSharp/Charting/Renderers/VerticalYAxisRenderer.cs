@@ -28,9 +28,9 @@
 #endregion
 
 using System;
-using PdfSharp.Drawing;
+using PDFSharp.Drawing;
 
-namespace PdfSharp.Charting.Renderers
+namespace PDFSharp.Charting.Renderers
 {
     /// <summary>
     /// Represents a Y axis renderer used for charts of type Column2D or Line.
@@ -53,8 +53,10 @@ namespace PdfSharp.Charting.Renderers
             Chart chart = (Chart)_rendererParms.DrawingItem;
             XGraphics gfx = _rendererParms.Graphics;
 
-            AxisRendererInfo yari = new AxisRendererInfo();
-            yari._axis = chart._yAxis;
+            AxisRendererInfo yari = new AxisRendererInfo
+            {
+                _axis = chart._yAxis
+            };
             InitScale(yari);
             if (yari._axis != null)
             {
@@ -101,9 +103,11 @@ namespace PdfSharp.Charting.Renderers
                 XSize titleSize = new XSize(0, 0);
                 if (yari._axisTitleRendererInfo != null)
                 {
-                    RendererParameters parms = new RendererParameters();
-                    parms.Graphics = gfx;
-                    parms.RendererInfo = yari;
+                    RendererParameters parms = new RendererParameters
+                    {
+                        Graphics = gfx,
+                        RendererInfo = yari
+                    };
                     AxisTitleRenderer atr = new AxisTitleRenderer(parms);
                     atr.Format();
                     titleSize.Height = yari._axisTitleRendererInfo.Height;
@@ -167,8 +171,10 @@ namespace PdfSharp.Charting.Renderers
             int cellSpace = yari.TickLabelsFont.FontFamily.GetLineSpacing(yari.TickLabelsFont.Style);
             double xHeight = yari.TickLabelsFont.Metrics.XHeight;
 
-            XSize labelSize = new XSize(0, 0);
-            labelSize.Height = lineSpace * xHeight / cellSpace;
+            XSize labelSize = new XSize(0, 0)
+            {
+                Height = lineSpace * xHeight / cellSpace
+            };
 
             int countTickLabels = (int)((yMax - yMin) / yMajorTick) + 1;
             for (int i = 0; i < countTickLabels; ++i)
@@ -221,9 +227,11 @@ namespace PdfSharp.Charting.Renderers
             // Draw axis title
             if (yari._axisTitleRendererInfo != null && yari._axisTitleRendererInfo.AxisTitleText != "")
             {
-                RendererParameters parms = new RendererParameters();
-                parms.Graphics = gfx;
-                parms.RendererInfo = yari;
+                RendererParameters parms = new RendererParameters
+                {
+                    Graphics = gfx,
+                    RendererInfo = yari
+                };
                 double width = yari._axisTitleRendererInfo.Width;
                 yari._axisTitleRendererInfo.Rect = yari.InnerRect;
                 yari._axisTitleRendererInfo.Width = width;
@@ -312,14 +320,14 @@ namespace PdfSharp.Charting.Renderers
         /// </summary>
         protected virtual void CalcYAxis(out double yMin, out double yMax)
         {
-            yMin = double.MaxValue;
-            yMax = double.MinValue;
+            yMin = Double.MaxValue;
+            yMax = Double.MinValue;
 
             foreach (Series series in ((Chart)_rendererParms.DrawingItem).SeriesCollection)
             {
                 foreach (Point point in series.Elements)
                 {
-                    if (!double.IsNaN(point._value))
+                    if (!Double.IsNaN(point._value))
                     {
                         yMin = Math.Min(yMin, point.Value);
                         yMax = Math.Max(yMax, point.Value);

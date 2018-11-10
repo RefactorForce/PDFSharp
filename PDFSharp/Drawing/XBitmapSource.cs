@@ -31,7 +31,7 @@
 #endif
 
 using System.Diagnostics;
-using PdfSharp.Internal;
+using PDFSharp.Internal;
 
 #if GDI
 using System.DrawingCore;
@@ -51,7 +51,7 @@ using Windows.UI.Xaml.Media.Imaging;
 #pragma warning disable 0169
 #pragma warning disable 0649
 
-namespace PdfSharp.Drawing
+namespace PDFSharp.Drawing
 {
     /// <summary>
     /// Defines an abstract base class for pixel based images.

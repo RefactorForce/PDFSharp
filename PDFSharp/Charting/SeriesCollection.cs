@@ -27,7 +27,7 @@
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
-namespace PdfSharp.Charting
+namespace PDFSharp.Charting
 {
     /// <summary>
     /// The collection of data series.
@@ -57,19 +57,18 @@ namespace PdfSharp.Charting
         /// <summary>
         /// Creates a deep copy of this object.
         /// </summary>
-        public new SeriesCollection Clone()
-        {
-            return (SeriesCollection)DeepCopy();
-        }
+        public new SeriesCollection Clone() => (SeriesCollection)DeepCopy();
 
         /// <summary>
         /// Adds a new series to the collection.
         /// </summary>
         public Series AddSeries()
         {
-            Series series = new Series();
-            // Initialize chart type for each new series.
-            series._chartType = ((Chart)_parent)._type;
+            Series series = new Series
+            {
+                // Initialize chart type for each new series.
+                _chartType = ((Chart)_parent)._type
+            };
             Add(series);
             return series;
         }

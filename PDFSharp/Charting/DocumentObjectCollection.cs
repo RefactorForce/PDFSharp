@@ -31,7 +31,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace PdfSharp.Charting
+namespace PDFSharp.Charting
 {
     /// <summary>
     /// Base class of all collections.
@@ -60,18 +60,15 @@ namespace PdfSharp.Charting
         /// </summary>
         public virtual DocumentObject this[int index]
         {
-            get { return _elements[index]; }
-            internal set { _elements[index] = value; }
+            get => _elements[index];
+            internal set => _elements[index] = value;
         }
 
         #region Methods
         /// <summary>
         /// Creates a deep copy of this object.
         /// </summary>
-        public new DocumentObjectCollection Clone()
-        {
-            return (DocumentObjectCollection)DeepCopy();
-        }
+        public new DocumentObjectCollection Clone() => (DocumentObjectCollection)DeepCopy();
 
         /// <summary>
         /// Implements the deep copy of the object.
@@ -90,43 +87,27 @@ namespace PdfSharp.Charting
         /// <summary>
         /// Copies the Array_List or a portion of it to a one-dimensional array.
         /// </summary>
-        public void CopyTo(Array array, int index)
-        {
-            throw new NotImplementedException("TODO");
-            //elements.CopyTo(array, index);
-        }
+        public void CopyTo(Array array, int index) => throw new NotImplementedException("TODO");//elements.CopyTo(array, index);
 
         /// <summary>
         /// Removes all elements from the collection.
         /// </summary>
-        public void Clear()
-        {
-            _elements.Clear();
-        }
+        public void Clear() => _elements.Clear();
 
         /// <summary>
         /// Inserts an element into the collection at the specified position.
         /// </summary>
-        public virtual void InsertObject(int index, DocumentObject val)
-        {
-            _elements.Insert(index, val);
-        }
+        public virtual void InsertObject(int index, DocumentObject val) => _elements.Insert(index, val);
 
         /// <summary>
         /// Searches for the specified object and returns the zero-based index of the first occurrence.
         /// </summary>
-        public int IndexOf(DocumentObject val)
-        {
-            return _elements.IndexOf(val);
-        }
+        public int IndexOf(DocumentObject val) => _elements.IndexOf(val);
 
         /// <summary>
         /// Removes the element at the specified index.
         /// </summary>
-        public void RemoveObjectAt(int index)
-        {
-            _elements.RemoveAt(index);
-        }
+        public void RemoveObjectAt(int index) => _elements.RemoveAt(index);
 
         /// <summary>
         /// Adds the specified document object to the collection.
@@ -143,10 +124,7 @@ namespace PdfSharp.Charting
         /// <summary>
         /// Gets the number of elements actually contained in the collection.
         /// </summary>
-        public int Count
-        {
-            get { return _elements.Count; }
-        }
+        public int Count => _elements.Count;
 
         /// <summary>
         /// Gets the first value in the collection, if there is any, otherwise null.
@@ -155,9 +133,7 @@ namespace PdfSharp.Charting
         {
             get
             {
-                if (Count > 0)
-                    return this[0];
-                return null;
+                return Count > 0 ? this[0] : null;
             }
         }
 
@@ -169,80 +145,39 @@ namespace PdfSharp.Charting
             get
             {
                 int count = _elements.Count;
-                if (count > 0)
-                    return (DocumentObject)_elements[count - 1];
-                return null;
+                return count > 0 ? (DocumentObject)_elements[count - 1] : null;
             }
         }
         #endregion
 
         #region IList
-        bool IList.IsReadOnly
-        {
-            get { return false; }
-        }
+        bool IList.IsReadOnly => false;
 
-        bool IList.IsFixedSize
-        {
-            get { return false; }
-        }
+        bool IList.IsFixedSize => false;
 
         object IList.this[int index]
         {
-            get { return _elements[index]; }
-            set { _elements[index] = (DocumentObject)value; }
+            get => _elements[index];
+            set => _elements[index] = (DocumentObject)value;
         }
 
-        void IList.RemoveAt(int index)
-        {
-            throw new NotImplementedException("IList.RemoveAt");
-            // TODO:  Add DocumentObjectCollection.RemoveAt implementation
-        }
+        void IList.RemoveAt(int index) => throw new NotImplementedException("IList.RemoveAt");// TODO:  Add DocumentObjectCollection.RemoveAt implementation
 
-        void IList.Insert(int index, object value)
-        {
-            throw new NotImplementedException("IList.Insert");
-            // TODO:  Add DocumentObjectCollection.Insert implementation
-        }
+        void IList.Insert(int index, object value) => throw new NotImplementedException("IList.Insert");// TODO:  Add DocumentObjectCollection.Insert implementation
 
-        void IList.Remove(object value)
-        {
-            throw new NotImplementedException("IList.Remove");
-            // TODO:  Add DocumentObjectCollection.Remove implementation
-        }
+        void IList.Remove(object value) => throw new NotImplementedException("IList.Remove");// TODO:  Add DocumentObjectCollection.Remove implementation
 
-        bool IList.Contains(object value)
-        {
-            throw new NotImplementedException("IList.Contains");
-            // TODO:  Add DocumentObjectCollection.Contains implementation
-            //return false;
-        }
+        bool IList.Contains(object value) => throw new NotImplementedException("IList.Contains");// TODO:  Add DocumentObjectCollection.Contains implementation//return false;
 
-        int System.Collections.IList.IndexOf(object value)
-        {
-            throw new NotImplementedException("IList.IndexOf");
-            // TODO:  Add DocumentObjectCollection.System.Collections.IList.IndexOf implementation
-            //return 0;
-        }
+        int System.Collections.IList.IndexOf(object value) => throw new NotImplementedException("IList.IndexOf");// TODO:  Add DocumentObjectCollection.System.Collections.IList.IndexOf implementation//return 0;
 
-        int IList.Add(object value)
-        {
-            throw new NotImplementedException("IList.Add");
-            // TODO:  Add DocumentObjectCollection.Add implementation
-            //return 0;
-        }
+        int IList.Add(object value) => throw new NotImplementedException("IList.Add");// TODO:  Add DocumentObjectCollection.Add implementation//return 0;
         #endregion
 
         #region ICollection
-        bool ICollection.IsSynchronized
-        {
-            get { return false; }
-        }
+        bool ICollection.IsSynchronized => false;
 
-        object ICollection.SyncRoot
-        {
-            get { return null; }
-        }
+        object ICollection.SyncRoot => null;
         #endregion
 
         /// <summary>
@@ -251,10 +186,7 @@ namespace PdfSharp.Charting
         /// <returns>
         /// An <see cref="T:System.Collections.IEnumerator"/> object that can be used to iterate through the collection.
         /// </returns>
-        public IEnumerator GetEnumerator()
-        {
-            return _elements.GetEnumerator();
-        }
+        public IEnumerator GetEnumerator() => _elements.GetEnumerator();
 
         List<DocumentObject> _elements;
     }

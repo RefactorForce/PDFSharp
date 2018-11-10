@@ -27,7 +27,7 @@
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
-namespace PdfSharp.Pdf.Actions
+namespace PDFSharp.Pdf.Actions
 {
     /// <summary>
     /// Specifies the predefined PDF actions.

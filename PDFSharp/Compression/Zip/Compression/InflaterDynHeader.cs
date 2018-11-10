@@ -37,9 +37,9 @@
 
 using System;
 
-using PdfSharp.SharpZipLib.Zip.Compression.Streams;
+using PDFSharp.SharpZipLib.Zip.Compression.Streams;
 
-namespace PdfSharp.SharpZipLib.Zip.Compression
+namespace PDFSharp.SharpZipLib.Zip.Compression
 {
 
     class InflaterDynHeader

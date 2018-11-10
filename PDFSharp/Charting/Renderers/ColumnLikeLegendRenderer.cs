@@ -27,9 +27,9 @@
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
-using PdfSharp.Drawing;
+using PDFSharp.Drawing;
 
-namespace PdfSharp.Charting.Renderers
+namespace PDFSharp.Charting.Renderers
 {
     /// <summary>
     /// Represents the legend renderer specific to charts like column, line, or bar.
@@ -54,8 +54,10 @@ namespace PdfSharp.Charting.Renderers
             ChartRendererInfo cri = (ChartRendererInfo)_rendererParms.RendererInfo;
             if (cri._chart._legend != null)
             {
-                lri = new LegendRendererInfo();
-                lri._legend = cri._chart._legend;
+                lri = new LegendRendererInfo
+                {
+                    _legend = cri._chart._legend
+                };
 
                 lri.Font = Converter.ToXFont(lri._legend._font, cri.DefaultFont);
                 lri.FontColor = new XSolidBrush(XColors.Black);
@@ -67,10 +69,12 @@ namespace PdfSharp.Charting.Renderers
                 int index = 0;
                 foreach (SeriesRendererInfo sri in cri.seriesRendererInfos)
                 {
-                    LegendEntryRendererInfo leri = new LegendEntryRendererInfo();
-                    leri._seriesRendererInfo = sri;
-                    leri._legendRendererInfo = lri;
-                    leri.EntryText = sri._series.Name;
+                    LegendEntryRendererInfo leri = new LegendEntryRendererInfo
+                    {
+                        _seriesRendererInfo = sri,
+                        _legendRendererInfo = lri,
+                        EntryText = sri._series.Name
+                    };
                     if (sri._markerRendererInfo != null)
                     {
                         leri.MarkerSize.Width = leri.MarkerSize.Height = sri._markerRendererInfo.MarkerSize.Point;

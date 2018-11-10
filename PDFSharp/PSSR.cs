@@ -31,13 +31,13 @@ using System;
 using System.Diagnostics;
 using System.Resources;
 using System.Reflection;
-using PdfSharp.Drawing;
-using PdfSharp.Internal;
-using PdfSharp.Pdf;
+using PDFSharp.Drawing;
+using PDFSharp.Internal;
+using PDFSharp.Pdf;
 
 #pragma warning disable 1591
 
-namespace PdfSharp
+namespace PDFSharp
 {
     /// <summary>
     /// The Pdf-Sharp-String-Resources.

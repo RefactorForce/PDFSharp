@@ -32,7 +32,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
-using PdfSharp.Fonts;
+using PDFSharp.Fonts;
 #if CORE || GDI
 using System.DrawingCore;
 using System.DrawingCore.Drawing2D;
@@ -49,7 +49,7 @@ using WpfTypeface = System.Windows.Media.Typeface;
 using WpfGlyphTypeface = System.Windows.Media.GlyphTypeface;
 #endif
 
-namespace PdfSharp.Drawing
+namespace PDFSharp.Drawing
 {
 #if true
     ///<summary>

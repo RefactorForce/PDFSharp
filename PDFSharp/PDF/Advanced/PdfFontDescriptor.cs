@@ -28,9 +28,9 @@
 #endregion
 
 using System;
-using PdfSharp.Fonts.OpenType;
+using PDFSharp.Fonts.OpenType;
 
-namespace PdfSharp.Pdf.Advanced
+namespace PDFSharp.Pdf.Advanced
 {
     /// <summary>
     /// The PDF font descriptor flags.

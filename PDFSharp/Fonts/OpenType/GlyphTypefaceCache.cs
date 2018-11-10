@@ -31,10 +31,10 @@ using System;
 using System.Diagnostics;
 using System.Collections.Generic;
 using System.Text;
-using PdfSharp.Drawing;
-using PdfSharp.Internal;
+using PDFSharp.Drawing;
+using PDFSharp.Internal;
 
-namespace PdfSharp.Fonts.OpenType
+namespace PDFSharp.Fonts.OpenType
 {
     /// <summary>
     /// Global table of all glyph typefaces.

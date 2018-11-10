@@ -33,15 +33,15 @@ using System.IO;
 #if NETFX_CORE
 using System.Threading.Tasks;
 #endif
-using PdfSharp.Pdf.Advanced;
-using PdfSharp.Pdf.Internal;
-using PdfSharp.Pdf.IO;
-using PdfSharp.Pdf.AcroForms;
-using PdfSharp.Pdf.Security;
+using PDFSharp.Pdf.Advanced;
+using PDFSharp.Pdf.Internal;
+using PDFSharp.Pdf.IO;
+using PDFSharp.Pdf.AcroForms;
+using PDFSharp.Pdf.Security;
 
 // ReSharper disable ConvertPropertyToExpressionBody
 
-namespace PdfSharp.Pdf
+namespace PDFSharp.Pdf
 {
     /// <summary>
     /// Represents a PDF document.

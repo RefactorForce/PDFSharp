@@ -36,7 +36,7 @@ using System.DrawingCore.Imaging;
 #if WPF
 #endif
 
-namespace PdfSharp.Pdf.Advanced
+namespace PDFSharp.Pdf.Advanced
 {
     /// <summary>
     /// Represents an extended graphics state object.

@@ -28,9 +28,9 @@
 #endregion
 
 using System;
-using PdfSharp.Drawing;
+using PDFSharp.Drawing;
 
-namespace PdfSharp.Charting.Renderers
+namespace PDFSharp.Charting.Renderers
 {
     /// <summary>
     /// Represents a axis title renderer used for x and y axis titles.
@@ -129,9 +129,11 @@ namespace PdfSharp.Charting.Renderers
                             break;
                     }
 
-                    XStringFormat xsf = new XStringFormat();
-                    xsf.Alignment = XStringAlignment.Center;
-                    xsf.LineAlignment = XLineAlignment.Center;
+                    XStringFormat xsf = new XStringFormat
+                    {
+                        Alignment = XStringAlignment.Center,
+                        LineAlignment = XLineAlignment.Center
+                    };
 
                     XGraphicsState state = gfx.Save();
                     gfx.TranslateTransform(x, y);

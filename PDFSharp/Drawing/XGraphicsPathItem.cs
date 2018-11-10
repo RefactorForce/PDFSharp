@@ -35,7 +35,7 @@ using System.DrawingCore.Drawing2D;
 using System.Windows.Media;
 #endif
 
-namespace PdfSharp.Drawing
+namespace PDFSharp.Drawing
 {
 #if true_ // unused
     /// <summary>

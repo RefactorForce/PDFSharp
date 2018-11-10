@@ -27,9 +27,9 @@
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
-using PdfSharp.Drawing;
+using PDFSharp.Drawing;
 
-namespace PdfSharp.Charting.Renderers
+namespace PDFSharp.Charting.Renderers
 {
     /// <summary>
     /// Represents a plot area renderer of areas.
@@ -69,7 +69,7 @@ namespace PdfSharp.Charting.Renderers
                 for (int idx = 0; idx < count; idx++)
                 {
                     double pointValue = sri._series.Elements[idx].Value;
-                    if (double.IsNaN(pointValue))
+                    if (System.Double.IsNaN(pointValue))
                         pointValue = 0;
                     points[idx + 1] = new XPoint(idx + xMajorTick / 2, pointValue);
                 }

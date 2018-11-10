@@ -29,7 +29,7 @@
 
 using System.Collections.Generic;
 
-namespace PdfSharp.Pdf.Advanced
+namespace PDFSharp.Pdf.Advanced
 {
     /// <summary>
     /// Base class for all dictionaries that map resource names to objects.

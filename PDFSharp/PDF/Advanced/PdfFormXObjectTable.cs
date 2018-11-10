@@ -31,9 +31,9 @@ using System;
 using System.Diagnostics;
 using System.Collections.Generic;
 using System.Globalization;
-using PdfSharp.Drawing;
+using PDFSharp.Drawing;
 
-namespace PdfSharp.Pdf.Advanced
+namespace PDFSharp.Pdf.Advanced
 {
     /// <summary>
     /// Contains all external PDF files from which PdfFormXObjects are imported into the current document.

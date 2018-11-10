@@ -28,12 +28,12 @@
 #endregion
 
 using System.Diagnostics;
-using PdfSharp.Fonts;
-using PdfSharp.Fonts.OpenType;
-using PdfSharp.Drawing;
-using PdfSharp.Pdf.Filters;
+using PDFSharp.Fonts;
+using PDFSharp.Fonts.OpenType;
+using PDFSharp.Drawing;
+using PDFSharp.Pdf.Filters;
 
-namespace PdfSharp.Pdf.Advanced
+namespace PDFSharp.Pdf.Advanced
 {
     /// <summary>
     /// Represents a TrueType font.

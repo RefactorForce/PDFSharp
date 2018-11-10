@@ -27,7 +27,7 @@
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
-namespace PdfSharp.Charting
+namespace PDFSharp.Charting
 {
     /// <summary>
     /// Represents charts with different types.
@@ -49,19 +49,13 @@ namespace PdfSharp.Charting
         /// Initializes a new instance of the Chart class with the specified chart type.
         /// </summary>
         public Chart(ChartType type)
-            : this()
-        {
-            Type = type;
-        }
+            : this() => Type = type;
 
         #region Methods
         /// <summary>
         /// Creates a deep copy of this object.
         /// </summary>
-        public new Chart Clone()
-        {
-            return (Chart)DeepCopy();
-        }
+        public new Chart Clone() => (Chart)DeepCopy();
 
         /// <summary>
         /// Implements the deep copy of the object.
@@ -110,17 +104,9 @@ namespace PdfSharp.Charting
         /// <summary>
         /// Determines the type of the given axis.
         /// </summary>
-        internal string CheckAxis(Axis axis)
-        {
-            if ((_xAxis != null) && (axis == _xAxis))
-                return "xaxis";
-            if ((_yAxis != null) && (axis == _yAxis))
-                return "yaxis";
-            if ((_zAxis != null) && (axis == _zAxis))
-                return "zaxis";
-
-            return "";
-        }
+        internal string CheckAxis(Axis axis) => _xAxis != null && axis == _xAxis
+                ? "xaxis"
+                : _yAxis != null && axis == _yAxis ? "yaxis" : _zAxis != null && axis == _zAxis ? "zaxis" : "";
         #endregion
 
         #region Properties
@@ -130,8 +116,8 @@ namespace PdfSharp.Charting
         /// </summary>
         public ChartType Type
         {
-            get { return _type; }
-            set { _type = value; }
+            get => _type;
+            set => _type = value;
         }
         internal ChartType _type;
 
@@ -139,73 +125,49 @@ namespace PdfSharp.Charting
         /// Gets or sets the font for the chart. This will be the default font for all objects which are
         /// part of the chart.
         /// </summary>
-        public Font Font
-        {
-            get { return _font ?? (_font = new Font(this)); }
-        }
+        public Font Font => _font ?? (_font = new Font(this));
         internal Font _font;
 
         /// <summary>
         /// Gets the legend of the chart.
         /// </summary>
-        public Legend Legend
-        {
-            get { return _legend ?? (_legend = new Legend(this)); }
-        }
+        public Legend Legend => _legend ?? (_legend = new Legend(this));
         internal Legend _legend;
 
         /// <summary>
         /// Gets the X-Axis of the Chart.
         /// </summary>
-        public Axis XAxis
-        {
-            get { return _xAxis ?? (_xAxis = new Axis(this)); }
-        }
+        public Axis XAxis => _xAxis ?? (_xAxis = new Axis(this));
         internal Axis _xAxis;
 
         /// <summary>
         /// Gets the Y-Axis of the Chart.
         /// </summary>
-        public Axis YAxis
-        {
-            get { return _yAxis ?? (_yAxis = new Axis(this)); }
-        }
+        public Axis YAxis => _yAxis ?? (_yAxis = new Axis(this));
         internal Axis _yAxis;
 
         /// <summary>
         /// Gets the Z-Axis of the Chart.
         /// </summary>
-        public Axis ZAxis
-        {
-            get { return _zAxis ?? (_zAxis = new Axis(this)); }
-        }
+        public Axis ZAxis => _zAxis ?? (_zAxis = new Axis(this));
         internal Axis _zAxis;
 
         /// <summary>
         /// Gets the collection of the data series.
         /// </summary>
-        public SeriesCollection SeriesCollection
-        {
-            get { return _seriesCollection ?? (_seriesCollection = new SeriesCollection(this)); }
-        }
+        public SeriesCollection SeriesCollection => _seriesCollection ?? (_seriesCollection = new SeriesCollection(this));
         internal SeriesCollection _seriesCollection;
 
         /// <summary>
         /// Gets the collection of the values written on the X-Axis.
         /// </summary>
-        public XValues XValues
-        {
-            get { return _xValues ?? (_xValues = new XValues(this)); }
-        }
+        public XValues XValues => _xValues ?? (_xValues = new XValues(this));
         internal XValues _xValues;
 
         /// <summary>
         /// Gets the plot (drawing) area of the chart.
         /// </summary>
-        public PlotArea PlotArea
-        {
-            get { return _plotArea ?? (_plotArea = new PlotArea(this)); }
-        }
+        public PlotArea PlotArea => _plotArea ?? (_plotArea = new PlotArea(this));
         internal PlotArea _plotArea;
 
         /// <summary>
@@ -213,18 +175,15 @@ namespace PdfSharp.Charting
         /// </summary>
         public BlankType DisplayBlanksAs
         {
-            get { return _displayBlanksAs; }
-            set { _displayBlanksAs = value; }
+            get => _displayBlanksAs;
+            set => _displayBlanksAs = value;
         }
         internal BlankType _displayBlanksAs;
 
         /// <summary>
         /// Gets the DataLabel of the chart.
         /// </summary>
-        public DataLabel DataLabel
-        {
-            get { return _dataLabel ?? (_dataLabel = new DataLabel(this)); }
-        }
+        public DataLabel DataLabel => _dataLabel ?? (_dataLabel = new DataLabel(this));
         internal DataLabel _dataLabel;
 
         /// <summary>
@@ -232,8 +191,8 @@ namespace PdfSharp.Charting
         /// </summary>
         public bool HasDataLabel
         {
-            get { return _hasDataLabel; }
-            set { _hasDataLabel = value; }
+            get => _hasDataLabel;
+            set => _hasDataLabel = value;
         }
         internal bool _hasDataLabel;
         #endregion

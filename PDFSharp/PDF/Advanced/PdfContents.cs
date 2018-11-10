@@ -31,10 +31,10 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Collections;
-using PdfSharp.Pdf.Content.Objects;
-using PdfSharp.Pdf.IO;
+using PDFSharp.Pdf.Content.Objects;
+using PDFSharp.Pdf.IO;
 
-namespace PdfSharp.Pdf.Advanced
+namespace PDFSharp.Pdf.Advanced
 {
     /// <summary>
     /// Represents an array of PDF content streams of a page.

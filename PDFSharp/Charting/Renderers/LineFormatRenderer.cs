@@ -27,9 +27,9 @@
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
-using PdfSharp.Drawing;
+using PDFSharp.Drawing;
 
-namespace PdfSharp.Charting.Renderers
+namespace PDFSharp.Charting.Renderers
 {
     /// <summary>
     /// Represents a renderer specialized to draw lines in various styles, colors and widths.
@@ -56,8 +56,10 @@ namespace PdfSharp.Charting.Renderers
 
             if (visible)
             {
-                _pen = new XPen(lineFormat.Color, width);
-                _pen.DashStyle = lineFormat.DashStyle;
+                _pen = new XPen(lineFormat.Color, width)
+                {
+                    DashStyle = lineFormat.DashStyle
+                };
             }
         }
 

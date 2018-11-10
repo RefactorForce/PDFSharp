@@ -28,9 +28,9 @@
 #endregion
 
 using System;
-using PdfSharp.Drawing;
+using PDFSharp.Drawing;
 
-namespace PdfSharp.Charting.Renderers
+namespace PDFSharp.Charting.Renderers
 {
     /// <summary>
     /// Represents the renderer for a legend entry.
@@ -56,9 +56,11 @@ namespace PdfSharp.Charting.Renderers
             // Initialize
             leri.MarkerArea.Width = MaxLegendMarkerWidth;
             leri.MarkerArea.Height = MaxLegendMarkerHeight;
-            leri.MarkerSize = new XSize();
-            leri.MarkerSize.Width = leri.MarkerArea.Width;
-            leri.MarkerSize.Height = leri.MarkerArea.Height;
+            leri.MarkerSize = new XSize
+            {
+                Width = leri.MarkerArea.Width,
+                Height = leri.MarkerArea.Height
+            };
             if (leri._seriesRendererInfo._series._chartType == ChartType.Line)
                 leri.MarkerArea.Width *= 3;
             leri.Width = leri.MarkerArea.Width;
@@ -114,8 +116,10 @@ namespace PdfSharp.Charting.Renderers
             {
                 rect = leri.Rect;
                 rect.X += leri.MarkerArea.Width + LegendEntryRenderer.SpacingBetweenMarkerAndText;
-                XStringFormat format = new XStringFormat();
-                format.LineAlignment = XLineAlignment.Near;
+                XStringFormat format = new XStringFormat
+                {
+                    LineAlignment = XLineAlignment.Near
+                };
                 gfx.DrawString(leri.EntryText, leri._legendRendererInfo.Font,
                                leri._legendRendererInfo.FontColor, rect, format);
             }

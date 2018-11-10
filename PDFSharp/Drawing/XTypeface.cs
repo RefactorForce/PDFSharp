@@ -37,7 +37,7 @@ using System.Windows.Documents;
 using System.Windows.Media;
 #endif
 
-namespace PdfSharp.Drawing
+namespace PDFSharp.Drawing
 {
 #if true_  // Not yet used
     /// <summary>

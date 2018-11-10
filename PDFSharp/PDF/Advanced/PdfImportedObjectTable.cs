@@ -30,7 +30,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace PdfSharp.Pdf.Advanced
+namespace PDFSharp.Pdf.Advanced
 {
     /// <summary>
     /// Represents the imported objects of an external document. Used to cache objects that are

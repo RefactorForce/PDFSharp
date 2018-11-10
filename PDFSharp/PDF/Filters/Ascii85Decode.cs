@@ -29,7 +29,7 @@
 
 using System;
 
-namespace PdfSharp.Pdf.Filters
+namespace PDFSharp.Pdf.Filters
 {
     /// <summary>
     /// Implements the ASCII85Decode filter.

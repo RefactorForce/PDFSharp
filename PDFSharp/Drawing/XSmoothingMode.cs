@@ -29,7 +29,7 @@
 
 using System;
 
-namespace PdfSharp.Drawing
+namespace PDFSharp.Drawing
 {
     /// <summary>
     /// Specifies whether smoothing (or antialiasing) is applied to lines and curves

@@ -27,9 +27,9 @@
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
-using PdfSharp.Drawing;
+using PDFSharp.Drawing;
 
-namespace PdfSharp.Charting.Renderers
+namespace PDFSharp.Charting.Renderers
 {
     /// <summary>
     /// Represents the base for all pie plot area renderer.
@@ -47,10 +47,7 @@ namespace PdfSharp.Charting.Renderers
         /// <summary>
         /// Layouts and calculates the space used by the pie plot area.
         /// </summary>
-        internal override void Format()
-        {
-            CalcSectors();
-        }
+        internal override void Format() => CalcSectors();
 
         /// <summary>
         /// Draws the content of the pie plot area.
@@ -72,14 +69,14 @@ namespace PdfSharp.Charting.Renderers
             SeriesRendererInfo sri = cri.seriesRendererInfos[0];
             foreach (SectorRendererInfo sector in sri._pointRendererInfos)
             {
-                if (!double.IsNaN(sector.StartAngle) && !double.IsNaN(sector.SweepAngle))
+                if (!System.Double.IsNaN(sector.StartAngle) && !System.Double.IsNaN(sector.SweepAngle))
                     gfx.DrawPie(sector.FillFormat, sector.Rect, sector.StartAngle, sector.SweepAngle);
             }
 
             // Draw border of the sectors.
             foreach (SectorRendererInfo sector in sri._pointRendererInfos)
             {
-                if (!double.IsNaN(sector.StartAngle) && !double.IsNaN(sector.SweepAngle))
+                if (!System.Double.IsNaN(sector.StartAngle) && !System.Double.IsNaN(sector.SweepAngle))
                     gfx.DrawPie(sector.LineFormat, sector.Rect, sector.StartAngle, sector.SweepAngle);
             }
 

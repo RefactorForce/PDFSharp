@@ -31,11 +31,11 @@ using System;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
-using PdfSharp.Internal;
-using PdfSharp.Pdf.Advanced;
-using PdfSharp.Pdf.Internal;
+using PDFSharp.Internal;
+using PDFSharp.Pdf.Advanced;
+using PDFSharp.Pdf.Internal;
 
-namespace PdfSharp.Pdf.IO
+namespace PDFSharp.Pdf.IO
 {
     /*
        Direct and indirect objects

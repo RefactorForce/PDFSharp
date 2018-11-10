@@ -29,7 +29,7 @@
 
 using System;
 
-namespace PdfSharp
+namespace PDFSharp
 {
     /// <summary>
     /// Version info base for all PDFsharp related assemblies.

@@ -39,7 +39,7 @@ using WpfTypeface = System.Windows.Media.Typeface;
 using WpfGlyphTypeface = System.Windows.Media.GlyphTypeface;
 #endif
 
-namespace PdfSharp.Fonts
+namespace PDFSharp.Fonts
 {
     /// <summary>
     /// Represents a font resolver info created by the platform font resolver.

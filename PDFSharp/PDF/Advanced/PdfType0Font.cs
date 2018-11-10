@@ -29,11 +29,11 @@
 
 using System.Diagnostics;
 using System.Text;
-using PdfSharp.Fonts;
-using PdfSharp.Fonts.OpenType;
-using PdfSharp.Drawing;
+using PDFSharp.Fonts;
+using PDFSharp.Fonts.OpenType;
+using PDFSharp.Drawing;
 
-namespace PdfSharp.Pdf.Advanced
+namespace PDFSharp.Pdf.Advanced
 {
     /// <summary>
     /// Represents a composite font. Used for Unicode encoding.

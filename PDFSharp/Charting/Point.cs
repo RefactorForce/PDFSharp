@@ -27,7 +27,7 @@
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
-namespace PdfSharp.Charting
+namespace PDFSharp.Charting
 {
     /// <summary>
     /// Represents a formatted value on the data series.
@@ -63,10 +63,7 @@ namespace PdfSharp.Charting
         /// <summary>
         /// Creates a deep copy of this object.
         /// </summary>
-        public new Point Clone()
-        {
-            return (Point)DeepCopy();
-        }
+        public new Point Clone() => (Point)DeepCopy();
 
         /// <summary>
         /// Implements the deep copy of the object.
@@ -92,19 +89,13 @@ namespace PdfSharp.Charting
         /// <summary>
         /// Gets the line format of the data point's border.
         /// </summary>
-        public LineFormat LineFormat
-        {
-            get { return _lineFormat ?? (_lineFormat = new LineFormat(this)); }
-        }
+        public LineFormat LineFormat => _lineFormat ?? (_lineFormat = new LineFormat(this));
         internal LineFormat _lineFormat;
 
         /// <summary>
         /// Gets the filling format of the data point.
         /// </summary>
-        public FillFormat FillFormat
-        {
-            get { return _fillFormat ?? (_fillFormat = new FillFormat(this)); }
-        }
+        public FillFormat FillFormat => _fillFormat ?? (_fillFormat = new FillFormat(this));
         internal FillFormat _fillFormat;
 
         /// <summary>
@@ -112,8 +103,8 @@ namespace PdfSharp.Charting
         /// </summary>
         public double Value
         {
-            get { return _value; }
-            set { _value = value; }
+            get => _value;
+            set => _value = value;
         }
         internal double _value;
         #endregion

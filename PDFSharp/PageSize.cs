@@ -27,7 +27,7 @@
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
-namespace PdfSharp
+namespace PDFSharp
 {
     /// <summary>
     /// Identifies the most popular predefined page sizes.

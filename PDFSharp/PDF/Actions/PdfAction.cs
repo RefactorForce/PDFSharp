@@ -27,7 +27,7 @@
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
-namespace PdfSharp.Pdf.Actions
+namespace PDFSharp.Pdf.Actions
 {
     /// <summary>
     /// Represents the base class for all PDF actions.

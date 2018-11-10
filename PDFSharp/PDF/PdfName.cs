@@ -30,9 +30,9 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using PdfSharp.Pdf.IO;
+using PDFSharp.Pdf.IO;
 
-namespace PdfSharp.Pdf
+namespace PDFSharp.Pdf
 {
     /// <summary>
     /// Represents a PDF name value.

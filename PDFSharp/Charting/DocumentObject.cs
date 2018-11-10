@@ -27,7 +27,7 @@
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
-namespace PdfSharp.Charting
+namespace PDFSharp.Charting
 {
     /// <summary>
     /// Base class for all chart classes.
@@ -52,10 +52,7 @@ namespace PdfSharp.Charting
         /// <summary>
         /// Creates a deep copy of the DocumentObject. The parent of the new object is null.
         /// </summary>
-        public object Clone()
-        {
-            return DeepCopy();
-        }
+        public object Clone() => DeepCopy();
 
         /// <summary>
         /// Implements the deep copy of the object.
@@ -72,10 +69,7 @@ namespace PdfSharp.Charting
         /// <summary>
         /// Gets the parent object.
         /// </summary>
-        public DocumentObject Parent
-        {
-            get { return _parent; }
-        }
+        public DocumentObject Parent => _parent;
 
         /// <summary>
         /// 

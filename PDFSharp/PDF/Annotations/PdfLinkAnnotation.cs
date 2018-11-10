@@ -28,10 +28,10 @@
 #endregion
 
 using System;
-using PdfSharp.Pdf.IO;
-using PdfSharp.Pdf.Internal;
+using PDFSharp.Pdf.IO;
+using PDFSharp.Pdf.Internal;
 
-namespace PdfSharp.Pdf.Annotations
+namespace PDFSharp.Pdf.Annotations
 {
     /// <summary>
     /// Represents a link annotation.

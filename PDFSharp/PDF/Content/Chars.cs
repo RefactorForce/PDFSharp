@@ -29,7 +29,7 @@
 
 // ReSharper disable InconsistentNaming
 
-namespace PdfSharp.Pdf.Content
+namespace PDFSharp.Pdf.Content
 {
     /// <summary>
     /// Character table by name. Same as PdfSharp.Pdf.IO.Chars. Not yet clear if necessary.

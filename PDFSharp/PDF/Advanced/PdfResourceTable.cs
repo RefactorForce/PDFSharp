@@ -29,7 +29,7 @@
 
 using System;
 
-namespace PdfSharp.Pdf.Advanced
+namespace PDFSharp.Pdf.Advanced
 {
     /// <summary>
     /// Base class for FontTable, ImageTable, FormXObjectTable etc.

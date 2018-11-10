@@ -27,7 +27,7 @@
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
-namespace PdfSharp.Charting
+namespace PDFSharp.Charting
 {
     /// <summary>
     /// The Pdf-Sharp-Charting-String-Resources.
@@ -35,14 +35,8 @@ namespace PdfSharp.Charting
     // ReSharper disable once InconsistentNaming
     internal class PSCSR
     {
-        internal static string InvalidChartTypeForCombination(ChartType chartType)
-        {
-            return string.Format("ChartType '{0}' not valid for combination of charts.", chartType.ToString());
-        }
+        internal static string InvalidChartTypeForCombination(ChartType chartType) => System.String.Format("ChartType '{0}' not valid for combination of charts.", chartType.ToString());
 
-        internal static string PercentNotSupportedByColumnDataLabel
-        {
-            get { return "Column data label cannot be set to 'Percent'"; }
-        }
+        internal static string PercentNotSupportedByColumnDataLabel => "Column data label cannot be set to 'Percent'";
     }
 }

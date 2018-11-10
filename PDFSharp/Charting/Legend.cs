@@ -32,7 +32,7 @@ using System;
 using System.ComponentModel;
 #endif
 
-namespace PdfSharp.Charting
+namespace PDFSharp.Charting
 {
     /// <summary>
     /// Represents a legend of a chart.
@@ -54,10 +54,7 @@ namespace PdfSharp.Charting
         /// <summary>
         /// Creates a deep copy of this object.
         /// </summary>
-        public new Legend Clone()
-        {
-            return (Legend)DeepCopy();
-        }
+        public new Legend Clone() => (Legend)DeepCopy();
 
         /// <summary>
         /// Implements the deep copy of the object.
@@ -83,19 +80,13 @@ namespace PdfSharp.Charting
         /// <summary>
         /// Gets the line format of the legend's border.
         /// </summary>
-        public LineFormat LineFormat
-        {
-            get { return _lineFormat ?? (_lineFormat = new LineFormat(this)); }
-        }
+        public LineFormat LineFormat => _lineFormat ?? (_lineFormat = new LineFormat(this));
         internal LineFormat _lineFormat;
 
         /// <summary>
         /// Gets the font of the legend.
         /// </summary>
-        public Font Font
-        {
-            get { return _font ?? (_font = new Font(this)); }
-        }
+        public Font Font => _font ?? (_font = new Font(this));
         internal Font _font;
 
         /// <summary>
@@ -103,7 +94,7 @@ namespace PdfSharp.Charting
         /// </summary>
         public DockingType Docking
         {
-            get { return _docking; }
+            get => _docking;
             set
             {
                 if (!Enum.IsDefined(typeof(DockingType), value))

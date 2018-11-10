@@ -42,7 +42,7 @@ using Microsoft.Graphics.Canvas.Brushes;
 using UwpBrush = Windows.UI.Xaml.Media.Brush;
 #endif
 
-namespace PdfSharp.Drawing
+namespace PDFSharp.Drawing
 {
     /// <summary>
     /// Defines a single color object used to fill shapes and draw text.

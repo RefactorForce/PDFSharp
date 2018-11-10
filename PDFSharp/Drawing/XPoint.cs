@@ -47,13 +47,13 @@ using SysPoint = Windows.Foundation.Point;
 using SysSize = Windows.Foundation.Size;
 #endif
 #if !EDF_CORE
-using PdfSharp.Internal;
+using PDFSharp.Internal;
 #else
 using PdfSharp.Internal;
 #endif
 
 #if !EDF_CORE
-namespace PdfSharp.Drawing
+namespace PDFSharp.Drawing
 #else
 namespace Edf.Drawing
 #endif

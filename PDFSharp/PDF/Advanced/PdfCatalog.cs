@@ -28,10 +28,10 @@
 #endregion
 
 using System;
-using PdfSharp.Pdf.IO;
-using PdfSharp.Pdf.AcroForms;
+using PDFSharp.Pdf.IO;
+using PDFSharp.Pdf.AcroForms;
 
-namespace PdfSharp.Pdf.Advanced
+namespace PDFSharp.Pdf.Advanced
 {
     /// <summary>
     /// Represents the catalog dictionary.

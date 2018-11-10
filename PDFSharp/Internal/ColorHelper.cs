@@ -37,7 +37,7 @@ using System.Windows;
 
 #pragma warning disable 649
 
-namespace PdfSharp.Internal
+namespace PDFSharp.Internal
 {
     struct SColor
     {

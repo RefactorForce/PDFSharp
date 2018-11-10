@@ -27,7 +27,7 @@
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
-namespace PdfSharp.Charting
+namespace PDFSharp.Charting
 {
     /// <summary>
     /// Represents the gridlines on the axes.
@@ -51,10 +51,7 @@ namespace PdfSharp.Charting
         /// <summary>
         /// Creates a deep copy of this object.
         /// </summary>
-        public new Gridlines Clone()
-        {
-            return (Gridlines)DeepCopy();
-        }
+        public new Gridlines Clone() => (Gridlines)DeepCopy();
 
         /// <summary>
         /// Implements the deep copy of the object.
@@ -75,10 +72,7 @@ namespace PdfSharp.Charting
         /// <summary>
         /// Gets the line format of the grid.
         /// </summary>
-        public LineFormat LineFormat
-        {
-            get { return _lineFormat ?? (_lineFormat = new LineFormat(this)); }
-        }
+        public LineFormat LineFormat => _lineFormat ?? (_lineFormat = new LineFormat(this));
         internal LineFormat _lineFormat;
         #endregion
     }

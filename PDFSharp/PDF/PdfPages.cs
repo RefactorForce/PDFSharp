@@ -31,11 +31,11 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Collections;
-using PdfSharp.Pdf.IO;
-using PdfSharp.Pdf.Advanced;
-using PdfSharp.Pdf.Annotations;
+using PDFSharp.Pdf.IO;
+using PDFSharp.Pdf.Advanced;
+using PDFSharp.Pdf.Annotations;
 
-namespace PdfSharp.Pdf
+namespace PDFSharp.Pdf
 {
     /// <summary>
     /// Represents the pages of the document.

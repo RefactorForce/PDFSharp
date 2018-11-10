@@ -29,7 +29,7 @@
 
 using System;
 
-namespace PdfSharp.Pdf.IO
+namespace PDFSharp.Pdf.IO
 {
     /// <summary>
     /// Exception thrown by PdfReader.

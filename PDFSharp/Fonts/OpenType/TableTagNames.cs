@@ -29,7 +29,7 @@
 
 // ReSharper disable InconsistentNaming
 
-namespace PdfSharp.Fonts.OpenType
+namespace PDFSharp.Fonts.OpenType
 {
     /// <summary>
     /// TrueType font table names.

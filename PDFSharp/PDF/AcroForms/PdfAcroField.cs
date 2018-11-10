@@ -30,9 +30,9 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using PdfSharp.Pdf.Advanced;
+using PDFSharp.Pdf.Advanced;
 
-namespace PdfSharp.Pdf.AcroForms
+namespace PDFSharp.Pdf.AcroForms
 {
     /// <summary>
     /// Represents the base class for all interactive field dictionaries.

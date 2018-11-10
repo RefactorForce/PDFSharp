@@ -34,7 +34,7 @@ using System.DrawingCore;
 using System.Windows.Media;
 #endif
 
-namespace PdfSharp.Drawing
+namespace PDFSharp.Drawing
 {
     ///<summary>
     /// Represents a set of 141 pre-defined RGB colors. Incidentally the values are the same

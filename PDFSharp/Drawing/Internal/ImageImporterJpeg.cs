@@ -28,9 +28,9 @@
 #endregion
 
 using System;
-using PdfSharp.Pdf;
+using PDFSharp.Pdf;
 
-namespace PdfSharp.Drawing.Internal
+namespace PDFSharp.Drawing.Internal
 {
     // ReSharper disable once InconsistentNaming
     internal class ImageImporterJpeg : ImageImporterRoot, IImageImporter

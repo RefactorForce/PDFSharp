@@ -37,7 +37,7 @@
 
 using System;
 
-namespace PdfSharp.SharpZipLib.Checksums
+namespace PDFSharp.SharpZipLib.Checksums
 {
 
     /// <summary>

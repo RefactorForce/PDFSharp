@@ -27,9 +27,9 @@
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
-using PdfSharp.Drawing;
+using PDFSharp.Drawing;
 
-namespace PdfSharp.Charting.Renderers
+namespace PDFSharp.Charting.Renderers
 {
     /// <summary>
     /// Represents an area chart renderer.
@@ -49,8 +49,10 @@ namespace PdfSharp.Charting.Renderers
         /// </summary>
         internal override RendererInfo Init()
         {
-            ChartRendererInfo cri = new ChartRendererInfo();
-            cri._chart = (Chart)_rendererParms.DrawingItem;
+            ChartRendererInfo cri = new ChartRendererInfo
+            {
+                _chart = (Chart)_rendererParms.DrawingItem
+            };
             _rendererParms.RendererInfo = cri;
 
             InitSeriesRendererInfo();
@@ -145,8 +147,10 @@ namespace PdfSharp.Charting.Renderers
             cri.seriesRendererInfos = new SeriesRendererInfo[seriesColl.Count];
             for (int idx = 0; idx < seriesColl.Count; ++idx)
             {
-                SeriesRendererInfo sri = new SeriesRendererInfo();
-                sri._series = seriesColl[idx];
+                SeriesRendererInfo sri = new SeriesRendererInfo
+                {
+                    _series = seriesColl[idx]
+                };
                 cri.seriesRendererInfos[idx] = sri;
             }
 

@@ -28,9 +28,9 @@
 #endregion
 
 using System;
-using PdfSharp.Drawing;
+using PDFSharp.Drawing;
 
-namespace PdfSharp.Charting.Renderers
+namespace PDFSharp.Charting.Renderers
 {
     /// <summary>
     /// Represents the legend renderer for all chart types.
@@ -54,10 +54,12 @@ namespace PdfSharp.Charting.Renderers
             if (lri == null)
                 return;
 
-            RendererParameters parms = new RendererParameters();
-            parms.Graphics = _rendererParms.Graphics;
+            RendererParameters parms = new RendererParameters
+            {
+                Graphics = _rendererParms.Graphics
+            };
 
-            bool verticalLegend = (lri._legend._docking == DockingType.Left || lri._legend._docking == DockingType.Right);
+            bool verticalLegend = lri._legend._docking == DockingType.Left || lri._legend._docking == DockingType.Right;
             XSize maxMarkerArea = new XSize();
             LegendEntryRenderer ler = new LegendEntryRenderer(parms);
             foreach (LegendEntryRendererInfo leri in lri.Entries)
@@ -106,12 +108,14 @@ namespace PdfSharp.Charting.Renderers
                 return;
 
             XGraphics gfx = _rendererParms.Graphics;
-            RendererParameters parms = new RendererParameters();
-            parms.Graphics = gfx;
+            RendererParameters parms = new RendererParameters
+            {
+                Graphics = gfx
+            };
 
             LegendEntryRenderer ler = new LegendEntryRenderer(parms);
 
-            bool verticalLegend = (lri._legend._docking == DockingType.Left || lri._legend._docking == DockingType.Right);
+            bool verticalLegend = lri._legend._docking == DockingType.Left || lri._legend._docking == DockingType.Right;
             int paddingFactor = 1;
             if (lri.BorderPen != null)
                 paddingFactor = 2;
