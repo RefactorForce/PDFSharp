@@ -31,7 +31,7 @@ using System;
 using System.Diagnostics;
 using System.Collections.Generic;
 using PDFSharp.Fonts.OpenType;
-using PDFSharp.Pdf.Internal;
+using PDFSharp.Interop.Internal;
 
 namespace PDFSharp.Fonts
 {

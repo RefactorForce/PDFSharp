@@ -35,7 +35,7 @@ using System.DrawingCore.Drawing2D;
 #if WPF
 using System.Windows.Media;
 #endif
-using PDFSharp.Pdf;
+using PDFSharp.Interop;
 
 namespace PDFSharp.Drawing
 {

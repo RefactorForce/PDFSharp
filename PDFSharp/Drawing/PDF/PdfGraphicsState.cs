@@ -38,9 +38,9 @@ using System.DrawingCore.Drawing2D;
 #if WPF
 #endif
 using PDFSharp.Internal;
-using PDFSharp.Pdf;
-using PDFSharp.Pdf.Advanced;
-using PDFSharp.Pdf.Internal;
+using PDFSharp.Interop;
+using PDFSharp.Interop.Advanced;
+using PDFSharp.Interop.Internal;
 
 // ReSharper disable CompareOfFloatsByEqualityOperator
 

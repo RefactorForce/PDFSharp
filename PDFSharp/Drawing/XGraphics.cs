@@ -74,10 +74,10 @@ using SysPoint = Windows.Foundation.Point;
 using SysSize = Windows.Foundation.Size;
 using SysRect = Windows.Foundation.Rect;
 #endif
-using PDFSharp.Pdf;
+using PDFSharp.Interop;
 using PDFSharp.Drawing.Pdf;
 using PDFSharp.Internal;
-using PDFSharp.Pdf.Advanced;
+using PDFSharp.Interop.Advanced;
 
 #pragma warning disable 1587
 // ReSharper disable UseNullPropagation

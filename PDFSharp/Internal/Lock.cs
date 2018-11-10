@@ -30,7 +30,7 @@
 using System;
 using System.ComponentModel;
 using System.Threading;
-using PDFSharp.Pdf.Internal;
+using PDFSharp.Interop.Internal;
 
 namespace PDFSharp.Internal
 {

@@ -52,7 +52,7 @@ using UwpFontFamily = Windows.UI.Xaml.Media.FontFamily;
 using PDFSharp.Fonts;
 using PDFSharp.Fonts.OpenType;
 using PDFSharp.Internal;
-using PDFSharp.Pdf;
+using PDFSharp.Interop;
 
 #if SILVERLIGHT
 #pragma warning disable 649

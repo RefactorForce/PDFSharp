@@ -38,7 +38,7 @@ using System.DrawingCore.Drawing2D;
 using System.Windows;
 using System.Windows.Media;
 #endif
-using PDFSharp.Pdf.Internal;
+using PDFSharp.Interop.Internal;
 #if !EDF_CORE
 using PDFSharp.Drawing;
 #endif

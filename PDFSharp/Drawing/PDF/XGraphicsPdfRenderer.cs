@@ -51,9 +51,9 @@ using SysSize = Windows.Foundation.Size;
 #endif
 using PDFSharp.Fonts.OpenType;
 using PDFSharp.Internal;
-using PDFSharp.Pdf;
-using PDFSharp.Pdf.Internal;
-using PDFSharp.Pdf.Advanced;
+using PDFSharp.Interop;
+using PDFSharp.Interop.Internal;
+using PDFSharp.Interop.Advanced;
 
 // ReSharper disable RedundantNameQualifier
 // ReSharper disable CompareOfFloatsByEqualityOperator

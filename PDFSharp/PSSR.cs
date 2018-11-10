@@ -33,7 +33,7 @@ using System.Resources;
 using System.Reflection;
 using PDFSharp.Drawing;
 using PDFSharp.Internal;
-using PDFSharp.Pdf;
+using PDFSharp.Interop;
 
 #pragma warning disable 1591
 

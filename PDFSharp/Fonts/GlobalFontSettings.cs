@@ -29,7 +29,7 @@
 
 using System;
 using PDFSharp.Internal;
-using PDFSharp.Pdf;
+using PDFSharp.Interop;
 
 namespace PDFSharp.Fonts
 {

@@ -29,8 +29,8 @@
 
 using System;
 using System.Globalization;
-using PDFSharp.Pdf.Content;
-using PDFSharp.Pdf.IO;
+using PDFSharp.Interop.Content;
+using PDFSharp.Interop.IO;
 
 #if GDI
 using System.DrawingCore;

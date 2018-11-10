@@ -38,8 +38,8 @@ using System.DrawingCore.Imaging;
 using System.Windows.Media;
 #endif
 using PDFSharp.Internal;
-using PDFSharp.Pdf;
-using PDFSharp.Pdf.IO;
+using PDFSharp.Interop;
+using PDFSharp.Interop.IO;
 
 namespace PDFSharp.Drawing
 {

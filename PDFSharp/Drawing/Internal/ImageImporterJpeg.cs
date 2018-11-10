@@ -28,7 +28,7 @@
 #endregion
 
 using System;
-using PDFSharp.Pdf;
+using PDFSharp.Interop;
 
 namespace PDFSharp.Drawing.Internal
 {

@@ -30,7 +30,7 @@
 using System;
 using System.Diagnostics;
 using System.IO;
-using PDFSharp.Pdf;
+using PDFSharp.Interop;
 
 namespace PDFSharp.Drawing
 {

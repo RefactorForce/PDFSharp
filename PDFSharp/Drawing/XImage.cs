@@ -30,7 +30,7 @@
 using System;
 using System.Diagnostics;
 using System.IO;
-using PDFSharp.Pdf;
+using PDFSharp.Interop;
 #if CORE
 using System.DrawingCore;
 #endif
@@ -49,8 +49,8 @@ using Windows.UI.Xaml.Media.Imaging;
 #endif
 using PDFSharp.Drawing.Internal;
 using PDFSharp.Internal;
-using PDFSharp.Pdf.IO;
-using PDFSharp.Pdf.Advanced;
+using PDFSharp.Interop.IO;
+using PDFSharp.Interop.Advanced;
 
 // WPFHACK
 #pragma warning disable 0169

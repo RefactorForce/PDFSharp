@@ -39,9 +39,9 @@ using System.DrawingCore.Imaging;
 using System.Windows.Media;
 #endif
 using PDFSharp.Drawing.Pdf;
-using PDFSharp.Pdf;
-using PDFSharp.Pdf.Advanced;
-using PDFSharp.Pdf.Filters;
+using PDFSharp.Interop;
+using PDFSharp.Interop.Advanced;
+using PDFSharp.Interop.Filters;
 
 namespace PDFSharp.Drawing
 {

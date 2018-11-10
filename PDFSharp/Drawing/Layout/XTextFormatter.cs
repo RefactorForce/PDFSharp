@@ -29,7 +29,7 @@
 
 using System;
 using System.Collections.Generic;
-using PDFSharp.Pdf.IO;
+using PDFSharp.Interop.IO;
 
 namespace PDFSharp.Drawing.Layout
 {
